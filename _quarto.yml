@@ -3,7 +3,7 @@ project:
   output-dir: docs
   
 website:
-  title: "smth smth math smth smth cs smth smth logic"
+  title: "pls suggest name"
   navbar:
     right:
       - about.qmd
@@ -11,7 +11,7 @@ website:
         href: https://github.com/quirtt
 format:
   html:
-    theme: cosmo
+    theme: solar
     css: styles.css
 
 
