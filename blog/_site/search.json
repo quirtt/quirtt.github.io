@@ -1,0 +1,51 @@
+[
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code."
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html",
+    "href": "posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html",
+    "title": "Shannon’s Card Magic Trick",
+    "section": "",
+    "text": "The magician sends you a deck of cards. You riffle shuffle it three times. You pick the card from the top and put it back in the deck, somewhere. You send the deck back to the magician. Can he find the chosen card?\n\nWhat do you think? Well, I guess I wouldn’t have asked this question if this weren’t possible. Yep - it is possible to do it reliably well.\nI couldn’t believe it myself. However, I think it will make more sense when I present the algorithm which was (apparently) discovered by Shannon. We will talk about this in part A. And implement it in part B. In the subsequent parts, &lt;&lt; we propose an algorithm that performs better in this particular setup, we also talk about more general setups &gt;&gt;."
+  },
+  {
+    "objectID": "posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html#setup",
+    "href": "posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html#setup",
+    "title": "Shannon’s Card Magic Trick",
+    "section": "",
+    "text": "The magician sends you a deck of cards. You riffle shuffle it three times. You pick the card from the top and put it back in the deck, somewhere. You send the deck back to the magician. Can he find the chosen card?\n\nWhat do you think? Well, I guess I wouldn’t have asked this question if this weren’t possible. Yep - it is possible to do it reliably well.\nI couldn’t believe it myself. However, I think it will make more sense when I present the algorithm which was (apparently) discovered by Shannon. We will talk about this in part A. And implement it in part B. In the subsequent parts, &lt;&lt; we propose an algorithm that performs better in this particular setup, we also talk about more general setups &gt;&gt;."
+  },
+  {
+    "objectID": "posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html#part-a-shannons-algorithm",
+    "href": "posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html#part-a-shannons-algorithm",
+    "title": "Shannon’s Card Magic Trick",
+    "section": "Part A: Shannon’s Algorithm",
+    "text": "Part A: Shannon’s Algorithm\nRemember the original orientation of the deck of cards. Label the cards in this orientation \\[\n    \\{1,2,\\cdots,52\\}\n\\]\nNow, we define rising sequence decomposition. To decompose a deck into its rising sequences we go through the following algorithm\n\n\nAlgorithm:\n\nStart with 1.\nFind the next number, If it is after the previous number, goto step 2. Else, continue.\nThis is a rising sequence. Start with the next unconsidered number, and goto step 2.\n\n\nFor example, if the deck is \\(\\{4,3,5,1,2\\}\\). we go \\(1\\to 2 \\implies (1,2)\\), \\(3 \\implies (3)\\), \\(4 \\to 5 \\implies (4,5)\\), thus \\(\\{4,3,5,1,2\\} \\implies (1,2)(3)(4,5)\\).\nWell, it’s time to reveal the secret algorithm that Shannon came up with:\n\n\n\nAlgorithm:\nPerform the rising sequence decomposition of the final deck. There exists a unique rising sequence singleton in this deck - this is the picked card.\n\nOur team implemented the algorithm in R and the results were extremely satisfactory."
+  },
+  {
+    "objectID": "posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html#part-b-implementation",
+    "href": "posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html#part-b-implementation",
+    "title": "Shannon’s Card Magic Trick",
+    "section": "Part B: Implementation",
+    "text": "Part B: Implementation\n\nVersion 1: Distribution fitting\nWe first cut a standard deck 100 times (LOL IN REAL LIFE) and we recorded the number of cards in the smaller deck (Let this vector be \\(X\\)). I was going to fit the Gaussian distribution over the vector \\(c(X,52-X)\\).\nHowever, I noticed my skill issue when @Ayan pointed out that this dataset would not be IID. To fix this issue, I tossed a coin 100 times and picked either \\(x \\text{ or } 52-x\\) for every \\(x \\in X\\). Fitting the Gaussian distribution over this we ended up with\nfloor(rnorm(1, mean=25.78, sd = 2.3046))\nEverything else was fairly easy to implement, I had quite some fun while making this. This empirically confirms that the algorithm works with pretty high probabilities \\(\\left(\\sim 91\\%\\right)\\).\n\n#Cards is the permutation _Sigma_.\n\nDataset = c(26,26,24,26,26,25,26,26,25,23,25,26,24,26,24,26,26,23,20,26,23,22,25,23,26,26,23,25,23,25,25,25,25,26,25,23,25,24,26,25,26,23,26,23,26,24,26,24,25,24,25,23,24,25,22,21,25,25,25,21,23,24,23,21,26,25,25,24,24,25,24,25,24,24,23,25,21,25,26,26,23,25,25,23,21,24,21,25,25,22,24,25,26,23,24,25,19,25,23,25)\n\n\nRiffleShuffle &lt;- function(Cards){\n  ### Riffle shuffles the vector of Cards using\n  ### L/(L+R), R/(L+R) probabilities to each hand. \n  NewDeck = vector()\n  split = floor(rnorm(1, mean=25.78, sd = 2.3046))\n\n  LeftHand = Cards[1:split]\n  RightHand = Cards[(split+1):52]\n  for(x in 1:52){\n    L &lt;- length(LeftHand)\n    R &lt;- length(RightHand)\n    hand = sample(c(\"L\", \"R\"), 1, prob=c(L,R))\n    \n    if(hand == \"L\"){\n      card = LeftHand[1]\n      LeftHand &lt;- if (L != 1) LeftHand[2:L] else vector()\n      NewDeck = append(NewDeck, card)\n    }\n    else{\n      card = RightHand[1]\n      RightHand &lt;- if (R != 1) RightHand[2:R] else vector()\n      NewDeck = append(NewDeck, card)\n    }\n  }\n  \n  return(NewDeck)\n}\n\nSwitch &lt;- function(Cards, vals) {\n  # 1 &lt;= y &lt;= 52\n  # 1 &lt;= x &lt;= 52\n  # Logic: xth index card is moved at yth index\n  x = vals[1]\n  y = vals[2]\n  NewCards = vector()\n  for (i in 1:length(Cards)) {\n    if (i != x) {\n      NewCards = append(NewCards, Cards[i])\n    }\n  }\n  if (y != 1) {\n    if (y != 52) {\n      NewCards = append(NewCards, Cards[x], after = y - 1)\n    } else {\n      NewCards = append(NewCards, Cards[x])\n    }\n  } else {\n    NewCards = append(Cards[x], NewCards)\n  }\n  return(NewCards)\n}\n\nRisingSingleton &lt;- function(array){\n  ### Checks if there is a unique Rising Singleton and returns the singleton.\n  index = numeric(0)\n  for (i in 1:52){\n    index[array[i]] = i\n  }\n  Sum = 0\n  SingletonCard = 0\n  for (i in 1:52){\n    if((index[i] &gt;= index[min((i+1), 52)]) & (index[i] &lt;= index[max((i-1), 1)])){\n      Sum = Sum + 1\n      SingletonCard = i\n    }\n  }\n  return(c((Sum == 1), SingletonCard))\n}\n\nProcess &lt;- function(Cards){\n  ### Performs the whole process and outputs whether there\n  ### is a unique Rising Singleton\n  Cards = RiffleShuffle(Cards)\n  Cards = RiffleShuffle(Cards)\n  Cards = RiffleShuffle(Cards)\n  \n  vals = c(1, rbinom(1, 52, 0.5))\n  PickedCard = Cards[1]\n  Cards = Switch(Cards, vals)\n\n  RSCheck = RisingSingleton(Cards)\n  return((RSCheck[1])&(RSCheck[2] == PickedCard))\n}\n\nSumCalculator &lt;- function(Cards){\n  ### Simulates Process 10000 and counts how many times  \n  ### there is a unique Rising Singleton which is also indeed\n  ### the picked card.\n  Sum = 0\n  for(i in 1:10000){\n    Sum = Sum + Process(Cards)\n  }\n  return(Sum)\n}\n\n\n\n\nVersion 2: Splitting using \\(\\operatorname{Bin}(52, \\frac{1}{2}\\}\\)\n#Cards is the permutation _Sigma_.\n\nRiffleShuffle &lt;- function(Cards){\n  ...\n  split = rbinom(1, 52, 1/2)\n  ...\n}\nWhere I only change how I perform the split. This results in about \\(\\left(89\\%\\right)\\).\nI would like to prove the probabilistic bound. I am also very interested in the use of information theory in this problem but since I am busy with Analysis at the moment, I will postpone that for a while."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "average blog",
+    "section": "",
+    "text": "Shannon’s Card Magic Trick\n\n\n\n\n\n\n\nisi\n\n\nstatistics\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nOct 23, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nOct 23, 2023\n\n\nHarlow Malloc\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nOct 20, 2023\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+  }
+]
