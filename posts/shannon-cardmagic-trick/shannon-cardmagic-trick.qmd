@@ -172,6 +172,9 @@ SumCalculator <- function(Cards){
   }
   return(Sum)
 }
+
+Cards = 1:52
+SumCalculator(Cards)/10000 * 100
 ```
 
 ------------------------------------------------------------------------
