@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Harlow Malloc">
-<meta name="dcterms.date" content="2023-10-23">
+<meta name="author" content="Himadri Mandal">
+<meta name="dcterms.date" content="2023-10-24">
 
-<title>pls suggest name - Post With Code</title>
+<title>pls suggest name - Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -37,10 +37,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -62,11 +62,13 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -100,50 +102,84 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">set theory</div>
+                <div class="quarto-category">math</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Himadri Mandal </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 24, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
-<!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Post With Code</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">news</div>
-    <div class="quarto-category">code</div>
-    <div class="quarto-category">analysis</div>
-  </div>
-  </div>
-
-
-
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Harlow Malloc </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 23, 2023</p>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#russells-paradox" id="toc-russells-paradox" class="nav-link active" data-scroll-target="#russells-paradox"><strong><em>Russell’s Paradox</em></strong></a></li>
+  <li><a href="#axiom-of-choice" id="toc-axiom-of-choice" class="nav-link" data-scroll-target="#axiom-of-choice">Axiom of Choice</a></li>
+  </ul>
+</nav>
     </div>
-  </div>
-  
-    
-  </div>
-  
-
-</header>
-
-<p>This is a post with executable code.</p>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
+
+
+<p>Mathematics has long been built on the sturdy foundation of intuition. From counting pebbles to solving complex equations, mathematicians have relied on their inner compass to navigate the abstract landscapes of numbers and shapes. But as the 19th century dawned, something intriguing and unsettling began to occur – mathematics, the bedrock of human knowledge, was on the brink of a seismic shift.</p>
+<p>This piece goes into <em>how</em> this happened, what changed - and its consequences. Though I might not know a lot of mathematics, I firmly believe that this is one of the most interesting (while being accessible) parts of mathematics.</p>
+<p>All of this begins with arguably the most famous paradox in mathematics, logic, and the like - the Russell’s paradox.</p>
+<section id="russells-paradox" class="level3">
+<h3 class="anchored" data-anchor-id="russells-paradox"><strong><em>Russell’s Paradox</em></strong></h3>
+<p>Let <span class="math inline">\(A\)</span> be the set of all sets that do not contain themselves. Does <span class="math inline">\(A\)</span> contain itself?</p>
+<p><span class="math display">\[
+A = \{x : x \not\in x\} \text{. Is } A \in A?
+\]</span></p>
+<hr>
+<p>Well, if <span class="math inline">\(A \in A\)</span> then by the definition of <span class="math inline">\(A\)</span>, we get <span class="math inline">\(A \not \in A\)</span>. But if <span class="math inline">\(A \not\in A\)</span> then <span class="math inline">\(A \in A\)</span>. Poof.</p>
+<p>This called for a need for formalism - intuition was just <em>not</em> enough. Here came Axiomatic Set Theory - one of the most famous systems of Axiomatic Set Theory is the <a href="https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory"><strong>Zermelo Fraenkel set theory</strong></a><strong>.</strong> (Do click the link and read the axioms - they are fun! And everything makes sense at the end.)</p>
+<p>Well, how does the <strong>Russell’s paradox</strong> get resolved? One of the axioms deals with this head-on.</p>
+<section id="axiom-schema-of-specification-axiom-of-restricted-comprehension" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-schema-of-specification-axiom-of-restricted-comprehension"><em>Axiom Schema of Specification / Axiom of Restricted Comprehension</em></h4>
+<p>Given a <em>parent set</em> <span class="math inline">\(z\)</span> we can construct a subset <span class="math inline">\(S \subseteq z\)</span> such that</p>
+<p><span class="math display">\[
+S = \{x \in z : \varphi(x)\}
+\]</span></p>
+</section>
+</section>
+<section id="axiom-of-choice" class="level1">
+<h1>Axiom of Choice</h1>
+<p>Let <span class="math inline">\(I\)</span> be an index set with a family of sets indexed on this index set <span class="math inline">\(\{A_i\}_{i \in I}\)</span>. Then there exists a choice function <span class="math inline">\(f:I \to A = \cup_{i \in I} A_i\)</span> such that <span class="math inline">\(f(i) \in A_i \ \forall i \in I\)</span>.</p>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

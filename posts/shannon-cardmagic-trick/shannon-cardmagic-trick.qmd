@@ -12,6 +12,8 @@ editor: visual
 image: "pfp.jpg"
 ---
 
+This was my statistics project at ISI Sem 1. My team had: *Myself*, *Siddhartha*, *Ayan*, *Drishti*, *Aman*, *Mrittika*. Thanks to everyone for their efforts.
+
 ## Setup
 
 ------------------------------------------------------------------------
@@ -179,7 +181,7 @@ SumCalculator(Cards)/10000 * 100
 
 ------------------------------------------------------------------------
 
-#### Version 2: Splitting using $\operatorname{Bin}(52, \frac{1}{2}\}$
+#### Version 2: Splitting using $\operatorname{Bin}\left(52, \frac{1}{2}\right)$
 
 ``` r
 #Cards is the permutation _Sigma_.
