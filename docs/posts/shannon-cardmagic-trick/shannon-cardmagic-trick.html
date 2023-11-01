@@ -196,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>The magician sends you a deck of cards. You riffle shuffle it <em>three</em> times. You pick the card from the top and put it back in the deck, <em>somewhere</em>. You send the deck back to the magician. Can he find the chosen card?</strong></p>
 <hr>
 <p>What do you think? Well, I guess I wouldn’t have asked this question if this weren’t possible. Yep - it is possible to do it <em>reliably</em> well.</p>
-<p>I couldn’t believe it myself. However, I think it will make more sense when I present the algorithm which was (apparently) discovered by Shannon. We will talk about this in part A. And implement it in part B. In the subsequent parts, &lt;&lt; we propose an algorithm that performs <em>better</em> in this particular setup, we also talk about more general setups &gt;&gt;.</p>
+<p>I couldn’t believe it myself. However, I think it will make more sense when I present the algorithm which was (apparently) discovered by Shannon. We will talk about this in part A. And implement it in part B. In the subsequent parts, we investigate what happens if we play with the setup a little bit.</p>
 </section>
 <section id="part-a-shannons-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="part-a-shannons-algorithm">Part A: Shannon’s Algorithm</h2>
@@ -336,22 +336,115 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>Cards <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">52</span></span>
 <span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="fu">SumCalculator</span>(Cards)<span class="sc">/</span><span class="dv">10000</span> <span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 92.08</code></pre>
+<pre><code>[1] 91.81</code></pre>
+</div>
+</div>
+<p>Also, <strong>@Siddhartha</strong> implemented this in Python</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Dataset <span class="op">=</span> [</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">26</span>, <span class="dv">26</span>, <span class="dv">24</span>, <span class="dv">26</span>, <span class="dv">26</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">26</span>, <span class="dv">25</span>, <span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">24</span>, <span class="dv">26</span>, <span class="dv">24</span>, <span class="dv">26</span>, <span class="dv">26</span>, <span class="dv">23</span>, <span class="dv">20</span>, <span class="dv">26</span>, <span class="dv">23</span>, <span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">23</span>, <span class="dv">26</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">26</span>, <span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">25</span>, <span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">24</span>, <span class="dv">26</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">23</span>, <span class="dv">26</span>, <span class="dv">23</span>, <span class="dv">26</span>, <span class="dv">24</span>, <span class="dv">26</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">24</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">25</span>, <span class="dv">23</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">21</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">24</span>, <span class="dv">23</span>, <span class="dv">21</span>, <span class="dv">26</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">24</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">24</span>, <span class="dv">24</span>, <span class="dv">23</span>, <span class="dv">25</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">21</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">26</span>, <span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">23</span>, <span class="dv">21</span>, <span class="dv">24</span>, <span class="dv">21</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">23</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">19</span>, <span class="dv">25</span>, <span class="dv">23</span>, <span class="dv">25</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> riffle_shuffle(cards):</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    new_deck <span class="op">=</span> []</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    split <span class="op">=</span> <span class="bu">int</span>(np.random.normal(<span class="fl">25.78</span>, <span class="fl">2.3046</span>))</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    left_hand <span class="op">=</span> cards[:split]</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    right_hand <span class="op">=</span> cards[split:]</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">53</span>):</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        l <span class="op">=</span> <span class="bu">len</span>(left_hand)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> <span class="bu">len</span>(right_hand)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        hand <span class="op">=</span> np.random.choice([<span class="st">"L"</span>, <span class="st">"R"</span>], p<span class="op">=</span>[l <span class="op">/</span> (l <span class="op">+</span> r), r <span class="op">/</span> (l <span class="op">+</span> r)])</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> hand <span class="op">==</span> <span class="st">"L"</span>:</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>            card <span class="op">=</span> left_hand[<span class="dv">0</span>]</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>            left_hand <span class="op">=</span> left_hand[<span class="dv">1</span>:] <span class="cf">if</span> l <span class="op">!=</span> <span class="dv">1</span> <span class="cf">else</span> []</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>            card <span class="op">=</span> right_hand[<span class="dv">0</span>]</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            right_hand <span class="op">=</span> right_hand[<span class="dv">1</span>:] <span class="cf">if</span> r <span class="op">!=</span> <span class="dv">1</span> <span class="cf">else</span> []</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        new_deck.append(card)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_deck</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> switch(cards, vals):</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> vals[<span class="dv">0</span>] <span class="op">-</span> <span class="dv">1</span>  </span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> vals[<span class="dv">1</span>] <span class="op">-</span> <span class="dv">1</span> </span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    new_cards <span class="op">=</span> []</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(cards)):</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i <span class="op">!=</span> x:</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>            new_cards.append(cards[i])</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="dv">1</span> <span class="op">&lt;</span> y <span class="op">&lt;</span> <span class="dv">52</span>:</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>        new_cards.insert(y <span class="op">-</span> <span class="dv">1</span>, cards[x])</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> y <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>        new_cards.insert(<span class="dv">0</span>, cards[x])</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> y <span class="op">==</span> <span class="dv">52</span>:</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>        new_cards.append(cards[x])</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> new_cards</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rising_singleton(cards):</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> np.zeros(<span class="dv">53</span>)</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">52</span>):</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>        index[cards[i <span class="op">-</span> <span class="dv">1</span>]] <span class="op">=</span> i</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    Sum <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    SingletonCard <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">53</span>):</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (index[i] <span class="op">&gt;=</span> <span class="bu">min</span>((i <span class="op">+</span> <span class="dv">1</span>), <span class="dv">52</span>)) <span class="kw">and</span> (index[i] <span class="op">&lt;=</span> <span class="bu">max</span>((i <span class="op">-</span> <span class="dv">1</span>), <span class="dv">1</span>)):</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>            Sum <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>            SingletonCard <span class="op">=</span> i</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (Sum <span class="op">==</span> <span class="dv">1</span>, SingletonCard)</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process(cards):</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    cards <span class="op">=</span> riffle_shuffle(cards)</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    cards <span class="op">=</span> riffle_shuffle(cards)</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    cards <span class="op">=</span> riffle_shuffle(cards)</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>    val <span class="op">=</span> [<span class="dv">1</span>, np.random.binomial(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="dv">1</span>)[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">1</span>]</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    picked_card <span class="op">=</span> cards[<span class="dv">0</span>]</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    cards <span class="op">=</span> switch(cards, val)</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>    rising_singleton_check <span class="op">=</span> rising_singleton(cards)</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rising_singleton_check[<span class="dv">0</span>] <span class="kw">and</span> rising_singleton_check[<span class="dv">1</span>] <span class="op">==</span> picked_card</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sum_calculator(cards):</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>    Sum <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>):</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>        Sum <span class="op">+=</span> process(cards)</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> Sum</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>cards <span class="op">=</span> [i<span class="op">+</span><span class="dv">1</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">52</span>)]</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>sum_calculator(cards)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0</code></pre>
 </div>
 </div>
 <hr>
 </section>
 <section id="version-2-splitting-using-operatornamebinleft52-frac12right" class="level4">
 <h4 class="anchored" data-anchor-id="version-2-splitting-using-operatornamebinleft52-frac12right">Version 2: Splitting using <span class="math inline">\(\operatorname{Bin}\left(52, \frac{1}{2}\right)\)</span></h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cards is the permutation _Sigma_.</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>RiffleShuffle <span class="ot">&lt;-</span> <span class="cf">function</span>(Cards){</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  ...</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  split <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="dv">52</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ...</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cards is the permutation _Sigma_.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>RiffleShuffle <span class="ot">&lt;-</span> <span class="cf">function</span>(Cards){</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  split <span class="ot">=</span> <span class="fu">rbinom</span>(<span class="dv">1</span>, <span class="dv">52</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Where I only change how I perform the split. This results in about <span class="math inline">\(\left(89\%\right)\)</span>.</p>
-<p>I would like to prove the probabilistic bound. I am also very interested in the use of information theory in this problem but since I am busy with Analysis at the moment, I will postpone that for a while.</p>
 
 
 </section>

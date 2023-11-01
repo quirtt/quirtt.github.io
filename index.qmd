@@ -1,5 +1,5 @@
 ---
-title: "average blog"
+title: ""
 listing:
   contents: posts
   sort: "date desc"

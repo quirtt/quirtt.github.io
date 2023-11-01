@@ -1,0 +1,137 @@
+---
+title: "Axiom of Choice, the Zorn's Lemma, and the Foundations of Mathematics"
+author: "Himadri Mandal"
+date: "2023-11-02"
+categories: [set theory, math]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+        # css: styles.css
+editor: visual
+image: "pfp.jpg"
+---
+
+Mathematics has long been built on the sturdy foundation of intuition. From counting pebbles to solving complex equations, mathematicians have relied on their inner compass to navigate the abstract landscapes of numbers and shapes. But as the 19th century dawned, something intriguing and unsettling began to occur -- mathematics, the bedrock of human knowledge, was on the brink of a seismic shift.
+
+This piece goes into *how* this happened, what changed - and its consequences. Though I might not know a lot of mathematics, I firmly believe that this is one of the most interesting (while being accessible) parts of mathematics.
+
+All of this begins with arguably the most famous paradox in mathematics, logic, and the like - the Russell's paradox.
+
+## ***Russell's Paradox***
+
+Let $A$ be the set of all sets that do not contain themselves. Does $A$ contain itself?
+
+$$
+A = \{x : x \not\in x\} \text{. Is } A \in A?
+$$
+
+------------------------------------------------------------------------
+
+Well, if $A \in A$ then by the definition of $A$, we get $A \not \in A$. But if $A \not\in A$ then $A \in A$. Poof.
+
+This called for a need for formalism - intuition was just *not* enough. Here came Axiomatic Set Theory - one of the most famous systems of Axiomatic Set Theory is the [**Zermelo Fraenkel set theory**](https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory)**.** (Do click the link and read the axioms - they are fun! And everything makes sense at the end.)
+
+Well, how does the **Russell's paradox** get resolved? One of the axioms deals with this head-on.
+
+#### *Axiom Schema of Specification / Axiom of Restricted Comprehension*
+
+Given a *parent set* $z$ we can construct a subset $S \subseteq z$ such that
+
+$$
+S = \{x \in z : \varphi(x)\}
+$$
+
+------------------------------------------------------------------------
+
+Although this defines how we can create *subsets* from a parent set, it DOESN'T talk about creating sets of elements that follow a formula. Infact, we will need a sort of $\text{``set of all sets: X"}$ to talk about creating sets out of thin air.
+
+However this is NOT a set (In $\text{ZF}$) . How do we prove this? Well, if $X$ is the set of all sets, then $P(X) \in X$ which means there exists an injective function from $f:P(X)\to X$. But we know by @thm-cantor that $P(X) >_{c} X$. This is a [***Class***](https://en.wikipedia.org/wiki/Class_(set_theory)).
+
+## ***Axiom of Choice***
+
+Let $I$ be an index set with a family of sets indexed on this index set $\{A_i\}_{i \in I}$. Then there exists a choice function $f:I \to A = \cup_{i \in I} A_i$ such that $f(i) \in A_i \ \forall i \in I$.
+
+------------------------------------------------------------------------
+
+This makes "intuitive" sense and is something that "should" be true. However, this is an independent statement in $\text{ZF}$, which is to say - we CANNOT prove this by ONLY using the axioms of $\text{ZF}$. There is an equivalent formulation of this axiom (which is used more often)
+
+## ***Zorn's Lemma***
+
+If $P$ is a nonempty partially ordered set such that every chain has an upper bound in $P$ then $P$ has a maximal element.
+
+------------------------------------------------------------------------
+
+There are quite a few words that need to be unpacked.
+
+#### *Definitions*
+
+1.  A binary relation $R$ on a set $P$ is a subset $R$ of $P \times P$, $(x,y) \in R$ and is often expressed as $xRy$.
+
+2.  A binary relation $R$ is a partial order if
+
+    a.  Reflexivity: $xRx$, Transitivity: $xRy, yRz \implies xRz$.
+
+    b.  Antisymmetry: $xRy, yRx \implies xRx$.
+
+3.  A partial order is called a linear order if any two elements are comparable.
+
+4.  Let $(P, \leq)$ be a poset (partially ordered set), a subset $C \subseteq P$ is called a *chain* if $C$ has a linear order.
+
+5.  Let $A \subseteq P$, an upper bound for $A$ is an element $x \in P$ such that $y \leq x, \ \forall y \in A$.
+
+6.  An $x \in P$ is called a maximal element if $\not\exists \ y\neq x : x \leq y$.
+
+7.  A linearly ordered set is called *well ordered* if every nonempty subset has a first element.
+
+### ***Zorn and Axiom of Choice are equivalent***
+
+We now conclude by proving that $\text{Zorn}\iff\text{AoC}$.
+
+::: {#thm-zorntoaoc}
+### $\text{Zorn} \implies \text{AoC}$
+
+$$
+\text{Zorn's Lemma} \ \implies \text{Axiom of Choice}
+$$
+
+------------------------------------------------------------------------
+
+Consider the following poset
+
+$$
+P = \{(J, f) : J \subseteq I, f : J \to A\text{ such that }f(j) \in A_j, \forall j \in J\}
+$$
+
+with the partial order:
+
+$$
+(J_1, f_1) \preceq (J_2, f_2) \text{ if } J_1 \subseteq J_2 \text{ and } f_2\Bigg|_{J_1} = f_1 \text{ ie. } f_2(x) = f_1(x), \forall x \in J_1
+$$
+
+then any chain $C = \{(J_\alpha, f_\alpha) : \alpha \in Y\}$, has the trivial upperbound $(\cup J_\alpha, f) : f\Bigg |_{\alpha} = f_\alpha, \forall \alpha \in Y$. By Zorn's Lemma, there exists a maximal element $f:J \to A$, if $J = I$ , we are done. Otherwise, pick $j \in I \setminus J$ since $A_j$ is nonempty, pick $x \in A_j$ and consider $f^{*}:J \cup \{j\} \to A$ such that $f(j) = x, f^{*}\Bigg|_{J} = f. \ \blacksquare$
+:::
+
+Todo: $\text{AoC} \to \text{Zorn}$.
+
+## ***Footnotes***
+
+::: {#thm-cantor}
+### Cantor's Diagonal Argument
+
+$$X <_{c} P(X) \ \forall \ X$$
+
+------------------------------------------------------------------------
+
+Assume for the sake of contradiction $P(X) =_{c} X$ (where $=_{c}$ means that there exists a bijection between the sets). Thus, there is an surjection $f:X \to P(X)$. Consider
+
+$$
+A = \{x \in X: x \not\in f(x)\}
+$$
+
+But since $f$ is a surjection, $\exists x_0 \ f(x_0) = A$ then
+
+$$
+x_0 \in A \iff x_0 \not\in A.
+$$
+:::

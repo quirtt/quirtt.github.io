@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/zorn-and-aoc/zorn-and-aoc.html",
       "/posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html"
     ]
   }

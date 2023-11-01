@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Himadri Mandal">
-<meta name="dcterms.date" content="2023-10-24">
+<meta name="dcterms.date" content="2023-11-02">
 
-<title>pls suggest name - Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics</title>
+<title>Cold Reflections - Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -76,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">pls suggest name</span>
+    <span class="navbar-title">Cold Reflections</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -126,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 24, 2023</p>
+        <p class="date">November 2, 2023</p>
       </div>
     </div>
     
@@ -143,7 +143,12 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#russells-paradox" id="toc-russells-paradox" class="nav-link active" data-scroll-target="#russells-paradox"><strong><em>Russell’s Paradox</em></strong></a></li>
-  <li><a href="#axiom-of-choice" id="toc-axiom-of-choice" class="nav-link" data-scroll-target="#axiom-of-choice">Axiom of Choice</a></li>
+  <li><a href="#axiom-of-choice" id="toc-axiom-of-choice" class="nav-link" data-scroll-target="#axiom-of-choice"><strong><em>Axiom of Choice</em></strong></a></li>
+  <li><a href="#zorns-lemma" id="toc-zorns-lemma" class="nav-link" data-scroll-target="#zorns-lemma"><strong><em>Zorn’s Lemma</em></strong></a>
+  <ul class="collapse">
+  <li><a href="#zorn-and-axiom-of-choice-are-equivalent" id="toc-zorn-and-axiom-of-choice-are-equivalent" class="nav-link" data-scroll-target="#zorn-and-axiom-of-choice-are-equivalent"><strong><em>Zorn and Axiom of Choice are equivalent</em></strong></a></li>
+  </ul></li>
+  <li><a href="#footnotes" id="toc-footnotes" class="nav-link" data-scroll-target="#footnotes"><strong><em>Footnotes</em></strong></a></li>
   </ul>
 </nav>
     </div>
@@ -156,8 +161,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Mathematics has long been built on the sturdy foundation of intuition. From counting pebbles to solving complex equations, mathematicians have relied on their inner compass to navigate the abstract landscapes of numbers and shapes. But as the 19th century dawned, something intriguing and unsettling began to occur – mathematics, the bedrock of human knowledge, was on the brink of a seismic shift.</p>
 <p>This piece goes into <em>how</em> this happened, what changed - and its consequences. Though I might not know a lot of mathematics, I firmly believe that this is one of the most interesting (while being accessible) parts of mathematics.</p>
 <p>All of this begins with arguably the most famous paradox in mathematics, logic, and the like - the Russell’s paradox.</p>
-<section id="russells-paradox" class="level3">
-<h3 class="anchored" data-anchor-id="russells-paradox"><strong><em>Russell’s Paradox</em></strong></h3>
+<section id="russells-paradox" class="level2">
+<h2 class="anchored" data-anchor-id="russells-paradox"><strong><em>Russell’s Paradox</em></strong></h2>
 <p>Let <span class="math inline">\(A\)</span> be the set of all sets that do not contain themselves. Does <span class="math inline">\(A\)</span> contain itself?</p>
 <p><span class="math display">\[
 A = \{x : x \not\in x\} \text{. Is } A \in A?
@@ -172,11 +177,73 @@ A = \{x : x \not\in x\} \text{. Is } A \in A?
 <p><span class="math display">\[
 S = \{x \in z : \varphi(x)\}
 \]</span></p>
+<hr>
+<p>Although this defines how we can create <em>subsets</em> from a parent set, it DOESN’T talk about creating sets of elements that follow a formula. Infact, we will need a sort of <span class="math inline">\(\text{``set of all sets: X"}\)</span> to talk about creating sets out of thin air.</p>
+<p>However this is NOT a set (In <span class="math inline">\(\text{ZF}\)</span>) . How do we prove this? Well, if <span class="math inline">\(X\)</span> is the set of all sets, then <span class="math inline">\(P(X) \in X\)</span> which means there exists an injective function from <span class="math inline">\(f:P(X)\to X\)</span>. But we know by <a href="#thm-cantor">Theorem&nbsp;2</a> that <span class="math inline">\(P(X) &gt;_{c} X\)</span>. This is a <a href="https://en.wikipedia.org/wiki/Class_(set_theory)"><strong><em>Class</em></strong></a>.</p>
 </section>
 </section>
-<section id="axiom-of-choice" class="level1">
-<h1>Axiom of Choice</h1>
+<section id="axiom-of-choice" class="level2">
+<h2 class="anchored" data-anchor-id="axiom-of-choice"><strong><em>Axiom of Choice</em></strong></h2>
 <p>Let <span class="math inline">\(I\)</span> be an index set with a family of sets indexed on this index set <span class="math inline">\(\{A_i\}_{i \in I}\)</span>. Then there exists a choice function <span class="math inline">\(f:I \to A = \cup_{i \in I} A_i\)</span> such that <span class="math inline">\(f(i) \in A_i \ \forall i \in I\)</span>.</p>
+<hr>
+<p>This makes “intuitive” sense and is something that “should” be true. However, this is an independent statement in <span class="math inline">\(\text{ZF}\)</span>, which is to say - we CANNOT prove this by ONLY using the axioms of <span class="math inline">\(\text{ZF}\)</span>. There is an equivalent formulation of this axiom (which is used more often)</p>
+</section>
+<section id="zorns-lemma" class="level2">
+<h2 class="anchored" data-anchor-id="zorns-lemma"><strong><em>Zorn’s Lemma</em></strong></h2>
+<p>If <span class="math inline">\(P\)</span> is a nonempty partially ordered set such that every chain has an upper bound in <span class="math inline">\(P\)</span> then <span class="math inline">\(P\)</span> has a maximal element.</p>
+<hr>
+<p>There are quite a few words that need to be unpacked.</p>
+<section id="definitions" class="level4">
+<h4 class="anchored" data-anchor-id="definitions"><em>Definitions</em></h4>
+<ol type="1">
+<li><p>A binary relation <span class="math inline">\(R\)</span> on a set <span class="math inline">\(P\)</span> is a subset <span class="math inline">\(R\)</span> of <span class="math inline">\(P \times P\)</span>, <span class="math inline">\((x,y) \in R\)</span> and is often expressed as <span class="math inline">\(xRy\)</span>.</p></li>
+<li><p>A binary relation <span class="math inline">\(R\)</span> is a partial order if</p>
+<ol type="a">
+<li><p>Reflexivity: <span class="math inline">\(xRx\)</span>, Transitivity: <span class="math inline">\(xRy, yRz \implies xRz\)</span>.</p></li>
+<li><p>Antisymmetry: <span class="math inline">\(xRy, yRx \implies xRx\)</span>.</p></li>
+</ol></li>
+<li><p>A partial order is called a linear order if any two elements are comparable.</p></li>
+<li><p>Let <span class="math inline">\((P, \leq)\)</span> be a poset (partially ordered set), a subset <span class="math inline">\(C \subseteq P\)</span> is called a <em>chain</em> if <span class="math inline">\(C\)</span> has a linear order.</p></li>
+<li><p>Let <span class="math inline">\(A \subseteq P\)</span>, an upper bound for <span class="math inline">\(A\)</span> is an element <span class="math inline">\(x \in P\)</span> such that <span class="math inline">\(y \leq x, \ \forall y \in A\)</span>.</p></li>
+<li><p>An <span class="math inline">\(x \in P\)</span> is called a maximal element if <span class="math inline">\(\not\exists \ y\neq x : x \leq y\)</span>.</p></li>
+<li><p>A linearly ordered set is called <em>well ordered</em>&nbsp;if every nonempty subset has a first element.</p></li>
+</ol>
+</section>
+<section id="zorn-and-axiom-of-choice-are-equivalent" class="level3">
+<h3 class="anchored" data-anchor-id="zorn-and-axiom-of-choice-are-equivalent"><strong><em>Zorn and Axiom of Choice are equivalent</em></strong></h3>
+<p>We now conclude by proving that <span class="math inline">\(\text{Zorn}\iff\text{AoC}\)</span>.</p>
+<div id="thm-zorntoaoc" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (<span class="math inline">\(\text{Zorn} \implies \text{AoC}\)</span>) </strong></span><span class="math display">\[
+\text{Zorn's Lemma} \ \implies \text{Axiom of Choice}
+\]</span></p>
+<hr>
+<p>Consider the following poset</p>
+<p><span class="math display">\[
+P = \{(J, f) : J \subseteq I, f : J \to A\text{ such that }f(j) \in A_j, \forall j \in J\}
+\]</span></p>
+<p>with the partial order:</p>
+<p><span class="math display">\[
+(J_1, f_1) \preceq (J_2, f_2) \text{ if } J_1 \subseteq J_2 \text{ and } f_2\Bigg|_{J_1} = f_1 \text{ ie. } f_2(x) = f_1(x), \forall x \in J_1
+\]</span></p>
+<p>then any chain <span class="math inline">\(C = \{(J_\alpha, f_\alpha) : \alpha \in Y\}\)</span>, has the trivial upperbound <span class="math inline">\((\cup J_\alpha, f) : f\Bigg |_{\alpha} = f_\alpha, \forall \alpha \in Y\)</span>. By Zorn’s Lemma, there exists a maximal element <span class="math inline">\(f:J \to A\)</span>, if <span class="math inline">\(J = I\)</span> , we are done. Otherwise, pick <span class="math inline">\(j \in I \setminus J\)</span> since <span class="math inline">\(A_j\)</span> is nonempty, pick <span class="math inline">\(x \in A_j\)</span> and consider <span class="math inline">\(f^{*}:J \cup \{j\} \to A\)</span> such that <span class="math inline">\(f(j) = x, f^{*}\Bigg|_{J} = f. \ \blacksquare\)</span></p>
+</div>
+<p>Todo: <span class="math inline">\(\text{AoC} \to \text{Zorn}\)</span>.</p>
+</section>
+</section>
+<section id="footnotes" class="level2">
+<h2 class="anchored" data-anchor-id="footnotes"><strong><em>Footnotes</em></strong></h2>
+<div id="thm-cantor" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (Cantor’s Diagonal Argument) </strong></span><span class="math display">\[X &lt;_{c} P(X) \ \forall \ X\]</span></p>
+<hr>
+<p>Assume for the sake of contradiction <span class="math inline">\(P(X) =_{c} X\)</span> (where <span class="math inline">\(=_{c}\)</span> means that there exists a bijection between the sets). Thus, there is an surjection <span class="math inline">\(f:X \to P(X)\)</span>. Consider</p>
+<p><span class="math display">\[
+A = \{x \in X: x \not\in f(x)\}
+\]</span></p>
+<p>But since <span class="math inline">\(f\)</span> is a surjection, <span class="math inline">\(\exists x_0 \ f(x_0) = A\)</span> then</p>
+<p><span class="math display">\[
+x_0 \in A \iff x_0 \not\in A.
+\]</span></p>
+</div>
 
 
 </section>
