@@ -10,6 +10,8 @@ format:
         # css: styles.css
 editor: visual
 image: "pfp.jpg"
+execute:
+    freeze: auto
 ---
 
 This was my statistics project at ISI Sem 1. My team had: *Myself*, *Siddhartha*, *Ayan*, *Drishti*, *Aman*, *Mrittika*. Thanks to everyone for their efforts.
@@ -73,6 +75,18 @@ floor(rnorm(1, mean=25.78, sd = 2.3046))
 ```
 
 Everything else was fairly easy to implement, I had quite some fun while making this. This empirically confirms that the algorithm works with pretty high probabilities $\left(\sim 91\%\right)$.
+
+Well, I know the code is probably not human-readable (moreso because it was written by me, lol), so, I work with the following functions: `RiffleShuffle`, `Switch`, `RisingSingleton`, `Process`, and `SumCalculator`. Here's what's special about each of them:
+
+-   `RiffleShuffle(Deck):` This first splits the deck according to the fitted distribution. Then, it stores a counter of the number of cards in the Left and Right hands (`LeftHand`, `RightHand`). My assumption is: the probability that the "next" card is from the Left hand is $\frac{\texttt{LeftHand}}{\texttt{LeftHand + RightHand}}$ and similarly for the Right hand.
+
+-   `Switch(Deck, c(x, y)):` The $x^{\text{th}}$ index card is moved to the $y^{\text{th}}$ index in the deck.
+
+-   `RisingSingleton(Deck):` Well, this is interesting. I first create the `index` array which stores the location of the $i^{\text{th}}$ card in the Deck. Then - note that if there is a RisingSingleton: there is an element $x$ such that $\texttt{index}[x+1] < \texttt{index}[x]$ and $\texttt{index}[x-1] > \texttt{index}[x]$. The weird condition in the code is to deal with the edgecases, so don't worry about that. At last, it counts the total number of rising singletons and returns the pair $(\texttt{(Sum(RisingSingleton) == 1)}, \texttt{LastSingleton})$.
+
+-   `Process:` This simulates the whole setup, and returns the boolean $(\texttt{(Sum(RisingSingleton) == 1) AND (LastSingleton == CorrectCard)})$ which amounts to checking whether we get what we want.
+
+-   `SumCalculator:` This function carries out `Process` 10000 times and finds the percentage of times it gets the card right.
 
 ```{r}
 #Cards is the permutation _Sigma_.
@@ -182,94 +196,60 @@ SumCalculator(Cards)/10000 * 100
 Also, **\@Siddhartha** implemented this in Python
 
 ```{python}
-import random
 import numpy as np
 
-Dataset = [
-    26, 26, 24, 26, 26, 25, 26, 26, 25, 23, 25, 26, 24, 26, 24, 26, 26, 23, 20, 26, 23, 22, 25, 23, 26,
-    26, 23, 25, 23, 25, 25, 25, 25, 26, 25, 23, 25, 24, 26, 25, 26, 23, 26, 23, 26, 24, 26, 24, 25, 24,
-    25, 23, 24, 25, 22, 21, 25, 25, 25, 21, 23, 24, 23, 21, 26, 25, 25, 24, 24, 25, 24, 25, 24, 24, 23, 25,
-    21, 25, 26, 26, 23, 25, 25, 23, 21, 24, 21, 25, 25, 22, 24, 25, 26, 23, 24, 25, 19, 25, 23, 25
-]
-
-def riffle_shuffle(cards):
-    new_deck = []
-    split = int(np.random.normal(25.78, 2.3046))
-    left_hand = cards[:split]
-    right_hand = cards[split:]
-   
-    for x in range(1, 53):
-        l = len(left_hand)
-        r = len(right_hand)
-        hand = np.random.choice(["L", "R"], p=[l / (l + r), r / (l + r)])
-       
-        if hand == "L":
-            card = left_hand[0]
-            left_hand = left_hand[1:] if l != 1 else []
+import random
+def riffle_shuffle(deck):
+    cut_index = int(np.random.normal(25.78, 2.3046))
+    cut_index = max(1, min(cut_index, 51))
+    left_hand = deck[:cut_index]
+    right_hand = deck[cut_index:]
+    shuffled_deck = []
+    while left_hand or right_hand:
+        if len(right_hand) > 0 and np.random.rand() <= len(right_hand) / (len(left_hand) + len(right_hand)):
+            shuffled_deck.append(right_hand.pop(0))
         else:
-            card = right_hand[0]
-            right_hand = right_hand[1:] if r != 1 else []
-       
-        new_deck.append(card)
-   
-    return new_deck
+            shuffled_deck.append(left_hand.pop(0))
+    return shuffled_deck
 
-def switch(cards, vals):
-    x = vals[0] - 1  
-    y = vals[1] - 1 
-    new_cards = []
+def swap_first_card(deck):
+    index = int(list(np.random.binomial(52, 0.5, 1))[0])
+    index = min(index, 52)
+    deck[0]=deck.pop(0)
+    deck.insert(index,deck[0])
+def rising_singleton(array):
+    # Create an index array to store the positions of values in the input array
+    index = [0] * 52
 
-    for i in range(len(cards)):
-        if i != x:
-            new_cards.append(cards[i])
+    # Populate the index array with the positions of values in the input array
+    for i in range(52):
+        index[array[i] - 1] = i
 
-    if 1 < y < 52:
-        new_cards.insert(y - 1, cards[x])
-    elif y == 1:
-        new_cards.insert(0, cards[x])
-    elif y == 52:
-        new_cards.append(cards[x])
-
-    return new_cards
-
-def rising_singleton(cards):
-    index = np.zeros(53)
-   
-    for i in range(1, 52):
-        index[cards[i - 1]] = i
-   
     Sum = 0
     SingletonCard = 0
-   
-    for i in range(1, 53):
-        if (index[i] >= min((i + 1), 52)) and (index[i] <= max((i - 1), 1)):
+
+    # Check if there is a unique Rising Singleton
+    for i in range(52):
+        if (index[i] >= index[min(i + 1, 51)]) and (index[i] <= index[max(i - 1, 0)]):
             Sum += 1
-            SingletonCard = i
-   
-    return (Sum == 1, SingletonCard)
+            SingletonCard = i + 1
 
-def process(cards):
-    cards = riffle_shuffle(cards)
-    cards = riffle_shuffle(cards)
-    cards = riffle_shuffle(cards)
-   
-    val = [1, np.random.binomial(1, 0.5, 1)[0] + 1]
-    picked_card = cards[0]
-    cards = switch(cards, val)
-   
-    rising_singleton_check = rising_singleton(cards)
-   
-    return rising_singleton_check[0] and rising_singleton_check[1] == picked_card
+    return [Sum == 1, SingletonCard]
 
-def sum_calculator(cards):
-    Sum = 0
-    for i in range(10000):
-        Sum += process(cards)
-   
-    return Sum
+unique_singleton_count = 0
 
-cards = [i+1 for i in range(52)]
-sum_calculator(cards)
+# Repeat the process 10,000 times
+for x in range(10000):
+    deck = list(range(1,53))
+    for y in range(3):
+        deck = riffle_shuffle(deck)
+    swap_first_card(deck)
+    is_unique_singleton,z = rising_singleton(deck)
+    if is_unique_singleton:
+        unique_singleton_count += 1
+
+# Percentage of unique singletons
+print("Percentage: ", unique_singleton_count/100)
 ```
 
 ------------------------------------------------------------------------
@@ -287,3 +267,11 @@ RiffleShuffle <- function(Cards){
 ```
 
 Where I only change how I perform the split. This results in about $\left(89\%\right)$.
+
+## Part C: Playing Around
+
+We can now tinker with the setup to see what happens when we change things a little bit. Note that we picked the card from the top and put it back *somewhere*. It makes sense to ask: what happens when we pick it from *anywhere*? Well, here's a plot in **R** which showcases what happens when we vary the location of the picked card.
+
+![](picked_card_vary.jpg){fig-align="center" width="459"}
+
+Which makes sense because the way we are choosing the position to put the card into is a function symmetric around 26.
