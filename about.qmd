@@ -1,18 +1,22 @@
 ---
 title: "About"
-
 image: profile.jpg
 about:
   template: jolla
   links:
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://linkedin.com/in/quirtt
     - icon: github
       text: Github
       href: https://github.com/quirtt
     - icon: discord
       text: quirtt on Discord
-
+      href: https://discord.com/app
 ---
 
+I'm **Himadri Mandal**, you might know me as **quirtt** from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (mostly Mathematics so far, though. lol!). Confession: I *might* like mathematics *more* than statistics - I *really* hope I enjoy statistics as I learn more of it, because I would be sad otherwise.
+
+At any point in the day I am found doing the following things: sleep, learn weird math/cs, watch anime, cope through university lectures, read some ML paper, goofing around with friends, playing table tennis. Ah well. I have been recently getting more and more involved in AI and AI alignment, too.
+
+If you find me interesting - feel free to shoot me a mail at **mandalhimadri06\@gmail.com** or send me a "Hi!" on Discord.
