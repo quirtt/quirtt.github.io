@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Himadri Mandal">
-<meta name="dcterms.date" content="2023-11-02">
+<meta name="dcterms.date" content="2023-11-16">
 
-<title>Cold Reflections - Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics</title>
+<title>Cold Reflections - Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,7 +105,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics</h1>
+      <h1 class="title">Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">set theory</div>
                 <div class="quarto-category">math</div>
@@ -126,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 2, 2023</p>
+        <p class="date">November 16, 2023</p>
       </div>
     </div>
     
@@ -144,10 +144,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#russells-paradox" id="toc-russells-paradox" class="nav-link active" data-scroll-target="#russells-paradox"><strong><em>Russell’s Paradox</em></strong></a></li>
   <li><a href="#axiom-of-choice" id="toc-axiom-of-choice" class="nav-link" data-scroll-target="#axiom-of-choice"><strong><em>Axiom of Choice</em></strong></a></li>
-  <li><a href="#zorns-lemma" id="toc-zorns-lemma" class="nav-link" data-scroll-target="#zorns-lemma"><strong><em>Zorn’s Lemma</em></strong></a>
-  <ul class="collapse">
-  <li><a href="#zorn-and-axiom-of-choice-are-equivalent" id="toc-zorn-and-axiom-of-choice-are-equivalent" class="nav-link" data-scroll-target="#zorn-and-axiom-of-choice-are-equivalent"><strong><em>Zorn and Axiom of Choice are equivalent</em></strong></a></li>
-  </ul></li>
+  <li><a href="#zorns-lemma" id="toc-zorns-lemma" class="nav-link" data-scroll-target="#zorns-lemma"><strong><em>Zorn’s Lemma</em></strong></a></li>
+  <li><a href="#zorn-and-axiom-of-choice-are-the-same" id="toc-zorn-and-axiom-of-choice-are-the-same" class="nav-link" data-scroll-target="#zorn-and-axiom-of-choice-are-the-same"><strong><em>Zorn and Axiom of Choice are the SAME!</em></strong></a></li>
   <li><a href="#footnotes" id="toc-footnotes" class="nav-link" data-scroll-target="#footnotes"><strong><em>Footnotes</em></strong></a></li>
   </ul>
 </nav>
@@ -179,7 +177,7 @@ S = \{x \in z : \varphi(x)\}
 \]</span></p>
 <hr>
 <p>Although this defines how we can create <em>subsets</em> from a parent set, it DOESN’T talk about creating sets of elements that follow a formula. Infact, we will need a sort of <span class="math inline">\(\text{``set of all sets: X"}\)</span> to talk about creating sets out of thin air.</p>
-<p>However this is NOT a set (In <span class="math inline">\(\text{ZF}\)</span>) . How do we prove this? Well, if <span class="math inline">\(X\)</span> is the set of all sets, then <span class="math inline">\(P(X) \in X\)</span> which means there exists an injective function from <span class="math inline">\(f:P(X)\to X\)</span>. But we know by <a href="#thm-cantor">Theorem&nbsp;2</a> that <span class="math inline">\(P(X) &gt;_{c} X\)</span>. This is a <a href="https://en.wikipedia.org/wiki/Class_(set_theory)"><strong><em>Class</em></strong></a>.</p>
+<p>However this is NOT a set (In <span class="math inline">\(\text{ZF}\)</span>) . How do we prove this? Well, if <span class="math inline">\(X\)</span> is the set of all sets, then <span class="math inline">\(P(X) \in X\)</span> which means there exists an injective function from <span class="math inline">\(f:P(X)\to X\)</span>. But we know by <a href="#thm-cantor">Theorem&nbsp;3</a> that <span class="math inline">\(P(X) &gt;_{c} X\)</span>. This is a <a href="https://en.wikipedia.org/wiki/Class_(set_theory)"><strong><em>Class</em></strong></a>.</p>
 </section>
 </section>
 <section id="axiom-of-choice" class="level2">
@@ -209,14 +207,16 @@ S = \{x \in z : \varphi(x)\}
 <li><p>A linearly ordered set is called <em>well ordered</em>&nbsp;if every nonempty subset has a first element.</p></li>
 </ol>
 </section>
-<section id="zorn-and-axiom-of-choice-are-equivalent" class="level3">
-<h3 class="anchored" data-anchor-id="zorn-and-axiom-of-choice-are-equivalent"><strong><em>Zorn and Axiom of Choice are equivalent</em></strong></h3>
+</section>
+<section id="zorn-and-axiom-of-choice-are-the-same" class="level2">
+<h2 class="anchored" data-anchor-id="zorn-and-axiom-of-choice-are-the-same"><strong><em>Zorn and Axiom of Choice are the SAME!</em></strong></h2>
 <p>We now conclude by proving that <span class="math inline">\(\text{Zorn}\iff\text{AoC}\)</span>.</p>
 <div id="thm-zorntoaoc" class="theorem">
 <p><span class="theorem-title"><strong>Theorem 1 (<span class="math inline">\(\text{Zorn} \implies \text{AoC}\)</span>) </strong></span><span class="math display">\[
 \text{Zorn's Lemma} \ \implies \text{Axiom of Choice}
 \]</span></p>
 <hr>
+<p>(This proof was communicated to me by PSC. Sir at ISIK)</p>
 <p>Consider the following poset</p>
 <p><span class="math display">\[
 P = \{(J, f) : J \subseteq I, f : J \to A\text{ such that }f(j) \in A_j, \forall j \in J\}
@@ -225,17 +225,41 @@ P = \{(J, f) : J \subseteq I, f : J \to A\text{ such that }f(j) \in A_j, \forall
 <p><span class="math display">\[
 (J_1, f_1) \preceq (J_2, f_2) \text{ if } J_1 \subseteq J_2 \text{ and } f_2\Bigg|_{J_1} = f_1 \text{ ie. } f_2(x) = f_1(x), \forall x \in J_1
 \]</span></p>
-<p>then any chain <span class="math inline">\(C = \{(J_\alpha, f_\alpha) : \alpha \in Y\}\)</span>, has the trivial upperbound <span class="math inline">\((\cup J_\alpha, f) : f\Bigg |_{\alpha} = f_\alpha, \forall \alpha \in Y\)</span>. By Zorn’s Lemma, there exists a maximal element <span class="math inline">\(f:J \to A\)</span>, if <span class="math inline">\(J = I\)</span> , we are done. Otherwise, pick <span class="math inline">\(j \in I \setminus J\)</span> since <span class="math inline">\(A_j\)</span> is nonempty, pick <span class="math inline">\(x \in A_j\)</span> and consider <span class="math inline">\(f^{*}:J \cup \{j\} \to A\)</span> such that $f(j) = x, f^{*}|_{J} = f, which contradicts maximality of <span class="math inline">\(f\)</span>. &nbsp;$</p>
+<p>then any chain <span class="math inline">\(C = \{(J_\alpha, f_\alpha) : \alpha \in Y\}\)</span>, has the trivial upperbound <span class="math inline">\((\cup J_\alpha, f) : f\Bigg |_{\alpha} = f_\alpha, \forall \alpha \in Y\)</span>. By Zorn’s Lemma, there exists a maximal element <span class="math inline">\(f:J \to A\)</span>, if <span class="math inline">\(J = I\)</span> , we are done. Otherwise, pick <span class="math inline">\(j \in I \setminus J\)</span> since <span class="math inline">\(A_j\)</span> is nonempty, pick <span class="math inline">\(x \in A_j\)</span> and consider <span class="math inline">\(f^{*}:J \cup \{j\} \to A\)</span> such that <span class="math inline">\(f(j) = x, f^{*}\Bigg|_{J} = f\)</span>, which contradicts maximality of <span class="math inline">\(f\)</span>. &nbsp;<span class="math inline">\(\blacksquare\)</span></p>
 </div>
-<p>Todo: <span class="math inline">\(\text{AoC} \to \text{Zorn}\)</span>.</p>
+<div id="thm-aoctozorn" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (<span class="math inline">\(\text{AoC} \implies \text{Zorn}\)</span>) </strong></span><span class="math display">\[
+\text{Axiom of Choice} \implies \text{Zorn's Lemma}
+\]</span></p>
+<p>This is <strong>definitely trickier</strong> to prove compared to the previous implication. I use transfinite induction and ordinals here (but if you don’t know about them I will probably make a post on them. Till then, check out <a href="https://venhance.github.io/napkin/Napkin.pdf">Napkin pg. 801</a>.)</p>
+<p>Let <span class="math inline">\((P, \leq)\)</span> be the poset, where every chain has an upperbound. Assume there is <strong>no maximal element</strong>. Let <span class="math inline">\(x_0\)</span> be any element in <span class="math inline">\(P\)</span>. By assumption <span class="math inline">\(\exists x_1\)</span> s.t. <span class="math inline">\(x_0 \leq x_1\)</span>. But again, by assumption, <span class="math inline">\(\exists x_2\)</span> s.t. <span class="math inline">\(x_0 \leq x_1 \leq x_2\)</span>. Intuitively we create a chain <span class="math inline">\(x_0 \leq x_1 \leq x_2 \ \cdots\)</span> which has an upper bound <span class="math inline">\(x_\omega\)</span>, but since this isn’t the maximal element again - I get <span class="math inline">\(x_0 \leq x_1 \leq x_2 \leq \cdots \leq x_\omega \leq x_{\omega+1} \leq \cdots\)</span>. We must “eventually” run out.</p>
+<p>Now to formalize this: for any element <span class="math inline">\(x \in P\)</span> consider the set <span class="math inline">\(S_x = \{y \in P : x \lneq y\}\)</span>. Clearly all <span class="math inline">\(S_x\)</span> are nonempty, because otherwise there is a maximal element. By AoC, there exists a choice function <span class="math inline">\(f:P \to \cup_{x \in P} S_x\)</span>, such that <span class="math inline">\(f(x) \in S_x \ \forall x \in P\)</span>. Using transfinite induction:</p>
+<ul>
+<li><p><u><strong>Step 1:</strong></u> <span class="math inline">\(x_0 \in P\)</span></p>
+<p>Take <span class="math inline">\(x_1 = f(x_0)\)</span>. Then <span class="math inline">\(x_0 \leq x_1\)</span>. Similarly, obtain <span class="math inline">\(C_{i &lt; \omega} = x_0 \leq x_1 \leq \cdots\)</span>.</p></li>
+<li><p><u><strong>Step 2:</strong></u> Let <span class="math inline">\(\lambda\)</span> be a limit ordinal. Defining <span class="math inline">\(x_\lambda = u(C_{i &lt; \lambda})\)</span> can be used to extend the chain.</p>
+<p>Consider the upper bound of this chain <span class="math inline">\(x = u(C_{i &lt; \lambda})\)</span>. Clearly, <span class="math inline">\(x\)</span> cannot be in <span class="math inline">\(C\)</span>, because otherwise, <span class="math inline">\(\exists k\)</span> s.t. <span class="math inline">\(C \ni x_k \geq x = x_{k-1}\)</span> which forces <span class="math inline">\(x = x_k = f(x)\)</span> which is not possible by the definition of <span class="math inline">\(f\)</span>. So, define <span class="math inline">\(x_{\lambda} = x\)</span>.</p></li>
+</ul>
+<p>Then - keep doing this. So, you end up with a chain <span class="math inline">\(C = x_0 \leq x_1 \leq \cdots \leq x_\omega \leq x_{\omega + 1} \leq \cdots \leq x_{\omega + \omega} \leq \cdots\)</span>.</p>
+<p>To finish we need magic: Hartogs’s theorem.</p>
+<section id="hartogss-theorem" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="hartogss-theorem">Hartogs’s Theorem</h3>
+<p>Given any set <span class="math inline">\(X\)</span>, there exists an ordinal <span class="math inline">\(\alpha\)</span> such that there is no injection <span class="math inline">\(f:\alpha \to X\)</span>.</p>
+<hr>
+<p>Consider the class of ordinals <span class="math inline">\(\alpha = \{\beta \in \text{Ord} \ | \ \exists f:\beta \hookrightarrow X\}\)</span>. Using the power set axiom twice - we get that <span class="math inline">\(\mathcal{P}(X \times X)\)</span> is a set. Consider the class <span class="math inline">\(W\)</span> of all reflexive well orderings of subsets of <span class="math inline">\(X\)</span>, since this is a definable subclass of <span class="math inline">\(\mathcal{P}(X \times X)\)</span>, it is a set by Schema of Specification.</p>
+<p>The class of all <a href="https://en.wikipedia.org/wiki/Order_type">order types</a> of well-orderings in <span class="math inline">\(W\)</span> is a set by the axiom schema of replacement: <span class="math inline">\((\operatorname{Domain}(w), w) \cong (\beta, \leq)\)</span> where <span class="math inline">\(w\)</span> is a well-ordering on <span class="math inline">\(\operatorname{Domain}(w)\)</span> which gets mapped to the order type <span class="math inline">\((\beta, \leq)\)</span>.</p>
+<p>Now we can see that <span class="math inline">\(W\)</span>, a set, is precisely <span class="math inline">\(\alpha\)</span>. Since every well-ordering of a subset of <span class="math inline">\(X\)</span> defines an injective function from <span class="math inline">\(\beta \hookrightarrow X\)</span> where <span class="math inline">\(\beta\)</span> is some ordinal. And the other side is true as well. To finish: <span class="math inline">\(\alpha\)</span> is a <em>transitive</em> set of ordinals, which means it is an ordinal itself. Ofcourse, then, <span class="math inline">\(\alpha\)</span> is the first ordinal with no injection <span class="math inline">\(\blacksquare\)</span>.</p>
+<hr>
+<p>So, the chain <em>has</em> to eventually end. We are done.</p>
 </section>
+</div>
 </section>
 <section id="footnotes" class="level2">
 <h2 class="anchored" data-anchor-id="footnotes"><strong><em>Footnotes</em></strong></h2>
 <div id="thm-cantor" class="theorem">
-<p><span class="theorem-title"><strong>Theorem 2 (Cantor’s Diagonal Argument) </strong></span><span class="math display">\[X &lt;_{c} P(X) \ \forall \ X\]</span></p>
+<p><span class="theorem-title"><strong>Theorem 3 (Cantor’s Diagonal Argument) </strong></span><span class="math display">\[X &lt;_{c} P(X) \ \forall \ X\]</span></p>
 <hr>
-<p>Assume for the sake of contradiction <span class="math inline">\(P(X) =_{c} X\)</span> (where <span class="math inline">\(=_{c}\)</span> means that there exists a bijection between the sets). Thus, there is an surjection <span class="math inline">\(f:X \to P(X)\)</span>. Consider</p>
+<p>Assume for the sake of contradiction <span class="math inline">\(P(X) =_{c} X\)</span> (where <span class="math inline">\(=_{c}\)</span> means that there exists a bijection between the sets). Thus, there is a surjection <span class="math inline">\(f:X \to P(X)\)</span>. Consider</p>
 <p><span class="math display">\[
 A = \{x \in X: x \not\in f(x)\}
 \]</span></p>
@@ -243,6 +267,7 @@ A = \{x \in X: x \not\in f(x)\}
 <p><span class="math display">\[
 x_0 \in A \iff x_0 \not\in A.
 \]</span></p>
+<p>a contradiction. (This is pretty much the same idea as the famous proof of real numbers being uncountable.)</p>
 </div>
 
 

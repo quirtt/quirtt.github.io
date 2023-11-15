@@ -1,7 +1,7 @@
 ---
-title: "Axiom of Choice, the Zorn's Lemma, and the Foundations of Mathematics"
+title: "Axiom of Choice, the Zorn's Lemma, and the Foundations of Mathematics: Set Theory Part I"
 author: "Himadri Mandal"
-date: "2023-11-02"
+date: "2023-11-16"
 categories: [set theory, math]
 format: 
     html: 
@@ -84,7 +84,7 @@ There are quite a few words that need to be unpacked.
 
 7.  A linearly ordered set is called *well ordered* if every nonempty subset has a first element.
 
-### ***Zorn and Axiom of Choice are equivalent***
+## ***Zorn and Axiom of Choice are the SAME!***
 
 We now conclude by proving that $\text{Zorn}\iff\text{AoC}$.
 
@@ -96,6 +96,8 @@ $$
 $$
 
 ------------------------------------------------------------------------
+
+(This proof was communicated to me by PSC. Sir at ISIK)
 
 Consider the following poset
 
@@ -109,10 +111,50 @@ $$
 (J_1, f_1) \preceq (J_2, f_2) \text{ if } J_1 \subseteq J_2 \text{ and } f_2\Bigg|_{J_1} = f_1 \text{ ie. } f_2(x) = f_1(x), \forall x \in J_1
 $$
 
-then any chain $C = \{(J_\alpha, f_\alpha) : \alpha \in Y\}$, has the trivial upperbound $(\cup J_\alpha, f) : f\Bigg |_{\alpha} = f_\alpha, \forall \alpha \in Y$. By Zorn's Lemma, there exists a maximal element $f:J \to A$, if $J = I$ , we are done. Otherwise, pick $j \in I \setminus J$ since $A_j$ is nonempty, pick $x \in A_j$ and consider $f^{*}:J \cup \{j\} \to A$ such that $f(j) = x, f^{*}\Bigg|_{J} = f, which contradicts maximality of $f$. \ \blacksquare$
+then any chain $C = \{(J_\alpha, f_\alpha) : \alpha \in Y\}$, has the trivial upperbound $(\cup J_\alpha, f) : f\Bigg |_{\alpha} = f_\alpha, \forall \alpha \in Y$. By Zorn's Lemma, there exists a maximal element $f:J \to A$, if $J = I$ , we are done. Otherwise, pick $j \in I \setminus J$ since $A_j$ is nonempty, pick $x \in A_j$ and consider $f^{*}:J \cup \{j\} \to A$ such that $f(j) = x, f^{*}\Bigg|_{J} = f$, which contradicts maximality of $f$.  $\blacksquare$
 :::
 
-Todo: $\text{AoC} \to \text{Zorn}$.
+::: {#thm-aoctozorn}
+### $\text{AoC} \implies \text{Zorn}$
+
+$$
+\text{Axiom of Choice} \implies \text{Zorn's Lemma}
+$$
+
+This is **definitely trickier** to prove compared to the previous implication. I use transfinite induction and ordinals here (but if you don't know about them I will probably make a post on them. Till then, check out [Napkin pg. 801](https://venhance.github.io/napkin/Napkin.pdf).)
+
+Let $(P, \leq)$ be the poset, where every chain has an upperbound. Assume there is **no maximal element**. Let $x_0$ be any element in $P$. By assumption $\exists x_1$ s.t. $x_0 \leq x_1$. But again, by assumption, $\exists x_2$ s.t. $x_0 \leq x_1 \leq x_2$. Intuitively we create a chain $x_0 \leq x_1 \leq x_2 \ \cdots$ which has an upper bound $x_\omega$, but since this isn't the maximal element again - I get $x_0 \leq x_1 \leq x_2 \leq \cdots \leq x_\omega \leq x_{\omega+1} \leq \cdots$. We must "eventually" run out.
+
+Now to formalize this: for any element $x \in P$ consider the set $S_x = \{y \in P : x \lneq y\}$. Clearly all $S_x$ are nonempty, because otherwise there is a maximal element. By AoC, there exists a choice function $f:P \to \cup_{x \in P} S_x$, such that $f(x) \in S_x \ \forall x \in P$. Using transfinite induction:
+
+-   [**Step 1:**]{.underline} $x_0 \in P$
+
+    Take $x_1 = f(x_0)$. Then $x_0 \leq x_1$. Similarly, obtain $C_{i < \omega} = x_0 \leq x_1 \leq \cdots$.
+
+-   [**Step 2:**]{.underline} Let $\lambda$ be a limit ordinal. Defining $x_\lambda = u(C_{i < \lambda})$ can be used to extend the chain.
+
+    Consider the upper bound of this chain $x = u(C_{i < \lambda})$. Clearly, $x$ cannot be in $C$, because otherwise, $\exists k$ s.t. $C \ni x_k \geq x = x_{k-1}$ which forces $x = x_k = f(x)$ which is not possible by the definition of $f$. So, define $x_{\lambda} = x$.
+
+Then - keep doing this. So, you end up with a chain $C = x_0 \leq x_1 \leq \cdots \leq x_\omega \leq x_{\omega + 1} \leq \cdots \leq x_{\omega + \omega} \leq \cdots$.
+
+To finish we need magic: Hartogs's theorem.
+
+### Hartogs's Theorem
+
+Given any set $X$, there exists an ordinal $\alpha$ such that there is no injection $f:\alpha \to X$.
+
+------------------------------------------------------------------------
+
+Consider the class of ordinals $\alpha = \{\beta \in \text{Ord} \ | \ \exists f:\beta \hookrightarrow X\}$. Using the power set axiom twice - we get that $\mathcal{P}(X \times X)$ is a set. Consider the class $W$ of all reflexive well orderings of subsets of $X$, since this is a definable subclass of $\mathcal{P}(X \times X)$, it is a set by Schema of Specification.
+
+The class of all [order types](https://en.wikipedia.org/wiki/Order_type) of well-orderings in $W$ is a set by the axiom schema of replacement: $(\operatorname{Domain}(w), w) \cong (\beta, \leq)$ where $w$ is a well-ordering on $\operatorname{Domain}(w)$ which gets mapped to the order type $(\beta, \leq)$.
+
+Now we can see that $W$, a set, is precisely $\alpha$. Since every well-ordering of a subset of $X$ defines an injective function from $\beta \hookrightarrow X$ where $\beta$ is some ordinal. And the other side is true as well. To finish: $\alpha$ is a *transitive* set of ordinals, which means it is an ordinal itself. Ofcourse, then, $\alpha$ is the first ordinal with no injection $\blacksquare$.
+
+------------------------------------------------------------------------
+
+So, the chain *has* to eventually end. We are done.
+:::
 
 ## ***Footnotes***
 
@@ -123,7 +165,7 @@ $$X <_{c} P(X) \ \forall \ X$$
 
 ------------------------------------------------------------------------
 
-Assume for the sake of contradiction $P(X) =_{c} X$ (where $=_{c}$ means that there exists a bijection between the sets). Thus, there is an surjection $f:X \to P(X)$. Consider
+Assume for the sake of contradiction $P(X) =_{c} X$ (where $=_{c}$ means that there exists a bijection between the sets). Thus, there is a surjection $f:X \to P(X)$. Consider
 
 $$
 A = \{x \in X: x \not\in f(x)\}
@@ -134,4 +176,6 @@ But since $f$ is a surjection, $\exists x_0 \ f(x_0) = A$ then
 $$
 x_0 \in A \iff x_0 \not\in A.
 $$
+
+a contradiction. (This is pretty much the same idea as the famous proof of real numbers being uncountable.)
 :::
