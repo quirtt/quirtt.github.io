@@ -81,7 +81,7 @@
     "href": "index.html",
     "title": "Cold Reflections",
     "section": "",
-    "text": "Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I\n\n\n\n\n\n\n\nset theory\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n  \n\n\n\n\nShannon’s Card Magic Trick\n\n\n\n\n\n\n\nisi\n\n\nstatistics\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nOct 23, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\nNo matching items"
+    "text": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem\n\n\n\n\n\n\n\nalgebra\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n  \n\n\n\n\nAxiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I\n\n\n\n\n\n\n\nset theory\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n  \n\n\n\n\nShannon’s Card Magic Trick\n\n\n\n\n\n\n\nisi\n\n\nstatistics\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nOct 23, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "no_show/post-with-code/index.html",
@@ -102,6 +102,27 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "I’m Himadri Mandal, you might know me as quirtt from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (mostly Mathematics so far, though. lol!). Confession: I might like mathematics more than statistics - I really hope I enjoy statistics as I learn more of it, because I would be sad otherwise.\nAt any point in the day I am found doing the following things: sleep, learn weird math/cs, watch anime, cope through university lectures, read some ML paper, goofing around with friends, playing table tennis. Ah well. I have been recently getting more and more involved in AI and AI alignment, too.\nIf you find me interesting - feel free to shoot me a mail at mandalhimadri06@gmail.com or send me a “Hi!” on Discord."
+    "text": "I’m Himadri Mandal, 17, you might know me as quirtt from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (mostly Mathematics so far, though. lol!). Confession: I might like mathematics more than statistics - I really hope I enjoy statistics as I learn more of it, because I would be sad otherwise.\nAt any point in the day I am found doing the following things: sleep, learn weird math/cs, watch anime, cope through university lectures, read some ML paper, goofing around with friends, playing table tennis. Ah well. I have been recently getting more and more involved in AI and AI alignment, too.\nIf you find me interesting - feel free to shoot me a mail at mandalhimadri06@gmail.com or send me a “Hi!” on Discord."
+  },
+  {
+    "objectID": "posts/a-cool-problem/polynomials-are-linear.html",
+    "href": "posts/a-cool-problem/polynomials-are-linear.html",
+    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
+    "section": "",
+    "text": "Reading the title: you are probably shouting “Lagrange Interpolation!!!” Yeah, sure, Lagrange is cool. But I will show you something cooler which ensures you don’t have to deal with the messy stuff (unlike your mom)."
+  },
+  {
+    "objectID": "posts/a-cool-problem/polynomials-are-linear.html#problem-statement",
+    "href": "posts/a-cool-problem/polynomials-are-linear.html#problem-statement",
+    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
+    "section": "Problem Statement",
+    "text": "Problem Statement\nLet \\(k \\in \\mathbb{N}\\) and \\(t_1, \\dotsc, t_k \\in [0,1]\\) be distinct points. Let \\(\\mathcal{P}_{k-1}\\) be the space of polynomials of degree less than or equal to \\(k-1\\) with real coefficients. Show that there exist real numbers \\(a_1, \\dotsc, a_k\\) such that\n\\[\n\\int_0^1f(x)dx = \\sum_{j=1}^k a_jf(t_j)\n\\]\nfor all \\(f \\in \\mathcal{P}_{k-1}\\)."
+  },
+  {
+    "objectID": "posts/a-cool-problem/polynomials-are-linear.html#solution",
+    "href": "posts/a-cool-problem/polynomials-are-linear.html#solution",
+    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
+    "section": "Solution",
+    "text": "Solution\nWhenever you try to prove something “uniquely” determines something; it’s always nice to try to find an isomorphism somewhere. Consider the linear map \\(S:\\mathcal{P}_{k-1} \\to \\mathbb{R}^k\\) such that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k))\n\\]\n\nClaim 1: \\(S\\) is an isomorphism.\nSince \\(\\dim{\\mathcal{P}_{k-1}} = \\dim{\\mathbb{R}^k} = k\\), we would be done if we prove \\(\\mathcal{N}(S) = 0\\). Assume \\(S(f) = (0, 0, \\dotsc, 0)\\) which means \\(f\\) a \\(\\leq k-1\\) degree polynomial is \\(0\\) at \\(k\\) distinct points. This is only possible when \\(f \\equiv 0\\). \\(\\blacksquare\\)\n\n\nFinish\nNotice that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k)) = \\sum_j f(t_j)e_j\n\\] Since \\(S\\) is an isomorphism, \\[\nf = \\sum_j f(t_j)S^{-1}(e_j)\n\\] Let \\(a_j = \\int_0^1 (S^{-1}(e_j))(x) dx\\), then, clearly, \\[\n\\int_0^1 f(x)dx = \\int_0^1 \\sum_j f(t_j)(S^{-1}(e_j))(x) dx\\] \\[\\int_0^1 f(x) dx = \\sum_j f(t_j) \\left(\\int_0^1 (S^{-1}(e_j))(x) dx\\right) = \\sum_j a_j f(t_j) \\blackquare\n\\]"
   }
 ]
