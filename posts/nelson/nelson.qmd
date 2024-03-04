@@ -24,7 +24,7 @@ Let's explore this intriguing theorem and its implications.
 (If you could link me up with a paper that talks about this theorem, please do. I couldn't find it. This theorem is apparently proven by "Nelson" but I couldn't find it.)
 
 ## **Theorem**
-> Let $X,Y$ be continuous random variables on $(\mathbb{R}, \mathcal{B}, P)$. For all $\epsilon > 0$ there exist completely deterministic random variables $U,V$ on the same probability space with $F_U = F_X, F_V = F_Y$ and $\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| < \epsilon$.
+> Let $X,Y$ be independent continuous random variables on $(\mathbb{R}, \mathcal{B}, P)$. For all $\epsilon > 0$ there exist deterministically dependent $U,V$ on the same probability space with $F_U = F_X, F_V = F_Y$ and $\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| < \epsilon$.
 
 Here is the proof I came up with:
 
