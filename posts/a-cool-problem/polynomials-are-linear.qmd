@@ -1,7 +1,7 @@
 ---
 title: "$k+1$ points uniquely determine a $k$ degree polynomial: A cool problem"
 author: "Himadri Mandal"
-date: "2023-11-16"
+date: "2023-12-10"
 categories: [algebra, math]
 format: 
     html: 
@@ -12,7 +12,7 @@ editor: visual
 image: "pfp.jpg"
 ---
 
-Reading the title: you are probably shouting "Lagrange Interpolation!!!" Yeah, sure, Lagrange is cool. But I will show you something cooler which ensures you don't have to deal with the messy stuff (unlike your mom).
+Reading the title: you are probably shouting "Lagrange Interpolation!!!" Yeah, sure, Lagrange is cool. But I will show you something cooler which ensures you don't have to deal with the messy stuff.
 
 ## Problem Statement
 

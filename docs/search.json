@@ -1,10 +1,38 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I’m Himadri Mandal, 17, you might know me as quirtt from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (mostly Mathematics so far, though. lol!). Confession: I might like mathematics more than statistics - I really hope I enjoy statistics as I learn more of it, because I would be sad otherwise.\nAt any point in the day I am found doing the following things: sleep, learn weird math/cs, watch anime, cope through university lectures, read some ML paper, goofing around with friends, playing table tennis. Ah well. I have been recently getting more and more involved in AI and AI alignment, too.\nIf you find me interesting - feel free to shoot me a mail at mandalhimadri06@gmail.com or send me a “Hi!” on Discord."
+  },
+  {
     "objectID": "no_show/welcome/index.html",
     "href": "no_show/welcome/index.html",
     "title": "Welcome To My Blog",
     "section": "",
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "posts/nelson/nelson.html",
+    "href": "posts/nelson/nelson.html",
+    "title": "So Far Yet So Close: How Independence is Almost Dependence",
+    "section": "",
+    "text": "Imagine two continuous random variables seemingly unrelated and free from any influence from each other. It’s a common assumption in probability theory that independence implies a lack of any relationship between variables.\nHowever, a fascinating theorem challenges this notion, showing that from any two independent continuous random variables, we can construct new variables that not only share the same distributions but also have joint distributions that are arbitrarily close.\nIn other words, independence can be deceptive, leading us to a realm where variables are closer than we think. Let’s explore this intriguing theorem and its implications.\n(If you could link me up with a paper that talks about this theorem, please do. I couldn’t find it. This theorem is apparently proven by “Nelson” but I couldn’t find it.)"
+  },
+  {
+    "objectID": "posts/nelson/nelson.html#theorem",
+    "href": "posts/nelson/nelson.html#theorem",
+    "title": "So Far Yet So Close: How Independence is Almost Dependence",
+    "section": "Theorem",
+    "text": "Theorem\n\nLet \\(X,Y\\) be continuous random variables on \\((\\mathbb{R}, \\mathcal{B}, P)\\). For all \\(\\epsilon &gt; 0\\) there exist completely deterministic random variables \\(U,V\\) on the same probability space with \\(F_U = F_X, F_V = F_Y\\) and \\(\\sup_{(a,b) \\in \\mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \\epsilon\\).\n\nHere is the proof I came up with:"
+  },
+  {
+    "objectID": "posts/nelson/nelson.html#proof",
+    "href": "posts/nelson/nelson.html#proof",
+    "title": "So Far Yet So Close: How Independence is Almost Dependence",
+    "section": "Proof",
+    "text": "Proof\nWe can instead work with the random variables \\(\\frac{1}{1+e^{X}}\\), and rename \\(Y\\) similarly too, to work with random variables bounded in \\([0,1]\\).\nFix positive integer \\(n\\), and obtain \\(\\{a_{0,1}=0 &lt; \\cdots &lt; a_{0,n-1} &lt; a_{1,0} &lt; \\cdots &lt; a_{1,n-1} &lt; \\cdots &lt; a_{n-1,0} &lt; \\cdots &lt; a_{n-1,n}=1\\}\\) and \\(\\{b_{0,1}=0 &lt; \\cdots &lt; b_{0,n-1} &lt; b_{1,0} &lt; \\cdots &lt; b_{1,n-1} &lt; \\cdots &lt; b_{n-1,0} &lt; \\cdots &lt; b_{n-1,n}=1\\}\\)\n\n\n\n\n\nsuch that \\[F_X(a_{j,0}) - F_X(a_{j-1, 0}) = \\frac{1}{n}, \\ F_Y(b_{j,0}) - F_Y(b_{j-1, 0}) = \\frac{1}{n}\\] \\[F_X(a_{j,i}) - F_X(a_{j, i-1}) = \\frac{1}{n^2}, \\ F_Y(b_{j,i}) - F_Y(b_{j, i-1}) = \\frac{1}{n^2}\\]\n\\[I_{i,j} = \\{a_{i, j} \\leq x \\leq a_{i, j+1}\\}, \\ J_{j,i} = \\{b_{j, i} \\leq y \\leq b_{j, i+1}\\}\\] \\[I_i = \\cup_{j}I_{i,j}, \\ J_j = \\cup_{i}J_{j,i}\\] The idea is to reorder \\(X\\) in a way such that \\[x \\in I_{i,j} \\iff y \\in J_{j,i}\\]\nHence we would want something like this \\[P\\left(X \\in \\cup_j I_{i,j}\\right)\\cdot P\\left(Y \\in \\cup_i J_{j,i}\\right) = P\\left(X \\in \\cup_{j}I_{i,j} \\text{ and } Y \\in \\cup_{i}J_{j,i}\\right) \\] \\[= P\\left(U \\in \\cup_{j}I_{i,j} \\text{ and } V \\in \\cup_{i}J_{j,i}\\right)\\]\nLet \\(V \\equiv Y\\), we would want to construct a bijective function \\(g:[0,1] \\to [0,1]\\) such that for \\(y \\in J_{j,i}\\)\n\\[F_Y(y) - F_Y(b_{j,i}) = P\\left(b_{j,i} \\leq Y \\leq y\\right) \\stackrel{\\textcolor{red}{!}}{=} P\\left(b_{j,i} \\leq g(X) \\leq y\\right)\\] \\[\\stackrel{\\textcolor{red}{!}}{=}P\\left(a_{i,j} \\leq X \\leq g^{-1}(y)\\right) = F_X(g^{-1}(y)) - F_X(a_{i,j})\\]\n\\[F_X(g^{-1}(y))  = F_Y(y)+(F_X(a_{i,j}) - F_Y(b_{j,i}))\\] \\[\\stackrel{\\textcolor{red}{!}}{=}F_Y(y) + \\left((i-j) \\cdot \\left(\\frac{n-1}{n^2}\\right)\\right)\\] \\[x = g^{-1}(y) \\stackrel{\\textcolor{red}{!}}{=} F_X^{-1}\\left(F_Y(y) + \\left((i-j) \\cdot \\left(\\frac{n-1}{n^2}\\right)\\right)\\right)\\]\nThis is clearly measurable, and it is easy to check that this function indeed satisfies the \\(x \\in I_{i,j} \\iff y \\in J_{j,i}\\) condition. Take \\(U \\equiv g^{-1}(Y)\\). This does the job because the method \\(g\\) was constructed with ensures that the variables have the same distribution.\nNow as \\(n \\to \\infty\\), the joint would get arbitrarily close.\n\\(\\blacksquare\\)\n(If you would like to use this proof, please email me.)"
   },
   {
     "objectID": "posts/zorn-and-aoc/zorn-and-aoc.html",
@@ -35,11 +63,39 @@
     "text": "Zorn’s Lemma\nIf \\(P\\) is a nonempty partially ordered set such that every chain has an upper bound in \\(P\\) then \\(P\\) has a maximal element.\n\nThere are quite a few words that need to be unpacked.\n\nDefinitions\n\nA binary relation \\(R\\) on a set \\(P\\) is a subset \\(R\\) of \\(P \\times P\\), \\((x,y) \\in R\\) and is often expressed as \\(xRy\\).\nA binary relation \\(R\\) is a partial order if\n\nReflexivity: \\(xRx\\), Transitivity: \\(xRy, yRz \\implies xRz\\).\nAntisymmetry: \\(xRy, yRx \\implies xRx\\).\n\nA partial order is called a linear order if any two elements are comparable.\nLet \\((P, \\leq)\\) be a poset (partially ordered set), a subset \\(C \\subseteq P\\) is called a chain if \\(C\\) has a linear order.\nLet \\(A \\subseteq P\\), an upper bound for \\(A\\) is an element \\(x \\in P\\) such that \\(y \\leq x, \\ \\forall y \\in A\\).\nAn \\(x \\in P\\) is called a maximal element if \\(\\not\\exists \\ y\\neq x : x \\leq y\\).\nA linearly ordered set is called well ordered if every nonempty subset has a first element."
   },
   {
+    "objectID": "posts/zorn-and-aoc/zorn-and-aoc.html#zorn-and-axiom-of-choice-are-the-same",
+    "href": "posts/zorn-and-aoc/zorn-and-aoc.html#zorn-and-axiom-of-choice-are-the-same",
+    "title": "Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I",
+    "section": "Zorn and Axiom of Choice are the SAME!",
+    "text": "Zorn and Axiom of Choice are the SAME!\nWe now conclude by proving that \\(\\text{Zorn}\\iff\\text{AoC}\\).\n\nTheorem 1 (\\(\\text{Zorn} \\implies \\text{AoC}\\)) \\[\n\\text{Zorn's Lemma} \\ \\implies \\text{Axiom of Choice}\n\\]\n\n(This proof was communicated to me by PSC. Sir at ISIK)\nConsider the following poset\n\\[\nP = \\{(J, f) : J \\subseteq I, f : J \\to A\\text{ such that }f(j) \\in A_j, \\forall j \\in J\\}\n\\]\nwith the partial order:\n\\[\n(J_1, f_1) \\preceq (J_2, f_2) \\text{ if } J_1 \\subseteq J_2 \\text{ and } f_2\\Bigg|_{J_1} = f_1 \\text{ ie. } f_2(x) = f_1(x), \\forall x \\in J_1\n\\]\nthen any chain \\(C = \\{(J_\\alpha, f_\\alpha) : \\alpha \\in Y\\}\\), has the trivial upperbound \\((\\cup J_\\alpha, f) : f\\Bigg |_{\\alpha} = f_\\alpha, \\forall \\alpha \\in Y\\). By Zorn’s Lemma, there exists a maximal element \\(f:J \\to A\\), if \\(J = I\\) , we are done. Otherwise, pick \\(j \\in I \\setminus J\\) since \\(A_j\\) is nonempty, pick \\(x \\in A_j\\) and consider \\(f^{*}:J \\cup \\{j\\} \\to A\\) such that \\(f(j) = x, f^{*}\\Bigg|_{J} = f\\), which contradicts maximality of \\(f\\).  \\(\\blacksquare\\)\n\n\nTheorem 2 (\\(\\text{AoC} \\implies \\text{Zorn}\\)) \\[\n\\text{Axiom of Choice} \\implies \\text{Zorn's Lemma}\n\\]\nThis is definitely trickier to prove compared to the previous implication. I use transfinite induction and ordinals here (but if you don’t know about them I will probably make a post on them. Till then, check out Napkin pg. 801.)\nLet \\((P, \\leq)\\) be the poset, where every chain has an upperbound. Assume there is no maximal element. Let \\(x_0\\) be any element in \\(P\\). By assumption \\(\\exists x_1\\) s.t. \\(x_0 \\leq x_1\\). But again, by assumption, \\(\\exists x_2\\) s.t. \\(x_0 \\leq x_1 \\leq x_2\\). Intuitively we create a chain \\(x_0 \\leq x_1 \\leq x_2 \\ \\cdots\\) which has an upper bound \\(x_\\omega\\), but since this isn’t the maximal element again - I get \\(x_0 \\leq x_1 \\leq x_2 \\leq \\cdots \\leq x_\\omega \\leq x_{\\omega+1} \\leq \\cdots\\). We must “eventually” run out.\nNow to formalize this: for any element \\(x \\in P\\) consider the set \\(S_x = \\{y \\in P : x \\lneq y\\}\\). Clearly all \\(S_x\\) are nonempty, because otherwise there is a maximal element. By AoC, there exists a choice function \\(f:P \\to \\cup_{x \\in P} S_x\\), such that \\(f(x) \\in S_x \\ \\forall x \\in P\\). Using transfinite induction:\n\nStep 1: \\(x_0 \\in P\\)\nTake \\(x_1 = f(x_0)\\). Then \\(x_0 \\leq x_1\\). Similarly, obtain \\(C_{i &lt; \\omega} = x_0 \\leq x_1 \\leq \\cdots\\).\nStep 2: Let \\(\\lambda\\) be a limit ordinal. Defining \\(x_\\lambda = u(C_{i &lt; \\lambda})\\) can be used to extend the chain.\nConsider the upper bound of this chain \\(x = u(C_{i &lt; \\lambda})\\). Clearly, \\(x\\) cannot be in \\(C\\), because otherwise, \\(\\exists k\\) s.t. \\(C \\ni x_k \\geq x = x_{k-1}\\) which forces \\(x = x_k = f(x)\\) which is not possible by the definition of \\(f\\). So, define \\(x_{\\lambda} = x\\).\n\nThen - keep doing this. So, you end up with a chain \\(C = x_0 \\leq x_1 \\leq \\cdots \\leq x_\\omega \\leq x_{\\omega + 1} \\leq \\cdots \\leq x_{\\omega + \\omega} \\leq \\cdots\\).\nTo finish we need magic: Hartogs’s theorem.\n\nHartogs’s Theorem\nGiven any set \\(X\\), there exists an ordinal \\(\\alpha\\) such that there is no injection \\(f:\\alpha \\to X\\).\n\nConsider the class of ordinals \\(\\alpha = \\{\\beta \\in \\text{Ord} \\ | \\ \\exists f:\\beta \\hookrightarrow X\\}\\). Using the power set axiom twice - we get that \\(\\mathcal{P}(X \\times X)\\) is a set. Consider the class \\(W\\) of all reflexive well orderings of subsets of \\(X\\), since this is a definable subclass of \\(\\mathcal{P}(X \\times X)\\), it is a set by Schema of Specification.\nThe class of all order types of well-orderings in \\(W\\) is a set by the axiom schema of replacement: \\((\\operatorname{Domain}(w), w) \\cong (\\beta, \\leq)\\) where \\(w\\) is a well-ordering on \\(\\operatorname{Domain}(w)\\) which gets mapped to the order type \\((\\beta, \\leq)\\).\nNow we can see that \\(W\\), a set, is precisely \\(\\alpha\\). Since every well-ordering of a subset of \\(X\\) defines an injective function from \\(\\beta \\hookrightarrow X\\) where \\(\\beta\\) is some ordinal. And the other side is true as well. To finish: \\(\\alpha\\) is a transitive set of ordinals, which means it is an ordinal itself. Ofcourse, then, \\(\\alpha\\) is the first ordinal with no injection \\(\\blacksquare\\).\n\nSo, the chain has to eventually end. We are done."
+  },
+  {
     "objectID": "posts/zorn-and-aoc/zorn-and-aoc.html#footnotes",
     "href": "posts/zorn-and-aoc/zorn-and-aoc.html#footnotes",
     "title": "Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I",
     "section": "Footnotes",
     "text": "Footnotes\n\nTheorem 3 (Cantor’s Diagonal Argument) \\[X &lt;_{c} P(X) \\ \\forall \\ X\\]\n\nAssume for the sake of contradiction \\(P(X) =_{c} X\\) (where \\(=_{c}\\) means that there exists a bijection between the sets). Thus, there is a surjection \\(f:X \\to P(X)\\). Consider\n\\[\nA = \\{x \\in X: x \\not\\in f(x)\\}\n\\]\nBut since \\(f\\) is a surjection, \\(\\exists x_0 \\ f(x_0) = A\\) then\n\\[\nx_0 \\in A \\iff x_0 \\not\\in A.\n\\]\na contradiction. (This is pretty much the same idea as the famous proof of real numbers being uncountable.)"
+  },
+  {
+    "objectID": "posts/a-cool-problem/polynomials-are-linear.html",
+    "href": "posts/a-cool-problem/polynomials-are-linear.html",
+    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
+    "section": "",
+    "text": "Reading the title: you are probably shouting “Lagrange Interpolation!!!” Yeah, sure, Lagrange is cool. But I will show you something cooler which ensures you don’t have to deal with the messy stuff."
+  },
+  {
+    "objectID": "posts/a-cool-problem/polynomials-are-linear.html#problem-statement",
+    "href": "posts/a-cool-problem/polynomials-are-linear.html#problem-statement",
+    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
+    "section": "Problem Statement",
+    "text": "Problem Statement\nLet \\(k \\in \\mathbb{N}\\) and \\(t_1, \\dotsc, t_k \\in [0,1]\\) be distinct points. Let \\(\\mathcal{P}_{k-1}\\) be the space of polynomials of degree less than or equal to \\(k-1\\) with real coefficients. Show that there exist real numbers \\(a_1, \\dotsc, a_k\\) such that\n\\[\n\\int_0^1f(x)dx = \\sum_{j=1}^k a_jf(t_j)\n\\]\nfor all \\(f \\in \\mathcal{P}_{k-1}\\)."
+  },
+  {
+    "objectID": "posts/a-cool-problem/polynomials-are-linear.html#solution",
+    "href": "posts/a-cool-problem/polynomials-are-linear.html#solution",
+    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
+    "section": "Solution",
+    "text": "Solution\nWhenever you try to prove something “uniquely” determines something; it’s always nice to try to find an isomorphism somewhere. Consider the linear map \\(S:\\mathcal{P}_{k-1} \\to \\mathbb{R}^k\\) such that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k))\n\\]\n\nClaim 1: \\(S\\) is an isomorphism.\nSince \\(\\dim{\\mathcal{P}_{k-1}} = \\dim{\\mathbb{R}^k} = k\\), we would be done if we prove \\(\\mathcal{N}(S) = 0\\). Assume \\(S(f) = (0, 0, \\dotsc, 0)\\) which means \\(f\\) a \\(\\leq k-1\\) degree polynomial is \\(0\\) at \\(k\\) distinct points. This is only possible when \\(f \\equiv 0\\). \\(\\blacksquare\\)\n\n\nFinish\nNotice that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k)) = \\sum_j f(t_j)e_j\n\\] Since \\(S\\) is an isomorphism, \\[\nf = \\sum_j f(t_j)S^{-1}(e_j)\n\\] Let \\(a_j = \\int_0^1 (S^{-1}(e_j))(x) dx\\), then, clearly, \\[\n\\int_0^1 f(x)dx = \\int_0^1 \\sum_j f(t_j)(S^{-1}(e_j))(x) dx\\] \\[\\int_0^1 f(x) dx = \\sum_j f(t_j) \\left(\\int_0^1 (S^{-1}(e_j))(x) dx\\right) = \\sum_j a_j f(t_j) \\blacksquare\n\\]"
   },
   {
     "objectID": "posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html",
@@ -77,13 +133,6 @@
     "text": "Part C: Playing Around\nWe can now tinker with the setup to see what happens when we change things a little bit. Note that we picked the card from the top and put it back somewhere. It makes sense to ask: what happens when we pick it from anywhere? Well, here’s a plot in R which showcases what happens when we vary the location of the picked card.\n\n\n\n\n\nWhich makes sense because the way we are choosing the position to put the card into is a function symmetric around 26."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Cold Reflections",
-    "section": "",
-    "text": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem\n\n\n\n\n\n\n\nalgebra\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n  \n\n\n\n\nAxiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I\n\n\n\n\n\n\n\nset theory\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n  \n\n\n\n\nShannon’s Card Magic Trick\n\n\n\n\n\n\n\nisi\n\n\nstatistics\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nOct 23, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\nNo matching items"
-  },
-  {
     "objectID": "no_show/post-with-code/index.html",
     "href": "no_show/post-with-code/index.html",
     "title": "Post With Code",
@@ -91,38 +140,10 @@
     "text": "This is a post with executable code."
   },
   {
-    "objectID": "posts/zorn-and-aoc/zorn-and-aoc.html#zorn-and-axiom-of-choice-are-the-same",
-    "href": "posts/zorn-and-aoc/zorn-and-aoc.html#zorn-and-axiom-of-choice-are-the-same",
-    "title": "Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I",
-    "section": "Zorn and Axiom of Choice are the SAME!",
-    "text": "Zorn and Axiom of Choice are the SAME!\nWe now conclude by proving that \\(\\text{Zorn}\\iff\\text{AoC}\\).\n\nTheorem 1 (\\(\\text{Zorn} \\implies \\text{AoC}\\)) \\[\n\\text{Zorn's Lemma} \\ \\implies \\text{Axiom of Choice}\n\\]\n\n(This proof was communicated to me by PSC. Sir at ISIK)\nConsider the following poset\n\\[\nP = \\{(J, f) : J \\subseteq I, f : J \\to A\\text{ such that }f(j) \\in A_j, \\forall j \\in J\\}\n\\]\nwith the partial order:\n\\[\n(J_1, f_1) \\preceq (J_2, f_2) \\text{ if } J_1 \\subseteq J_2 \\text{ and } f_2\\Bigg|_{J_1} = f_1 \\text{ ie. } f_2(x) = f_1(x), \\forall x \\in J_1\n\\]\nthen any chain \\(C = \\{(J_\\alpha, f_\\alpha) : \\alpha \\in Y\\}\\), has the trivial upperbound \\((\\cup J_\\alpha, f) : f\\Bigg |_{\\alpha} = f_\\alpha, \\forall \\alpha \\in Y\\). By Zorn’s Lemma, there exists a maximal element \\(f:J \\to A\\), if \\(J = I\\) , we are done. Otherwise, pick \\(j \\in I \\setminus J\\) since \\(A_j\\) is nonempty, pick \\(x \\in A_j\\) and consider \\(f^{*}:J \\cup \\{j\\} \\to A\\) such that \\(f(j) = x, f^{*}\\Bigg|_{J} = f\\), which contradicts maximality of \\(f\\).  \\(\\blacksquare\\)\n\n\nTheorem 2 (\\(\\text{AoC} \\implies \\text{Zorn}\\)) \\[\n\\text{Axiom of Choice} \\implies \\text{Zorn's Lemma}\n\\]\nThis is definitely trickier to prove compared to the previous implication. I use transfinite induction and ordinals here (but if you don’t know about them I will probably make a post on them. Till then, check out Napkin pg. 801.)\nLet \\((P, \\leq)\\) be the poset, where every chain has an upperbound. Assume there is no maximal element. Let \\(x_0\\) be any element in \\(P\\). By assumption \\(\\exists x_1\\) s.t. \\(x_0 \\leq x_1\\). But again, by assumption, \\(\\exists x_2\\) s.t. \\(x_0 \\leq x_1 \\leq x_2\\). Intuitively we create a chain \\(x_0 \\leq x_1 \\leq x_2 \\ \\cdots\\) which has an upper bound \\(x_\\omega\\), but since this isn’t the maximal element again - I get \\(x_0 \\leq x_1 \\leq x_2 \\leq \\cdots \\leq x_\\omega \\leq x_{\\omega+1} \\leq \\cdots\\). We must “eventually” run out.\nNow to formalize this: for any element \\(x \\in P\\) consider the set \\(S_x = \\{y \\in P : x \\lneq y\\}\\). Clearly all \\(S_x\\) are nonempty, because otherwise there is a maximal element. By AoC, there exists a choice function \\(f:P \\to \\cup_{x \\in P} S_x\\), such that \\(f(x) \\in S_x \\ \\forall x \\in P\\). Using transfinite induction:\n\nStep 1: \\(x_0 \\in P\\)\nTake \\(x_1 = f(x_0)\\). Then \\(x_0 \\leq x_1\\). Similarly, obtain \\(C_{i &lt; \\omega} = x_0 \\leq x_1 \\leq \\cdots\\).\nStep 2: Let \\(\\lambda\\) be a limit ordinal. Defining \\(x_\\lambda = u(C_{i &lt; \\lambda})\\) can be used to extend the chain.\nConsider the upper bound of this chain \\(x = u(C_{i &lt; \\lambda})\\). Clearly, \\(x\\) cannot be in \\(C\\), because otherwise, \\(\\exists k\\) s.t. \\(C \\ni x_k \\geq x = x_{k-1}\\) which forces \\(x = x_k = f(x)\\) which is not possible by the definition of \\(f\\). So, define \\(x_{\\lambda} = x\\).\n\nThen - keep doing this. So, you end up with a chain \\(C = x_0 \\leq x_1 \\leq \\cdots \\leq x_\\omega \\leq x_{\\omega + 1} \\leq \\cdots \\leq x_{\\omega + \\omega} \\leq \\cdots\\).\nTo finish we need magic: Hartogs’s theorem.\n\nHartogs’s Theorem\nGiven any set \\(X\\), there exists an ordinal \\(\\alpha\\) such that there is no injection \\(f:\\alpha \\to X\\).\n\nConsider the class of ordinals \\(\\alpha = \\{\\beta \\in \\text{Ord} \\ | \\ \\exists f:\\beta \\hookrightarrow X\\}\\). Using the power set axiom twice - we get that \\(\\mathcal{P}(X \\times X)\\) is a set. Consider the class \\(W\\) of all reflexive well orderings of subsets of \\(X\\), since this is a definable subclass of \\(\\mathcal{P}(X \\times X)\\), it is a set by Schema of Specification.\nThe class of all order types of well-orderings in \\(W\\) is a set by the axiom schema of replacement: \\((\\operatorname{Domain}(w), w) \\cong (\\beta, \\leq)\\) where \\(w\\) is a well-ordering on \\(\\operatorname{Domain}(w)\\) which gets mapped to the order type \\((\\beta, \\leq)\\).\nNow we can see that \\(W\\), a set, is precisely \\(\\alpha\\). Since every well-ordering of a subset of \\(X\\) defines an injective function from \\(\\beta \\hookrightarrow X\\) where \\(\\beta\\) is some ordinal. And the other side is true as well. To finish: \\(\\alpha\\) is a transitive set of ordinals, which means it is an ordinal itself. Ofcourse, then, \\(\\alpha\\) is the first ordinal with no injection \\(\\blacksquare\\).\n\nSo, the chain has to eventually end. We are done."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Cold Reflections",
     "section": "",
-    "text": "I’m Himadri Mandal, 17, you might know me as quirtt from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (mostly Mathematics so far, though. lol!). Confession: I might like mathematics more than statistics - I really hope I enjoy statistics as I learn more of it, because I would be sad otherwise.\nAt any point in the day I am found doing the following things: sleep, learn weird math/cs, watch anime, cope through university lectures, read some ML paper, goofing around with friends, playing table tennis. Ah well. I have been recently getting more and more involved in AI and AI alignment, too.\nIf you find me interesting - feel free to shoot me a mail at mandalhimadri06@gmail.com or send me a “Hi!” on Discord."
-  },
-  {
-    "objectID": "posts/a-cool-problem/polynomials-are-linear.html",
-    "href": "posts/a-cool-problem/polynomials-are-linear.html",
-    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
-    "section": "",
-    "text": "Reading the title: you are probably shouting “Lagrange Interpolation!!!” Yeah, sure, Lagrange is cool. But I will show you something cooler which ensures you don’t have to deal with the messy stuff (unlike your mom)."
-  },
-  {
-    "objectID": "posts/a-cool-problem/polynomials-are-linear.html#problem-statement",
-    "href": "posts/a-cool-problem/polynomials-are-linear.html#problem-statement",
-    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
-    "section": "Problem Statement",
-    "text": "Problem Statement\nLet \\(k \\in \\mathbb{N}\\) and \\(t_1, \\dotsc, t_k \\in [0,1]\\) be distinct points. Let \\(\\mathcal{P}_{k-1}\\) be the space of polynomials of degree less than or equal to \\(k-1\\) with real coefficients. Show that there exist real numbers \\(a_1, \\dotsc, a_k\\) such that\n\\[\n\\int_0^1f(x)dx = \\sum_{j=1}^k a_jf(t_j)\n\\]\nfor all \\(f \\in \\mathcal{P}_{k-1}\\)."
-  },
-  {
-    "objectID": "posts/a-cool-problem/polynomials-are-linear.html#solution",
-    "href": "posts/a-cool-problem/polynomials-are-linear.html#solution",
-    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
-    "section": "Solution",
-    "text": "Solution\nWhenever you try to prove something “uniquely” determines something; it’s always nice to try to find an isomorphism somewhere. Consider the linear map \\(S:\\mathcal{P}_{k-1} \\to \\mathbb{R}^k\\) such that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k))\n\\]\n\nClaim 1: \\(S\\) is an isomorphism.\nSince \\(\\dim{\\mathcal{P}_{k-1}} = \\dim{\\mathbb{R}^k} = k\\), we would be done if we prove \\(\\mathcal{N}(S) = 0\\). Assume \\(S(f) = (0, 0, \\dotsc, 0)\\) which means \\(f\\) a \\(\\leq k-1\\) degree polynomial is \\(0\\) at \\(k\\) distinct points. This is only possible when \\(f \\equiv 0\\). \\(\\blacksquare\\)\n\n\nFinish\nNotice that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k)) = \\sum_j f(t_j)e_j\n\\] Since \\(S\\) is an isomorphism, \\[\nf = \\sum_j f(t_j)S^{-1}(e_j)\n\\] Let \\(a_j = \\int_0^1 (S^{-1}(e_j))(x) dx\\), then, clearly, \\[\n\\int_0^1 f(x)dx = \\int_0^1 \\sum_j f(t_j)(S^{-1}(e_j))(x) dx\\] \\[\\int_0^1 f(x) dx = \\sum_j f(t_j) \\left(\\int_0^1 (S^{-1}(e_j))(x) dx\\right) = \\sum_j a_j f(t_j) \\blacksquare\n\\]"
+    "text": "So Far Yet So Close: How Independence is Almost Dependence\n\n\n\n\n\n\n\nprobability theory\n\n\nstatistics\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nMar 4, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n  \n\n\n\n\n\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem\n\n\n\n\n\n\n\nalgebra\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nDec 10, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n  \n\n\n\n\nAxiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I\n\n\n\n\n\n\n\nset theory\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n  \n\n\n\n\nShannon’s Card Magic Trick\n\n\n\n\n\n\n\nisi\n\n\nstatistics\n\n\nmath\n\n\n\n\n\n\n\n\n\n\n\nOct 23, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\nNo matching items"
   }
 ]

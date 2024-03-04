@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Himadri Mandal">
-<meta name="dcterms.date" content="2023-11-16">
+<meta name="dcterms.date" content="2024-03-04">
 
-<title>Cold Reflections - \(k+1\) points uniquely determine a \(k\) degree polynomial</title>
+<title>Cold Reflections - So Far Yet So Close: How Independence is Almost Dependence</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,9 +105,10 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title"><span class="math inline">\(k+1\)</span> points uniquely determine a <span class="math inline">\(k\)</span> degree polynomial</h1>
+      <h1 class="title">So Far Yet So Close: How Independence is Almost Dependence</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">algebra</div>
+                <div class="quarto-category">probability theory</div>
+                <div class="quarto-category">statistics</div>
                 <div class="quarto-category">math</div>
               </div>
                   </div>
@@ -126,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 16, 2023</p>
+        <p class="date">March 4, 2024</p>
       </div>
     </div>
     
@@ -138,7 +139,14 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#theorem" id="toc-theorem" class="nav-link active" data-scroll-target="#theorem"><strong>Theorem</strong></a></li>
+  <li><a href="#proof" id="toc-proof" class="nav-link" data-scroll-target="#proof"><strong>Proof</strong></a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -146,8 +154,39 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<p>Imagine two continuous random variables seemingly unrelated and free from any influence from each other. It’s a common assumption in probability theory that independence implies a lack of any relationship between variables.</p>
+<p>However, a fascinating theorem challenges this notion, showing that from any two independent continuous random variables, we can construct new variables that not only share the same distributions but also have joint distributions that are arbitrarily close.</p>
+<p>In other words, independence can be deceptive, leading us to a realm where variables are closer than we think. Let’s explore this intriguing theorem and its implications.</p>
+<p>(If you could link me up with a paper that talks about this theorem, please do. I couldn’t find it. This theorem is apparently proven by “Nelson” but I couldn’t find it.)</p>
+<section id="theorem" class="level2">
+<h2 class="anchored" data-anchor-id="theorem"><strong>Theorem</strong></h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(X,Y\)</span> be continuous random variables on <span class="math inline">\((\mathbb{R}, \mathcal{B}, P)\)</span>. For all <span class="math inline">\(\epsilon &gt; 0\)</span> there exist completely deterministic random variables <span class="math inline">\(U,V\)</span> on the same probability space with <span class="math inline">\(F_U = F_X, F_V = F_Y\)</span> and <span class="math inline">\(\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \epsilon\)</span>.</p>
+</blockquote>
+<p>Here is the proof I came up with:</p>
+</section>
+<section id="proof" class="level2">
+<h2 class="anchored" data-anchor-id="proof"><strong>Proof</strong></h2>
+<p>We can instead work with the random variables <span class="math inline">\(\frac{1}{1+e^{X}}\)</span>, and rename <span class="math inline">\(Y\)</span> similarly too, to work with random variables bounded in <span class="math inline">\([0,1]\)</span>.</p>
+<p>Fix positive integer <span class="math inline">\(n\)</span>, and obtain <span class="math inline">\(\{a_{0,1}=0 &lt; \cdots &lt; a_{0,n-1} &lt; a_{1,0} &lt; \cdots &lt; a_{1,n-1} &lt; \cdots &lt; a_{n-1,0} &lt; \cdots &lt; a_{n-1,n}=1\}\)</span> and <span class="math inline">\(\{b_{0,1}=0 &lt; \cdots &lt; b_{0,n-1} &lt; b_{1,0} &lt; \cdots &lt; b_{1,n-1} &lt; \cdots &lt; b_{n-1,0} &lt; \cdots &lt; b_{n-1,n}=1\}\)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./construction.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+<p>such that <span class="math display">\[F_X(a_{j,0}) - F_X(a_{j-1, 0}) = \frac{1}{n}, \ F_Y(b_{j,0}) - F_Y(b_{j-1, 0}) = \frac{1}{n}\]</span> <span class="math display">\[F_X(a_{j,i}) - F_X(a_{j, i-1}) = \frac{1}{n^2}, \ F_Y(b_{j,i}) - F_Y(b_{j, i-1}) = \frac{1}{n^2}\]</span></p>
+<p><span class="math display">\[I_{i,j} = \{a_{i, j} \leq x \leq a_{i, j+1}\}, \ J_{j,i} = \{b_{j, i} \leq y \leq b_{j, i+1}\}\]</span> <span class="math display">\[I_i = \cup_{j}I_{i,j}, \ J_j = \cup_{i}J_{j,i}\]</span> The idea is to reorder <span class="math inline">\(X\)</span> in a way such that <span class="math display">\[x \in I_{i,j} \iff y \in J_{j,i}\]</span></p>
+<p>Hence we would want something like this <span class="math display">\[P\left(X \in \cup_j I_{i,j}\right)\cdot P\left(Y \in \cup_i J_{j,i}\right) = P\left(X \in \cup_{j}I_{i,j} \text{ and } Y \in \cup_{i}J_{j,i}\right) \]</span> <span class="math display">\[= P\left(U \in \cup_{j}I_{i,j} \text{ and } V \in \cup_{i}J_{j,i}\right)\]</span></p>
+<p>Let <span class="math inline">\(V \equiv Y\)</span>, we would want to construct a bijective function <span class="math inline">\(g:[0,1] \to [0,1]\)</span> such that for <span class="math inline">\(y \in J_{j,i}\)</span></p>
+<p><span class="math display">\[F_Y(y) - F_Y(b_{j,i}) = P\left(b_{j,i} \leq Y \leq y\right) \stackrel{\textcolor{red}{!}}{=} P\left(b_{j,i} \leq g(X) \leq y\right)\]</span> <span class="math display">\[\stackrel{\textcolor{red}{!}}{=}P\left(a_{i,j} \leq X \leq g^{-1}(y)\right) = F_X(g^{-1}(y)) - F_X(a_{i,j})\]</span></p>
+<p><span class="math display">\[F_X(g^{-1}(y))  = F_Y(y)+(F_X(a_{i,j}) - F_Y(b_{j,i}))\]</span> <span class="math display">\[\stackrel{\textcolor{red}{!}}{=}F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\]</span> <span class="math display">\[x = g^{-1}(y) \stackrel{\textcolor{red}{!}}{=} F_X^{-1}\left(F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\right)\]</span></p>
+<p>This is clearly measurable, and it is easy to check that this function indeed satisfies the <span class="math inline">\(x \in I_{i,j} \iff y \in J_{j,i}\)</span> condition. Take <span class="math inline">\(U \equiv g^{-1}(Y)\)</span>. This does the job because the method <span class="math inline">\(g\)</span> was constructed with ensures that the variables have the same distribution.</p>
+<p>Now as <span class="math inline">\(n \to \infty\)</span>, the joint would get arbitrarily close.</p>
+<p><span class="math inline">\(\blacksquare\)</span></p>
+<p>(If you would like to use this proof, please email me.)</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
