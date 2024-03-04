@@ -16,12 +16,12 @@ Imagine two continuous random variables seemingly unrelated and free from any in
 It's a common assumption in probability theory that independence implies a lack of any relationship between variables.
 
 However, a fascinating theorem challenges this notion, showing that from any two independent continuous random variables, 
-we can construct new variables that not only share the same distributions but also have joint distributions that are arbitrarily close. 
+we can construct new deterministically dependent variables that not only share the same distributions but also have joint distributions that are arbitrarily close. 
 
 In other words, independence can be deceptive, leading us to a realm where variables are closer than we think. 
 Let's explore this intriguing theorem and its implications.
 
-(If you could link me up with a paper that talks about this theorem, please do. I couldn't find it. This theorem is apparently proven by "Nelson" but I couldn't find it.)
+(If you could link me up with a paper that talks about this theorem, please do. I couldn't find it. This theorem is apparently proven by "Nelson".)
 
 ## **Theorem**
 > Let $X,Y$ be independent continuous random variables on $(\mathbb{R}, \mathcal{B}, P)$. For all $\epsilon > 0$ there exist deterministically dependent $U,V$ on the same probability space with $F_U = F_X, F_V = F_Y$ and $\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| < \epsilon$.

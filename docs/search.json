@@ -18,14 +18,14 @@
     "href": "posts/nelson/nelson.html",
     "title": "So Far Yet So Close: How Independence is Almost Dependence",
     "section": "",
-    "text": "Imagine two continuous random variables seemingly unrelated and free from any influence from each other. It’s a common assumption in probability theory that independence implies a lack of any relationship between variables.\nHowever, a fascinating theorem challenges this notion, showing that from any two independent continuous random variables, we can construct new variables that not only share the same distributions but also have joint distributions that are arbitrarily close.\nIn other words, independence can be deceptive, leading us to a realm where variables are closer than we think. Let’s explore this intriguing theorem and its implications.\n(If you could link me up with a paper that talks about this theorem, please do. I couldn’t find it. This theorem is apparently proven by “Nelson” but I couldn’t find it.)"
+    "text": "Imagine two continuous random variables seemingly unrelated and free from any influence from each other. It’s a common assumption in probability theory that independence implies a lack of any relationship between variables.\nHowever, a fascinating theorem challenges this notion, showing that from any two independent continuous random variables, we can construct new deterministically dependent variables that not only share the same distributions but also have joint distributions that are arbitrarily close.\nIn other words, independence can be deceptive, leading us to a realm where variables are closer than we think. Let’s explore this intriguing theorem and its implications.\n(If you could link me up with a paper that talks about this theorem, please do. I couldn’t find it. This theorem is apparently proven by “Nelson”.)"
   },
   {
     "objectID": "posts/nelson/nelson.html#theorem",
     "href": "posts/nelson/nelson.html#theorem",
     "title": "So Far Yet So Close: How Independence is Almost Dependence",
     "section": "Theorem",
-    "text": "Theorem\n\nLet \\(X,Y\\) be continuous random variables on \\((\\mathbb{R}, \\mathcal{B}, P)\\). For all \\(\\epsilon &gt; 0\\) there exist completely deterministic random variables \\(U,V\\) on the same probability space with \\(F_U = F_X, F_V = F_Y\\) and \\(\\sup_{(a,b) \\in \\mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \\epsilon\\).\n\nHere is the proof I came up with:"
+    "text": "Theorem\n\nLet \\(X,Y\\) be independent continuous random variables on \\((\\mathbb{R}, \\mathcal{B}, P)\\). For all \\(\\epsilon &gt; 0\\) there exist deterministically dependent \\(U,V\\) on the same probability space with \\(F_U = F_X, F_V = F_Y\\) and \\(\\sup_{(a,b) \\in \\mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \\epsilon\\).\n\nHere is the proof I came up with:"
   },
   {
     "objectID": "posts/nelson/nelson.html#proof",
