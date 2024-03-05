@@ -24,7 +24,7 @@ Let's explore this intriguing theorem and its implications.
 (If you could link me up with a paper that talks about this theorem, please do. I couldn't find it. This theorem is apparently proven by "Nelson".)
 
 ## **Theorem**
-> Let $X,Y$ be independent continuous random variables on $(\mathbb{R}, \mathcal{B}, P)$. For all $\epsilon > 0$ there exist deterministically dependent $U,V$ on the same probability space with $F_U = F_X, F_V = F_Y$ and $\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| < \epsilon$.
+> Let $X,Y$ with $F_X, F_Y \uparrow,$ be independent continuous random variables on $(\mathbb{R}, \mathcal{B}, P)$. For all $\epsilon > 0$ there exist deterministically dependent $U,V$ on the same probability space  $F_U = F_X, F_V = F_Y$ and $\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| < \epsilon$.
 
 Here is the proof I came up with:
 
@@ -60,10 +60,26 @@ $$F_X(g^{-1}(y))  = F_Y(y)+(F_X(a_{i,j}) - F_Y(b_{j,i}))$$
 $$\stackrel{\textcolor{red}{!}}{=}F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)$$
 $$x = g^{-1}(y) \stackrel{\textcolor{red}{!}}{=} F_X^{-1}\left(F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\right)$$
 
-This is clearly measurable, and it is easy to check that this function indeed satisfies the $x \in I_{i,j} \iff y \in J_{j,i}$ condition. Take $U \equiv g^{-1}(Y)$. This does the job because the method $g$ was constructed with ensures that the variables have the same distribution.
+This is clearly measurable, and it is easy to check that this function indeed satisfies the $x \in I_{i,j} \iff y \in J_{j,i}$ condition. Take $U \equiv g^{-1}(Y)$.
 
-Now as $n \to \infty$, the joint would get arbitrarily close. 
+I will now be done if I show that $U$ follows the same CDF as $X$. For $x \in I_{i,j}$
+
+$$P\left(a_{i,j} \leq U \leq x\right)$$ 
+$$ = P\left(a_{i,j} \leq F_X^{-1}\left(F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\right) \leq x\right)$$
+$$= P\left(F_X(a_{i,j}) \leq F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right) \leq F_X(x)\right)$$
+$$= F_X(x) - F_X(a_{i,j}) = P(a_{i,j} \leq X \leq x)$$
+
+The last equality was legal because $F_X(a_{i,j}) - (F_X(a_{i,j}) - F_Y(b_{j,i})) = F_Y(b_{j,i}) \geq 0$. 
+
+Now as $n \to \infty$, their joints would get arbitrarily close. 
 
 $\blacksquare$
 
 (If you would like to use this proof, please email me.)
+
+Using the same idea but fixing things up a little bit for the issues with invertibility, one could also prove the following
+
+## **Theorem**
+> Let $X,Y$ be independent continuous random variables on $(\mathbb{R}, \mathcal{B}, P)$. For all $\epsilon > 0$ there exist deterministically dependent $U,V$ on the same probability space with $F_U = F_X, F_V = F_Y$ and $\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| < \epsilon$.
+
+----------

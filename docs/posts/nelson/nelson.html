@@ -145,6 +145,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#theorem" id="toc-theorem" class="nav-link active" data-scroll-target="#theorem"><strong>Theorem</strong></a></li>
   <li><a href="#proof" id="toc-proof" class="nav-link" data-scroll-target="#proof"><strong>Proof</strong></a></li>
+  <li><a href="#theorem-1" id="toc-theorem-1" class="nav-link" data-scroll-target="#theorem-1"><strong>Theorem</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -161,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="theorem" class="level2">
 <h2 class="anchored" data-anchor-id="theorem"><strong>Theorem</strong></h2>
 <blockquote class="blockquote">
-<p>Let <span class="math inline">\(X,Y\)</span> be independent continuous random variables on <span class="math inline">\((\mathbb{R}, \mathcal{B}, P)\)</span>. For all <span class="math inline">\(\epsilon &gt; 0\)</span> there exist deterministically dependent <span class="math inline">\(U,V\)</span> on the same probability space with <span class="math inline">\(F_U = F_X, F_V = F_Y\)</span> and <span class="math inline">\(\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \epsilon\)</span>.</p>
+<p>Let <span class="math inline">\(X,Y\)</span> with <span class="math inline">\(F_X, F_Y \uparrow,\)</span> be independent continuous random variables on <span class="math inline">\((\mathbb{R}, \mathcal{B}, P)\)</span>. For all <span class="math inline">\(\epsilon &gt; 0\)</span> there exist deterministically dependent <span class="math inline">\(U,V\)</span> on the same probability space <span class="math inline">\(F_U = F_X, F_V = F_Y\)</span> and <span class="math inline">\(\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \epsilon\)</span>.</p>
 </blockquote>
 <p>Here is the proof I came up with:</p>
 </section>
@@ -180,10 +181,21 @@ ul.task-list li input[type="checkbox"] {
 <p>Let <span class="math inline">\(V \equiv Y\)</span>, we would want to construct a bijective function <span class="math inline">\(g:[0,1] \to [0,1]\)</span> such that for <span class="math inline">\(y \in J_{j,i}\)</span></p>
 <p><span class="math display">\[F_Y(y) - F_Y(b_{j,i}) = P\left(b_{j,i} \leq Y \leq y\right) \stackrel{\textcolor{red}{!}}{=} P\left(b_{j,i} \leq g(X) \leq y\right)\]</span> <span class="math display">\[\stackrel{\textcolor{red}{!}}{=}P\left(a_{i,j} \leq X \leq g^{-1}(y)\right) = F_X(g^{-1}(y)) - F_X(a_{i,j})\]</span></p>
 <p><span class="math display">\[F_X(g^{-1}(y))  = F_Y(y)+(F_X(a_{i,j}) - F_Y(b_{j,i}))\]</span> <span class="math display">\[\stackrel{\textcolor{red}{!}}{=}F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\]</span> <span class="math display">\[x = g^{-1}(y) \stackrel{\textcolor{red}{!}}{=} F_X^{-1}\left(F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\right)\]</span></p>
-<p>This is clearly measurable, and it is easy to check that this function indeed satisfies the <span class="math inline">\(x \in I_{i,j} \iff y \in J_{j,i}\)</span> condition. Take <span class="math inline">\(U \equiv g^{-1}(Y)\)</span>. This does the job because the method <span class="math inline">\(g\)</span> was constructed with ensures that the variables have the same distribution.</p>
-<p>Now as <span class="math inline">\(n \to \infty\)</span>, the joint would get arbitrarily close.</p>
+<p>This is clearly measurable, and it is easy to check that this function indeed satisfies the <span class="math inline">\(x \in I_{i,j} \iff y \in J_{j,i}\)</span> condition. Take <span class="math inline">\(U \equiv g^{-1}(Y)\)</span>.</p>
+<p>I will now be done if I show that <span class="math inline">\(U\)</span> follows the same CDF as <span class="math inline">\(X\)</span>. For <span class="math inline">\(x \in I_{i,j}\)</span></p>
+<p><span class="math display">\[P\left(a_{i,j} \leq U \leq x\right)\]</span> <span class="math display">\[ = P\left(a_{i,j} \leq F_X^{-1}\left(F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\right) \leq x\right)\]</span> <span class="math display">\[= P\left(F_X(a_{i,j}) \leq F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right) \leq F_X(x)\right)\]</span> <span class="math display">\[= F_X(x) - F_X(a_{i,j}) = P(a_{i,j} \leq X \leq x)\]</span></p>
+<p>The last equality was legal because <span class="math inline">\(F_X(a_{i,j}) - (F_X(a_{i,j}) - F_Y(b_{j,i})) = F_Y(b_{j,i}) \geq 0\)</span>.</p>
+<p>Now as <span class="math inline">\(n \to \infty\)</span>, their joints would get arbitrarily close.</p>
 <p><span class="math inline">\(\blacksquare\)</span></p>
 <p>(If you would like to use this proof, please email me.)</p>
+<p>Using the same idea but fixing things up a little bit for the issues with invertibility, one could also prove the following</p>
+</section>
+<section id="theorem-1" class="level2">
+<h2 class="anchored" data-anchor-id="theorem-1"><strong>Theorem</strong></h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(X,Y\)</span> be independent continuous random variables on <span class="math inline">\((\mathbb{R}, \mathcal{B}, P)\)</span>. For all <span class="math inline">\(\epsilon &gt; 0\)</span> there exist deterministically dependent <span class="math inline">\(U,V\)</span> on the same probability space with <span class="math inline">\(F_U = F_X, F_V = F_Y\)</span> and <span class="math inline">\(\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \epsilon\)</span>.</p>
+</blockquote>
+<hr>
 
 
 </section>
