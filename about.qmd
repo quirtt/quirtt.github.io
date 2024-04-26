@@ -4,6 +4,8 @@ image: profile.jpg
 about:
   template: jolla
   links:
+    - text: Curriculum Vitae
+      href: ./CV.pdf
     - icon: linkedin
       text: LinkedIn
       href: https://linkedin.com/in/quirtt
@@ -13,10 +15,14 @@ about:
     - icon: discord
       text: quirtt on Discord
       href: https://discord.com/app
+
 ---
 
-I'm **Himadri Mandal**, 17, you might know me as **quirtt** from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (mostly Mathematics so far, though. lol!). Confession: I *might* like mathematics *more* than statistics - I *really* hope I enjoy statistics as I learn more of it, because I would be sad otherwise.
+I'm **Himadri Mandal**, 18, you might know me as **quirtt** from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (well, mostly Mathematics, but I enjoy both). 
+I am also a CS nerd, enjoy almost anything geeky, and have a deep interest in wanting to automate all of Mathematics, and wish to work on this a lot.
 
-At any point in the day I am found doing the following things: sleep, learn weird math/cs, watch anime, cope through university lectures, read some ML paper, goofing around with friends, playing table tennis. Ah well. I have been recently getting more and more involved in AI and AI alignment, too.
+You could check some of my projects out on github, but it could be difficult as they are largely undocumented.
+I am usually found: learning math/cs, reading ML papers, playing table tennis, chilling with friends, singing badly in my room, etc.
+Ah well. I have been recently getting more and more interested in AI and AI alignment, too. I wish do some good work in that field as well.
 
-If you find me interesting - feel free to shoot me a mail at **mandalhimadri06\@gmail.com** or send me a "Hi!" on Discord.
+If you find me interesting - feel free to shoot me a mail at **mandalhimadri06\@gmail.com** or send me a "Hi!" on my Discord.

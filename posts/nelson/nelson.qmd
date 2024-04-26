@@ -21,7 +21,7 @@ we can construct new deterministically dependent variables that not only share t
 In other words, independence can be deceptive, leading us to a realm where variables are closer than we think. 
 Let's explore this intriguing theorem and its implications.
 
-(If you could link me up with a paper that talks about this theorem, please do. I couldn't find it. This theorem is apparently proven by "Nelson".)
+(If you could link me up with a paper that talks about this theorem, please do. I couldn't find it. This theorem is apparently proven by "Nelson". Edit: I found it.)
 
 ## **Theorem**
 > Let $X,Y$ with $F_X, F_Y \uparrow,$ be independent continuous random variables on $(\mathbb{R}, \mathcal{B}, P)$. For all $\epsilon > 0$ there exist deterministically dependent $U,V$ on the same probability space  $F_U = F_X, F_V = F_Y$ and $\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| < \epsilon$.
@@ -32,15 +32,16 @@ Here is the proof I came up with:
 We can instead work with the random variables $\frac{1}{1+e^{X}}$, and rename $Y$ similarly too, to work with random variables bounded in $[0,1]$.
 
 Fix positive integer $n$, and obtain 
-$\{a_{0,1}=0 < \cdots < a_{0,n-1} < a_{1,0} < \cdots < a_{1,n-1} < \cdots < a_{n-1,0} < \cdots < a_{n-1,n}=1\}$ 
+$\{a_{0,0}=0 < \cdots < a_{0,n-1} < a_{1,0} < \cdots < a_{1,n-1} < \cdots < a_{n-1,0} < \cdots < a_{n-1,n}=1\}$ 
 and
-$\{b_{0,1}=0 < \cdots < b_{0,n-1} < b_{1,0} < \cdots < b_{1,n-1} < \cdots < b_{n-1,0} < \cdots < b_{n-1,n}=1\}$
+$\{b_{0,0}=0 < \cdots < b_{0,n-1} < b_{1,0} < \cdots < b_{1,n-1} < \cdots < b_{n-1,0} < \cdots < b_{n-1,n}=1\}$
 
 ![](./construction.jpg){width=100% fig-align="center"}
 
 such that 
 $$F_X(a_{j,0}) - F_X(a_{j-1, 0}) = \frac{1}{n}, \ F_Y(b_{j,0}) - F_Y(b_{j-1, 0}) = \frac{1}{n}$$
 $$F_X(a_{j,i}) - F_X(a_{j, i-1}) = \frac{1}{n^2}, \ F_Y(b_{j,i}) - F_Y(b_{j, i-1}) = \frac{1}{n^2}$$
+$$\implies F_X(a_{i,j}) = F_Y(b_{i,j}) = \frac{i}{n} + \frac{j}{n^2}$$
 
 $$I_{i,j} = \{a_{i, j} \leq x \leq a_{i, j+1}\}, \ J_{j,i} = \{b_{j, i} \leq y \leq b_{j, i+1}\}$$
 $$I_i = \cup_{j}I_{i,j}, \ J_j = \cup_{i}J_{j,i}$$
@@ -65,8 +66,8 @@ This is clearly measurable, and it is easy to check that this function indeed sa
 I will now be done if I show that $U$ follows the same CDF as $X$. For $x \in I_{i,j}$
 
 $$P\left(a_{i,j} \leq U \leq x\right)$$ 
-$$ = P\left(a_{i,j} \leq F_X^{-1}\left(F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\right) \leq x\right)$$
-$$= P\left(F_X(a_{i,j}) \leq F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right) \leq F_X(x)\right)$$
+$$ = P\left(a_{i,j} \leq F_X^{-1}\left(F_Y(Y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\right) \leq x\right)$$
+$$= P\left(F_X(a_{i,j}) \leq F_Y(Y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right) \leq F_X(x)\right)$$
 $$= F_X(x) - F_X(a_{i,j}) = P(a_{i,j} \leq X \leq x)$$
 
 The last equality was legal because $F_X(a_{i,j}) - (F_X(a_{i,j}) - F_Y(b_{j,i})) = F_Y(b_{j,i}) \geq 0$. 
