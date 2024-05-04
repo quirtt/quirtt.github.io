@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/OthelloGPT/OthelloGPT.html",
       "/posts/nelson/nelson.html",
       "/posts/a-cool-problem/polynomials-are-linear.html",
       "/posts/zorn-and-aoc/zorn-and-aoc.html",

@@ -1,8 +1,27 @@
 ---
-title: "OthelloGPT Proposal"
-format: html
+title: "Ponderings on OthelloGPT"
 editor: visual
+author: "Himadri Mandal"
+date: "2024-5-5"
+categories: [machine learning, interpretability]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+image: "othello.jpeg"
 ---
+
+This is a report of sorts of my playing around with OthelloGPT, a GPT model trained on Othello games to predict all the possible legal moves.
+
+It is a common problem in Machine Learning to talk about whether a model is *just* remembering information, performing surface statistics or is actually doing something deeper? We try to investigate this for OthelloGPT!
+
+The [original paper](https://arxiv.org/pdf/2210.13382) by Kenneth Li et. al. find that this model is *not* just performing sequence statistics, the model representation infact has a world model of the Othello environment.
+
+The authors make multiple arguments like a) how the world model representation is being used to draw inferences, b) how a non-linear probe can actually input the internal representation of the model and output (with high accuracy!) the current board state and c) how altering the internal representation ends up having the intended effect on the predictions. They also have a more accessible version of it as a [blog](https://thegradient.pub/othello/).
+
+Later Neel Nanda et al publish a [paper](https://arxiv.org/pdf/2309.00941) talking about their findings on how this representation is, well, actually linear! You need to view in a particular direction to find the linearity!
+
+In this project, I dealt with the following problem:
 
 ## [**How Does The Model Compute That A Certain Cell is Blank?**]{.underline}
 
@@ -95,4 +114,4 @@ Setting $M_U = 0.2, 0.3, 0.4$ etc give us bunch of neurons that are very highly 
 
 ### [Goal #3]{.underline} How could a transformer come up with this?
 
-I wanted to look more into this but there is only 15 minutes to the deadline, and unfortunately I didn't begin this project until yesterday! I think I have things to say, but I can't. Forgive!
+WIP!
