@@ -3,7 +3,7 @@ title: "Ponderings on OthelloGPT"
 editor: visual
 author: "Himadri Mandal"
 date: "2024-5-5"
-categories: [machine learning, interpretability]
+categories: [machine learning, artificial intelligence, interpretability]
 format: 
     html: 
         toc: true

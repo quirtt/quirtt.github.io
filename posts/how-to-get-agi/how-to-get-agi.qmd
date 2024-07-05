@@ -1,0 +1,64 @@
+---
+title: "How to get AGI?"
+editor: visual
+author: "Himadri Mandal"
+date: "2024-7-06"
+categories: [artificial intelligence, artificial general intelligence, philosophy]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+image: "brain.jpeg"
+---
+
+Here is an excerpt from a brilliant conversation [^1] between Dwarkesh Patel and François Chollet.
+
+[^1]: <https://www.youtube.com/watch?v=UakqL6Pj9xo>
+
+I believe this is the general consensus of most AI researchers on how AGI will be achieved. I have thought along similar lines before but this internalizes that feeling of mine further.
+
+------------------------------------------------------------------------
+
+### François Chollet 00:47:38
+
+Clearly LLMs have some degree of generalization. This is precisely why. It's because they have to compress.
+
+### Dwarkesh Patel 00:48:19
+
+Why is that intrinsically limited? At some point it has to learn a higher level of generalization and a higher level, and then the highest level is the fluid intelligence.
+
+## (00:48:28) – Future of AI progress: deep learning + program synthesis
+
+### François Chollet 00:48:28
+
+It's intrinsically limited because the substrate of your model is a big parametric curve. All you can do with this is local generalization. If you want to go beyond this towards broader or even extreme generalization, you have to move to a different type of model. My paradigm of choice is discrete program search, program synthesis.
+
+If you want to understand that, you can sort of compare and contrast it with deep learning. In deep learning your model is a differentiable parametric curve. In program synthesis, your model is a discrete graph of operators. You've got a set of logical operators, like a domain-specific language. You're picking instances of it. You're structuring that into a graph that's a program. That's actually very similar to a program you might write in Python or C++ and so on. We are doing machine learning here. We're trying to automatically learn these models.
+
+In deep learning your learning engine is gradient descent. Gradient descent is very compute efficient because you have this very strong informative feedback signal about where the solution is. You can get to the solution very quickly, but it is very data inefficient. In order to make it work, you need a dense sampling of the operating space. You need a dense sampling of the data distribution. Then you're limited to only generalizing within that data distribution. The reason why you have this limitation is because your model is a curve.
+
+Meanwhile, if you look at discrete program search, the learning engine is combinatorial search. You're just trying a bunch of programs until you find one that actually meets your spec. This process is extremely data efficient. You can learn a generalizable program from just one example, two examples. This is why it works so well on ARC, by the way. The big limitation is that it's extremely compute inefficient because you're running into combinatorial explosion, of course.
+
+You can sort of see here how deep learning and discrete program search have very complementary strengths, and limitations as well. Every limitation of deep learning has a corresponding strength in program synthesis and inversely. The path forward is going to be to merge the two.
+
+Here’s another way you can think about it. These parametric curves trained with gradient descent are great fits for everything that's System 1-type thinking: pattern recognition, intuition, memorization, etc. Discrete program search is a great fit for Type 2 thinking: planning, reasoning. It’s quickly figuring out a generalizable model that matches just one or two examples, like for an ARC puzzle for instance.
+
+Humans are never doing pure System 1 or pure System 2. They're always mixing and matching both. Right now, we have all the tools for System 1. We have almost nothing for System 2. The way forward is to create a hybrid system.
+
+The form it's going to take is mostly System 2. The outer structure is going to be a discrete program search system. You're going to fix the fundamental limitation of discrete program search, which is combinatorial explosion, with deep learning. You're going to leverage deep learning to guide and to provide intuition in program space, to guide the program search.
+
+That's very similar to what you see when you're playing chess or when you're trying to prove a theorem, for instance. It's mostly a reasoning thing, but you start out with some intuition about the shape of the solution. That's very much something you can get via a deep learning model. Deep learning models are very much like intuition machines. They're pattern matching machines.
+
+You start from this shape of the solution, and then you're going to do actual explicit discrete program search. But you're not going to do it via brute force. You're not going to try things randomly. You're actually going to ask another deep learning model for suggestions. It’ll be like, “here's the most likely next step. Here's where in the graph you should be going.” You can also use yet another deep learning model for feedback like “well, here's what I have so far. Is it looking good? Should I just backtrack and try something new?” Discrete program search is going to be the key but you want to make it dramatically better, orders of magnitude more efficient, by leveraging deep learning.
+
+By the way, another thing that you can use deep learning for is of course things like common sense knowledge and knowledge in general. You're going to end up with this sort of system where you have this on-the-fly synthesis engine that can adapt to new situations.
+
+The way it adapts is that it's going to fetch from a bank of patterns, modules that could be themselves curves, differentiable modules, and some others that could be algorithmic in nature. It's going to assemble them via this intuition-guided process. For every new situation you might be faced with, it's going to give you a generalizable model that was synthesized using very, very little data. Something like this would solve ARC.
+
+------------------------------------------------------------------------
+
+## Thoughts
+
+After watching the podcast, I realized that AlphaGeometry[^2] is, almost entirely, just this idea. i believe you can become way better at generating intuition if you have a database of all mathematical theorems, proofs etc in a symbolic / DPS form. But this is too naive. I'll update as I have more thoughts.
+
+[^2]: <https://deepmind.google/discover/blog/alphageometry-an-olympiad-level-ai-system-for-geometry/>
