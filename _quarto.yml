@@ -4,7 +4,9 @@ project:
   
 website:
   title: "Cold Reflections"
+  favicon: "coldreflection.jpeg"
   navbar:
+    logo: "coldreflection.jpeg"
     right:
       - about.qmd
       - icon: github
