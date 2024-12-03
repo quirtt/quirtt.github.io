@@ -7,6 +7,10 @@ website:
   favicon: "coldreflection.jpeg"
   navbar:
     logo: "coldreflection.jpeg"
+    left:
+      - text: Thoughts
+        href: thoughts
+
     right:
       - about.qmd
       - icon: github

@@ -9,5 +9,11 @@
       "/posts/zorn-and-aoc/zorn-and-aoc.html",
       "/posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html"
     ]
+  },
+  {
+    "listing": "/thoughts/index.html",
+    "items": [
+      "/thoughts/uncondition/how-to-get-agi.html"
+    ]
   }
 ]
