@@ -18,9 +18,9 @@ website:
         href: https://github.com/quirtt
 format:
   html:
-    # theme: pulse
+    theme: pulse
     # theme: cerulean
-    theme: default
+    # theme: default
     # theme: cyborg
     # theme: minty
     # theme: sketchy

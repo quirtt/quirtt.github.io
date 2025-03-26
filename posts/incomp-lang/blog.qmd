@@ -1,5 +1,5 @@
 ---
-title: "Language is an Infinitely Incomplete Approximation of Human Concepts"
+title: "[DRAFT] Language is an Infinitely Incomplete Approximation of Human Concepts"
 author: "Himadri Mandal"
 date: "2025-3-13"
 categories: [philosophy, cognition, math]
@@ -9,7 +9,7 @@ format:
         html-math-method: mathjax
         # css: styles.css
 editor: visual
-image: "pfp.jpeg"
+image: "display.png"
 ---
 
 I had thought of this idea last year, but never got around to writing it. In this blog, I show how humans are infinitely limited by the mode of language in transmission of ideas. I don't quite remember how I got around to thinking about this, but here goes haha.
