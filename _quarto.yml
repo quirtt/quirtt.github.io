@@ -8,8 +8,9 @@ website:
   navbar:
     logo: "coldreflection.jpeg"
     left:
-      - text: Thoughts
-        href: thoughts
+      - text: "Thoughts"
+        href: thoughts/
+
 
     right:
       - about.qmd

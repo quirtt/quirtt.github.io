@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Himadri Mandal">
-<meta name="dcterms.date" content="2024-05-05">
+<meta name="dcterms.date" content="2023-11-16">
 
-<title>Ponderings on OthelloGPT – Cold Reflections</title>
+<title>Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I – Cold Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,11 +149,10 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Ponderings on OthelloGPT</h1>
+      <h1 class="title">Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">machine learning</div>
-                <div class="quarto-category">artificial intelligence</div>
-                <div class="quarto-category">interpretability</div>
+                <div class="quarto-category">set theory</div>
+                <div class="quarto-category">math</div>
               </div>
                   </div>
   </div>
@@ -171,7 +170,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">May 5, 2024</p>
+        <p class="date">November 16, 2023</p>
       </div>
     </div>
     
@@ -187,12 +186,11 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#how-does-the-model-compute-that-a-certain-cell-is-blank" id="toc-how-does-the-model-compute-that-a-certain-cell-is-blank" class="nav-link active" data-scroll-target="#how-does-the-model-compute-that-a-certain-cell-is-blank"><u><strong>How Does The Model Compute That A Certain Cell is Blank?</strong></u></a>
-  <ul class="collapse">
-  <li><a href="#goal-1-at-which-layer-does-the-model-conclude-that-its-blank" id="toc-goal-1-at-which-layer-does-the-model-conclude-that-its-blank" class="nav-link" data-scroll-target="#goal-1-at-which-layer-does-the-model-conclude-that-its-blank"><u>Goal #1</u> At which layer does the model conclude that it’s blank?</a></li>
-  <li><a href="#goal-2-does-this-come-from-any-specific-head-or-neuron" id="toc-goal-2-does-this-come-from-any-specific-head-or-neuron" class="nav-link" data-scroll-target="#goal-2-does-this-come-from-any-specific-head-or-neuron"><u>Goal #2</u> Does this come from any specific head or neuron?</a></li>
-  <li><a href="#goal-3-how-could-a-transformer-come-up-with-this" id="toc-goal-3-how-could-a-transformer-come-up-with-this" class="nav-link" data-scroll-target="#goal-3-how-could-a-transformer-come-up-with-this"><u>Goal #3</u> How could a transformer come up with this?</a></li>
-  </ul></li>
+  <li><a href="#russells-paradox" id="toc-russells-paradox" class="nav-link active" data-scroll-target="#russells-paradox"><strong><em>Russell’s Paradox</em></strong></a></li>
+  <li><a href="#axiom-of-choice" id="toc-axiom-of-choice" class="nav-link" data-scroll-target="#axiom-of-choice"><strong><em>Axiom of Choice</em></strong></a></li>
+  <li><a href="#zorns-lemma" id="toc-zorns-lemma" class="nav-link" data-scroll-target="#zorns-lemma"><strong><em>Zorn’s Lemma</em></strong></a></li>
+  <li><a href="#zorn-and-axiom-of-choice-are-the-same" id="toc-zorn-and-axiom-of-choice-are-the-same" class="nav-link" data-scroll-target="#zorn-and-axiom-of-choice-are-the-same"><strong><em>Zorn and Axiom of Choice are the SAME!</em></strong></a></li>
+  <li><a href="#footnotes" id="toc-footnotes" class="nav-link" data-scroll-target="#footnotes"><strong><em>Footnotes</em></strong></a></li>
   </ul>
 </nav>
     </div>
@@ -203,74 +201,121 @@ window.Quarto = {
 
 
 
-<p>This is a report of sorts of my playing around with OthelloGPT, a GPT model trained on Othello games to predict all the possible legal moves.</p>
-<p>It is a common problem in Machine Learning to talk about whether a model is <em>just</em> remembering information, performing surface statistics or is actually doing something deeper? We try to investigate this for OthelloGPT!</p>
-<p>The <a href="https://arxiv.org/pdf/2210.13382">original paper</a> by Kenneth Li et. al.&nbsp;find that this model is <em>not</em> just performing sequence statistics, the model representation infact has a world model of the Othello environment.</p>
-<p>The authors make multiple arguments like a) how the world model representation is being used to draw inferences, b) how a non-linear probe can actually input the internal representation of the model and output (with high accuracy!) the current board state and c) how altering the internal representation ends up having the intended effect on the predictions. They also have a more accessible version of it as a <a href="https://thegradient.pub/othello/">blog</a>.</p>
-<p>Later Neel Nanda et al publish a <a href="https://arxiv.org/pdf/2309.00941">paper</a> talking about their findings on how this representation is, well, actually linear! You need to view in a particular direction to find the linearity!</p>
-<p>In this project, I dealt with the following problem:</p>
-<section id="how-does-the-model-compute-that-a-certain-cell-is-blank" class="level2">
-<h2 class="anchored" data-anchor-id="how-does-the-model-compute-that-a-certain-cell-is-blank"><u><strong>How Does The Model Compute That A Certain Cell is Blank?</strong></u></h2>
-<p>This seems like an easy thing to compute, as all you need to do is to figure out whether the <span class="math inline">\((i,j)^{\text{th}}\)</span> cell has appeared in the move sequence or not.</p>
-<p><u><strong>Goals</strong></u>:</p>
-<ul>
-<li><p>At which layer does the model conclude that it’s blank?</p></li>
-<li><p>Does this come from any specific head or neuron?</p></li>
-<li><p>How could a transformer detect this?</p></li>
-</ul>
-<p>We hypothesize that a single attention head per cell is what is used by a transformer. Let’s try to answer these questions one-by-one.</p>
-<section id="goal-1-at-which-layer-does-the-model-conclude-that-its-blank" class="level3">
-<h3 class="anchored" data-anchor-id="goal-1-at-which-layer-does-the-model-conclude-that-its-blank"><u>Goal #1</u> At which layer does the model conclude that it’s blank?</h3>
-<p>Let us first fix some notation. Let <span class="math inline">\(X_L\)</span> be the intervention by the linear probe at the <span class="math inline">\(L\)</span>’th layer of the residual stream. Let <span class="math inline">\(Y\)</span> be the true representation of the game board.</p>
-<p>We try to find its goodness at two things:</p>
-<ul>
-<li><p>Test #1: The prediction is blank <code>CONDITIONAL</code> on the true representation being blank</p></li>
-<li><p>Test #2: The prediction is NOT blank <code>CONDITIONAL</code> on the correct representation being NOT blank</p></li>
-</ul>
-<p>We calculate the following conditional probabilities and plot them (which themselves are tensors of the shape <span class="math inline">\(\text{rows} \times \text{cols}\)</span>). Ofcourse <strong>we only care about the games in the middle</strong> because if not, things become a bit more weird.<span class="math display">\[
-\text{Test 1: }P(X_L = Y \Bigg|Y=\text{Blank}) = \frac{P(X_L = Y \text{ and } Y=\text{Blank})}{P(Y=\text{Blank})}
-\]</span></p>
-<p><img src="./images/plot_tp_mid.png" class="img-fluid"></p>
-<p>Notice that the 4 squares in the middle have NaN value. This is because those can never be blank and so there’s a division by zero error. It isn’t an issue for us though.<br>
-Also, there doesn’t seem to be much improvement after Layer 1, so let us just focus on the first two layers.</p>
-<p><img src="./images/plot_tp_1_mid.png" class="img-fluid"></p>
-<p>Let’s also find out the <span class="math inline">\(\text{maxerr}\)</span> and <span class="math inline">\(\text{avgerr}\)</span> across layers and plot it.</p>
-<p><img src="./images/max_and_avg_error_test1_mid.png" class="img-fluid"></p>
-<p>Looking at this plot, it seems like a good idea to hypothesize that most of the <strong>Is_Blank</strong> computation is done in Layer 0 (for most cells) and some of the remaining computation is done in Layer 1. It seems that Layer 1 is what gives it structure finally, though.</p>
-<p>Let’s now do the second test.</p>
+<p>Mathematics has long been built on the sturdy foundation of intuition. From counting pebbles to solving complex equations, mathematicians have relied on their inner compass to navigate the abstract landscapes of numbers and shapes. But as the 19th century dawned, something intriguing and unsettling began to occur – mathematics, the bedrock of human knowledge, was on the brink of a seismic shift.</p>
+<p>This piece goes into <em>how</em> this happened, what changed - and its consequences. Though I might not know a lot of mathematics, I firmly believe that this is one of the most interesting (while being accessible) parts of mathematics.</p>
+<p>All of this begins with arguably the most famous paradox in mathematics, logic, and the like - the Russell’s paradox.</p>
+<section id="russells-paradox" class="level2">
+<h2 class="anchored" data-anchor-id="russells-paradox"><strong><em>Russell’s Paradox</em></strong></h2>
+<p>Let <span class="math inline">\(A\)</span> be the set of all sets that do not contain themselves. Does <span class="math inline">\(A\)</span> contain itself?</p>
 <p><span class="math display">\[
-\text{Test 2: }P(X_L \neq \text{Blank} \Bigg|Y\neq\text{Blank}) = \frac{P(X_L \neq \text{Blank} \text{ and } Y\neq\text{Blank})}{P(Y\neq\text{Blank})}
+A = \{x : x \not\in x\} \text{. Is } A \in A?
 \]</span></p>
-<p>We calculate and then plot the same graphs.</p>
-<p><img src="./images/plot_tp_2_mid.png" class="img-fluid"></p>
-<p><img src="./images/max_and_avg_error_test2_mid.png" class="img-fluid"></p>
-<p>Ah! I thought that the features <strong>Is_Blank</strong> and <strong>Is_Not_Blank</strong> would get implemented almost together, and although that does seem to be the case, the <span class="math inline">\(\text{maxerr}\)</span> only really gets close to the average error by <strong>Layer 4</strong>, which is precisely where the OthelloGPT has created a high-accuracy world model (according to Neel’s findings). This is all super interesting!</p>
-<p>Let us now try to answer a more important question.</p>
+<hr>
+<p>Well, if <span class="math inline">\(A \in A\)</span> then by the definition of <span class="math inline">\(A\)</span>, we get <span class="math inline">\(A \not \in A\)</span>. But if <span class="math inline">\(A \not\in A\)</span> then <span class="math inline">\(A \in A\)</span>. Poof.</p>
+<p>This called for a need for formalism - intuition was just <em>not</em> enough. Here came Axiomatic Set Theory - one of the most famous systems of Axiomatic Set Theory is the <a href="https://en.wikipedia.org/wiki/Zermelo%E2%80%93Fraenkel_set_theory"><strong>Zermelo Fraenkel set theory</strong></a><strong>.</strong> (Do click the link and read the axioms - they are fun! And everything makes sense at the end.)</p>
+<p>Well, how does the <strong>Russell’s paradox</strong> get resolved? One of the axioms deals with this head-on.</p>
+<section id="axiom-schema-of-specification-axiom-of-restricted-comprehension" class="level4">
+<h4 class="anchored" data-anchor-id="axiom-schema-of-specification-axiom-of-restricted-comprehension"><em>Axiom Schema of Specification / Axiom of Restricted Comprehension</em></h4>
+<p>Given a <em>parent set</em> <span class="math inline">\(z\)</span> we can construct a subset <span class="math inline">\(S \subseteq z\)</span> such that</p>
+<p><span class="math display">\[
+S = \{x \in z : \varphi(x)\}
+\]</span></p>
+<hr>
+<p>Although this defines how we can create <em>subsets</em> from a parent set, it DOESN’T talk about creating sets of elements that follow a formula. Infact, we will need a sort of <span class="math inline">\(\text{``set of all sets: X"}\)</span> to talk about creating sets out of thin air.</p>
+<p>However this is NOT a set (In <span class="math inline">\(\text{ZF}\)</span>) . How do we prove this? Well, if <span class="math inline">\(X\)</span> is the set of all sets, then <span class="math inline">\(P(X) \in X\)</span> which means there exists an injective function from <span class="math inline">\(f:P(X)\to X\)</span>. But we know by <a href="#thm-cantor" class="quarto-xref">Theorem&nbsp;3</a> that <span class="math inline">\(P(X) &gt;_{c} X\)</span>. This is a <a href="https://en.wikipedia.org/wiki/Class_(set_theory)"><strong><em>Class</em></strong></a>.</p>
 </section>
-<section id="goal-2-does-this-come-from-any-specific-head-or-neuron" class="level3">
-<h3 class="anchored" data-anchor-id="goal-2-does-this-come-from-any-specific-head-or-neuron"><u>Goal #2</u> Does this come from any specific head or neuron?</h3>
-<p>Let’s look at the cosine similarity of output weights and the blank colour probe for top layer 0 and layer 1 neurons sorted according to standard deviation (sorting wrt to “<strong>resid_post</strong>”)</p>
-<p><img src="./images/cosine_sim_layer0.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer1.png" class="img-fluid"></p>
-<p>Layer 0 <strong>resid_post</strong> doesn’t seem very interpretable to me. However, L1N360 looks very interesting. It computes Is_Blank of cell D2. Can we find more such neurons? Let’s try to use the same technique on <strong>post</strong></p>
-<p><img src="./images/cosine_sim_layer0_post.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer1_post.png" class="img-fluid"></p>
-<p>Wow! Layer 0 seems to compute bunch of <strong>Not_Is_Blank</strong> features for particular cells. Let’s try to find more such neurons!</p>
-<p><img src="./images/cosine_sim_layer0_post-1.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer0_post-2.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer0_post-3.png" class="img-fluid"></p>
-<p>Wait! This is all cool and stuff, but what about <strong>Is_Blank</strong> features? Is Layer 0 not computing it? Lets try to change the experiment in a way to obtain neurons that track <strong>Is_Blank</strong> heavily.</p>
-<p>I will start with a bound <span class="math inline">\(M_U\)</span> on the absolute values of the cosine sim, so that anything above <span class="math inline">\(M_U\)</span> will be treated as <span class="math inline">\(1\)</span> and anything below <span class="math inline">\(M_U\)</span> will be treated as 0. Could I find something interesting out of this simple setup?</p>
-<p><code>top_layer_0_neurons = ((focus_cache["post", 0][:, 3:-3]).abs() &gt; Mu).float().std(dim=[0,1]).argsort(descending=True)</code></p>
-<p>Setting <span class="math inline">\(M_U = 0.2, 0.3, 0.4\)</span> etc give us bunch of neurons that are very highly correlated to the <strong>Is_Blank</strong> probe for a single cell! This is more evidence for our hypothesis that Layer 0 computes the <strong>Is_Blank</strong> feature. Infact, this makes it highly interpretable.</p>
-<p><img src="./images/cosine_sim_layer0_post_experimentabs.png" class="img-fluid"></p>
 </section>
-<section id="goal-3-how-could-a-transformer-come-up-with-this" class="level3">
-<h3 class="anchored" data-anchor-id="goal-3-how-could-a-transformer-come-up-with-this"><u>Goal #3</u> How could a transformer come up with this?</h3>
-<p>WIP!</p>
+<section id="axiom-of-choice" class="level2">
+<h2 class="anchored" data-anchor-id="axiom-of-choice"><strong><em>Axiom of Choice</em></strong></h2>
+<p>Let <span class="math inline">\(I\)</span> be an index set with a family of sets indexed on this index set <span class="math inline">\(\{A_i\}_{i \in I}\)</span>. Then there exists a choice function <span class="math inline">\(f:I \to A = \cup_{i \in I} A_i\)</span> such that <span class="math inline">\(f(i) \in A_i \ \forall i \in I\)</span>.</p>
+<hr>
+<p>This makes “intuitive” sense and is something that “should” be true. However, this is an independent statement in <span class="math inline">\(\text{ZF}\)</span>, which is to say - we CANNOT prove this by ONLY using the axioms of <span class="math inline">\(\text{ZF}\)</span>. There is an equivalent formulation of this axiom (which is used more often)</p>
+</section>
+<section id="zorns-lemma" class="level2">
+<h2 class="anchored" data-anchor-id="zorns-lemma"><strong><em>Zorn’s Lemma</em></strong></h2>
+<p>If <span class="math inline">\(P\)</span> is a nonempty partially ordered set such that every chain has an upper bound in <span class="math inline">\(P\)</span> then <span class="math inline">\(P\)</span> has a maximal element.</p>
+<hr>
+<p>There are quite a few words that need to be unpacked.</p>
+<section id="definitions" class="level4">
+<h4 class="anchored" data-anchor-id="definitions"><em>Definitions</em></h4>
+<ol type="1">
+<li><p>A binary relation <span class="math inline">\(R\)</span> on a set <span class="math inline">\(P\)</span> is a subset <span class="math inline">\(R\)</span> of <span class="math inline">\(P \times P\)</span>, <span class="math inline">\((x,y) \in R\)</span> and is often expressed as <span class="math inline">\(xRy\)</span>.</p></li>
+<li><p>A binary relation <span class="math inline">\(R\)</span> is a partial order if</p>
+<ol type="a">
+<li><p>Reflexivity: <span class="math inline">\(xRx\)</span>, Transitivity: <span class="math inline">\(xRy, yRz \implies xRz\)</span>.</p></li>
+<li><p>Antisymmetry: <span class="math inline">\(xRy, yRx \implies xRx\)</span>.</p></li>
+</ol></li>
+<li><p>A partial order is called a linear order if any two elements are comparable.</p></li>
+<li><p>Let <span class="math inline">\((P, \leq)\)</span> be a poset (partially ordered set), a subset <span class="math inline">\(C \subseteq P\)</span> is called a <em>chain</em> if <span class="math inline">\(C\)</span> has a linear order.</p></li>
+<li><p>Let <span class="math inline">\(A \subseteq P\)</span>, an upper bound for <span class="math inline">\(A\)</span> is an element <span class="math inline">\(x \in P\)</span> such that <span class="math inline">\(y \leq x, \ \forall y \in A\)</span>.</p></li>
+<li><p>An <span class="math inline">\(x \in P\)</span> is called a maximal element if <span class="math inline">\(\not\exists \ y\neq x : x \leq y\)</span>.</p></li>
+<li><p>A linearly ordered set is called <em>well ordered</em>&nbsp;if every nonempty subset has a first element.</p></li>
+</ol>
+</section>
+</section>
+<section id="zorn-and-axiom-of-choice-are-the-same" class="level2">
+<h2 class="anchored" data-anchor-id="zorn-and-axiom-of-choice-are-the-same"><strong><em>Zorn and Axiom of Choice are the SAME!</em></strong></h2>
+<p>We now conclude by proving that <span class="math inline">\(\text{Zorn}\iff\text{AoC}\)</span>.</p>
+<div id="thm-zorntoaoc" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 1 (<span class="math inline">\(\text{Zorn} \implies \text{AoC}\)</span>)</strong></span> <span class="math display">\[
+\text{Zorn's Lemma} \ \implies \text{Axiom of Choice}
+\]</span></p>
+<hr>
+<p>(This proof was communicated to me by PSC. Sir at ISIK)</p>
+<p>Consider the following poset</p>
+<p><span class="math display">\[
+P = \{(J, f) : J \subseteq I, f : J \to A\text{ such that }f(j) \in A_j, \forall j \in J\}
+\]</span></p>
+<p>with the partial order:</p>
+<p><span class="math display">\[
+(J_1, f_1) \preceq (J_2, f_2) \text{ if } J_1 \subseteq J_2 \text{ and } f_2\Bigg|_{J_1} = f_1 \text{ ie. } f_2(x) = f_1(x), \forall x \in J_1
+\]</span></p>
+<p>then any chain <span class="math inline">\(C = \{(J_\alpha, f_\alpha) : \alpha \in Y\}\)</span>, has the trivial upperbound <span class="math inline">\((\cup J_\alpha, f) : f\Bigg |_{\alpha} = f_\alpha, \forall \alpha \in Y\)</span>. By Zorn’s Lemma, there exists a maximal element <span class="math inline">\(f:J \to A\)</span>, if <span class="math inline">\(J = I\)</span> , we are done. Otherwise, pick <span class="math inline">\(j \in I \setminus J\)</span> since <span class="math inline">\(A_j\)</span> is nonempty, pick <span class="math inline">\(x \in A_j\)</span> and consider <span class="math inline">\(f^{*}:J \cup \{j\} \to A\)</span> such that <span class="math inline">\(f(j) = x, f^{*}\Bigg|_{J} = f\)</span>, which contradicts maximality of <span class="math inline">\(f\)</span>. &nbsp;<span class="math inline">\(\blacksquare\)</span></p>
+</div>
+<div id="thm-aoctozorn" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 2 (<span class="math inline">\(\text{AoC} \implies \text{Zorn}\)</span>)</strong></span> <span class="math display">\[
+\text{Axiom of Choice} \implies \text{Zorn's Lemma}
+\]</span></p>
+<p>This is <strong>definitely trickier</strong> to prove compared to the previous implication. I use transfinite induction and ordinals here (but if you don’t know about them I will probably make a post on them. Till then, check out <a href="https://venhance.github.io/napkin/Napkin.pdf">Napkin pg. 801</a>.)</p>
+<p>Let <span class="math inline">\((P, \leq)\)</span> be the poset, where every chain has an upperbound. Assume there is <strong>no maximal element</strong>. Let <span class="math inline">\(x_0\)</span> be any element in <span class="math inline">\(P\)</span>. By assumption <span class="math inline">\(\exists x_1\)</span> s.t. <span class="math inline">\(x_0 \leq x_1\)</span>. But again, by assumption, <span class="math inline">\(\exists x_2\)</span> s.t. <span class="math inline">\(x_0 \leq x_1 \leq x_2\)</span>. Intuitively we create a chain <span class="math inline">\(x_0 \leq x_1 \leq x_2 \ \cdots\)</span> which has an upper bound <span class="math inline">\(x_\omega\)</span>, but since this isn’t the maximal element again - I get <span class="math inline">\(x_0 \leq x_1 \leq x_2 \leq \cdots \leq x_\omega \leq x_{\omega+1} \leq \cdots\)</span>. We must “eventually” run out.</p>
+<p>Now to formalize this: for any element <span class="math inline">\(x \in P\)</span> consider the set <span class="math inline">\(S_x = \{y \in P : x \lneq y\}\)</span>. Clearly all <span class="math inline">\(S_x\)</span> are nonempty, because otherwise there is a maximal element. By AoC, there exists a choice function <span class="math inline">\(f:P \to \cup_{x \in P} S_x\)</span>, such that <span class="math inline">\(f(x) \in S_x \ \forall x \in P\)</span>. Using transfinite induction:</p>
+<ul>
+<li><p><u><strong>Step 1:</strong></u> <span class="math inline">\(x_0 \in P\)</span></p>
+<p>Take <span class="math inline">\(x_1 = f(x_0)\)</span>. Then <span class="math inline">\(x_0 \leq x_1\)</span>. Similarly, obtain <span class="math inline">\(C_{i &lt; \omega} = x_0 \leq x_1 \leq \cdots\)</span>.</p></li>
+<li><p><u><strong>Step 2:</strong></u> Let <span class="math inline">\(\lambda\)</span> be a limit ordinal. Defining <span class="math inline">\(x_\lambda = u(C_{i &lt; \lambda})\)</span> can be used to extend the chain.</p>
+<p>Consider the upper bound of this chain <span class="math inline">\(x = u(C_{i &lt; \lambda})\)</span>. Clearly, <span class="math inline">\(x\)</span> cannot be in <span class="math inline">\(C\)</span>, because otherwise, <span class="math inline">\(\exists k\)</span> s.t. <span class="math inline">\(C \ni x_k \geq x = x_{k-1}\)</span> which forces <span class="math inline">\(x = x_k = f(x)\)</span> which is not possible by the definition of <span class="math inline">\(f\)</span>. So, define <span class="math inline">\(x_{\lambda} = x\)</span>.</p></li>
+</ul>
+<p>Then - keep doing this. So, you end up with a chain <span class="math inline">\(C = x_0 \leq x_1 \leq \cdots \leq x_\omega \leq x_{\omega + 1} \leq \cdots \leq x_{\omega + \omega} \leq \cdots\)</span>.</p>
+<p>To finish we need magic: Hartogs’s theorem.</p>
+<section id="hartogss-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="hartogss-theorem">Hartogs’s Theorem</h3>
+<p>Given any set <span class="math inline">\(X\)</span>, there exists an ordinal <span class="math inline">\(\alpha\)</span> such that there is no injection <span class="math inline">\(f:\alpha \to X\)</span>.</p>
+<hr>
+<p>Consider the class of ordinals <span class="math inline">\(\alpha = \{\beta \in \text{Ord} \ | \ \exists f:\beta \hookrightarrow X\}\)</span>. Using the power set axiom twice - we get that <span class="math inline">\(\mathcal{P}(X \times X)\)</span> is a set. Consider the class <span class="math inline">\(W\)</span> of all reflexive well orderings of subsets of <span class="math inline">\(X\)</span>, since this is a definable subclass of <span class="math inline">\(\mathcal{P}(X \times X)\)</span>, it is a set by Schema of Specification.</p>
+<p>The class of all <a href="https://en.wikipedia.org/wiki/Order_type">order types</a> of well-orderings in <span class="math inline">\(W\)</span> is a set by the axiom schema of replacement: <span class="math inline">\((\operatorname{Domain}(w), w) \cong (\beta, \leq)\)</span> where <span class="math inline">\(w\)</span> is a well-ordering on <span class="math inline">\(\operatorname{Domain}(w)\)</span> which gets mapped to the order type <span class="math inline">\((\beta, \leq)\)</span>.</p>
+<p>Now we can see that <span class="math inline">\(W\)</span>, a set, is precisely <span class="math inline">\(\alpha\)</span>. Since every well-ordering of a subset of <span class="math inline">\(X\)</span> defines an injective function from <span class="math inline">\(\beta \hookrightarrow X\)</span> where <span class="math inline">\(\beta\)</span> is some ordinal. And the other side is true as well. To finish: <span class="math inline">\(\alpha\)</span> is a <em>transitive</em> set of ordinals, which means it is an ordinal itself. Ofcourse, then, <span class="math inline">\(\alpha\)</span> is the first ordinal with no injection <span class="math inline">\(\blacksquare\)</span>.</p>
+<hr>
+<p>So, the chain <em>has</em> to eventually end. We are done.</p>
+</section>
+</div>
+</section>
+<section id="footnotes" class="level2">
+<h2 class="anchored" data-anchor-id="footnotes"><strong><em>Footnotes</em></strong></h2>
+<div id="thm-cantor" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 3 (Cantor’s Diagonal Argument)</strong></span> <span class="math display">\[X &lt;_{c} P(X) \ \forall \ X\]</span></p>
+<hr>
+<p>Assume for the sake of contradiction <span class="math inline">\(P(X) =_{c} X\)</span> (where <span class="math inline">\(=_{c}\)</span> means that there exists a bijection between the sets). Thus, there is a surjection <span class="math inline">\(f:X \to P(X)\)</span>. Consider</p>
+<p><span class="math display">\[
+A = \{x \in X: x \not\in f(x)\}
+\]</span></p>
+<p>But since <span class="math inline">\(f\)</span> is a surjection, <span class="math inline">\(\exists x_0 \ f(x_0) = A\)</span> then</p>
+<p><span class="math display">\[
+x_0 \in A \iff x_0 \not\in A.
+\]</span></p>
+<p>a contradiction. (This is pretty much the same idea as the famous proof of real numbers being uncountable.)</p>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

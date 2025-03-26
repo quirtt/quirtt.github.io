@@ -1,0 +1,22 @@
+---
+title: "Some Important Results in Probability Theory"
+author: "Himadri Mandal"
+date: "2025-3-17"
+categories: [probability, math]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+        # css: styles.css
+editor: visual
+---
+
+## Theorem \[Lebesgue Differentiation Theorem\]
+
+### A random variable $X$ has a density $f_X$ iff the CDF $F_X$ is absolutely continous[^1] in every closed, bounded interval.
+
+[^1]: <https://en.wikipedia.org/wiki/Absolute_continuity>
+
+*Proof.*
+
+## Theorem: Monotone Convergence Theorem

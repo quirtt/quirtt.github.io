@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Himadri Mandal">
-<meta name="dcterms.date" content="2024-05-05">
+<meta name="dcterms.date" content="2025-03-13">
 
-<title>Ponderings on OthelloGPT – Cold Reflections</title>
+<title>Language is an Infinitely Incomplete Approximation of Human Concepts – Cold Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,11 +149,11 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Ponderings on OthelloGPT</h1>
+      <h1 class="title">Language is an Infinitely Incomplete Approximation of Human Concepts</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">machine learning</div>
-                <div class="quarto-category">artificial intelligence</div>
-                <div class="quarto-category">interpretability</div>
+                <div class="quarto-category">philosophy</div>
+                <div class="quarto-category">cognition</div>
+                <div class="quarto-category">math</div>
               </div>
                   </div>
   </div>
@@ -171,7 +171,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">May 5, 2024</p>
+        <p class="date">March 13, 2025</p>
       </div>
     </div>
     
@@ -187,12 +187,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#how-does-the-model-compute-that-a-certain-cell-is-blank" id="toc-how-does-the-model-compute-that-a-certain-cell-is-blank" class="nav-link active" data-scroll-target="#how-does-the-model-compute-that-a-certain-cell-is-blank"><u><strong>How Does The Model Compute That A Certain Cell is Blank?</strong></u></a>
-  <ul class="collapse">
-  <li><a href="#goal-1-at-which-layer-does-the-model-conclude-that-its-blank" id="toc-goal-1-at-which-layer-does-the-model-conclude-that-its-blank" class="nav-link" data-scroll-target="#goal-1-at-which-layer-does-the-model-conclude-that-its-blank"><u>Goal #1</u> At which layer does the model conclude that it’s blank?</a></li>
-  <li><a href="#goal-2-does-this-come-from-any-specific-head-or-neuron" id="toc-goal-2-does-this-come-from-any-specific-head-or-neuron" class="nav-link" data-scroll-target="#goal-2-does-this-come-from-any-specific-head-or-neuron"><u>Goal #2</u> Does this come from any specific head or neuron?</a></li>
-  <li><a href="#goal-3-how-could-a-transformer-come-up-with-this" id="toc-goal-3-how-could-a-transformer-come-up-with-this" class="nav-link" data-scroll-target="#goal-3-how-could-a-transformer-come-up-with-this"><u>Goal #3</u> How could a transformer come up with this?</a></li>
-  </ul></li>
+  <li><a href="#theorem" id="toc-theorem" class="nav-link active" data-scroll-target="#theorem">Theorem</a></li>
+  <li><a href="#theorem-1" id="toc-theorem-1" class="nav-link" data-scroll-target="#theorem-1">Theorem</a></li>
   </ul>
 </nav>
     </div>
@@ -203,74 +199,33 @@ window.Quarto = {
 
 
 
-<p>This is a report of sorts of my playing around with OthelloGPT, a GPT model trained on Othello games to predict all the possible legal moves.</p>
-<p>It is a common problem in Machine Learning to talk about whether a model is <em>just</em> remembering information, performing surface statistics or is actually doing something deeper? We try to investigate this for OthelloGPT!</p>
-<p>The <a href="https://arxiv.org/pdf/2210.13382">original paper</a> by Kenneth Li et. al.&nbsp;find that this model is <em>not</em> just performing sequence statistics, the model representation infact has a world model of the Othello environment.</p>
-<p>The authors make multiple arguments like a) how the world model representation is being used to draw inferences, b) how a non-linear probe can actually input the internal representation of the model and output (with high accuracy!) the current board state and c) how altering the internal representation ends up having the intended effect on the predictions. They also have a more accessible version of it as a <a href="https://thegradient.pub/othello/">blog</a>.</p>
-<p>Later Neel Nanda et al publish a <a href="https://arxiv.org/pdf/2309.00941">paper</a> talking about their findings on how this representation is, well, actually linear! You need to view in a particular direction to find the linearity!</p>
-<p>In this project, I dealt with the following problem:</p>
-<section id="how-does-the-model-compute-that-a-certain-cell-is-blank" class="level2">
-<h2 class="anchored" data-anchor-id="how-does-the-model-compute-that-a-certain-cell-is-blank"><u><strong>How Does The Model Compute That A Certain Cell is Blank?</strong></u></h2>
-<p>This seems like an easy thing to compute, as all you need to do is to figure out whether the <span class="math inline">\((i,j)^{\text{th}}\)</span> cell has appeared in the move sequence or not.</p>
-<p><u><strong>Goals</strong></u>:</p>
-<ul>
-<li><p>At which layer does the model conclude that it’s blank?</p></li>
-<li><p>Does this come from any specific head or neuron?</p></li>
-<li><p>How could a transformer detect this?</p></li>
-</ul>
-<p>We hypothesize that a single attention head per cell is what is used by a transformer. Let’s try to answer these questions one-by-one.</p>
-<section id="goal-1-at-which-layer-does-the-model-conclude-that-its-blank" class="level3">
-<h3 class="anchored" data-anchor-id="goal-1-at-which-layer-does-the-model-conclude-that-its-blank"><u>Goal #1</u> At which layer does the model conclude that it’s blank?</h3>
-<p>Let us first fix some notation. Let <span class="math inline">\(X_L\)</span> be the intervention by the linear probe at the <span class="math inline">\(L\)</span>’th layer of the residual stream. Let <span class="math inline">\(Y\)</span> be the true representation of the game board.</p>
-<p>We try to find its goodness at two things:</p>
-<ul>
-<li><p>Test #1: The prediction is blank <code>CONDITIONAL</code> on the true representation being blank</p></li>
-<li><p>Test #2: The prediction is NOT blank <code>CONDITIONAL</code> on the correct representation being NOT blank</p></li>
-</ul>
-<p>We calculate the following conditional probabilities and plot them (which themselves are tensors of the shape <span class="math inline">\(\text{rows} \times \text{cols}\)</span>). Ofcourse <strong>we only care about the games in the middle</strong> because if not, things become a bit more weird.<span class="math display">\[
-\text{Test 1: }P(X_L = Y \Bigg|Y=\text{Blank}) = \frac{P(X_L = Y \text{ and } Y=\text{Blank})}{P(Y=\text{Blank})}
-\]</span></p>
-<p><img src="./images/plot_tp_mid.png" class="img-fluid"></p>
-<p>Notice that the 4 squares in the middle have NaN value. This is because those can never be blank and so there’s a division by zero error. It isn’t an issue for us though.<br>
-Also, there doesn’t seem to be much improvement after Layer 1, so let us just focus on the first two layers.</p>
-<p><img src="./images/plot_tp_1_mid.png" class="img-fluid"></p>
-<p>Let’s also find out the <span class="math inline">\(\text{maxerr}\)</span> and <span class="math inline">\(\text{avgerr}\)</span> across layers and plot it.</p>
-<p><img src="./images/max_and_avg_error_test1_mid.png" class="img-fluid"></p>
-<p>Looking at this plot, it seems like a good idea to hypothesize that most of the <strong>Is_Blank</strong> computation is done in Layer 0 (for most cells) and some of the remaining computation is done in Layer 1. It seems that Layer 1 is what gives it structure finally, though.</p>
-<p>Let’s now do the second test.</p>
+<p>I had thought of this idea last year, but never got around to writing it. In this blog, I show how humans are infinitely limited by the mode of language in transmission of ideas. I don’t quite remember how I got around to thinking about this, but here goes haha.</p>
+<p>Every written language is described by a finite set of characters. Every spoken language requires a finite sequence of sounds. Every idea that is realized by humans and communicated through language has to be put into a sequence of letters / sequence of sounds. Call such a thought <em>expressible</em>.</p>
+<p>I define languages to be made of <em>fixed</em> objects, i.e., there are no new characters. A reasonable contention would be: “this is BS? languages change all the time”. Well, yes. However, if they change, then I call the new object a new language. You can think of this as:</p>
 <p><span class="math display">\[
-\text{Test 2: }P(X_L \neq \text{Blank} \Bigg|Y\neq\text{Blank}) = \frac{P(X_L \neq \text{Blank} \text{ and } Y\neq\text{Blank})}{P(Y\neq\text{Blank})}
+\{\text{eng\_v1}, \text{eng\_v2}, \text{eng\_v3}\cdots\}
 \]</span></p>
-<p>We calculate and then plot the same graphs.</p>
-<p><img src="./images/plot_tp_2_mid.png" class="img-fluid"></p>
-<p><img src="./images/max_and_avg_error_test2_mid.png" class="img-fluid"></p>
-<p>Ah! I thought that the features <strong>Is_Blank</strong> and <strong>Is_Not_Blank</strong> would get implemented almost together, and although that does seem to be the case, the <span class="math inline">\(\text{maxerr}\)</span> only really gets close to the average error by <strong>Layer 4</strong>, which is precisely where the OthelloGPT has created a high-accuracy world model (according to Neel’s findings). This is all super interesting!</p>
-<p>Let us now try to answer a more important question.</p>
+<p>&lt;<strong><em>fill in</em></strong>: why the set of all languages is countable&gt;</p>
+<section id="theorem" class="level3">
+<h3 class="anchored" data-anchor-id="theorem">Theorem</h3>
+<p>The set of all languages is countable.</p>
+<hr>
 </section>
-<section id="goal-2-does-this-come-from-any-specific-head-or-neuron" class="level3">
-<h3 class="anchored" data-anchor-id="goal-2-does-this-come-from-any-specific-head-or-neuron"><u>Goal #2</u> Does this come from any specific head or neuron?</h3>
-<p>Let’s look at the cosine similarity of output weights and the blank colour probe for top layer 0 and layer 1 neurons sorted according to standard deviation (sorting wrt to “<strong>resid_post</strong>”)</p>
-<p><img src="./images/cosine_sim_layer0.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer1.png" class="img-fluid"></p>
-<p>Layer 0 <strong>resid_post</strong> doesn’t seem very interpretable to me. However, L1N360 looks very interesting. It computes Is_Blank of cell D2. Can we find more such neurons? Let’s try to use the same technique on <strong>post</strong></p>
-<p><img src="./images/cosine_sim_layer0_post.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer1_post.png" class="img-fluid"></p>
-<p>Wow! Layer 0 seems to compute bunch of <strong>Not_Is_Blank</strong> features for particular cells. Let’s try to find more such neurons!</p>
-<p><img src="./images/cosine_sim_layer0_post-1.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer0_post-2.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer0_post-3.png" class="img-fluid"></p>
-<p>Wait! This is all cool and stuff, but what about <strong>Is_Blank</strong> features? Is Layer 0 not computing it? Lets try to change the experiment in a way to obtain neurons that track <strong>Is_Blank</strong> heavily.</p>
-<p>I will start with a bound <span class="math inline">\(M_U\)</span> on the absolute values of the cosine sim, so that anything above <span class="math inline">\(M_U\)</span> will be treated as <span class="math inline">\(1\)</span> and anything below <span class="math inline">\(M_U\)</span> will be treated as 0. Could I find something interesting out of this simple setup?</p>
-<p><code>top_layer_0_neurons = ((focus_cache["post", 0][:, 3:-3]).abs() &gt; Mu).float().std(dim=[0,1]).argsort(descending=True)</code></p>
-<p>Setting <span class="math inline">\(M_U = 0.2, 0.3, 0.4\)</span> etc give us bunch of neurons that are very highly correlated to the <strong>Is_Blank</strong> probe for a single cell! This is more evidence for our hypothesis that Layer 0 computes the <strong>Is_Blank</strong> feature. Infact, this makes it highly interpretable.</p>
-<p><img src="./images/cosine_sim_layer0_post_experimentabs.png" class="img-fluid"></p>
-</section>
-<section id="goal-3-how-could-a-transformer-come-up-with-this" class="level3">
-<h3 class="anchored" data-anchor-id="goal-3-how-could-a-transformer-come-up-with-this"><u>Goal #3</u> How could a transformer come up with this?</h3>
-<p>WIP!</p>
+<section id="theorem-1" class="level3">
+<h3 class="anchored" data-anchor-id="theorem-1">Theorem</h3>
+<p>If the set of all possible spoken and written languages is <strong>countable</strong> then the set of <em>expressible</em> ideas is <strong>countable</strong>.</p>
+<hr>
+<p><em>Proof.</em></p>
+<p>Let <span class="math inline">\(S\)</span> be the set of all languages. For a language, <span class="math inline">\(L \in S\)</span>, let <span class="math inline">\(\mathcal{C}(L)\)</span> be the characters of <span class="math inline">\(L\)</span>. We understand that, <span class="math inline">\(|\mathcal{C}(L)|&lt;\infty.\)</span></p>
+<p>Define <span class="math inline">\(\mathcal{C}(S) = \cup_{L \in S}\{(L, x) : x\in \mathcal{C}(L) \}\)</span>, which is the set of all characters (signed with the language it belongs to). Since <span class="math inline">\(S\)</span> is countable, <span class="math inline">\(\mathcal{C}(S)\)</span> is countable.</p>
+<p>Now, every <em>expressible</em> idea is a finite sequence of characters/phonemes like:</p>
+<p><span class="math display">\[
+\gamma_1 \gamma_2 \gamma_3 \gamma_4 \cdots \gamma_N
+\]</span></p>
+<p>where <span class="math inline">\(\gamma_i \in \mathcal{C}(S)\)</span>.</p>
+<p>Let <span class="math inline">\(\mathrm{I}\)</span> be the set of all expressible ideas. We know that set of all finite sequences formed using countable characters is countable, and therefore: <span class="math inline">\(\mathrm{I}\)</span> be countable. <span class="math inline">\(\blacksquare\)</span></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

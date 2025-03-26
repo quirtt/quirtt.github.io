@@ -2,18 +2,15 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/how-to-get-agi/how-to-get-agi.html",
-      "/posts/OthelloGPT/OthelloGPT.html",
-      "/posts/nelson/nelson.html",
-      "/posts/a-cool-problem/polynomials-are-linear.html",
-      "/posts/zorn-and-aoc/zorn-and-aoc.html",
-      "/posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html"
-    ]
-  },
-  {
-    "listing": "/thoughts/index.html",
-    "items": [
-      "/thoughts/uncondition/how-to-get-agi.html"
+      "/posts/dna-storage/blog.html",
+      "/posts/mct-dct/blog.html",
+      "/posts/incomp-lang/blog.html",
+      "/posts/how-to-get-agi/blog.html",
+      "/posts/OthelloGPT/blog.html",
+      "/posts/nelson/blog.html",
+      "/posts/polynomials-are-linear/blog.html",
+      "/posts/zorn-and-aoc/blog.html",
+      "/posts/shannon-cardmagic-trick/blog.html"
     ]
   }
 ]

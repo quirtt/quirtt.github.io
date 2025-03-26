@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Himadri Mandal">
-<meta name="dcterms.date" content="2024-03-04">
+<meta name="dcterms.date" content="2025-03-17">
 
-<title>Cold Reflections - So Far Yet So Close: How Independence is Almost Dependence</title>
+<title>Some Important Results in Probability Theory – Cold Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -38,17 +38,23 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-bd89562929948232a0cfc2a2280e30cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -57,14 +63,42 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -72,10 +106,10 @@ ul.task-list li input[type="checkbox"] {
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../coldreflection.jpeg" alt="" class="navbar-logo">
     </a>
@@ -84,24 +118,30 @@ ul.task-list li input[type="checkbox"] {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
- <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/quirtt" rel="" target=""><i class="bi bi-github" role="img">
-</i> 
- <span class="menu-text"></span></a>
+    <a class="nav-link" href="../../thoughts"> 
+<span class="menu-text">Thoughts</span></a>
   </li>  
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/quirtt"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -109,10 +149,9 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">So Far Yet So Close: How Independence is Almost Dependence</h1>
+      <h1 class="title">Some Important Results in Probability Theory</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">probability theory</div>
-                <div class="quarto-category">statistics</div>
+                <div class="quarto-category">probability</div>
                 <div class="quarto-category">math</div>
               </div>
                   </div>
@@ -131,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 4, 2024</p>
+        <p class="date">March 17, 2025</p>
       </div>
     </div>
     
@@ -147,9 +186,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#theorem" id="toc-theorem" class="nav-link active" data-scroll-target="#theorem"><strong>Theorem</strong></a></li>
-  <li><a href="#proof" id="toc-proof" class="nav-link" data-scroll-target="#proof"><strong>Proof</strong></a></li>
-  <li><a href="#theorem-1" id="toc-theorem-1" class="nav-link" data-scroll-target="#theorem-1"><strong>Theorem</strong></a></li>
+  <li><a href="#theorem-lebesgue-differentiation-theorem" id="toc-theorem-lebesgue-differentiation-theorem" class="nav-link active" data-scroll-target="#theorem-lebesgue-differentiation-theorem">Theorem [Lebesgue Differentiation Theorem]</a>
+  <ul class="collapse">
+  <li><a href="#a-random-variable-x-has-a-density-f_x-iff-the-cdf-f_x-is-absolutely-continous1-in-every-closed-bounded-interval." id="toc-a-random-variable-x-has-a-density-f_x-iff-the-cdf-f_x-is-absolutely-continous1-in-every-closed-bounded-interval." class="nav-link" data-scroll-target="#a-random-variable-x-has-a-density-f_x-iff-the-cdf-f_x-is-absolutely-continous1-in-every-closed-bounded-interval.">A random variable <span class="math inline">\(X\)</span> has a density <span class="math inline">\(f_X\)</span> iff the CDF <span class="math inline">\(F_X\)</span> is absolutely continous in every closed, bounded interval.</a></li>
+  </ul></li>
+  <li><a href="#theorem-monotone-convergence-theorem" id="toc-theorem-monotone-convergence-theorem" class="nav-link" data-scroll-target="#theorem-monotone-convergence-theorem">Theorem: Monotone Convergence Theorem</a></li>
   </ul>
 </nav>
     </div>
@@ -159,52 +200,27 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>Imagine two continuous random variables seemingly unrelated and free from any influence from each other. It’s a common assumption in probability theory that independence implies a lack of any relationship between variables.</p>
-<p>However, a fascinating theorem challenges this notion, showing that from any two independent continuous random variables, we can construct new deterministically dependent variables that not only share the same distributions but also have joint distributions that are arbitrarily close.</p>
-<p>In other words, independence can be deceptive, leading us to a realm where variables are closer than we think. Let’s explore this intriguing theorem and its implications.</p>
-<p>(If you could link me up with a paper that talks about this theorem, please do. I couldn’t find it. This theorem is apparently proven by “Nelson”. Edit: I found it.)</p>
-<section id="theorem" class="level2">
-<h2 class="anchored" data-anchor-id="theorem"><strong>Theorem</strong></h2>
-<blockquote class="blockquote">
-<p>Let <span class="math inline">\(X,Y\)</span> with <span class="math inline">\(F_X, F_Y \uparrow,\)</span> be independent continuous random variables on <span class="math inline">\((\mathbb{R}, \mathcal{B}, P)\)</span>. For all <span class="math inline">\(\epsilon &gt; 0\)</span> there exist deterministically dependent <span class="math inline">\(U,V\)</span> on the same probability space <span class="math inline">\(F_U = F_X, F_V = F_Y\)</span> and <span class="math inline">\(\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \epsilon\)</span>.</p>
-</blockquote>
-<p>Here is the proof I came up with:</p>
+
+<section id="theorem-lebesgue-differentiation-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="theorem-lebesgue-differentiation-theorem">Theorem [Lebesgue Differentiation Theorem]</h2>
+<section id="a-random-variable-x-has-a-density-f_x-iff-the-cdf-f_x-is-absolutely-continous1-in-every-closed-bounded-interval." class="level3">
+<h3 class="anchored" data-anchor-id="a-random-variable-x-has-a-density-f_x-iff-the-cdf-f_x-is-absolutely-continous1-in-every-closed-bounded-interval.">A random variable <span class="math inline">\(X\)</span> has a density <span class="math inline">\(f_X\)</span> iff the CDF <span class="math inline">\(F_X\)</span> is absolutely continous<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> in every closed, bounded interval.</h3>
+<p><em>Proof.</em></p>
 </section>
-<section id="proof" class="level2">
-<h2 class="anchored" data-anchor-id="proof"><strong>Proof</strong></h2>
-<p>We can instead work with the random variables <span class="math inline">\(\frac{1}{1+e^{X}}\)</span>, and rename <span class="math inline">\(Y\)</span> similarly too, to work with random variables bounded in <span class="math inline">\([0,1]\)</span>.</p>
-<p>Fix positive integer <span class="math inline">\(n\)</span>, and obtain <span class="math inline">\(\{a_{0,0}=0 &lt; \cdots &lt; a_{0,n-1} &lt; a_{1,0} &lt; \cdots &lt; a_{1,n-1} &lt; \cdots &lt; a_{n-1,0} &lt; \cdots &lt; a_{n-1,n}=1\}\)</span> and <span class="math inline">\(\{b_{0,0}=0 &lt; \cdots &lt; b_{0,n-1} &lt; b_{1,0} &lt; \cdots &lt; b_{1,n-1} &lt; \cdots &lt; b_{n-1,0} &lt; \cdots &lt; b_{n-1,n}=1\}\)</span></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./construction.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
-</figure>
-</div>
-<p>such that <span class="math display">\[F_X(a_{j,0}) - F_X(a_{j-1, 0}) = \frac{1}{n}, \ F_Y(b_{j,0}) - F_Y(b_{j-1, 0}) = \frac{1}{n}\]</span> <span class="math display">\[F_X(a_{j,i}) - F_X(a_{j, i-1}) = \frac{1}{n^2}, \ F_Y(b_{j,i}) - F_Y(b_{j, i-1}) = \frac{1}{n^2}\]</span> <span class="math display">\[\implies F_X(a_{i,j}) = F_Y(b_{i,j}) = \frac{i}{n} + \frac{j}{n^2}\]</span></p>
-<p><span class="math display">\[I_{i,j} = \{a_{i, j} \leq x \leq a_{i, j+1}\}, \ J_{j,i} = \{b_{j, i} \leq y \leq b_{j, i+1}\}\]</span> <span class="math display">\[I_i = \cup_{j}I_{i,j}, \ J_j = \cup_{i}J_{j,i}\]</span> The idea is to reorder <span class="math inline">\(X\)</span> in a way such that <span class="math display">\[x \in I_{i,j} \iff y \in J_{j,i}\]</span></p>
-<p>Hence we would want something like this <span class="math display">\[P\left(X \in \cup_j I_{i,j}\right)\cdot P\left(Y \in \cup_i J_{j,i}\right) = P\left(X \in \cup_{j}I_{i,j} \text{ and } Y \in \cup_{i}J_{j,i}\right) \]</span> <span class="math display">\[= P\left(U \in \cup_{j}I_{i,j} \text{ and } V \in \cup_{i}J_{j,i}\right)\]</span></p>
-<p>Let <span class="math inline">\(V \equiv Y\)</span>, we would want to construct a bijective function <span class="math inline">\(g:[0,1] \to [0,1]\)</span> such that for <span class="math inline">\(y \in J_{j,i}\)</span></p>
-<p><span class="math display">\[F_Y(y) - F_Y(b_{j,i}) = P\left(b_{j,i} \leq Y \leq y\right) \stackrel{\textcolor{red}{!}}{=} P\left(b_{j,i} \leq g(X) \leq y\right)\]</span> <span class="math display">\[\stackrel{\textcolor{red}{!}}{=}P\left(a_{i,j} \leq X \leq g^{-1}(y)\right) = F_X(g^{-1}(y)) - F_X(a_{i,j})\]</span></p>
-<p><span class="math display">\[F_X(g^{-1}(y))  = F_Y(y)+(F_X(a_{i,j}) - F_Y(b_{j,i}))\]</span> <span class="math display">\[\stackrel{\textcolor{red}{!}}{=}F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\]</span> <span class="math display">\[x = g^{-1}(y) \stackrel{\textcolor{red}{!}}{=} F_X^{-1}\left(F_Y(y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\right)\]</span></p>
-<p>This is clearly measurable, and it is easy to check that this function indeed satisfies the <span class="math inline">\(x \in I_{i,j} \iff y \in J_{j,i}\)</span> condition. Take <span class="math inline">\(U \equiv g^{-1}(Y)\)</span>.</p>
-<p>I will now be done if I show that <span class="math inline">\(U\)</span> follows the same CDF as <span class="math inline">\(X\)</span>. For <span class="math inline">\(x \in I_{i,j}\)</span></p>
-<p><span class="math display">\[P\left(a_{i,j} \leq U \leq x\right)\]</span> <span class="math display">\[ = P\left(a_{i,j} \leq F_X^{-1}\left(F_Y(Y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right)\right) \leq x\right)\]</span> <span class="math display">\[= P\left(F_X(a_{i,j}) \leq F_Y(Y) + \left((i-j) \cdot \left(\frac{n-1}{n^2}\right)\right) \leq F_X(x)\right)\]</span> <span class="math display">\[= F_X(x) - F_X(a_{i,j}) = P(a_{i,j} \leq X \leq x)\]</span></p>
-<p>The last equality was legal because <span class="math inline">\(F_X(a_{i,j}) - (F_X(a_{i,j}) - F_Y(b_{j,i})) = F_Y(b_{j,i}) \geq 0\)</span>.</p>
-<p>Now as <span class="math inline">\(n \to \infty\)</span>, their joints would get arbitrarily close.</p>
-<p><span class="math inline">\(\blacksquare\)</span></p>
-<p>(If you would like to use this proof, please email me.)</p>
-<p>Using the same idea but fixing things up a little bit for the issues with invertibility, one could also prove the following</p>
 </section>
-<section id="theorem-1" class="level2">
-<h2 class="anchored" data-anchor-id="theorem-1"><strong>Theorem</strong></h2>
-<blockquote class="blockquote">
-<p>Let <span class="math inline">\(X,Y\)</span> be independent continuous random variables on <span class="math inline">\((\mathbb{R}, \mathcal{B}, P)\)</span>. For all <span class="math inline">\(\epsilon &gt; 0\)</span> there exist deterministically dependent <span class="math inline">\(U,V\)</span> on the same probability space with <span class="math inline">\(F_U = F_X, F_V = F_Y\)</span> and <span class="math inline">\(\sup_{(a,b) \in \mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \epsilon\)</span>.</p>
-</blockquote>
-<hr>
+<section id="theorem-monotone-convergence-theorem" class="level2">
+<h2 class="anchored" data-anchor-id="theorem-monotone-convergence-theorem">Theorem: Monotone Convergence Theorem</h2>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://en.wikipedia.org/wiki/Absolute_continuity" class="uri">https://en.wikipedia.org/wiki/Absolute_continuity</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -240,18 +256,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -283,11 +288,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -297,8 +339,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -310,7 +361,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -354,6 +527,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -379,6 +553,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -439,6 +639,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

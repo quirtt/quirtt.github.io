@@ -1,0 +1,53 @@
+---
+title: "Language is an Infinitely Incomplete Approximation of Human Concepts"
+author: "Himadri Mandal"
+date: "2025-3-13"
+categories: [philosophy, cognition, math]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+        # css: styles.css
+editor: visual
+image: "pfp.jpeg"
+---
+
+I had thought of this idea last year, but never got around to writing it. In this blog, I show how humans are infinitely limited by the mode of language in transmission of ideas. I don't quite remember how I got around to thinking about this, but here goes haha.
+
+Every written language is described by a finite set of characters. Every spoken language requires a finite sequence of sounds. Every idea that is realized by humans and communicated through language has to be put into a sequence of letters / sequence of sounds. Call such a thought *expressible*.
+
+I define languages to be made of *fixed* objects, i.e., there are no new characters. A reasonable contention would be: "this is BS? languages change all the time". Well, yes. However, if they change, then I call the new object a new language. You can think of this as:
+
+$$
+\{\text{eng\_v1}, \text{eng\_v2}, \text{eng\_v3}\cdots\}
+$$
+
+\<***fill in***: why the set of all languages is countable\>
+
+### Theorem
+
+The set of all languages is countable.
+
+------------------------------------------------------------------------
+
+### Theorem
+
+If the set of all possible spoken and written languages is **countable** then the set of *expressible* ideas is **countable**.
+
+------------------------------------------------------------------------
+
+*Proof.*
+
+Let $S$ be the set of all languages. For a language, $L \in S$, let $\mathcal{C}(L)$ be the characters of $L$. We understand that, $|\mathcal{C}(L)|<\infty.$
+
+Define $\mathcal{C}(S) = \cup_{L \in S}\{(L, x) : x\in \mathcal{C}(L) \}$, which is the set of all characters (signed with the language it belongs to). Since $S$ is countable, $\mathcal{C}(S)$ is countable.
+
+Now, every *expressible* idea is a finite sequence of characters/phonemes like:
+
+$$
+\gamma_1 \gamma_2 \gamma_3 \gamma_4 \cdots \gamma_N
+$$
+
+where $\gamma_i \in \mathcal{C}(S)$.
+
+Let $\mathrm{I}$ be the set of all expressible ideas. We know that set of all finite sequences formed using countable characters is countable, and therefore: $\mathrm{I}$ be countable. $\blacksquare$

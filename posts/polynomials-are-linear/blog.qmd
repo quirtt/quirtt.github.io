@@ -1,0 +1,49 @@
+---
+title: "$k+1$ points uniquely determine a $k$ degree polynomial: A cool problem"
+author: "Himadri Mandal"
+date: "2023-12-10"
+categories: [algebra, math]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+        # css: styles.css
+editor: visual
+image: "pfp.jpg"
+---
+
+Reading the title: you are probably shouting "Lagrange Interpolation!!!" Yeah, sure, Lagrange is cool. But I will show you something cooler which ensures you don't have to deal with the messy stuff.
+
+## Problem Statement
+
+Let $k \in \mathbb{N}$ and $t_1, \dotsc, t_k \in [0,1]$ be distinct points. Let $\mathcal{P}_{k-1}$ be the space of polynomials of degree less than or equal to $k-1$ with real coefficients. Show that there exist real numbers $a_1, \dotsc, a_k$ such that
+
+$$
+\int_0^1f(x)dx = \sum_{j=1}^k a_jf(t_j)
+$$
+
+for all $f \in \mathcal{P}_{k-1}$.
+
+## Solution
+
+Whenever you try to prove something "uniquely" determines something; it's always nice to try to find an isomorphism somewhere. Consider the linear map $S:\mathcal{P}_{k-1} \to \mathbb{R}^k$ such that
+
+$$
+S(f) = (f(t_1), \dotsc, f(t_k))
+$$
+
+### Claim 1: $S$ is an isomorphism.
+
+Since $\dim{\mathcal{P}_{k-1}} = \dim{\mathbb{R}^k} = k$, we would be done if we prove $\mathcal{N}(S) = 0$. Assume $S(f) = (0, 0, \dotsc, 0)$ which means $f$ a $\leq k-1$ degree polynomial is $0$ at $k$ distinct points. This is only possible when $f \equiv 0$. $\blacksquare$
+
+### Finish
+
+Notice that
+
+$$
+S(f) = (f(t_1), \dotsc, f(t_k)) = \sum_j f(t_j)e_j
+$$ Since $S$ is an isomorphism, $$
+f = \sum_j f(t_j)S^{-1}(e_j)
+$$ Let $a_j = \int_0^1 (S^{-1}(e_j))(x) dx$, then, clearly, $$
+\int_0^1 f(x)dx = \int_0^1 \sum_j f(t_j)(S^{-1}(e_j))(x) dx$$ $$\int_0^1 f(x) dx = \sum_j f(t_j) \left(\int_0^1 (S^{-1}(e_j))(x) dx\right) = \sum_j a_j f(t_j) \blacksquare 
+$$

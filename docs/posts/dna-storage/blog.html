@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Himadri Mandal">
-<meta name="dcterms.date" content="2024-05-05">
+<meta name="dcterms.date" content="2025-03-25">
 
-<title>Ponderings on OthelloGPT – Cold Reflections</title>
+<title>Ideas on DNA Storage – Cold Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -149,11 +169,10 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Ponderings on OthelloGPT</h1>
+      <h1 class="title">Ideas on DNA Storage</h1>
                                 <div class="quarto-categories">
+                <div class="quarto-category">biology</div>
                 <div class="quarto-category">machine learning</div>
-                <div class="quarto-category">artificial intelligence</div>
-                <div class="quarto-category">interpretability</div>
               </div>
                   </div>
   </div>
@@ -171,7 +190,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">May 5, 2024</p>
+        <p class="date">March 25, 2025</p>
       </div>
     </div>
     
@@ -187,12 +206,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#how-does-the-model-compute-that-a-certain-cell-is-blank" id="toc-how-does-the-model-compute-that-a-certain-cell-is-blank" class="nav-link active" data-scroll-target="#how-does-the-model-compute-that-a-certain-cell-is-blank"><u><strong>How Does The Model Compute That A Certain Cell is Blank?</strong></u></a>
+  <li><a href="#primer-current-sota-on-the-dna-storage-problem" id="toc-primer-current-sota-on-the-dna-storage-problem" class="nav-link active" data-scroll-target="#primer-current-sota-on-the-dna-storage-problem">Primer: Current SoTA on the DNA Storage problem</a></li>
+  <li><a href="#ideas-on-improving-t_textseq" id="toc-ideas-on-improving-t_textseq" class="nav-link" data-scroll-target="#ideas-on-improving-t_textseq">Ideas on improving <span class="math inline">\(T_{\text{seq}}\)</span></a>
   <ul class="collapse">
-  <li><a href="#goal-1-at-which-layer-does-the-model-conclude-that-its-blank" id="toc-goal-1-at-which-layer-does-the-model-conclude-that-its-blank" class="nav-link" data-scroll-target="#goal-1-at-which-layer-does-the-model-conclude-that-its-blank"><u>Goal #1</u> At which layer does the model conclude that it’s blank?</a></li>
-  <li><a href="#goal-2-does-this-come-from-any-specific-head-or-neuron" id="toc-goal-2-does-this-come-from-any-specific-head-or-neuron" class="nav-link" data-scroll-target="#goal-2-does-this-come-from-any-specific-head-or-neuron"><u>Goal #2</u> Does this come from any specific head or neuron?</a></li>
-  <li><a href="#goal-3-how-could-a-transformer-come-up-with-this" id="toc-goal-3-how-could-a-transformer-come-up-with-this" class="nav-link" data-scroll-target="#goal-3-how-could-a-transformer-come-up-with-this"><u>Goal #3</u> How could a transformer come up with this?</a></li>
+  <li><a href="#assumptions" id="toc-assumptions" class="nav-link" data-scroll-target="#assumptions"><u><strong>Assumptions</strong></u></a></li>
+  <li><a href="#one-step-further" id="toc-one-step-further" class="nav-link" data-scroll-target="#one-step-further">One Step Further</a></li>
   </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
     </div>
@@ -203,77 +223,95 @@ window.Quarto = {
 
 
 
-<p>This is a report of sorts of my playing around with OthelloGPT, a GPT model trained on Othello games to predict all the possible legal moves.</p>
-<p>It is a common problem in Machine Learning to talk about whether a model is <em>just</em> remembering information, performing surface statistics or is actually doing something deeper? We try to investigate this for OthelloGPT!</p>
-<p>The <a href="https://arxiv.org/pdf/2210.13382">original paper</a> by Kenneth Li et. al.&nbsp;find that this model is <em>not</em> just performing sequence statistics, the model representation infact has a world model of the Othello environment.</p>
-<p>The authors make multiple arguments like a) how the world model representation is being used to draw inferences, b) how a non-linear probe can actually input the internal representation of the model and output (with high accuracy!) the current board state and c) how altering the internal representation ends up having the intended effect on the predictions. They also have a more accessible version of it as a <a href="https://thegradient.pub/othello/">blog</a>.</p>
-<p>Later Neel Nanda et al publish a <a href="https://arxiv.org/pdf/2309.00941">paper</a> talking about their findings on how this representation is, well, actually linear! You need to view in a particular direction to find the linearity!</p>
-<p>In this project, I dealt with the following problem:</p>
-<section id="how-does-the-model-compute-that-a-certain-cell-is-blank" class="level2">
-<h2 class="anchored" data-anchor-id="how-does-the-model-compute-that-a-certain-cell-is-blank"><u><strong>How Does The Model Compute That A Certain Cell is Blank?</strong></u></h2>
-<p>This seems like an easy thing to compute, as all you need to do is to figure out whether the <span class="math inline">\((i,j)^{\text{th}}\)</span> cell has appeared in the move sequence or not.</p>
-<p><u><strong>Goals</strong></u>:</p>
+<p>Recently, I have been thinking about the DNA storage problem quite a bit. It’s been something extremely interesting to me. Asking ChatGPT for DNA storage system use-cases, we find a heck ton of stuff:</p>
+<blockquote class="blockquote">
+<p>DNA storage, an emerging technology, uses synthetic DNA to encode and store data. This approach leverages the natural stability and high density of DNA, offering innovative solutions in several areas:</p>
 <ul>
-<li><p>At which layer does the model conclude that it’s blank?</p></li>
-<li><p>Does this come from any specific head or neuron?</p></li>
-<li><p>How could a transformer detect this?</p></li>
+<li><p><strong>Long-Term Archiving</strong>: DNA’s durability can potentially preserve data for thousands of years, making it ideal for archival storage of cultural, historical, and scientific records.</p></li>
+<li><p><strong>High-Density Storage</strong>: The compact nature of DNA allows vast amounts of data to be stored in a microscopic volume, which is particularly useful in data centers and environments where space is at a premium.</p></li>
+<li><p><strong>Sustainability</strong>: Compared to traditional electronic storage, DNA storage may offer energy-efficient alternatives with minimal environmental impact during long-term data preservation.</p></li>
+<li><p><strong>Data Security and Longevity</strong>: DNA storage’s unique encoding process may add an extra layer of data security and protection against obsolescence, ensuring that information remains accessible as technology evolves.</p></li>
 </ul>
-<p>We hypothesize that a single attention head per cell is what is used by a transformer. Let’s try to answer these questions one-by-one.</p>
-<section id="goal-1-at-which-layer-does-the-model-conclude-that-its-blank" class="level3">
-<h3 class="anchored" data-anchor-id="goal-1-at-which-layer-does-the-model-conclude-that-its-blank"><u>Goal #1</u> At which layer does the model conclude that it’s blank?</h3>
-<p>Let us first fix some notation. Let <span class="math inline">\(X_L\)</span> be the intervention by the linear probe at the <span class="math inline">\(L\)</span>’th layer of the residual stream. Let <span class="math inline">\(Y\)</span> be the true representation of the game board.</p>
-<p>We try to find its goodness at two things:</p>
+<p>As research continues, DNA storage could revolutionize how we think about data preservation, combining biological inspiration with digital innovation.</p>
+</blockquote>
+<p><u>In this blog post</u>: I would like to present some of my ideas on how DNA sequencing can be improved (I am not a biologist so please feel free to tell me if I am spewing nonsense, haha!) Before that, though, let me quickly present the context in which thinking about this came to be.</p>
+<section id="primer-current-sota-on-the-dna-storage-problem" class="level1">
+<h1>Primer: Current SoTA on the DNA Storage problem</h1>
+<p>An end-to-end DNA storage solution has to be able to perform <em>fast</em> writing (i.e.&nbsp;encoding electronic information into DNA sequences) and <em>fast</em> reading. Writing, as it stands, has more-or-less been solved.</p>
+<p>There is a well-known method called <strong>Combinatorial Assembly / Sequence Assembly</strong> <span class="citation" data-cites="Roquet2021.04.20.440194"><a href="#ref-Roquet2021.04.20.440194" role="doc-biblioref">[1]</a></span>,<span class="citation" data-cites="wiki:sequence_assembly"><a href="#ref-wiki:sequence_assembly" role="doc-biblioref">[2]</a></span> which goes like: have a collection of pre-generated small DNA sequences. Now, given the arbitrary DNA sequence you want to generate, pick and choose from the collection of pre-generated sequences to form a longer sequence that better represents the wanted sequence. Keep repeating this until you form the whole sequence.</p>
+<p>This achieved writing speeds of upto 1 Mbps, which is fast enough. The next problem is reading (i.e.&nbsp;decoding DNA sequences into bits and bytes).</p>
+<p><img src="images/flow-read.png" class="img-fluid"></p>
+<p>The end-to-end process of the SoTA in reading the DNA sequences has been demonstrated in the image above. <span class="citation" data-cites="barlev2024deepdnastoragescalable"><a href="#ref-barlev2024deepdnastoragescalable" role="doc-biblioref">[3]</a></span> The DNA sequence is broken into chunks, and then it undergoes PCR which quickly multiplies the chunks. I call the time taken to do this <span class="math inline">\(T_{\text{PCR}}\)</span>. Then, these sequences undergo sequencing (via nanopore / illumina sequencing) which convert these chemical sequences into electronic data. I call the time taken to do this <span class="math inline">\(T_{\text{seq}}\)</span>.</p>
+<p>However, we have two problems here:</p>
 <ul>
-<li><p>Test #1: The prediction is blank <code>CONDITIONAL</code> on the true representation being blank</p></li>
-<li><p>Test #2: The prediction is NOT blank <code>CONDITIONAL</code> on the correct representation being NOT blank</p></li>
+<li><p>We do not know which chunk followed which chunk in the original sequence.</p></li>
+<li><p>The generated reads are noisy. We want to remove the noise.</p></li>
 </ul>
-<p>We calculate the following conditional probabilities and plot them (which themselves are tensors of the shape <span class="math inline">\(\text{rows} \times \text{cols}\)</span>). Ofcourse <strong>we only care about the games in the middle</strong> because if not, things become a bit more weird.<span class="math display">\[
-\text{Test 1: }P(X_L = Y \Bigg|Y=\text{Blank}) = \frac{P(X_L = Y \text{ and } Y=\text{Blank})}{P(Y=\text{Blank})}
-\]</span></p>
-<p><img src="./images/plot_tp_mid.png" class="img-fluid"></p>
-<p>Notice that the 4 squares in the middle have NaN value. This is because those can never be blank and so there’s a division by zero error. It isn’t an issue for us though.<br>
-Also, there doesn’t seem to be much improvement after Layer 1, so let us just focus on the first two layers.</p>
-<p><img src="./images/plot_tp_1_mid.png" class="img-fluid"></p>
-<p>Let’s also find out the <span class="math inline">\(\text{maxerr}\)</span> and <span class="math inline">\(\text{avgerr}\)</span> across layers and plot it.</p>
-<p><img src="./images/max_and_avg_error_test1_mid.png" class="img-fluid"></p>
-<p>Looking at this plot, it seems like a good idea to hypothesize that most of the <strong>Is_Blank</strong> computation is done in Layer 0 (for most cells) and some of the remaining computation is done in Layer 1. It seems that Layer 1 is what gives it structure finally, though.</p>
-<p>Let’s now do the second test.</p>
+<p>To solve the first problem, the noisy reads are clustered into groups according to their noise distributions <span class="math inline">\(\boxed{\varepsilon \sim F_{\text{seq}}}\)</span>. The hypothesis is different starting chunks onstrate distinctly different noise distributions after the whole process is followed through.</p>
+<p>The second problem is solved by <strong>DNAFormer</strong> which is a transformer model trained on the noisy reads to generate the original reads. It has been trained using synthetic data generated by estimating the noise distribution.</p>
+<p>I call the reconstruction time <span class="math inline">\(T_{\text{reconstruct}}\)</span>. Therefore,</p>
 <p><span class="math display">\[
-\text{Test 2: }P(X_L \neq \text{Blank} \Bigg|Y\neq\text{Blank}) = \frac{P(X_L \neq \text{Blank} \text{ and } Y\neq\text{Blank})}{P(Y\neq\text{Blank})}
+T_{\text{read}} = T_{\text{PCR}} + T_{\text{seq}} + T_{\text{reconstuct}}
 \]</span></p>
-<p>We calculate and then plot the same graphs.</p>
-<p><img src="./images/plot_tp_2_mid.png" class="img-fluid"></p>
-<p><img src="./images/max_and_avg_error_test2_mid.png" class="img-fluid"></p>
-<p>Ah! I thought that the features <strong>Is_Blank</strong> and <strong>Is_Not_Blank</strong> would get implemented almost together, and although that does seem to be the case, the <span class="math inline">\(\text{maxerr}\)</span> only really gets close to the average error by <strong>Layer 4</strong>, which is precisely where the OthelloGPT has created a high-accuracy world model (according to Neel’s findings). This is all super interesting!</p>
-<p>Let us now try to answer a more important question.</p>
+<p>Now, if we had to make DNA storage solutions commercial we would need this time to be low. Notice that:</p>
+<ul>
+<li><p><span class="math inline">\(T_{\text{PCR}}\)</span> is highly parallelizable. This won’t cause us issues for most use-cases.</p></li>
+<li><p><span class="math inline">\(T_{\text{seq}}\)</span> stands at around 2.2 seconds for every 1 kilo-base pair read.</p></li>
+<li><p><span class="math inline">\(T_{\text{reconstruct}}\)</span> has come down rapidly after <span class="citation" data-cites="barlev2024deepdnastoragescalable"><a href="#ref-barlev2024deepdnastoragescalable" role="doc-biblioref">[3]</a></span>. (Orders of minutes that once took hours / days)</p></li>
+</ul>
+<p>Therefore: the bottleneck that remains is <span class="math inline">\(T_{\text{seq}}\)</span>. This is important.</p>
 </section>
-<section id="goal-2-does-this-come-from-any-specific-head-or-neuron" class="level3">
-<h3 class="anchored" data-anchor-id="goal-2-does-this-come-from-any-specific-head-or-neuron"><u>Goal #2</u> Does this come from any specific head or neuron?</h3>
-<p>Let’s look at the cosine similarity of output weights and the blank colour probe for top layer 0 and layer 1 neurons sorted according to standard deviation (sorting wrt to “<strong>resid_post</strong>”)</p>
-<p><img src="./images/cosine_sim_layer0.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer1.png" class="img-fluid"></p>
-<p>Layer 0 <strong>resid_post</strong> doesn’t seem very interpretable to me. However, L1N360 looks very interesting. It computes Is_Blank of cell D2. Can we find more such neurons? Let’s try to use the same technique on <strong>post</strong></p>
-<p><img src="./images/cosine_sim_layer0_post.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer1_post.png" class="img-fluid"></p>
-<p>Wow! Layer 0 seems to compute bunch of <strong>Not_Is_Blank</strong> features for particular cells. Let’s try to find more such neurons!</p>
-<p><img src="./images/cosine_sim_layer0_post-1.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer0_post-2.png" class="img-fluid"></p>
-<p><img src="./images/cosine_sim_layer0_post-3.png" class="img-fluid"></p>
-<p>Wait! This is all cool and stuff, but what about <strong>Is_Blank</strong> features? Is Layer 0 not computing it? Lets try to change the experiment in a way to obtain neurons that track <strong>Is_Blank</strong> heavily.</p>
-<p>I will start with a bound <span class="math inline">\(M_U\)</span> on the absolute values of the cosine sim, so that anything above <span class="math inline">\(M_U\)</span> will be treated as <span class="math inline">\(1\)</span> and anything below <span class="math inline">\(M_U\)</span> will be treated as 0. Could I find something interesting out of this simple setup?</p>
-<p><code>top_layer_0_neurons = ((focus_cache["post", 0][:, 3:-3]).abs() &gt; Mu).float().std(dim=[0,1]).argsort(descending=True)</code></p>
-<p>Setting <span class="math inline">\(M_U = 0.2, 0.3, 0.4\)</span> etc give us bunch of neurons that are very highly correlated to the <strong>Is_Blank</strong> probe for a single cell! This is more evidence for our hypothesis that Layer 0 computes the <strong>Is_Blank</strong> feature. Infact, this makes it highly interpretable.</p>
-<p><img src="./images/cosine_sim_layer0_post_experimentabs.png" class="img-fluid"></p>
+<section id="ideas-on-improving-t_textseq" class="level1">
+<h1>Ideas on improving <span class="math inline">\(T_{\text{seq}}\)</span></h1>
+<p>Let <span class="math inline">\(\mathbb{S_n} = \{A,T,C,G\}^n\)</span>. Let <span class="math inline">\(G : \mathbb{S_n} \to P(\mathbb{R}^3)\)</span> be the function that maps a DNA sequence <span class="math inline">\(S \in \mathbb{S_n}\)</span> to the geometrical structure that <span class="math inline">\(S\)</span> forms upon folding.</p>
+<p><img src="images/structure-diag.png" class="img-fluid" width="2200"></p>
+<p>Let <span class="math inline">\(f\)</span> be a function that takes in the total geometry of the sequence and outputs the local geometries around the molecule. Ofcourse, <span class="math inline">\(f\)</span> can be concatenated with dipole information, magnetic information etc.</p>
+<p>The idea is: given a DNA sequence <span class="math inline">\(S\)</span> which hasn’t been sequenced yet, we want to (somehow) quickly figure out the information <span class="math inline">\(f(G(S))\)</span>, and use that information to somehow figure out what the original <span class="math inline">\(S\)</span> is. Essentially, we would want to learn the map <span class="math inline">\(\boxed{f(G(T)) \to T}\)</span>.</p>
+<p>Using <strong>AlphaFold</strong>, and similar techniques, one could generate lots of data on how <span class="math inline">\(f(G(T))\)</span> would look like for lots of different sequences. This is crucial, and is the reason why ideas like this wouldn’t have worked earlier.</p>
+<p>For this idea to work, there are some crucial assumptions made (which need to be thought about).</p>
+<section id="assumptions" class="level2">
+<h2 class="anchored" data-anchor-id="assumptions"><u><strong>Assumptions</strong></u></h2>
+<ul>
+<li><p><span class="math inline">\(\exists \ \delta \ \forall S, |S| &lt; \delta\)</span></p>
+<p><span class="math display">\[
+G(S) \text{ is unique.}
+\]</span></p>
+<p>which is saying that for small DNA sequences the generated topology is unique.</p></li>
+<li><p>There exists a fastly-observable <span class="math inline">\(f\)</span> that can be used to invert the map, and hence, obtain <span class="math inline">\(T\)</span>.</p></li>
+<li><p><span class="math inline">\(f\)</span> is “more-or-less” one-one.</p></li>
+</ul>
 </section>
-<section id="goal-3-how-could-a-transformer-come-up-with-this" class="level3">
-<h3 class="anchored" data-anchor-id="goal-3-how-could-a-transformer-come-up-with-this"><u>Goal #3</u> How could a transformer come up with this?</h3>
-<p>WIP!</p>
+<section id="one-step-further" class="level2">
+<h2 class="anchored" data-anchor-id="one-step-further">One Step Further</h2>
+<p>DNA sequences are used because they exhibit very interesting and useful properties.</p>
+<p>Using</p>
+<ul>
+<li><strong>DNA Polymerase,</strong></li>
+<li><strong>restriction enzymes,</strong></li>
+<li>and techniques like <strong>PCR</strong></li>
+</ul>
+<p>one can manipulate DNA sequences as needed. This is especially why DNA sequences are preferred. However, there could be other biochemical molecules that demonstrate capabilities of being manipulated similarly, and also turn out to be better candidates for the <strong>biochemical storage</strong> problem.</p>
+<p>This could be due to possibilities of finer manipulation, or have better <span class="math inline">\(f\)</span> or could have easier-to-learn inverse mappings <span class="math inline">\(\boxed{f(G(T)) \to T}\)</span>.</p>
+</section>
+</section>
+<section id="references" class="level1">
+
+
 
 
 </section>
-</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" data-entry-spacing="0" role="list">
+<div id="ref-Roquet2021.04.20.440194" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">N. Roquet <em>et al.</em>, <span>“DNA-based data storage via combinatorial assembly,”</span> <em>bioRxiv</em>, 2021, doi: <a href="https://doi.org/10.1101/2021.04.20.440194">10.1101/2021.04.20.440194</a>.</div>
+</div>
+<div id="ref-wiki:sequence_assembly" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Wikipedia, <span>“<span class="nocase">Sequence assembly</span> — <span>W</span>ikipedia<span>,</span> the free encyclopedia.”</span> <a href="http://en.wikipedia.org/w/index.php?title=Sequence%20assembly&amp;oldid=1271575830" class="uri">http://en.wikipedia.org/w/index.php?title=Sequence%20assembly&amp;oldid=1271575830</a>, 2025.</div>
+</div>
+<div id="ref-barlev2024deepdnastoragescalable" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">D. Bar-Lev, I. Orr, O. Sabary, T. Etzion, and E. Yaakobi, <span>“Deep DNA storage: Scalable and robust DNA storage via coding theory and deep learning.”</span> 2024. Available: <a href="https://arxiv.org/abs/2109.00031">https://arxiv.org/abs/2109.00031</a></div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

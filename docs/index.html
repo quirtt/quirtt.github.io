@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Cold Reflections -</title>
+<title>Cold Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -38,17 +38,23 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-bd89562929948232a0cfc2a2280e30cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -57,6 +63,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -92,8 +99,35 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -101,10 +135,10 @@ ul.task-list li input[type="checkbox"] {
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     <img src="./coldreflection.jpeg" alt="" class="navbar-logo">
     </a>
@@ -113,40 +147,40 @@ ul.task-list li input[type="checkbox"] {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./thoughts" rel="" target="">
- <span class="menu-text">Thoughts</span></a>
+    <a class="nav-link" href="./thoughts/"> 
+<span class="menu-text">Thoughts</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/quirtt" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/quirtt"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block"></header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="algebra">algebra <span class="quarto-category-count">(1)</span></div><div class="category" data-category="artificial general intelligence">artificial general intelligence <span class="quarto-category-count">(1)</span></div><div class="category" data-category="artificial intelligence">artificial intelligence <span class="quarto-category-count">(2)</span></div><div class="category" data-category="interpretability">interpretability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="isi">isi <span class="quarto-category-count">(1)</span></div><div class="category" data-category="machine learning">machine learning <span class="quarto-category-count">(1)</span></div><div class="category" data-category="math">math <span class="quarto-category-count">(4)</span></div><div class="category" data-category="philosophy">philosophy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="probability theory">probability theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="set theory">set theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(9)</span></div><div class="category" data-category="YWxnZWJyYQ==">algebra <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YXJ0aWZpY2lhbCUyMGdlbmVyYWwlMjBpbnRlbGxpZ2VuY2U=">artificial general intelligence <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZQ==">artificial intelligence <span class="quarto-category-count">(2)</span></div><div class="category" data-category="YmlvbG9neQ==">biology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29nbml0aW9u">cognition <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aW50ZXJwcmV0YWJpbGl0eQ==">interpretability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="aXNp">isi <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWFjaGluZSUyMGxlYXJuaW5n">machine learning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bWF0aA==">math <span class="quarto-category-count">(6)</span></div><div class="category" data-category="cGhpbG9zb3BoeQ==">philosophy <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cHJvYmFiaWxpdHk=">probability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvYmFiaWxpdHklMjB0aGVvcnk=">probability theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c2V0JTIwdGhlb3J5">set theory <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3RhdGlzdGljcw==">statistics <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -156,40 +190,150 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="artificial intelligence,artificial general intelligence,philosophy" data-listing-date-sort="1720204200000" data-listing-file-modified-sort="1720443454925" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="0" data-categories="YmlvbG9neSUyQ21hY2hpbmUlMjBsZWFybmluZw==" data-listing-date-sort="1742841000000" data-listing-file-modified-sort="1742992693676" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="954">
 <div class="thumbnail">
-<p><a href="./posts/how-to-get-agi/how-to-get-agi.html"> <img src="./posts/how-to-get-agi/brain.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/dna-storage/blog.html" class="no-external"></a></p><a href="./posts/dna-storage/blog.html" class="no-external">
+<p class="card-img-top"><img src="posts/dna-storage/images/flow-read.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/dna-storage/blog.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/how-to-get-agi/how-to-get-agi.html">
 <h3 class="no-anchor listing-title">
-How to get AGI?
+<a href="./posts/dna-storage/blog.html" class="no-external">Ideas on DNA Storage</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/dna-storage/blog.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('YmlvbG9neQ=='); return false;">
+biology
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZSUyMGxlYXJuaW5n'); return false;">
+machine learning
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/dna-storage/blog.html" class="no-external">Recently, I have been thinking about the DNA storage problem quite a bit. It’s been something extremely interesting to me. Asking ChatGPT for DNA storage system use-cases…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/dna-storage/blog.html" class="no-external">
+<div class="listing-date">
+Mar 25, 2025
+</div>
+<div class="listing-author">
+Himadri Mandal
 </div>
 </a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="cHJvYmFiaWxpdHklMkNtYXRo" data-listing-date-sort="1742149800000" data-listing-file-modified-sort="1742926931337" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="26">
+<div class="thumbnail">
+<p><a href="./posts/mct-dct/blog.html" class="no-external"></a></p><a href="./posts/mct-dct/blog.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/mct-dct/blog.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/mct-dct/blog.html" class="no-external">Some Important Results in Probability Theory</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/mct-dct/blog.html" class="no-external"></a>
+</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('artificial intelligence'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('cHJvYmFiaWxpdHk='); return false;">
+probability
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">
+math
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/mct-dct/blog.html" class="no-external"><em>Proof.</em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/mct-dct/blog.html" class="no-external">
+<div class="listing-date">
+Mar 17, 2025
+</div>
+<div class="listing-author">
+Himadri Mandal
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="cGhpbG9zb3BoeSUyQ2NvZ25pdGlvbiUyQ21hdGg=" data-listing-date-sort="1741804200000" data-listing-file-modified-sort="1742045986284" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="284">
+<div class="thumbnail">
+<p><a href="./posts/incomp-lang/blog.html" class="no-external"></a></p><a href="./posts/incomp-lang/blog.html" class="no-external">
+<p><img loading="lazy" src="./posts/incomp-lang/pfp.jpeg" class="thumbnail-image"></p>
+</a><p><a href="./posts/incomp-lang/blog.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/incomp-lang/blog.html" class="no-external">Language is an Infinitely Incomplete Approximation of Human Concepts</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/incomp-lang/blog.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('cGhpbG9zb3BoeQ=='); return false;">
+philosophy
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Y29nbml0aW9u'); return false;">
+cognition
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">
+math
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/incomp-lang/blog.html" class="no-external">I had thought of this idea last year, but never got around to writing it. In this blog, I show how humans are infinitely limited by the mode of language in transmission of…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/incomp-lang/blog.html" class="no-external">
+<div class="listing-date">
+Mar 13, 2025
+</div>
+<div class="listing-author">
+Himadri Mandal
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyQ2FydGlmaWNpYWwlMjBnZW5lcmFsJTIwaW50ZWxsaWdlbmNlJTJDcGhpbG9zb3BoeQ==" data-listing-date-sort="1720204200000" data-listing-file-modified-sort="1741809844335" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="985">
+<div class="thumbnail">
+<p><a href="./posts/how-to-get-agi/blog.html" class="no-external"></a></p><a href="./posts/how-to-get-agi/blog.html" class="no-external">
+<p><img loading="lazy" src="./posts/how-to-get-agi/brain.jpeg" class="thumbnail-image"></p>
+</a><p><a href="./posts/how-to-get-agi/blog.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/how-to-get-agi/blog.html" class="no-external">How to get AGI?</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/how-to-get-agi/blog.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZQ=='); return false;">
 artificial intelligence
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('artificial general intelligence'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('YXJ0aWZpY2lhbCUyMGdlbmVyYWwlMjBpbnRlbGxpZ2VuY2U='); return false;">
 artificial general intelligence
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('philosophy'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('cGhpbG9zb3BoeQ=='); return false;">
 philosophy
 </div>
 </div>
-<a href="./posts/how-to-get-agi/how-to-get-agi.html">
 <div class="listing-description">
-Here is an excerpt from a brilliant conversation <sup>1</sup> between Dwarkesh Patel and François Chollet.
+<a href="./posts/how-to-get-agi/blog.html" class="no-external">Here is an excerpt from a brilliant conversation <sup>1</sup> between Dwarkesh Patel and François Chollet.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/how-to-get-agi/how-to-get-agi.html">
+<a href="./posts/how-to-get-agi/blog.html" class="no-external">
 <div class="listing-date">
 Jul 6, 2024
 </div>
@@ -199,38 +343,36 @@ Himadri Mandal
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="machine learning,artificial intelligence,interpretability" data-listing-date-sort="1714847400000" data-listing-file-modified-sort="1720224050237" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="4" data-categories="bWFjaGluZSUyMGxlYXJuaW5nJTJDYXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyQ2ludGVycHJldGFiaWxpdHk=" data-listing-date-sort="1714847400000" data-listing-file-modified-sort="1741809844332" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="844">
 <div class="thumbnail">
-<p><a href="./posts/OthelloGPT/OthelloGPT.html"> <img src="./posts/OthelloGPT/othello.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/OthelloGPT/blog.html" class="no-external"></a></p><a href="./posts/OthelloGPT/blog.html" class="no-external">
+<p><img loading="lazy" src="./posts/OthelloGPT/othello.jpeg" class="thumbnail-image"></p>
+</a><p><a href="./posts/OthelloGPT/blog.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/OthelloGPT/OthelloGPT.html">
 <h3 class="no-anchor listing-title">
-Ponderings on OthelloGPT
+<a href="./posts/OthelloGPT/blog.html" class="no-external">Ponderings on OthelloGPT</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/OthelloGPT/blog.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('machine learning'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('bWFjaGluZSUyMGxlYXJuaW5n'); return false;">
 machine learning
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('artificial intelligence'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZQ=='); return false;">
 artificial intelligence
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('interpretability'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('aW50ZXJwcmV0YWJpbGl0eQ=='); return false;">
 interpretability
 </div>
 </div>
-<a href="./posts/OthelloGPT/OthelloGPT.html">
 <div class="listing-description">
-This is a report of sorts of my playing around with OthelloGPT, a GPT model trained on Othello games to predict all the possible legal moves.
+<a href="./posts/OthelloGPT/blog.html" class="no-external">This is a report of sorts of my playing around with OthelloGPT, a GPT model trained on Othello games to predict all the possible legal moves.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/OthelloGPT/OthelloGPT.html">
+<a href="./posts/OthelloGPT/blog.html" class="no-external">
 <div class="listing-date">
 May 5, 2024
 </div>
@@ -240,38 +382,36 @@ Himadri Mandal
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="probability theory,statistics,math" data-listing-date-sort="1709490600000" data-listing-file-modified-sort="1720447665683" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="5" data-categories="cHJvYmFiaWxpdHklMjB0aGVvcnklMkNzdGF0aXN0aWNzJTJDbWF0aA==" data-listing-date-sort="1709490600000" data-listing-file-modified-sort="1741810308210" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="599">
 <div class="thumbnail">
-<p><a href="./posts/nelson/nelson.html"> <img src="./posts/nelson/pfp.jpeg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/nelson/blog.html" class="no-external"></a></p><a href="./posts/nelson/blog.html" class="no-external">
+<p><img loading="lazy" src="./posts/nelson/pfp.jpeg" class="thumbnail-image"></p>
+</a><p><a href="./posts/nelson/blog.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/nelson/nelson.html">
 <h3 class="no-anchor listing-title">
-So Far Yet So Close: How Independence is Almost Dependence
+<a href="./posts/nelson/blog.html" class="no-external">So Far Yet So Close: How Independence is Almost Dependence</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/nelson/blog.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('probability theory'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('cHJvYmFiaWxpdHklMjB0aGVvcnk='); return false;">
 probability theory
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljcw=='); return false;">
 statistics
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('math'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">
 math
 </div>
 </div>
-<a href="./posts/nelson/nelson.html">
 <div class="listing-description">
-Imagine two continuous random variables…
+<a href="./posts/nelson/blog.html" class="no-external">Imagine two continuous random variables seemingly unrelated and free from any influence from each other. It’s a common assumption in probability theory that independence…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/nelson/nelson.html">
+<a href="./posts/nelson/blog.html" class="no-external">
 <div class="listing-date">
 Mar 4, 2024
 </div>
@@ -281,35 +421,33 @@ Himadri Mandal
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="algebra,math" data-listing-date-sort="1702146600000" data-listing-file-modified-sort="1709497485712" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="6" data-categories="YWxnZWJyYSUyQ21hdGg=" data-listing-date-sort="1702146600000" data-listing-file-modified-sort="1741810507777" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="211">
 <div class="thumbnail">
-<p><a href="./posts/a-cool-problem/polynomials-are-linear.html"> <img src="./posts/a-cool-problem/pfp.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/polynomials-are-linear/blog.html" class="no-external"></a></p><a href="./posts/polynomials-are-linear/blog.html" class="no-external">
+<p><img loading="lazy" src="./posts/polynomials-are-linear/pfp.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/polynomials-are-linear/blog.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/a-cool-problem/polynomials-are-linear.html">
 <h3 class="no-anchor listing-title">
-<span class="math inline">\(k+1\)</span> points uniquely determine a <span class="math inline">\(k\)</span> degree polynomial: A cool problem
+<a href="./posts/polynomials-are-linear/blog.html" class="no-external"><span class="math inline">\(k+1\)</span> points uniquely determine a <span class="math inline">\(k\)</span> degree polynomial: A cool problem</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/polynomials-are-linear/blog.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('algebra'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('YWxnZWJyYQ=='); return false;">
 algebra
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('math'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">
 math
 </div>
 </div>
-<a href="./posts/a-cool-problem/polynomials-are-linear.html">
 <div class="listing-description">
-Reading the title…
+<a href="./posts/polynomials-are-linear/blog.html" class="no-external">Reading the title: you are probably shouting “Lagrange Interpolation!!!” Yeah, sure, Lagrange is cool. But I will show you something cooler which ensures you don’t have to…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/a-cool-problem/polynomials-are-linear.html">
+<a href="./posts/polynomials-are-linear/blog.html" class="no-external">
 <div class="listing-date">
 Dec 10, 2023
 </div>
@@ -319,35 +457,33 @@ Himadri Mandal
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="set theory,math" data-listing-date-sort="1700073000000" data-listing-file-modified-sort="1702578126869" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+<div class="quarto-post image-right" data-index="7" data-categories="c2V0JTIwdGhlb3J5JTJDbWF0aA==" data-listing-date-sort="1700073000000" data-listing-file-modified-sort="1741809844337" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1437">
 <div class="thumbnail">
-<p><a href="./posts/zorn-and-aoc/zorn-and-aoc.html"> <img src="./posts/zorn-and-aoc/pfp.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/zorn-and-aoc/blog.html" class="no-external"></a></p><a href="./posts/zorn-and-aoc/blog.html" class="no-external">
+<p><img loading="lazy" src="./posts/zorn-and-aoc/pfp.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/zorn-and-aoc/blog.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/zorn-and-aoc/zorn-and-aoc.html">
 <h3 class="no-anchor listing-title">
-Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I
+<a href="./posts/zorn-and-aoc/blog.html" class="no-external">Axiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/zorn-and-aoc/blog.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('set theory'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('c2V0JTIwdGhlb3J5'); return false;">
 set theory
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('math'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">
 math
 </div>
 </div>
-<a href="./posts/zorn-and-aoc/zorn-and-aoc.html">
 <div class="listing-description">
-Mathematics has long been built on the sturdy foundation of intuition. From counting pebbles to solving complex equations, mathematicians have relied on their inner compass…
+<a href="./posts/zorn-and-aoc/blog.html" class="no-external">Mathematics has long been built on the sturdy foundation of intuition. From counting pebbles to solving complex equations, mathematicians have relied on their inner compass…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/zorn-and-aoc/zorn-and-aoc.html">
+<a href="./posts/zorn-and-aoc/blog.html" class="no-external">
 <div class="listing-date">
 Nov 16, 2023
 </div>
@@ -357,38 +493,36 @@ Himadri Mandal
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="isi,statistics,math" data-listing-date-sort="1697999400000" data-listing-file-modified-sort="1702578126868" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
+<div class="quarto-post image-right" data-index="8" data-categories="aXNpJTJDc3RhdGlzdGljcyUyQ21hdGg=" data-listing-date-sort="1697999400000" data-listing-file-modified-sort="1742040731214" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1633">
 <div class="thumbnail">
-<p><a href="./posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html"> <img src="./posts/shannon-cardmagic-trick/pfp.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/shannon-cardmagic-trick/blog.html" class="no-external"></a></p><a href="./posts/shannon-cardmagic-trick/blog.html" class="no-external">
+<p><img loading="lazy" src="./posts/shannon-cardmagic-trick/pfp.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/shannon-cardmagic-trick/blog.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html">
 <h3 class="no-anchor listing-title">
-Shannon’s Card Magic Trick
+<a href="./posts/shannon-cardmagic-trick/blog.html" class="no-external">Shannon’s Card Magic Trick</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/shannon-cardmagic-trick/blog.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('isi'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('aXNp'); return false;">
 isi
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('statistics'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('c3RhdGlzdGljcw=='); return false;">
 statistics
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('math'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('bWF0aA=='); return false;">
 math
 </div>
 </div>
-<a href="./posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html">
 <div class="listing-description">
-This was my statistics project at ISI Sem 1. My team had: <em>Myself</em>, <em>Siddhartha</em>, <em>Ayan</em>, <em>Drishti</em>, <em>Aman</em>, <em>Mrittika</em>. Thanks to everyone for their efforts.
+<a href="./posts/shannon-cardmagic-trick/blog.html" class="no-external">This was my statistics project at ISI Sem 1. My team had: <em>Myself</em>, <em>Siddhartha</em>, <em>Ayan</em>, <em>Drishti</em>, <em>Aman</em>, <em>Mrittika</em>. Thanks to everyone for their efforts.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/shannon-cardmagic-trick/shannon-cardmagic-trick.html">
+<a href="./posts/shannon-cardmagic-trick/blog.html" class="no-external">
 <div class="listing-date">
 Oct 23, 2023
 </div>
@@ -438,18 +572,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -481,11 +604,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -495,8 +655,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -508,7 +677,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -552,6 +843,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -577,6 +869,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -637,6 +955,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
