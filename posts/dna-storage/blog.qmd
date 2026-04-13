@@ -10,7 +10,6 @@ format:
         # css: styles.
 editor: visual
 bibliography: references.bib
-csl: /home/quirtt/Projects/quirtt.github.io/ieee.csl
 engine: knitr
 ---
 

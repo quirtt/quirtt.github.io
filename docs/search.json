@@ -1,5 +1,68 @@
 [
   {
+    "objectID": "posts/dna-storage/blog.html",
+    "href": "posts/dna-storage/blog.html",
+    "title": "Ideas on DNA Storage",
+    "section": "",
+    "text": "Recently, I have been thinking about the DNA storage problem quite a bit. It’s been something extremely interesting to me. Asking ChatGPT for DNA storage system use-cases, we find a heck ton of stuff:\nIn this blog post: I would like to present some of my ideas on how DNA sequencing can be improved (I am not a biologist so please feel free to tell me if I am spewing nonsense, haha!) Before that, though, let me quickly present the context in which thinking about this came to be."
+  },
+  {
+    "objectID": "posts/dna-storage/blog.html#assumptions",
+    "href": "posts/dna-storage/blog.html#assumptions",
+    "title": "Ideas on DNA Storage",
+    "section": "Assumptions",
+    "text": "Assumptions\n\n\\(\\exists \\ \\delta \\ \\forall S, |S| &lt; \\delta\\)\n\\[\nG(S) \\text{ is unique.}\n\\]\nwhich is saying that for small DNA sequences the generated topology is unique.\nThere exists a fastly-observable \\(f\\) that can be used to invert the map, and hence, obtain \\(T\\).\n\\(f\\) is “more-or-less” one-one."
+  },
+  {
+    "objectID": "posts/dna-storage/blog.html#one-step-further",
+    "href": "posts/dna-storage/blog.html#one-step-further",
+    "title": "Ideas on DNA Storage",
+    "section": "One Step Further",
+    "text": "One Step Further\nDNA sequences are used because they exhibit very interesting and useful properties.\nUsing\n\nDNA Polymerase,\nrestriction enzymes,\nand techniques like PCR\n\none can manipulate DNA sequences as needed. This is especially why DNA sequences are preferred. However, there could be other biochemical molecules that demonstrate capabilities of being manipulated similarly, and also turn out to be better candidates for the biochemical storage problem.\nThis could be due to possibilities of finer manipulation, or have better \\(f\\) or could have easier-to-learn inverse mappings \\(\\boxed{f(G(T)) \\to T}\\)."
+  },
+  {
+    "objectID": "posts/OthelloGPT/blog.html",
+    "href": "posts/OthelloGPT/blog.html",
+    "title": "Ponderings on OthelloGPT",
+    "section": "",
+    "text": "This is a report of sorts of my playing around with OthelloGPT, a GPT model trained on Othello games to predict all the possible legal moves.\nIt is a common problem in Machine Learning to talk about whether a model is just remembering information, performing surface statistics or is actually doing something deeper? We try to investigate this for OthelloGPT!\nThe original paper by Kenneth Li et. al. find that this model is not just performing sequence statistics, the model representation infact has a world model of the Othello environment.\nThe authors make multiple arguments like a) how the world model representation is being used to draw inferences, b) how a non-linear probe can actually input the internal representation of the model and output (with high accuracy!) the current board state and c) how altering the internal representation ends up having the intended effect on the predictions. They also have a more accessible version of it as a blog.\nLater Neel Nanda et al publish a paper talking about their findings on how this representation is, well, actually linear! You need to view in a particular direction to find the linearity!\nIn this project, I dealt with the following problem:"
+  },
+  {
+    "objectID": "posts/OthelloGPT/blog.html#how-does-the-model-compute-that-a-certain-cell-is-blank",
+    "href": "posts/OthelloGPT/blog.html#how-does-the-model-compute-that-a-certain-cell-is-blank",
+    "title": "Ponderings on OthelloGPT",
+    "section": "How Does The Model Compute That A Certain Cell is Blank?",
+    "text": "How Does The Model Compute That A Certain Cell is Blank?\nThis seems like an easy thing to compute, as all you need to do is to figure out whether the \\((i,j)^{\\text{th}}\\) cell has appeared in the move sequence or not.\nGoals:\n\nAt which layer does the model conclude that it’s blank?\nDoes this come from any specific head or neuron?\nHow could a transformer detect this?\n\nWe hypothesize that a single attention head per cell is what is used by a transformer. Let’s try to answer these questions one-by-one.\n\nGoal #1 At which layer does the model conclude that it’s blank?\nLet us first fix some notation. Let \\(X_L\\) be the intervention by the linear probe at the \\(L\\)’th layer of the residual stream. Let \\(Y\\) be the true representation of the game board.\nWe try to find its goodness at two things:\n\nTest #1: The prediction is blank CONDITIONAL on the true representation being blank\nTest #2: The prediction is NOT blank CONDITIONAL on the correct representation being NOT blank\n\nWe calculate the following conditional probabilities and plot them (which themselves are tensors of the shape \\(\\text{rows} \\times \\text{cols}\\)). Ofcourse we only care about the games in the middle because if not, things become a bit more weird.\\[\n\\text{Test 1: }P(X_L = Y \\Bigg|Y=\\text{Blank}) = \\frac{P(X_L = Y \\text{ and } Y=\\text{Blank})}{P(Y=\\text{Blank})}\n\\]\n\nNotice that the 4 squares in the middle have NaN value. This is because those can never be blank and so there’s a division by zero error. It isn’t an issue for us though.\nAlso, there doesn’t seem to be much improvement after Layer 1, so let us just focus on the first two layers.\n\nLet’s also find out the \\(\\text{maxerr}\\) and \\(\\text{avgerr}\\) across layers and plot it.\n\nLooking at this plot, it seems like a good idea to hypothesize that most of the Is_Blank computation is done in Layer 0 (for most cells) and some of the remaining computation is done in Layer 1. It seems that Layer 1 is what gives it structure finally, though.\nLet’s now do the second test.\n\\[\n\\text{Test 2: }P(X_L \\neq \\text{Blank} \\Bigg|Y\\neq\\text{Blank}) = \\frac{P(X_L \\neq \\text{Blank} \\text{ and } Y\\neq\\text{Blank})}{P(Y\\neq\\text{Blank})}\n\\]\nWe calculate and then plot the same graphs.\n\n\nAh! I thought that the features Is_Blank and Is_Not_Blank would get implemented almost together, and although that does seem to be the case, the \\(\\text{maxerr}\\) only really gets close to the average error by Layer 4, which is precisely where the OthelloGPT has created a high-accuracy world model (according to Neel’s findings). This is all super interesting!\nLet us now try to answer a more important question.\n\n\nGoal #2 Does this come from any specific head or neuron?\nLet’s look at the cosine similarity of output weights and the blank colour probe for top layer 0 and layer 1 neurons sorted according to standard deviation (sorting wrt to “resid_post”)\n\n\nLayer 0 resid_post doesn’t seem very interpretable to me. However, L1N360 looks very interesting. It computes Is_Blank of cell D2. Can we find more such neurons? Let’s try to use the same technique on post\n\n\nWow! Layer 0 seems to compute bunch of Not_Is_Blank features for particular cells. Let’s try to find more such neurons!\n\n\n\nWait! This is all cool and stuff, but what about Is_Blank features? Is Layer 0 not computing it? Lets try to change the experiment in a way to obtain neurons that track Is_Blank heavily.\nI will start with a bound \\(M_U\\) on the absolute values of the cosine sim, so that anything above \\(M_U\\) will be treated as \\(1\\) and anything below \\(M_U\\) will be treated as 0. Could I find something interesting out of this simple setup?\ntop_layer_0_neurons = ((focus_cache[\"post\", 0][:, 3:-3]).abs() &gt; Mu).float().std(dim=[0,1]).argsort(descending=True)\nSetting \\(M_U = 0.2, 0.3, 0.4\\) etc give us bunch of neurons that are very highly correlated to the Is_Blank probe for a single cell! This is more evidence for our hypothesis that Layer 0 computes the Is_Blank feature. Infact, this makes it highly interpretable.\n\n\n\nGoal #3 How could a transformer come up with this?\nWIP!"
+  },
+  {
+    "objectID": "thoughts/Reorganization of Thoughts before I enter ENS.html",
+    "href": "thoughts/Reorganization of Thoughts before I enter ENS.html",
+    "title": "Cold Reflections",
+    "section": "",
+    "text": "Well, this is just a test document. But I have a lot to say. I recall what Marbach told me. What Partha sir told me and understand what has led me to this point. What are the fundamental qualities that are different in me that has led me somewhere which nobody near me could possibly dream of."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "I’m Himadri Mandal, 18, you might know me as quirtt from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (well, mostly Mathematics, but I enjoy both). I am also a CS nerd, enjoy almost anything geeky, and have a deep interest in wanting to automate all of Mathematics, and wish to work on this a lot.\nYou could check some of my projects out on github, but it could be difficult as they are largely undocumented. I am usually found: learning math/cs, reading ML papers, playing table tennis, chilling with friends, singing badly in my room, etc. Ah well. I have been recently getting more and more interested in AI and AI alignment, too. I wish do some good work in that field as well.\nIf you find me interesting - feel free to shoot me a mail at mandalhimadri06@gmail.com or send me a “Hi!” on my Discord."
+  },
+  {
+    "objectID": "no_show/post-with-code/index.html",
+    "href": "no_show/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code."
+  },
+  {
+    "objectID": "posts/incomp-lang/blog.html",
+    "href": "posts/incomp-lang/blog.html",
+    "title": "[DRAFT] Language is an Infinitely Incomplete Approximation of Human Concepts",
+    "section": "",
+    "text": "I had thought of this idea last year, but never got around to writing it. In this blog, I show how humans are infinitely limited by the mode of language in transmission of ideas. I don’t quite remember how I got around to thinking about this, but here goes haha.\nEvery written language is described by a finite set of characters. Every spoken language requires a finite sequence of sounds. Every idea that is realized by humans and communicated through language has to be put into a sequence of letters / sequence of sounds. Call such a thought expressible.\nI define languages to be made of fixed objects, i.e., there are no new characters. A reasonable contention would be: “this is BS? languages change all the time”. Well, yes. However, if they change, then I call the new object a new language. You can think of this as:\n\\[\n\\{\\text{eng\\_v1}, \\text{eng\\_v2}, \\text{eng\\_v3}\\cdots\\}\n\\]\n&lt;fill in: why the set of all languages is countable&gt;\n\nTheorem\nThe set of all languages is countable.\n\n\n\nTheorem\nIf the set of all possible spoken and written languages is countable then the set of expressible ideas is countable.\n\nProof.\nLet \\(S\\) be the set of all languages. For a language, \\(L \\in S\\), let \\(\\mathcal{C}(L)\\) be the characters of \\(L\\). We understand that, \\(|\\mathcal{C}(L)|&lt;\\infty.\\)\nDefine \\(\\mathcal{C}(S) = \\cup_{L \\in S}\\{(L, x) : x\\in \\mathcal{C}(L) \\}\\), which is the set of all characters (signed with the language it belongs to). Since \\(S\\) is countable, \\(\\mathcal{C}(S)\\) is countable.\nNow, every expressible idea is a finite sequence of characters/phonemes like:\n\\[\n\\gamma_1 \\gamma_2 \\gamma_3 \\gamma_4 \\cdots \\gamma_N\n\\]\nwhere \\(\\gamma_i \\in \\mathcal{C}(S)\\).\nLet \\(\\mathrm{I}\\) be the set of all expressible ideas. We know that set of all finite sequences formed using countable characters is countable, and therefore: \\(\\mathrm{I}\\) be countable. \\(\\blacksquare\\)"
+  },
+  {
     "objectID": "posts/polynomials-are-linear/blog.html",
     "href": "posts/polynomials-are-linear/blog.html",
     "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
@@ -19,6 +82,62 @@
     "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
     "section": "Solution",
     "text": "Solution\nWhenever you try to prove something “uniquely” determines something; it’s always nice to try to find an isomorphism somewhere. Consider the linear map \\(S:\\mathcal{P}_{k-1} \\to \\mathbb{R}^k\\) such that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k))\n\\]\n\nClaim 1: \\(S\\) is an isomorphism.\nSince \\(\\dim{\\mathcal{P}_{k-1}} = \\dim{\\mathbb{R}^k} = k\\), we would be done if we prove \\(\\mathcal{N}(S) = 0\\). Assume \\(S(f) = (0, 0, \\dotsc, 0)\\) which means \\(f\\) a \\(\\leq k-1\\) degree polynomial is \\(0\\) at \\(k\\) distinct points. This is only possible when \\(f \\equiv 0\\). \\(\\blacksquare\\)\n\n\nFinish\nNotice that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k)) = \\sum_j f(t_j)e_j\n\\] Since \\(S\\) is an isomorphism, \\[\nf = \\sum_j f(t_j)S^{-1}(e_j)\n\\] Let \\(a_j = \\int_0^1 (S^{-1}(e_j))(x) dx\\), then, clearly, \\[\n\\int_0^1 f(x)dx = \\int_0^1 \\sum_j f(t_j)(S^{-1}(e_j))(x) dx\\] \\[\\int_0^1 f(x) dx = \\sum_j f(t_j) \\left(\\int_0^1 (S^{-1}(e_j))(x) dx\\right) = \\sum_j a_j f(t_j) \\blacksquare\n\\]"
+  },
+  {
+    "objectID": "posts/mct-dct/blog.html",
+    "href": "posts/mct-dct/blog.html",
+    "title": "[DRAFT] Some Important Results in Probability Theory",
+    "section": "",
+    "text": "Proof."
+  },
+  {
+    "objectID": "posts/mct-dct/blog.html#theorem-lebesgue-differentiation-theorem",
+    "href": "posts/mct-dct/blog.html#theorem-lebesgue-differentiation-theorem",
+    "title": "[DRAFT] Some Important Results in Probability Theory",
+    "section": "",
+    "text": "Proof."
+  },
+  {
+    "objectID": "posts/mct-dct/blog.html#theorem-monotone-convergence-theorem",
+    "href": "posts/mct-dct/blog.html#theorem-monotone-convergence-theorem",
+    "title": "[DRAFT] Some Important Results in Probability Theory",
+    "section": "Theorem: Monotone Convergence Theorem",
+    "text": "Theorem: Monotone Convergence Theorem"
+  },
+  {
+    "objectID": "posts/mct-dct/blog.html#footnotes",
+    "href": "posts/mct-dct/blog.html#footnotes",
+    "title": "[DRAFT] Some Important Results in Probability Theory",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://en.wikipedia.org/wiki/Absolute_continuity↩︎"
+  },
+  {
+    "objectID": "posts/how-to-get-agi/blog.html",
+    "href": "posts/how-to-get-agi/blog.html",
+    "title": "How to get AGI?",
+    "section": "",
+    "text": "Here is an excerpt from a brilliant conversation 1 between Dwarkesh Patel and François Chollet.\nI believe this is the general consensus of most AI researchers on how AGI will be achieved. I have thought along similar lines before but this internalizes that feeling of mine further."
+  },
+  {
+    "objectID": "posts/how-to-get-agi/blog.html#future-of-ai-progress-deep-learning-program-synthesis",
+    "href": "posts/how-to-get-agi/blog.html#future-of-ai-progress-deep-learning-program-synthesis",
+    "title": "How to get AGI?",
+    "section": "(00:48:28) – Future of AI progress: deep learning + program synthesis",
+    "text": "(00:48:28) – Future of AI progress: deep learning + program synthesis\n\nFrançois Chollet 00:48:28\nIt’s intrinsically limited because the substrate of your model is a big parametric curve. All you can do with this is local generalization. If you want to go beyond this towards broader or even extreme generalization, you have to move to a different type of model. My paradigm of choice is discrete program search, program synthesis.\nIf you want to understand that, you can sort of compare and contrast it with deep learning. In deep learning your model is a differentiable parametric curve. In program synthesis, your model is a discrete graph of operators. You’ve got a set of logical operators, like a domain-specific language. You’re picking instances of it. You’re structuring that into a graph that’s a program. That’s actually very similar to a program you might write in Python or C++ and so on. We are doing machine learning here. We’re trying to automatically learn these models.\nIn deep learning your learning engine is gradient descent. Gradient descent is very compute efficient because you have this very strong informative feedback signal about where the solution is. You can get to the solution very quickly, but it is very data inefficient. In order to make it work, you need a dense sampling of the operating space. You need a dense sampling of the data distribution. Then you’re limited to only generalizing within that data distribution. The reason why you have this limitation is because your model is a curve.\nMeanwhile, if you look at discrete program search, the learning engine is combinatorial search. You’re just trying a bunch of programs until you find one that actually meets your spec. This process is extremely data efficient. You can learn a generalizable program from just one example, two examples. This is why it works so well on ARC, by the way. The big limitation is that it’s extremely compute inefficient because you’re running into combinatorial explosion, of course.\nYou can sort of see here how deep learning and discrete program search have very complementary strengths, and limitations as well. Every limitation of deep learning has a corresponding strength in program synthesis and inversely. The path forward is going to be to merge the two.\nHere’s another way you can think about it. These parametric curves trained with gradient descent are great fits for everything that’s System 1-type thinking: pattern recognition, intuition, memorization, etc. Discrete program search is a great fit for Type 2 thinking: planning, reasoning. It’s quickly figuring out a generalizable model that matches just one or two examples, like for an ARC puzzle for instance.\nHumans are never doing pure System 1 or pure System 2. They’re always mixing and matching both. Right now, we have all the tools for System 1. We have almost nothing for System 2. The way forward is to create a hybrid system.\nThe form it’s going to take is mostly System 2. The outer structure is going to be a discrete program search system. You’re going to fix the fundamental limitation of discrete program search, which is combinatorial explosion, with deep learning. You’re going to leverage deep learning to guide and to provide intuition in program space, to guide the program search.\nThat’s very similar to what you see when you’re playing chess or when you’re trying to prove a theorem, for instance. It’s mostly a reasoning thing, but you start out with some intuition about the shape of the solution. That’s very much something you can get via a deep learning model. Deep learning models are very much like intuition machines. They’re pattern matching machines.\nYou start from this shape of the solution, and then you’re going to do actual explicit discrete program search. But you’re not going to do it via brute force. You’re not going to try things randomly. You’re actually going to ask another deep learning model for suggestions. It’ll be like, “here’s the most likely next step. Here’s where in the graph you should be going.” You can also use yet another deep learning model for feedback like “well, here’s what I have so far. Is it looking good? Should I just backtrack and try something new?” Discrete program search is going to be the key but you want to make it dramatically better, orders of magnitude more efficient, by leveraging deep learning.\nBy the way, another thing that you can use deep learning for is of course things like common sense knowledge and knowledge in general. You’re going to end up with this sort of system where you have this on-the-fly synthesis engine that can adapt to new situations.\nThe way it adapts is that it’s going to fetch from a bank of patterns, modules that could be themselves curves, differentiable modules, and some others that could be algorithmic in nature. It’s going to assemble them via this intuition-guided process. For every new situation you might be faced with, it’s going to give you a generalizable model that was synthesized using very, very little data. Something like this would solve ARC."
+  },
+  {
+    "objectID": "posts/how-to-get-agi/blog.html#thoughts",
+    "href": "posts/how-to-get-agi/blog.html#thoughts",
+    "title": "How to get AGI?",
+    "section": "Thoughts",
+    "text": "Thoughts\nAfter watching the podcast, I realized that AlphaGeometry2 is, almost entirely, just this idea. i believe you can become way better at generating intuition if you have a database of all mathematical theorems, proofs etc in a symbolic / DPS form. But this is too naive. I’ll update as I have more thoughts."
+  },
+  {
+    "objectID": "posts/how-to-get-agi/blog.html#footnotes",
+    "href": "posts/how-to-get-agi/blog.html#footnotes",
+    "title": "How to get AGI?",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://www.youtube.com/watch?v=UakqL6Pj9xo↩︎\nhttps://deepmind.google/discover/blog/alphageometry-an-olympiad-level-ai-system-for-geometry/↩︎"
   },
   {
     "objectID": "posts/zorn-and-aoc/blog.html",
@@ -63,104 +182,6 @@
     "text": "Footnotes\n\nTheorem 3 (Cantor’s Diagonal Argument) \\[X &lt;_{c} P(X) \\ \\forall \\ X\\]\n\nAssume for the sake of contradiction \\(P(X) =_{c} X\\) (where \\(=_{c}\\) means that there exists a bijection between the sets). Thus, there is a surjection \\(f:X \\to P(X)\\). Consider\n\\[\nA = \\{x \\in X: x \\not\\in f(x)\\}\n\\]\nBut since \\(f\\) is a surjection, \\(\\exists x_0 \\ f(x_0) = A\\) then\n\\[\nx_0 \\in A \\iff x_0 \\not\\in A.\n\\]\na contradiction. (This is pretty much the same idea as the famous proof of real numbers being uncountable.)"
   },
   {
-    "objectID": "posts/nelson/blog.html",
-    "href": "posts/nelson/blog.html",
-    "title": "So Far Yet So Close: How Independence is Almost Dependence",
-    "section": "",
-    "text": "Imagine two continuous random variables seemingly unrelated and free from any influence from each other. It’s a common assumption in probability theory that independence implies a lack of any relationship between variables.\nHowever, a fascinating theorem challenges this notion, showing that from any two independent continuous random variables, we can construct new deterministically dependent variables that not only share the same distributions but also have joint distributions that are arbitrarily close.\nIn other words, independence can be deceptive, leading us to a realm where variables are closer than we think. Let’s explore this intriguing theorem and its implications.\n(If you could link me up with a paper that talks about this theorem, please do. I couldn’t find it. This theorem is apparently proven by “Nelson”. Edit: I found it.)"
-  },
-  {
-    "objectID": "posts/nelson/blog.html#theorem",
-    "href": "posts/nelson/blog.html#theorem",
-    "title": "So Far Yet So Close: How Independence is Almost Dependence",
-    "section": "Theorem",
-    "text": "Theorem\n\nLet \\(X,Y\\) with \\(F_X, F_Y \\uparrow,\\) be independent continuous random variables on \\((\\mathbb{R}, \\mathcal{B}, P)\\). For all \\(\\epsilon &gt; 0\\) there exist deterministically dependent \\(U,V\\) on the same probability space \\(F_U = F_X, F_V = F_Y\\) and \\(\\sup_{(a,b) \\in \\mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \\epsilon\\).\n\nHere is the proof I came up with:"
-  },
-  {
-    "objectID": "posts/nelson/blog.html#proof",
-    "href": "posts/nelson/blog.html#proof",
-    "title": "So Far Yet So Close: How Independence is Almost Dependence",
-    "section": "Proof",
-    "text": "Proof\nWe can instead work with the random variables \\(\\frac{1}{1+e^{X}}\\), and rename \\(Y\\) similarly too, to work with random variables bounded in \\([0,1]\\).\nFix positive integer \\(n\\), and obtain \\(\\{a_{0,0}=0 &lt; \\cdots &lt; a_{0,n-1} &lt; a_{1,0} &lt; \\cdots &lt; a_{1,n-1} &lt; \\cdots &lt; a_{n-1,0} &lt; \\cdots &lt; a_{n-1,n}=1\\}\\) and \\(\\{b_{0,0}=0 &lt; \\cdots &lt; b_{0,n-1} &lt; b_{1,0} &lt; \\cdots &lt; b_{1,n-1} &lt; \\cdots &lt; b_{n-1,0} &lt; \\cdots &lt; b_{n-1,n}=1\\}\\)\n\n\n\n\n\nsuch that \\[F_X(a_{j,0}) - F_X(a_{j-1, 0}) = \\frac{1}{n}, \\ F_Y(b_{j,0}) - F_Y(b_{j-1, 0}) = \\frac{1}{n}\\] \\[F_X(a_{j,i}) - F_X(a_{j, i-1}) = \\frac{1}{n^2}, \\ F_Y(b_{j,i}) - F_Y(b_{j, i-1}) = \\frac{1}{n^2}\\] \\[\\implies F_X(a_{i,j}) = F_Y(b_{i,j}) = \\frac{i}{n} + \\frac{j}{n^2}\\]\n\\[I_{i,j} = \\{a_{i, j} \\leq x \\leq a_{i, j+1}\\}, \\ J_{j,i} = \\{b_{j, i} \\leq y \\leq b_{j, i+1}\\}\\] \\[I_i = \\cup_{j}I_{i,j}, \\ J_j = \\cup_{i}J_{j,i}\\] The idea is to reorder \\(X\\) in a way such that \\[x \\in I_{i,j} \\iff y \\in J_{j,i}\\]\nHence we would want something like this \\[P\\left(X \\in \\cup_j I_{i,j}\\right)\\cdot P\\left(Y \\in \\cup_i J_{j,i}\\right) = P\\left(X \\in \\cup_{j}I_{i,j} \\text{ and } Y \\in \\cup_{i}J_{j,i}\\right) \\] \\[= P\\left(U \\in \\cup_{j}I_{i,j} \\text{ and } V \\in \\cup_{i}J_{j,i}\\right)\\]\nLet \\(V \\equiv Y\\), we would want to construct a bijective function \\(g:[0,1] \\to [0,1]\\) such that for \\(y \\in J_{j,i}\\)\n\\[F_Y(y) - F_Y(b_{j,i}) = P\\left(b_{j,i} \\leq Y \\leq y\\right) \\stackrel{\\textcolor{red}{!}}{=} P\\left(b_{j,i} \\leq g(X) \\leq y\\right)\\] \\[\\stackrel{\\textcolor{red}{!}}{=}P\\left(a_{i,j} \\leq X \\leq g^{-1}(y)\\right) = F_X(g^{-1}(y)) - F_X(a_{i,j})\\]\n\\[F_X(g^{-1}(y))  = F_Y(y)+(F_X(a_{i,j}) - F_Y(b_{j,i}))\\] \\[\\stackrel{\\textcolor{red}{!}}{=}F_Y(y) + \\left((i-j) \\cdot \\left(\\frac{n-1}{n^2}\\right)\\right)\\] \\[x = g^{-1}(y) \\stackrel{\\textcolor{red}{!}}{=} F_X^{-1}\\left(F_Y(y) + \\left((i-j) \\cdot \\left(\\frac{n-1}{n^2}\\right)\\right)\\right)\\]\nThis is clearly measurable, and it is easy to check that this function indeed satisfies the \\(x \\in I_{i,j} \\iff y \\in J_{j,i}\\) condition. Take \\(U \\equiv g^{-1}(Y)\\).\nI will now be done if I show that \\(U\\) follows the same CDF as \\(X\\). For \\(x \\in I_{i,j}\\)\n\\[P\\left(a_{i,j} \\leq U \\leq x\\right)\\] \\[ = P\\left(a_{i,j} \\leq F_X^{-1}\\left(F_Y(Y) + \\left((i-j) \\cdot \\left(\\frac{n-1}{n^2}\\right)\\right)\\right) \\leq x\\right)\\] \\[= P\\left(F_X(a_{i,j}) \\leq F_Y(Y) + \\left((i-j) \\cdot \\left(\\frac{n-1}{n^2}\\right)\\right) \\leq F_X(x)\\right)\\] \\[= F_X(x) - F_X(a_{i,j}) = P(a_{i,j} \\leq X \\leq x)\\]\nThe last equality was legal because \\(F_X(a_{i,j}) - (F_X(a_{i,j}) - F_Y(b_{j,i})) = F_Y(b_{j,i}) \\geq 0\\).\nNow as \\(n \\to \\infty\\), their joints would get arbitrarily close.\n\\(\\blacksquare\\)\n(If you would like to use this proof, please email me.)\nUsing the same idea but fixing things up a little bit for the issues with invertibility, one could also prove the following"
-  },
-  {
-    "objectID": "posts/nelson/blog.html#theorem-1",
-    "href": "posts/nelson/blog.html#theorem-1",
-    "title": "So Far Yet So Close: How Independence is Almost Dependence",
-    "section": "Theorem",
-    "text": "Theorem\n\nLet \\(X,Y\\) be independent continuous random variables on \\((\\mathbb{R}, \\mathcal{B}, P)\\). For all \\(\\epsilon &gt; 0\\) there exist deterministically dependent \\(U,V\\) on the same probability space with \\(F_U = F_X, F_V = F_Y\\) and \\(\\sup_{(a,b) \\in \\mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \\epsilon\\)."
-  },
-  {
-    "objectID": "posts/OthelloGPT/OthelloGPT.html",
-    "href": "posts/OthelloGPT/OthelloGPT.html",
-    "title": "Ponderings on OthelloGPT",
-    "section": "",
-    "text": "This is a report of sorts of my playing around with OthelloGPT, a GPT model trained on Othello games to predict all the possible legal moves.\nIt is a common problem in Machine Learning to talk about whether a model is just remembering information, performing surface statistics or is actually doing something deeper? We try to investigate this for OthelloGPT!\nThe original paper by Kenneth Li et. al. find that this model is not just performing sequence statistics, the model representation infact has a world model of the Othello environment.\nThe authors make multiple arguments like a) how the world model representation is being used to draw inferences, b) how a non-linear probe can actually input the internal representation of the model and output (with high accuracy!) the current board state and c) how altering the internal representation ends up having the intended effect on the predictions. They also have a more accessible version of it as a blog.\nLater Neel Nanda et al publish a paper talking about their findings on how this representation is, well, actually linear! You need to view in a particular direction to find the linearity!\nIn this project, I dealt with the following problem:"
-  },
-  {
-    "objectID": "posts/OthelloGPT/OthelloGPT.html#how-does-the-model-compute-that-a-certain-cell-is-blank",
-    "href": "posts/OthelloGPT/OthelloGPT.html#how-does-the-model-compute-that-a-certain-cell-is-blank",
-    "title": "Ponderings on OthelloGPT",
-    "section": "How Does The Model Compute That A Certain Cell is Blank?",
-    "text": "How Does The Model Compute That A Certain Cell is Blank?\nThis seems like an easy thing to compute, as all you need to do is to figure out whether the \\((i,j)^{\\text{th}}\\) cell has appeared in the move sequence or not.\nGoals:\n\nAt which layer does the model conclude that it’s blank?\nDoes this come from any specific head or neuron?\nHow could a transformer detect this?\n\nWe hypothesize that a single attention head per cell is what is used by a transformer. Let’s try to answer these questions one-by-one.\n\nGoal #1 At which layer does the model conclude that it’s blank?\nLet us first fix some notation. Let \\(X_L\\) be the intervention by the linear probe at the \\(L\\)’th layer of the residual stream. Let \\(Y\\) be the true representation of the game board.\nWe try to find its goodness at two things:\n\nTest #1: The prediction is blank CONDITIONAL on the true representation being blank\nTest #2: The prediction is NOT blank CONDITIONAL on the correct representation being NOT blank\n\nWe calculate the following conditional probabilities and plot them (which themselves are tensors of the shape \\(\\text{rows} \\times \\text{cols}\\)). Ofcourse we only care about the games in the middle because if not, things become a bit more weird.\\[\n\\text{Test 1: }P(X_L = Y \\Bigg|Y=\\text{Blank}) = \\frac{P(X_L = Y \\text{ and } Y=\\text{Blank})}{P(Y=\\text{Blank})}\n\\]\n\nNotice that the 4 squares in the middle have NaN value. This is because those can never be blank and so there’s a division by zero error. It isn’t an issue for us though.\nAlso, there doesn’t seem to be much improvement after Layer 1, so let us just focus on the first two layers.\n\nLet’s also find out the \\(\\text{maxerr}\\) and \\(\\text{avgerr}\\) across layers and plot it.\n\nLooking at this plot, it seems like a good idea to hypothesize that most of the Is_Blank computation is done in Layer 0 (for most cells) and some of the remaining computation is done in Layer 1. It seems that Layer 1 is what gives it structure finally, though.\nLet’s now do the second test.\n\\[\n\\text{Test 2: }P(X_L \\neq \\text{Blank} \\Bigg|Y\\neq\\text{Blank}) = \\frac{P(X_L \\neq \\text{Blank} \\text{ and } Y\\neq\\text{Blank})}{P(Y\\neq\\text{Blank})}\n\\]\nWe calculate and then plot the same graphs.\n\n\nAh! I thought that the features Is_Blank and Is_Not_Blank would get implemented almost together, and although that does seem to be the case, the \\(\\text{maxerr}\\) only really gets close to the average error by Layer 4, which is precisely where the OthelloGPT has created a high-accuracy world model (according to Neel’s findings). This is all super interesting!\nLet us now try to answer a more important question.\n\n\nGoal #2 Does this come from any specific head or neuron?\nLet’s look at the cosine similarity of output weights and the blank colour probe for top layer 0 and layer 1 neurons sorted according to standard deviation (sorting wrt to “resid_post”)\n\n\nLayer 0 resid_post doesn’t seem very interpretable to me. However, L1N360 looks very interesting. It computes Is_Blank of cell D2. Can we find more such neurons? Let’s try to use the same technique on post\n\n\nWow! Layer 0 seems to compute bunch of Not_Is_Blank features for particular cells. Let’s try to find more such neurons!\n\n\n\nWait! This is all cool and stuff, but what about Is_Blank features? Is Layer 0 not computing it? Lets try to change the experiment in a way to obtain neurons that track Is_Blank heavily.\nI will start with a bound \\(M_U\\) on the absolute values of the cosine sim, so that anything above \\(M_U\\) will be treated as \\(1\\) and anything below \\(M_U\\) will be treated as 0. Could I find something interesting out of this simple setup?\ntop_layer_0_neurons = ((focus_cache[\"post\", 0][:, 3:-3]).abs() &gt; Mu).float().std(dim=[0,1]).argsort(descending=True)\nSetting \\(M_U = 0.2, 0.3, 0.4\\) etc give us bunch of neurons that are very highly correlated to the Is_Blank probe for a single cell! This is more evidence for our hypothesis that Layer 0 computes the Is_Blank feature. Infact, this makes it highly interpretable.\n\n\n\nGoal #3 How could a transformer come up with this?\nWIP!"
-  },
-  {
-    "objectID": "no_show/post-with-code/index.html",
-    "href": "no_show/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "I’m Himadri Mandal, 18, you might know me as quirtt from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (well, mostly Mathematics, but I enjoy both). I am also a CS nerd, enjoy almost anything geeky, and have a deep interest in wanting to automate all of Mathematics, and wish to work on this a lot.\nYou could check some of my projects out on github, but it could be difficult as they are largely undocumented. I am usually found: learning math/cs, reading ML papers, playing table tennis, chilling with friends, singing badly in my room, etc. Ah well. I have been recently getting more and more interested in AI and AI alignment, too. I wish do some good work in that field as well.\nIf you find me interesting - feel free to shoot me a mail at mandalhimadri06@gmail.com or send me a “Hi!” on my Discord."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Cold Reflections",
-    "section": "",
-    "text": "Ideas on DNA Storage\n\n\n\n\n\n\nbiology\n\n\nmachine learning\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n[DRAFT] Some Important Results in Probability Theory\n\n\n\n\n\n\nprobability\n\n\nmath\n\n\n\n\n\n\n\n\n\nMar 17, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n[DRAFT] Language is an Infinitely Incomplete Approximation of Human Concepts\n\n\n\n\n\n\nphilosophy\n\n\ncognition\n\n\nmath\n\n\n\n\n\n\n\n\n\nMar 13, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nHow to get AGI?\n\n\n\n\n\n\nartificial intelligence\n\n\nartificial general intelligence\n\n\nphilosophy\n\n\n\n\n\n\n\n\n\nJul 6, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nPonderings on OthelloGPT\n\n\n\n\n\n\nmachine learning\n\n\nartificial intelligence\n\n\ninterpretability\n\n\n\n\n\n\n\n\n\nMay 5, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nSo Far Yet So Close: How Independence is Almost Dependence\n\n\n\n\n\n\nprobability theory\n\n\nstatistics\n\n\nmath\n\n\n\n\n\n\n\n\n\nMar 4, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem\n\n\n\n\n\n\nalgebra\n\n\nmath\n\n\n\n\n\n\n\n\n\nDec 10, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nAxiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I\n\n\n\n\n\n\nset theory\n\n\nmath\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nShannon’s Card Magic Trick\n\n\n\n\n\n\nisi\n\n\nstatistics\n\n\nmath\n\n\n\n\n\n\n\n\n\nOct 23, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "no_show/welcome/index.html",
-    "href": "no_show/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
-  },
-  {
-    "objectID": "posts/how-to-get-agi/blog.html",
-    "href": "posts/how-to-get-agi/blog.html",
-    "title": "How to get AGI?",
-    "section": "",
-    "text": "Here is an excerpt from a brilliant conversation 1 between Dwarkesh Patel and François Chollet.\nI believe this is the general consensus of most AI researchers on how AGI will be achieved. I have thought along similar lines before but this internalizes that feeling of mine further."
-  },
-  {
-    "objectID": "posts/how-to-get-agi/blog.html#future-of-ai-progress-deep-learning-program-synthesis",
-    "href": "posts/how-to-get-agi/blog.html#future-of-ai-progress-deep-learning-program-synthesis",
-    "title": "How to get AGI?",
-    "section": "(00:48:28) – Future of AI progress: deep learning + program synthesis",
-    "text": "(00:48:28) – Future of AI progress: deep learning + program synthesis\n\nFrançois Chollet 00:48:28\nIt’s intrinsically limited because the substrate of your model is a big parametric curve. All you can do with this is local generalization. If you want to go beyond this towards broader or even extreme generalization, you have to move to a different type of model. My paradigm of choice is discrete program search, program synthesis.\nIf you want to understand that, you can sort of compare and contrast it with deep learning. In deep learning your model is a differentiable parametric curve. In program synthesis, your model is a discrete graph of operators. You’ve got a set of logical operators, like a domain-specific language. You’re picking instances of it. You’re structuring that into a graph that’s a program. That’s actually very similar to a program you might write in Python or C++ and so on. We are doing machine learning here. We’re trying to automatically learn these models.\nIn deep learning your learning engine is gradient descent. Gradient descent is very compute efficient because you have this very strong informative feedback signal about where the solution is. You can get to the solution very quickly, but it is very data inefficient. In order to make it work, you need a dense sampling of the operating space. You need a dense sampling of the data distribution. Then you’re limited to only generalizing within that data distribution. The reason why you have this limitation is because your model is a curve.\nMeanwhile, if you look at discrete program search, the learning engine is combinatorial search. You’re just trying a bunch of programs until you find one that actually meets your spec. This process is extremely data efficient. You can learn a generalizable program from just one example, two examples. This is why it works so well on ARC, by the way. The big limitation is that it’s extremely compute inefficient because you’re running into combinatorial explosion, of course.\nYou can sort of see here how deep learning and discrete program search have very complementary strengths, and limitations as well. Every limitation of deep learning has a corresponding strength in program synthesis and inversely. The path forward is going to be to merge the two.\nHere’s another way you can think about it. These parametric curves trained with gradient descent are great fits for everything that’s System 1-type thinking: pattern recognition, intuition, memorization, etc. Discrete program search is a great fit for Type 2 thinking: planning, reasoning. It’s quickly figuring out a generalizable model that matches just one or two examples, like for an ARC puzzle for instance.\nHumans are never doing pure System 1 or pure System 2. They’re always mixing and matching both. Right now, we have all the tools for System 1. We have almost nothing for System 2. The way forward is to create a hybrid system.\nThe form it’s going to take is mostly System 2. The outer structure is going to be a discrete program search system. You’re going to fix the fundamental limitation of discrete program search, which is combinatorial explosion, with deep learning. You’re going to leverage deep learning to guide and to provide intuition in program space, to guide the program search.\nThat’s very similar to what you see when you’re playing chess or when you’re trying to prove a theorem, for instance. It’s mostly a reasoning thing, but you start out with some intuition about the shape of the solution. That’s very much something you can get via a deep learning model. Deep learning models are very much like intuition machines. They’re pattern matching machines.\nYou start from this shape of the solution, and then you’re going to do actual explicit discrete program search. But you’re not going to do it via brute force. You’re not going to try things randomly. You’re actually going to ask another deep learning model for suggestions. It’ll be like, “here’s the most likely next step. Here’s where in the graph you should be going.” You can also use yet another deep learning model for feedback like “well, here’s what I have so far. Is it looking good? Should I just backtrack and try something new?” Discrete program search is going to be the key but you want to make it dramatically better, orders of magnitude more efficient, by leveraging deep learning.\nBy the way, another thing that you can use deep learning for is of course things like common sense knowledge and knowledge in general. You’re going to end up with this sort of system where you have this on-the-fly synthesis engine that can adapt to new situations.\nThe way it adapts is that it’s going to fetch from a bank of patterns, modules that could be themselves curves, differentiable modules, and some others that could be algorithmic in nature. It’s going to assemble them via this intuition-guided process. For every new situation you might be faced with, it’s going to give you a generalizable model that was synthesized using very, very little data. Something like this would solve ARC."
-  },
-  {
-    "objectID": "posts/how-to-get-agi/blog.html#thoughts",
-    "href": "posts/how-to-get-agi/blog.html#thoughts",
-    "title": "How to get AGI?",
-    "section": "Thoughts",
-    "text": "Thoughts\nAfter watching the podcast, I realized that AlphaGeometry2 is, almost entirely, just this idea. i believe you can become way better at generating intuition if you have a database of all mathematical theorems, proofs etc in a symbolic / DPS form. But this is too naive. I’ll update as I have more thoughts."
-  },
-  {
-    "objectID": "posts/how-to-get-agi/blog.html#footnotes",
-    "href": "posts/how-to-get-agi/blog.html#footnotes",
-    "title": "How to get AGI?",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://www.youtube.com/watch?v=UakqL6Pj9xo↩︎\nhttps://deepmind.google/discover/blog/alphageometry-an-olympiad-level-ai-system-for-geometry/↩︎"
-  },
-  {
     "objectID": "posts/shannon-cardmagic-trick/blog.html",
     "href": "posts/shannon-cardmagic-trick/blog.html",
     "title": "Shannon’s Card Magic Trick",
@@ -196,94 +217,59 @@
     "text": "Part C: Playing Around\nWe can now tinker with the setup to see what happens when we change things a little bit. Note that we picked the card from the top and put it back somewhere. It makes sense to ask: what happens when we pick it from anywhere? Well, here’s a plot in R which showcases what happens when we vary the location of the picked card.\n\n\n\n\n\nWhich makes sense because the way we are choosing the position to put the card into is a function symmetric around 26."
   },
   {
-    "objectID": "posts/incomp-lang/blog.html",
-    "href": "posts/incomp-lang/blog.html",
-    "title": "[DRAFT] Language is an Infinitely Incomplete Approximation of Human Concepts",
+    "objectID": "posts/nelson/blog.html",
+    "href": "posts/nelson/blog.html",
+    "title": "So Far Yet So Close: How Independence is Almost Dependence",
     "section": "",
-    "text": "I had thought of this idea last year, but never got around to writing it. In this blog, I show how humans are infinitely limited by the mode of language in transmission of ideas. I don’t quite remember how I got around to thinking about this, but here goes haha.\nEvery written language is described by a finite set of characters. Every spoken language requires a finite sequence of sounds. Every idea that is realized by humans and communicated through language has to be put into a sequence of letters / sequence of sounds. Call such a thought expressible.\nI define languages to be made of fixed objects, i.e., there are no new characters. A reasonable contention would be: “this is BS? languages change all the time”. Well, yes. However, if they change, then I call the new object a new language. You can think of this as:\n\\[\n\\{\\text{eng\\_v1}, \\text{eng\\_v2}, \\text{eng\\_v3}\\cdots\\}\n\\]\n&lt;fill in: why the set of all languages is countable&gt;\n\nTheorem\nThe set of all languages is countable.\n\n\n\nTheorem\nIf the set of all possible spoken and written languages is countable then the set of expressible ideas is countable.\n\nProof.\nLet \\(S\\) be the set of all languages. For a language, \\(L \\in S\\), let \\(\\mathcal{C}(L)\\) be the characters of \\(L\\). We understand that, \\(|\\mathcal{C}(L)|&lt;\\infty.\\)\nDefine \\(\\mathcal{C}(S) = \\cup_{L \\in S}\\{(L, x) : x\\in \\mathcal{C}(L) \\}\\), which is the set of all characters (signed with the language it belongs to). Since \\(S\\) is countable, \\(\\mathcal{C}(S)\\) is countable.\nNow, every expressible idea is a finite sequence of characters/phonemes like:\n\\[\n\\gamma_1 \\gamma_2 \\gamma_3 \\gamma_4 \\cdots \\gamma_N\n\\]\nwhere \\(\\gamma_i \\in \\mathcal{C}(S)\\).\nLet \\(\\mathrm{I}\\) be the set of all expressible ideas. We know that set of all finite sequences formed using countable characters is countable, and therefore: \\(\\mathrm{I}\\) be countable. \\(\\blacksquare\\)"
+    "text": "Imagine two continuous random variables seemingly unrelated and free from any influence from each other. It’s a common assumption in probability theory that independence implies a lack of any relationship between variables.\nHowever, a fascinating theorem challenges this notion, showing that from any two independent continuous random variables, we can construct new deterministically dependent variables that not only share the same distributions but also have joint distributions that are arbitrarily close.\nIn other words, independence can be deceptive, leading us to a realm where variables are closer than we think. Let’s explore this intriguing theorem and its implications.\n(If you could link me up with a paper that talks about this theorem, please do. I couldn’t find it. This theorem is apparently proven by “Nelson”. Edit: I found it.)"
   },
   {
-    "objectID": "posts/mct-dct/blog.html#a-random-variable-x-is-has-a-density-f_x-iff-the-cdf-f_x-is-absolutely-continous1-in-every-closed-bounded-interval.",
-    "href": "posts/mct-dct/blog.html#a-random-variable-x-is-has-a-density-f_x-iff-the-cdf-f_x-is-absolutely-continous1-in-every-closed-bounded-interval.",
-    "title": "Some Important Results in Probability Theory",
-    "section": "A random variable \\(X\\) is has a density \\(f_X\\) iff the CDF \\(F_X\\) is absolutely continous1 in every closed, bounded interval.",
-    "text": "A random variable \\(X\\) is has a density \\(f_X\\) iff the CDF \\(F_X\\) is absolutely continous1 in every closed, bounded interval."
+    "objectID": "posts/nelson/blog.html#theorem",
+    "href": "posts/nelson/blog.html#theorem",
+    "title": "So Far Yet So Close: How Independence is Almost Dependence",
+    "section": "Theorem",
+    "text": "Theorem\n\nLet \\(X,Y\\) with \\(F_X, F_Y \\uparrow,\\) be independent continuous random variables on \\((\\mathbb{R}, \\mathcal{B}, P)\\). For all \\(\\epsilon &gt; 0\\) there exist deterministically dependent \\(U,V\\) on the same probability space \\(F_U = F_X, F_V = F_Y\\) and \\(\\sup_{(a,b) \\in \\mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \\epsilon\\).\n\nHere is the proof I came up with:"
   },
   {
-    "objectID": "posts/mct-dct/blog.html#footnotes",
-    "href": "posts/mct-dct/blog.html#footnotes",
-    "title": "[DRAFT] Some Important Results in Probability Theory",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://en.wikipedia.org/wiki/Absolute_continuity↩︎"
+    "objectID": "posts/nelson/blog.html#proof",
+    "href": "posts/nelson/blog.html#proof",
+    "title": "So Far Yet So Close: How Independence is Almost Dependence",
+    "section": "Proof",
+    "text": "Proof\nWe can instead work with the random variables \\(\\frac{1}{1+e^{X}}\\), and rename \\(Y\\) similarly too, to work with random variables bounded in \\([0,1]\\).\nFix positive integer \\(n\\), and obtain \\(\\{a_{0,0}=0 &lt; \\cdots &lt; a_{0,n-1} &lt; a_{1,0} &lt; \\cdots &lt; a_{1,n-1} &lt; \\cdots &lt; a_{n-1,0} &lt; \\cdots &lt; a_{n-1,n}=1\\}\\) and \\(\\{b_{0,0}=0 &lt; \\cdots &lt; b_{0,n-1} &lt; b_{1,0} &lt; \\cdots &lt; b_{1,n-1} &lt; \\cdots &lt; b_{n-1,0} &lt; \\cdots &lt; b_{n-1,n}=1\\}\\)\n\n\n\n\n\nsuch that \\[F_X(a_{j,0}) - F_X(a_{j-1, 0}) = \\frac{1}{n}, \\ F_Y(b_{j,0}) - F_Y(b_{j-1, 0}) = \\frac{1}{n}\\] \\[F_X(a_{j,i}) - F_X(a_{j, i-1}) = \\frac{1}{n^2}, \\ F_Y(b_{j,i}) - F_Y(b_{j, i-1}) = \\frac{1}{n^2}\\] \\[\\implies F_X(a_{i,j}) = F_Y(b_{i,j}) = \\frac{i}{n} + \\frac{j}{n^2}\\]\n\\[I_{i,j} = \\{a_{i, j} \\leq x \\leq a_{i, j+1}\\}, \\ J_{j,i} = \\{b_{j, i} \\leq y \\leq b_{j, i+1}\\}\\] \\[I_i = \\cup_{j}I_{i,j}, \\ J_j = \\cup_{i}J_{j,i}\\] The idea is to reorder \\(X\\) in a way such that \\[x \\in I_{i,j} \\iff y \\in J_{j,i}\\]\nHence we would want something like this \\[P\\left(X \\in \\cup_j I_{i,j}\\right)\\cdot P\\left(Y \\in \\cup_i J_{j,i}\\right) = P\\left(X \\in \\cup_{j}I_{i,j} \\text{ and } Y \\in \\cup_{i}J_{j,i}\\right) \\] \\[= P\\left(U \\in \\cup_{j}I_{i,j} \\text{ and } V \\in \\cup_{i}J_{j,i}\\right)\\]\nLet \\(V \\equiv Y\\), we would want to construct a bijective function \\(g:[0,1] \\to [0,1]\\) such that for \\(y \\in J_{j,i}\\)\n\\[F_Y(y) - F_Y(b_{j,i}) = P\\left(b_{j,i} \\leq Y \\leq y\\right) \\stackrel{\\textcolor{red}{!}}{=} P\\left(b_{j,i} \\leq g(X) \\leq y\\right)\\] \\[\\stackrel{\\textcolor{red}{!}}{=}P\\left(a_{i,j} \\leq X \\leq g^{-1}(y)\\right) = F_X(g^{-1}(y)) - F_X(a_{i,j})\\]\n\\[F_X(g^{-1}(y))  = F_Y(y)+(F_X(a_{i,j}) - F_Y(b_{j,i}))\\] \\[\\stackrel{\\textcolor{red}{!}}{=}F_Y(y) + \\left((i-j) \\cdot \\left(\\frac{n-1}{n^2}\\right)\\right)\\] \\[x = g^{-1}(y) \\stackrel{\\textcolor{red}{!}}{=} F_X^{-1}\\left(F_Y(y) + \\left((i-j) \\cdot \\left(\\frac{n-1}{n^2}\\right)\\right)\\right)\\]\nThis is clearly measurable, and it is easy to check that this function indeed satisfies the \\(x \\in I_{i,j} \\iff y \\in J_{j,i}\\) condition. Take \\(U \\equiv g^{-1}(Y)\\).\nI will now be done if I show that \\(U\\) follows the same CDF as \\(X\\). For \\(x \\in I_{i,j}\\)\n\\[P\\left(a_{i,j} \\leq U \\leq x\\right)\\] \\[ = P\\left(a_{i,j} \\leq F_X^{-1}\\left(F_Y(Y) + \\left((i-j) \\cdot \\left(\\frac{n-1}{n^2}\\right)\\right)\\right) \\leq x\\right)\\] \\[= P\\left(F_X(a_{i,j}) \\leq F_Y(Y) + \\left((i-j) \\cdot \\left(\\frac{n-1}{n^2}\\right)\\right) \\leq F_X(x)\\right)\\] \\[= F_X(x) - F_X(a_{i,j}) = P(a_{i,j} \\leq X \\leq x)\\]\nThe last equality was legal because \\(F_X(a_{i,j}) - (F_X(a_{i,j}) - F_Y(b_{j,i})) = F_Y(b_{j,i}) \\geq 0\\).\nNow as \\(n \\to \\infty\\), their joints would get arbitrarily close.\n\\(\\blacksquare\\)\n(If you would like to use this proof, please email me.)\nUsing the same idea but fixing things up a little bit for the issues with invertibility, one could also prove the following"
   },
   {
-    "objectID": "posts/dna-storage/blog.html",
-    "href": "posts/dna-storage/blog.html",
-    "title": "Ideas on DNA Storage",
+    "objectID": "posts/nelson/blog.html#theorem-1",
+    "href": "posts/nelson/blog.html#theorem-1",
+    "title": "So Far Yet So Close: How Independence is Almost Dependence",
+    "section": "Theorem",
+    "text": "Theorem\n\nLet \\(X,Y\\) be independent continuous random variables on \\((\\mathbb{R}, \\mathcal{B}, P)\\). For all \\(\\epsilon &gt; 0\\) there exist deterministically dependent \\(U,V\\) on the same probability space with \\(F_U = F_X, F_V = F_Y\\) and \\(\\sup_{(a,b) \\in \\mathbb{R}^2} |F_{U,V}(a,b) - F_{X,Y}(a,b)| &lt; \\epsilon\\)."
+  },
+  {
+    "objectID": "no_show/welcome/index.html",
+    "href": "no_show/welcome/index.html",
+    "title": "Welcome To My Blog",
     "section": "",
-    "text": "Recently, I have been thinking about the DNA storage problem quite a bit. It’s been something extremely interesting to me. Asking ChatGPT for DNA storage system use-cases, we find a heck ton of stuff:\nIn this blog post: I would like to present some of my ideas on how DNA sequencing can be improved (I am not a biologist so please feel free to tell me if I am spewing nonsense, haha!) Before that, though, let me quickly present the context in which thinking about this came to be."
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
-    "objectID": "posts/mct-dct/blog.html",
-    "href": "posts/mct-dct/blog.html",
-    "title": "[DRAFT] Some Important Results in Probability Theory",
+    "objectID": "thoughts/(a) NOW.html",
+    "href": "thoughts/(a) NOW.html",
+    "title": "Cold Reflections",
     "section": "",
-    "text": "Proof."
+    "text": "Update the Blog and connect the obsidian files to the blog directly."
   },
   {
-    "objectID": "posts/mct-dct/blog.html#theorem-lebesgue-differentiation-theorem",
-    "href": "posts/mct-dct/blog.html#theorem-lebesgue-differentiation-theorem",
-    "title": "[DRAFT] Some Important Results in Probability Theory",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Cold Reflections",
     "section": "",
-    "text": "Proof."
+    "text": "Ideas on DNA Storage\n\n\n\nbiology\n\nmachine learning\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n[DRAFT] Some Important Results in Probability Theory\n\n\n\nprobability\n\nmath\n\n\n\n\n\n\n\n\n\nMar 17, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n[DRAFT] Language is an Infinitely Incomplete Approximation of Human Concepts\n\n\n\nphilosophy\n\ncognition\n\nmath\n\n\n\n\n\n\n\n\n\nMar 13, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nHow to get AGI?\n\n\n\nartificial intelligence\n\nartificial general intelligence\n\nphilosophy\n\n\n\n\n\n\n\n\n\nJul 6, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nPonderings on OthelloGPT\n\n\n\nmachine learning\n\nartificial intelligence\n\ninterpretability\n\n\n\n\n\n\n\n\n\nMay 5, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nSo Far Yet So Close: How Independence is Almost Dependence\n\n\n\nprobability theory\n\nstatistics\n\nmath\n\n\n\n\n\n\n\n\n\nMar 4, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem\n\n\n\nalgebra\n\nmath\n\n\n\n\n\n\n\n\n\nDec 10, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nAxiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I\n\n\n\nset theory\n\nmath\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nShannon’s Card Magic Trick\n\n\n\nisi\n\nstatistics\n\nmath\n\n\n\n\n\n\n\n\n\nOct 23, 2023\n\n\nHimadri Mandal\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/mct-dct/blog.html#theorem-monotone-convergence-theorem",
-    "href": "posts/mct-dct/blog.html#theorem-monotone-convergence-theorem",
-    "title": "[DRAFT] Some Important Results in Probability Theory",
-    "section": "Theorem: Monotone Convergence Theorem",
-    "text": "Theorem: Monotone Convergence Theorem"
-  },
-  {
-    "objectID": "posts/dna-storage/blog.html#references",
-    "href": "posts/dna-storage/blog.html#references",
-    "title": "Ideas on DNA Storage",
-    "section": "References",
-    "text": "References"
-  },
-  {
-    "objectID": "posts/dna-storage/blog.html#assumptions",
-    "href": "posts/dna-storage/blog.html#assumptions",
-    "title": "Ideas on DNA Storage",
-    "section": "Assumptions",
-    "text": "Assumptions\n\n\\(\\exists \\ \\delta \\ \\forall S, |S| &lt; \\delta\\)\n\\[\nG(S) \\text{ is unique.}\n\\]\nwhich is saying that for small DNA sequences the generated topology is unique.\nThere exists a fastly-observable \\(f\\) that can be used to invert the map, and hence, obtain \\(T\\).\n\\(f\\) is “more-or-less” one-one."
-  },
-  {
-    "objectID": "posts/dna-storage/blog.html#further",
-    "href": "posts/dna-storage/blog.html#further",
-    "title": "Ideas on DNA Storage",
-    "section": "Further",
-    "text": "Further\nDNA sequences are used because they exhibit very interesting and useful properties.\nUsing\n\nDNA Polymerase,\nrestriction enzymes,\nand techniques like PCR\n\none can manipulate DNA sequences as needed. This is especially why DNA sequences are preferred. However, there could be other biochemical molecules that demonstrate capabilities of being manipulated similarly, and also turn out to be better candidates for the biochemical storage problem.\nThis could be due to possibilities of finer manipulation, or have better \\(f\\) or could have easier-to-learn inverse mappings \\(\\boxed{f(G(T)) \\to T}\\)."
-  },
-  {
-    "objectID": "posts/dna-storage/blog.html#one-step-further",
-    "href": "posts/dna-storage/blog.html#one-step-further",
-    "title": "Ideas on DNA Storage",
-    "section": "One Step Further",
-    "text": "One Step Further\nDNA sequences are used because they exhibit very interesting and useful properties.\nUsing\n\nDNA Polymerase,\nrestriction enzymes,\nand techniques like PCR\n\none can manipulate DNA sequences as needed. This is especially why DNA sequences are preferred. However, there could be other biochemical molecules that demonstrate capabilities of being manipulated similarly, and also turn out to be better candidates for the biochemical storage problem.\nThis could be due to possibilities of finer manipulation, or have better \\(f\\) or could have easier-to-learn inverse mappings \\(\\boxed{f(G(T)) \\to T}\\)."
-  },
-  {
-    "objectID": "posts/OthelloGPT/blog.html",
-    "href": "posts/OthelloGPT/blog.html",
-    "title": "Ponderings on OthelloGPT",
+    "objectID": "thoughts/NOW.html",
+    "href": "thoughts/NOW.html",
+    "title": "Cold Reflections",
     "section": "",
-    "text": "This is a report of sorts of my playing around with OthelloGPT, a GPT model trained on Othello games to predict all the possible legal moves.\nIt is a common problem in Machine Learning to talk about whether a model is just remembering information, performing surface statistics or is actually doing something deeper? We try to investigate this for OthelloGPT!\nThe original paper by Kenneth Li et. al. find that this model is not just performing sequence statistics, the model representation infact has a world model of the Othello environment.\nThe authors make multiple arguments like a) how the world model representation is being used to draw inferences, b) how a non-linear probe can actually input the internal representation of the model and output (with high accuracy!) the current board state and c) how altering the internal representation ends up having the intended effect on the predictions. They also have a more accessible version of it as a blog.\nLater Neel Nanda et al publish a paper talking about their findings on how this representation is, well, actually linear! You need to view in a particular direction to find the linearity!\nIn this project, I dealt with the following problem:"
-  },
-  {
-    "objectID": "posts/OthelloGPT/blog.html#how-does-the-model-compute-that-a-certain-cell-is-blank",
-    "href": "posts/OthelloGPT/blog.html#how-does-the-model-compute-that-a-certain-cell-is-blank",
-    "title": "Ponderings on OthelloGPT",
-    "section": "How Does The Model Compute That A Certain Cell is Blank?",
-    "text": "How Does The Model Compute That A Certain Cell is Blank?\nThis seems like an easy thing to compute, as all you need to do is to figure out whether the \\((i,j)^{\\text{th}}\\) cell has appeared in the move sequence or not.\nGoals:\n\nAt which layer does the model conclude that it’s blank?\nDoes this come from any specific head or neuron?\nHow could a transformer detect this?\n\nWe hypothesize that a single attention head per cell is what is used by a transformer. Let’s try to answer these questions one-by-one.\n\nGoal #1 At which layer does the model conclude that it’s blank?\nLet us first fix some notation. Let \\(X_L\\) be the intervention by the linear probe at the \\(L\\)’th layer of the residual stream. Let \\(Y\\) be the true representation of the game board.\nWe try to find its goodness at two things:\n\nTest #1: The prediction is blank CONDITIONAL on the true representation being blank\nTest #2: The prediction is NOT blank CONDITIONAL on the correct representation being NOT blank\n\nWe calculate the following conditional probabilities and plot them (which themselves are tensors of the shape \\(\\text{rows} \\times \\text{cols}\\)). Ofcourse we only care about the games in the middle because if not, things become a bit more weird.\\[\n\\text{Test 1: }P(X_L = Y \\Bigg|Y=\\text{Blank}) = \\frac{P(X_L = Y \\text{ and } Y=\\text{Blank})}{P(Y=\\text{Blank})}\n\\]\n\nNotice that the 4 squares in the middle have NaN value. This is because those can never be blank and so there’s a division by zero error. It isn’t an issue for us though.\nAlso, there doesn’t seem to be much improvement after Layer 1, so let us just focus on the first two layers.\n\nLet’s also find out the \\(\\text{maxerr}\\) and \\(\\text{avgerr}\\) across layers and plot it.\n\nLooking at this plot, it seems like a good idea to hypothesize that most of the Is_Blank computation is done in Layer 0 (for most cells) and some of the remaining computation is done in Layer 1. It seems that Layer 1 is what gives it structure finally, though.\nLet’s now do the second test.\n\\[\n\\text{Test 2: }P(X_L \\neq \\text{Blank} \\Bigg|Y\\neq\\text{Blank}) = \\frac{P(X_L \\neq \\text{Blank} \\text{ and } Y\\neq\\text{Blank})}{P(Y\\neq\\text{Blank})}\n\\]\nWe calculate and then plot the same graphs.\n\n\nAh! I thought that the features Is_Blank and Is_Not_Blank would get implemented almost together, and although that does seem to be the case, the \\(\\text{maxerr}\\) only really gets close to the average error by Layer 4, which is precisely where the OthelloGPT has created a high-accuracy world model (according to Neel’s findings). This is all super interesting!\nLet us now try to answer a more important question.\n\n\nGoal #2 Does this come from any specific head or neuron?\nLet’s look at the cosine similarity of output weights and the blank colour probe for top layer 0 and layer 1 neurons sorted according to standard deviation (sorting wrt to “resid_post”)\n\n\nLayer 0 resid_post doesn’t seem very interpretable to me. However, L1N360 looks very interesting. It computes Is_Blank of cell D2. Can we find more such neurons? Let’s try to use the same technique on post\n\n\nWow! Layer 0 seems to compute bunch of Not_Is_Blank features for particular cells. Let’s try to find more such neurons!\n\n\n\nWait! This is all cool and stuff, but what about Is_Blank features? Is Layer 0 not computing it? Lets try to change the experiment in a way to obtain neurons that track Is_Blank heavily.\nI will start with a bound \\(M_U\\) on the absolute values of the cosine sim, so that anything above \\(M_U\\) will be treated as \\(1\\) and anything below \\(M_U\\) will be treated as 0. Could I find something interesting out of this simple setup?\ntop_layer_0_neurons = ((focus_cache[\"post\", 0][:, 3:-3]).abs() &gt; Mu).float().std(dim=[0,1]).argsort(descending=True)\nSetting \\(M_U = 0.2, 0.3, 0.4\\) etc give us bunch of neurons that are very highly correlated to the Is_Blank probe for a single cell! This is more evidence for our hypothesis that Layer 0 computes the Is_Blank feature. Infact, this makes it highly interpretable.\n\n\n\nGoal #3 How could a transformer come up with this?\nWIP!"
+    "text": "Update the Blog and connect the obsidian files to the blog directly."
   }
 ]

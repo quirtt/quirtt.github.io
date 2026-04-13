@@ -3,3 +3,4 @@
 /docs/no_show/
 /.vscode
 .DS_Store
+**/*.quarto_ipynb

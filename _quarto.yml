@@ -1,7 +1,9 @@
 project:
   type: website
   output-dir: docs
-  
+  resources: 
+    - thoughts/
+
 website:
   title: "Cold Reflections"
   favicon: "coldreflection.jpeg"
@@ -19,13 +21,6 @@ website:
 format:
   html:
     theme: pulse
-    # theme: cerulean
-    # theme: default
-    # theme: cyborg
-    # theme: minty
-    # theme: sketchy
-    # theme: vapor (blue edit karna padega)
-  
     css: styles.css
 
 

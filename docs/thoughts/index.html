@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thoughts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #58a6ff;
+        }
+        
+        .subtitle {
+            color: #8b949e;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+        
+        .file-list {
+            list-style: none;
+        }
+        
+        .file-list li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .file-list a {
+            color: #58a6ff;
+            text-decoration: none;
+            font-size: 1.05rem;
+            transition: color 0.2s;
+            word-break: break-word;
+        }
+        
+        .file-list a:hover {
+            color: #79c0ff;
+            text-decoration: underline;
+        }
+        
+        .empty-state {
+            color: #8b949e;
+            font-style: italic;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .back-link {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #30363d;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        .back-link a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thoughts</h1>
+        <p class="subtitle">Raw notes from Obsidian • No filtering, no curation</p>
+        
+        <ul class="file-list" id="fileList">
+            <li class="empty-state">Loading...</li>
+        </ul>
+        
+        <div class="back-link">
+            <a href="/">← Back to quirtt.github.io</a>
+        </div>
+    </div>
+    
+    <script>
+        // DEBUG: Show current location and what we're trying to fetch
+        console.log('=== SCRIPT EXECUTION DEBUG ===');
+        console.log('Page URL:', window.location.href);
+        console.log('Pathname:', window.location.pathname);
+        console.log('Origin:', window.location.origin);
+        console.log('Base path:', window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1));
+        console.log('Fetching from: ./manifest.json');
+        console.log('Full URL would be:', window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1) + 'manifest.json');
+        console.log('=============================\n');
+        
+        // DEBUG: Try to list all files in this directory
+        console.log('📂 Attempting to list files in current directory...');
+        fetch('./')
+            .then(response => response.text())
+            .then(html => {
+                console.log('✅ Directory listing HTML received');
+                console.log('Raw HTML (first 2000 chars):', html.substring(0, 2000));
+                
+                // Try to parse as HTML and extract links
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const links = Array.from(doc.querySelectorAll('a'));
+                console.log('Found ' + links.length + ' links in directory listing:');
+                links.forEach((link, idx) => {
+                    console.log(`  ${idx + 1}. ${link.textContent} → ${link.href}`);
+                });
+            })
+            .catch(error => {
+                console.warn('⚠️ Could not get directory listing (GitHub Pages might not support this):', error.message);
+            });
+        
+        console.log('=============================\n');
+        
+        // Load manifest.json which contains list of all markdown files
+        const fileList = document.getElementById('fileList');
+        
+        // Try fetching manifest.json with cache busting
+        const manifestUrl = './manifest.json?' + new Date().getTime();
+        console.log('About to fetch:', manifestUrl);
+        
+        fetch(manifestUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: manifest.json not found`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const files = data.files || [];
+                
+                if (files.length === 0) {
+                    fileList.innerHTML = '<li class="empty-state">❌ No markdown files found in manifest.json<br><br>Did you run: <code>python3 sync-thoughts.py</code> ?</li>';
+                    return;
+                }
+                
+                fileList.innerHTML = files
+                    .filter(filename => filename.endsWith('.md'))
+                    .sort()
+                    .map(filename => {
+                        const displayName = filename.replace('.md', '').replace(/-/g, ' ');
+                        return `<li><a href="viewer.html?file=${filename}">${displayName}</a></li>`;
+                    })
+                    .join('');
+            })
+            .catch(error => {
+                console.error('❌ FETCH ERROR:', error);
+                console.error('Error message:', error.message);
+                console.error('Current URL:', window.location.href);
+                console.error('Manifest URL attempted:', manifestUrl);
+                
+                // Try to fetch without cache busting to see what happens
+                console.log('\n🔍 Trying alternate fetch without cache busting...');
+                fetch('./manifest.json')
+                    .then(r => console.log('Response status:', r.status, 'OK:', r.ok))
+                    .catch(e => console.error('Alternate fetch also failed:', e));
+                
+                fileList.innerHTML = `
+                    <li class="empty-state">
+                        ⚠️ Error loading manifest.json<br><br>
+                        <strong>Debug Info:</strong><br>
+                        Current URL: ${window.location.href}<br>
+                        Tried to fetch: ${manifestUrl}<br>
+                        Error: ${error.message}<br><br>
+                        <strong>Troubleshooting:</strong><br>
+                        1. Did you run <code>python3 sync-thoughts.py</code>?<br>
+                        2. Check browser console (F12) for detailed errors<br>
+                        3. Check if <code>manifest.json</code> exists in this folder<br>
+                        4. Try <code>git add thoughts/manifest.json && git push</code>
+                    </li>
+                `;
+            });
+    </script>
+</body>
+</html>
