@@ -1,0 +1,1 @@
+- Update the Blog and connect the obsidian files to the blog directly. 
