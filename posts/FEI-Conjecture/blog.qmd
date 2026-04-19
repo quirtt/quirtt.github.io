@@ -1,0 +1,56 @@
+---
+title: "Fourier Entropy Influence Conjecture"
+author: "Himadri Mandal"
+date: ""
+categories: [boolean functions, analysis, probability, math]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+        # css: styles.css
+editor: visual
+image: "pfp.jpg"
+---
+
+::: {.hidden}
+$$
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\E}{\mathbb{E}}
+$$
+:::
+
+Fourier Entropy Influence Conjecture is a conjecture in the analysis of boolean functions which states that for any boolean function $f:\{-1,1\}^n \to \{-1,1\}$, there is a constant $C$ independent of the dimension $n$ such that 
+
+$$
+    H(\hat{f}^2) \leq C \cdot I(f)
+$$
+
+I wish to understand the existing literature in FEIC before I start working with Prof. Sourav Chakraborty. Even if I don't make any progress in the Summer, I believe something will click in the time I will be at ENS Paris. Let's begin. I started by visiting the EmergentMind [page](https://www.emergentmind.com/topics/fourier-entropy-influence-fei-conjecture) on this conjecture and scouring through the guest [post](https://terrytao.wordpress.com/2007/08/16/gil-kalai-the-entropyinfluence-conjecture/) on the Terrance Tao blog by Gil Kalai.
+
+Some recent results in the FEIC are:
+
+- (2020): [Towards a Proof of the Fourier--Entropy Conjecture? (Esty Kelman, Guy Kindler, Noam Lifshitz, Dor Minzer, Muli Safra)](https://arxiv.org/abs/1911.10579), with talks at [lecture1](https://www.youtube.com/watch?v=gccNUx1S5FA), [lecture2](https://www.youtube.com/watch?v=gccNUx1S5FA)
+
+- (2023): [A new bound for the Fourier-Entropy-Influence conjecture (Xiao Han)](https://arxiv.org/abs/2312.08271)
+
+First, we state the theorems proven in the first paper.
+
+For $\{0,1\}$ boolean functions, define the normalized influence of $f$ as $\tilde{I}[f] = \frac{I[f]}{\Var(f)}$. 
+
+> There is $C > 0$, such that for any function $f:\{0, 1\}^n \to \{0, 1\}^n$, there is a non-empty $S \subset [n]$ of size $O(\tilde{I}[f])$ such that $|\hat{f}(S)| \geq 2^{-C \cdot |S| \log(1 + \tilde{I}[f])}\sqrt{\Var(f)}$. In particular, $$H_\infty(\hat{f}^2) \ll \tilde{I}[f] \log(1 + \tilde{I}[f])$$. 
+
+> For every $\eta > 0$, there exists $C > 0$, such that for all $f: \{0,1\}^n \to \{0,1\}$ we have $$\sum_S \hat{f}(S)^2 1_{|\hat{f}(S)| \leq 2^{-C \cdot \tilde{I}[f]\log(1 + \tilde{I}[f])}} \leq \eta \cdot \Var(f)$$
+
+Next, they show a slightly weaker version of FEIC that holds for the low-degree parts of $f$. 
+
+> There exists an absolute constant $K > 0$, such that for any $D \in \mathbb{N}$ and $f:\{0,1\}^n \to \{0,1\}$ we have that $$H[\widehat{f^{\leq D}}] K \sum_{|S| \leq D} |S| \log(|S| + 1)\hat{f}(S)^2 + K \cdot I[f]$$
+
+Since $I[f] = \sum_S |S| \hat{f}(S)^2$, this theorem is just short of FEIC by a $\log(|S| + 1)$ factor.
+
+Now, we state the results proven in the, recent, second paper. 
+
+> There exist $c_1, c_2 > 0$ such that for any boolean function $f:\{-1,1\}^n \to \{-1,1\}$, we have $$H(\hat{f}^2) < c_1 \cdot I(f) + c_2 \sum_{k \in [n]} I_k(f) \log\frac{1}{I_k(f)}$$
+
+---
+
+To understand the first paper, I start with the talks. I attach the notes I took while watching the talks.

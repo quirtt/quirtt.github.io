@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Himadri Mandal">
 
-<title>reorganization-of-thoughts-before-i-enter-ens – Cold Reflections</title>
+<title>Fourier Entropy Influence Conjecture – Cold Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,25 +24,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../coldreflection.jpeg" rel="icon" type="image/jpeg">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-1ac49dc45d461ba7e3f4755605d38e4c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../coldreflection.jpeg" rel="icon" type="image/jpeg">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-1ac49dc45d461ba7e3f4755605d38e4c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,22 +71,51 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../coldreflection.jpeg" alt="" class="navbar-logo light-content">
-    <img src="../coldreflection.jpeg" alt="" class="navbar-logo dark-content">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../coldreflection.jpeg" alt="" class="navbar-logo light-content">
+    <img src="../../coldreflection.jpeg" alt="" class="navbar-logo dark-content">
     </a>
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Cold Reflections</span>
     </a>
   </div>
@@ -96,13 +126,13 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../thoughts/"> 
+    <a class="nav-link" href="../../thoughts/"> 
 <span class="menu-text">Thoughts</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -118,17 +148,82 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Fourier Entropy Influence Conjecture</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">boolean functions</div>
+                <div class="quarto-category">analysis</div>
+                <div class="quarto-category">probability</div>
+                <div class="quarto-category">math</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Himadri Mandal </p>
+            </div>
+    </div>
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
-<p>Well, this is just a test document. But I have a lot to say. I recall what Marbach told me. What Partha sir told me and understand what has led me to this point. What are the fundamental qualities that are different in me that has led me somewhere which nobody near me could possibly dream of.</p>
+
+<div class="hidden">
+<p><span class="math display">\[
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\E}{\mathbb{E}}
+\]</span></p>
+</div>
+<p>Fourier Entropy Influence Conjecture is a conjecture in the analysis of boolean functions which states that for any boolean function <span class="math inline">\(f:\{-1,1\}^n \to \{-1,1\}\)</span>, there is a constant <span class="math inline">\(C\)</span> independent of the dimension <span class="math inline">\(n\)</span> such that</p>
+<p><span class="math display">\[
+    H(\hat{f}^2) \leq C \cdot I(f)
+\]</span></p>
+<p>I wish to understand the existing literature in FEIC before I start working with Prof.&nbsp;Sourav Chakraborty. Even if I don’t make any progress in the Summer, I believe something will click in the time I will be at ENS Paris. Let’s begin. I started by visiting the EmergentMind <a href="https://www.emergentmind.com/topics/fourier-entropy-influence-fei-conjecture">page</a> on this conjecture and scouring through the guest <a href="https://terrytao.wordpress.com/2007/08/16/gil-kalai-the-entropyinfluence-conjecture/">post</a> on the Terrance Tao blog by Gil Kalai.</p>
+<p>Some recent results in the FEIC are:</p>
+<ul>
+<li><p>(2020): <a href="https://arxiv.org/abs/1911.10579">Towards a Proof of the Fourier–Entropy Conjecture? (Esty Kelman, Guy Kindler, Noam Lifshitz, Dor Minzer, Muli Safra)</a>, with talks at <a href="https://www.youtube.com/watch?v=gccNUx1S5FA">lecture1</a>, <a href="https://www.youtube.com/watch?v=gccNUx1S5FA">lecture2</a></p></li>
+<li><p>(2023): <a href="https://arxiv.org/abs/2312.08271">A new bound for the Fourier-Entropy-Influence conjecture (Xiao Han)</a></p></li>
+</ul>
+<p>First, we state the theorems proven in the first paper.</p>
+<p>For <span class="math inline">\(\{0,1\}\)</span> boolean functions, define the normalized influence of <span class="math inline">\(f\)</span> as <span class="math inline">\(\tilde{I}[f] = \frac{I[f]}{\Var(f)}\)</span>.</p>
+<blockquote class="blockquote">
+<p>There is <span class="math inline">\(C &gt; 0\)</span>, such that for any function <span class="math inline">\(f:\{0, 1\}^n \to \{0, 1\}^n\)</span>, there is a non-empty <span class="math inline">\(S \subset [n]\)</span> of size <span class="math inline">\(O(\tilde{I}[f])\)</span> such that <span class="math inline">\(|\hat{f}(S)| \geq 2^{-C \cdot |S| \log(1 + \tilde{I}[f])}\sqrt{\Var(f)}\)</span>. In particular, <span class="math display">\[H_\infty(\hat{f}^2) \ll \tilde{I}[f] \log(1 + \tilde{I}[f])\]</span>.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>For every <span class="math inline">\(\eta &gt; 0\)</span>, there exists <span class="math inline">\(C &gt; 0\)</span>, such that for all <span class="math inline">\(f: \{0,1\}^n \to \{0,1\}\)</span> we have <span class="math display">\[\sum_S \hat{f}(S)^2 1_{|\hat{f}(S)| \leq 2^{-C \cdot \tilde{I}[f]\log(1 + \tilde{I}[f])}} \leq \eta \cdot \Var(f)\]</span></p>
+</blockquote>
+<p>Next, they show a slightly weaker version of FEIC that holds for the low-degree parts of <span class="math inline">\(f\)</span>.</p>
+<blockquote class="blockquote">
+<p>There exists an absolute constant <span class="math inline">\(K &gt; 0\)</span>, such that for any <span class="math inline">\(D \in \mathbb{N}\)</span> and <span class="math inline">\(f:\{0,1\}^n \to \{0,1\}\)</span> we have that <span class="math display">\[H[\widehat{f^{\leq D}}] K \sum_{|S| \leq D} |S| \log(|S| + 1)\hat{f}(S)^2 + K \cdot I[f]\]</span></p>
+</blockquote>
+<p>Since <span class="math inline">\(I[f] = \sum_S |S| \hat{f}(S)^2\)</span>, this theorem is just short of FEIC by a <span class="math inline">\(\log(|S| + 1)\)</span> factor.</p>
+<p>Now, we state the results proven in the, recent, second paper.</p>
+<blockquote class="blockquote">
+<p>There exist <span class="math inline">\(c_1, c_2 &gt; 0\)</span> such that for any boolean function <span class="math inline">\(f:\{-1,1\}^n \to \{-1,1\}\)</span>, we have <span class="math display">\[H(\hat{f}^2) &lt; c_1 \cdot I(f) + c_2 \sum_{k \in [n]} I_k(f) \log\frac{1}{I_k(f)}\]</span></p>
+</blockquote>
+<hr>
+<p>To understand the first paper, I start with the talks. I attach the notes I took while watching the talks.</p>
 
 
 

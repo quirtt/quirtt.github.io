@@ -1,24 +1,31 @@
 [
   {
-    "objectID": "posts/dna-storage/blog.html",
-    "href": "posts/dna-storage/blog.html",
-    "title": "Ideas on DNA Storage",
+    "objectID": "thoughts/NOW.html",
+    "href": "thoughts/NOW.html",
+    "title": "Cold Reflections",
     "section": "",
-    "text": "Recently, I have been thinking about the DNA storage problem quite a bit. It’s been something extremely interesting to me. Asking ChatGPT for DNA storage system use-cases, we find a heck ton of stuff:\nIn this blog post: I would like to present some of my ideas on how DNA sequencing can be improved (I am not a biologist so please feel free to tell me if I am spewing nonsense, haha!) Before that, though, let me quickly present the context in which thinking about this came to be."
+    "text": "Update the Blog and connect the obsidian files to the blog directly."
   },
   {
-    "objectID": "posts/dna-storage/blog.html#assumptions",
-    "href": "posts/dna-storage/blog.html#assumptions",
-    "title": "Ideas on DNA Storage",
-    "section": "Assumptions",
-    "text": "Assumptions\n\n\\(\\exists \\ \\delta \\ \\forall S, |S| &lt; \\delta\\)\n\\[\nG(S) \\text{ is unique.}\n\\]\nwhich is saying that for small DNA sequences the generated topology is unique.\nThere exists a fastly-observable \\(f\\) that can be used to invert the map, and hence, obtain \\(T\\).\n\\(f\\) is “more-or-less” one-one."
+    "objectID": "thoughts/(a) NOW.html",
+    "href": "thoughts/(a) NOW.html",
+    "title": "Cold Reflections",
+    "section": "",
+    "text": "Update the Blog and connect the obsidian files to the blog directly."
   },
   {
-    "objectID": "posts/dna-storage/blog.html#one-step-further",
-    "href": "posts/dna-storage/blog.html#one-step-further",
-    "title": "Ideas on DNA Storage",
-    "section": "One Step Further",
-    "text": "One Step Further\nDNA sequences are used because they exhibit very interesting and useful properties.\nUsing\n\nDNA Polymerase,\nrestriction enzymes,\nand techniques like PCR\n\none can manipulate DNA sequences as needed. This is especially why DNA sequences are preferred. However, there could be other biochemical molecules that demonstrate capabilities of being manipulated similarly, and also turn out to be better candidates for the biochemical storage problem.\nThis could be due to possibilities of finer manipulation, or have better \\(f\\) or could have easier-to-learn inverse mappings \\(\\boxed{f(G(T)) \\to T}\\)."
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Cold Reflections",
+    "section": "",
+    "text": "Fourier Entropy Influence Conjecture\n\n\n\nboolean functions\n\nanalysis\n\nprobability\n\nmath\n\n\n\n\n\n\n\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nIdeas on DNA Storage\n\n\n\nbiology\n\nmachine learning\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n[DRAFT] Some Important Results in Probability Theory\n\n\n\nprobability\n\nmath\n\n\n\n\n\n\n\n\n\nMar 17, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n[DRAFT] Language is an Infinitely Incomplete Approximation of Human Concepts\n\n\n\nphilosophy\n\ncognition\n\nmath\n\n\n\n\n\n\n\n\n\nMar 13, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nHow to get AGI?\n\n\n\nartificial intelligence\n\nartificial general intelligence\n\nphilosophy\n\n\n\n\n\n\n\n\n\nJul 6, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nPonderings on OthelloGPT\n\n\n\nmachine learning\n\nartificial intelligence\n\ninterpretability\n\n\n\n\n\n\n\n\n\nMay 5, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nSo Far Yet So Close: How Independence is Almost Dependence\n\n\n\nprobability theory\n\nstatistics\n\nmath\n\n\n\n\n\n\n\n\n\nMar 4, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem\n\n\n\nalgebra\n\nmath\n\n\n\n\n\n\n\n\n\nDec 10, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nAxiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I\n\n\n\nset theory\n\nmath\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nShannon’s Card Magic Trick\n\n\n\nisi\n\nstatistics\n\nmath\n\n\n\n\n\n\n\n\n\nOct 23, 2023\n\n\nHimadri Mandal\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "no_show/post-with-code/index.html",
+    "href": "no_show/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code."
   },
   {
     "objectID": "posts/OthelloGPT/blog.html",
@@ -35,109 +42,39 @@
     "text": "How Does The Model Compute That A Certain Cell is Blank?\nThis seems like an easy thing to compute, as all you need to do is to figure out whether the \\((i,j)^{\\text{th}}\\) cell has appeared in the move sequence or not.\nGoals:\n\nAt which layer does the model conclude that it’s blank?\nDoes this come from any specific head or neuron?\nHow could a transformer detect this?\n\nWe hypothesize that a single attention head per cell is what is used by a transformer. Let’s try to answer these questions one-by-one.\n\nGoal #1 At which layer does the model conclude that it’s blank?\nLet us first fix some notation. Let \\(X_L\\) be the intervention by the linear probe at the \\(L\\)’th layer of the residual stream. Let \\(Y\\) be the true representation of the game board.\nWe try to find its goodness at two things:\n\nTest #1: The prediction is blank CONDITIONAL on the true representation being blank\nTest #2: The prediction is NOT blank CONDITIONAL on the correct representation being NOT blank\n\nWe calculate the following conditional probabilities and plot them (which themselves are tensors of the shape \\(\\text{rows} \\times \\text{cols}\\)). Ofcourse we only care about the games in the middle because if not, things become a bit more weird.\\[\n\\text{Test 1: }P(X_L = Y \\Bigg|Y=\\text{Blank}) = \\frac{P(X_L = Y \\text{ and } Y=\\text{Blank})}{P(Y=\\text{Blank})}\n\\]\n\nNotice that the 4 squares in the middle have NaN value. This is because those can never be blank and so there’s a division by zero error. It isn’t an issue for us though.\nAlso, there doesn’t seem to be much improvement after Layer 1, so let us just focus on the first two layers.\n\nLet’s also find out the \\(\\text{maxerr}\\) and \\(\\text{avgerr}\\) across layers and plot it.\n\nLooking at this plot, it seems like a good idea to hypothesize that most of the Is_Blank computation is done in Layer 0 (for most cells) and some of the remaining computation is done in Layer 1. It seems that Layer 1 is what gives it structure finally, though.\nLet’s now do the second test.\n\\[\n\\text{Test 2: }P(X_L \\neq \\text{Blank} \\Bigg|Y\\neq\\text{Blank}) = \\frac{P(X_L \\neq \\text{Blank} \\text{ and } Y\\neq\\text{Blank})}{P(Y\\neq\\text{Blank})}\n\\]\nWe calculate and then plot the same graphs.\n\n\nAh! I thought that the features Is_Blank and Is_Not_Blank would get implemented almost together, and although that does seem to be the case, the \\(\\text{maxerr}\\) only really gets close to the average error by Layer 4, which is precisely where the OthelloGPT has created a high-accuracy world model (according to Neel’s findings). This is all super interesting!\nLet us now try to answer a more important question.\n\n\nGoal #2 Does this come from any specific head or neuron?\nLet’s look at the cosine similarity of output weights and the blank colour probe for top layer 0 and layer 1 neurons sorted according to standard deviation (sorting wrt to “resid_post”)\n\n\nLayer 0 resid_post doesn’t seem very interpretable to me. However, L1N360 looks very interesting. It computes Is_Blank of cell D2. Can we find more such neurons? Let’s try to use the same technique on post\n\n\nWow! Layer 0 seems to compute bunch of Not_Is_Blank features for particular cells. Let’s try to find more such neurons!\n\n\n\nWait! This is all cool and stuff, but what about Is_Blank features? Is Layer 0 not computing it? Lets try to change the experiment in a way to obtain neurons that track Is_Blank heavily.\nI will start with a bound \\(M_U\\) on the absolute values of the cosine sim, so that anything above \\(M_U\\) will be treated as \\(1\\) and anything below \\(M_U\\) will be treated as 0. Could I find something interesting out of this simple setup?\ntop_layer_0_neurons = ((focus_cache[\"post\", 0][:, 3:-3]).abs() &gt; Mu).float().std(dim=[0,1]).argsort(descending=True)\nSetting \\(M_U = 0.2, 0.3, 0.4\\) etc give us bunch of neurons that are very highly correlated to the Is_Blank probe for a single cell! This is more evidence for our hypothesis that Layer 0 computes the Is_Blank feature. Infact, this makes it highly interpretable.\n\n\n\nGoal #3 How could a transformer come up with this?\nWIP!"
   },
   {
-    "objectID": "thoughts/Reorganization of Thoughts before I enter ENS.html",
-    "href": "thoughts/Reorganization of Thoughts before I enter ENS.html",
-    "title": "Cold Reflections",
+    "objectID": "posts/shannon-cardmagic-trick/blog.html",
+    "href": "posts/shannon-cardmagic-trick/blog.html",
+    "title": "Shannon’s Card Magic Trick",
     "section": "",
-    "text": "Well, this is just a test document. But I have a lot to say. I recall what Marbach told me. What Partha sir told me and understand what has led me to this point. What are the fundamental qualities that are different in me that has led me somewhere which nobody near me could possibly dream of."
+    "text": "This was my statistics project at ISI Sem 1. My team had: Myself, Siddhartha, Ayan, Drishti, Aman, Mrittika. Thanks to everyone for their efforts."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "I’m Himadri Mandal, 18, you might know me as quirtt from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (well, mostly Mathematics, but I enjoy both). I am also a CS nerd, enjoy almost anything geeky, and have a deep interest in wanting to automate all of Mathematics, and wish to work on this a lot.\nYou could check some of my projects out on github, but it could be difficult as they are largely undocumented. I am usually found: learning math/cs, reading ML papers, playing table tennis, chilling with friends, singing badly in my room, etc. Ah well. I have been recently getting more and more interested in AI and AI alignment, too. I wish do some good work in that field as well.\nIf you find me interesting - feel free to shoot me a mail at mandalhimadri06@gmail.com or send me a “Hi!” on my Discord."
+    "objectID": "posts/shannon-cardmagic-trick/blog.html#setup",
+    "href": "posts/shannon-cardmagic-trick/blog.html#setup",
+    "title": "Shannon’s Card Magic Trick",
+    "section": "Setup",
+    "text": "Setup\n\nThe magician sends you a deck of cards. You riffle shuffle it three times. You pick the card from the top and put it back in the deck, somewhere. You send the deck back to the magician. Can he find the chosen card?\n\nWhat do you think? Well, I guess I wouldn’t have asked this question if this weren’t possible. Yep - it is possible to do it reliably well.\nI couldn’t believe it myself. However, I think it will make more sense when I present the algorithm which was (apparently) discovered by Shannon. We will talk about this in part A. And implement it in part B. In the subsequent parts, we investigate what happens if we play with the setup a little bit."
   },
   {
-    "objectID": "no_show/post-with-code/index.html",
-    "href": "no_show/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code."
+    "objectID": "posts/shannon-cardmagic-trick/blog.html#part-a-shannons-algorithm",
+    "href": "posts/shannon-cardmagic-trick/blog.html#part-a-shannons-algorithm",
+    "title": "Shannon’s Card Magic Trick",
+    "section": "Part A: Shannon’s Algorithm",
+    "text": "Part A: Shannon’s Algorithm\nRemember the original orientation of the deck of cards. Label the cards in this orientation \\[\n    \\{1,2,\\cdots,52\\}\n\\]\nNow, we define rising sequence decomposition. To decompose a deck into its rising sequences we go through the following algorithm\n\n\nAlgorithm:\n\nStart with 1.\nFind the next number, If it is after the previous number, goto step 2. Else, continue.\nThis is a rising sequence. Start with the next unconsidered number, and goto step 2.\n\n\nFor example, if the deck is \\(\\{4,3,5,1,2\\}\\). we go \\(1\\to 2 \\implies (1,2)\\), \\(3 \\implies (3)\\), \\(4 \\to 5 \\implies (4,5)\\), thus \\(\\{4,3,5,1,2\\} \\implies (1,2)(3)(4,5)\\).\nWell, it’s time to reveal the secret algorithm that Shannon came up with:\n\n\n\nAlgorithm:\nPerform the rising sequence decomposition of the final deck. There exists a unique rising sequence singleton in this deck - this is the picked card.\n\nOur team implemented the algorithm in R and the results were extremely satisfactory."
   },
   {
-    "objectID": "posts/incomp-lang/blog.html",
-    "href": "posts/incomp-lang/blog.html",
-    "title": "[DRAFT] Language is an Infinitely Incomplete Approximation of Human Concepts",
-    "section": "",
-    "text": "I had thought of this idea last year, but never got around to writing it. In this blog, I show how humans are infinitely limited by the mode of language in transmission of ideas. I don’t quite remember how I got around to thinking about this, but here goes haha.\nEvery written language is described by a finite set of characters. Every spoken language requires a finite sequence of sounds. Every idea that is realized by humans and communicated through language has to be put into a sequence of letters / sequence of sounds. Call such a thought expressible.\nI define languages to be made of fixed objects, i.e., there are no new characters. A reasonable contention would be: “this is BS? languages change all the time”. Well, yes. However, if they change, then I call the new object a new language. You can think of this as:\n\\[\n\\{\\text{eng\\_v1}, \\text{eng\\_v2}, \\text{eng\\_v3}\\cdots\\}\n\\]\n&lt;fill in: why the set of all languages is countable&gt;\n\nTheorem\nThe set of all languages is countable.\n\n\n\nTheorem\nIf the set of all possible spoken and written languages is countable then the set of expressible ideas is countable.\n\nProof.\nLet \\(S\\) be the set of all languages. For a language, \\(L \\in S\\), let \\(\\mathcal{C}(L)\\) be the characters of \\(L\\). We understand that, \\(|\\mathcal{C}(L)|&lt;\\infty.\\)\nDefine \\(\\mathcal{C}(S) = \\cup_{L \\in S}\\{(L, x) : x\\in \\mathcal{C}(L) \\}\\), which is the set of all characters (signed with the language it belongs to). Since \\(S\\) is countable, \\(\\mathcal{C}(S)\\) is countable.\nNow, every expressible idea is a finite sequence of characters/phonemes like:\n\\[\n\\gamma_1 \\gamma_2 \\gamma_3 \\gamma_4 \\cdots \\gamma_N\n\\]\nwhere \\(\\gamma_i \\in \\mathcal{C}(S)\\).\nLet \\(\\mathrm{I}\\) be the set of all expressible ideas. We know that set of all finite sequences formed using countable characters is countable, and therefore: \\(\\mathrm{I}\\) be countable. \\(\\blacksquare\\)"
+    "objectID": "posts/shannon-cardmagic-trick/blog.html#part-b-implementation",
+    "href": "posts/shannon-cardmagic-trick/blog.html#part-b-implementation",
+    "title": "Shannon’s Card Magic Trick",
+    "section": "Part B: Implementation",
+    "text": "Part B: Implementation\n\nVersion 1: Distribution fitting\nWe first cut a standard deck 100 times (LOL IN REAL LIFE) and we recorded the number of cards in the smaller deck (Let this vector be \\(X\\)). I was going to fit the Gaussian distribution over the vector \\(c(X,52-X)\\).\nHowever, I noticed my skill issue when @Ayan pointed out that this dataset would not be IID. To fix this issue, I tossed a coin 100 times and picked either \\(x \\text{ or } 52-x\\) for every \\(x \\in X\\). Fitting the Gaussian distribution over this we ended up with\nfloor(rnorm(1, mean=25.78, sd = 2.3046))\nEverything else was fairly easy to implement, I had quite some fun while making this. This empirically confirms that the algorithm works with pretty high probabilities \\(\\left(\\sim 91\\%\\right)\\).\nWell, I know the code is probably not human-readable (moreso because it was written by me, lol), so, I work with the following functions: RiffleShuffle, Switch, RisingSingleton, Process, and SumCalculator. Here’s what’s special about each of them:\n\nRiffleShuffle(Deck): This first splits the deck according to the fitted distribution. Then, it stores a counter of the number of cards in the Left and Right hands (LeftHand, RightHand). My assumption is: the probability that the “next” card is from the Left hand is \\(\\frac{\\texttt{LeftHand}}{\\texttt{LeftHand + RightHand}}\\) and similarly for the Right hand.\nSwitch(Deck, c(x, y)): The \\(x^{\\text{th}}\\) index card is moved to the \\(y^{\\text{th}}\\) index in the deck.\nRisingSingleton(Deck): Well, this is interesting. I first create the index array which stores the location of the \\(i^{\\text{th}}\\) card in the Deck. Then - note that if there is a RisingSingleton: there is an element \\(x\\) such that \\(\\texttt{index}[x+1] &lt; \\texttt{index}[x]\\) and \\(\\texttt{index}[x-1] &gt; \\texttt{index}[x]\\). The weird condition in the code is to deal with the edgecases, so don’t worry about that. At last, it counts the total number of rising singletons and returns the pair \\((\\texttt{(Sum(RisingSingleton) == 1)}, \\texttt{LastSingleton})\\).\nProcess: This simulates the whole setup, and returns the boolean \\((\\texttt{(Sum(RisingSingleton) == 1) AND (LastSingleton == CorrectCard)})\\) which amounts to checking whether we get what we want.\nSumCalculator: This function carries out Process 10000 times and finds the percentage of times it gets the card right.\n\n\n#Cards is the permutation _Sigma_.\n\nDataset = c(26,26,24,26,26,25,26,26,25,23,25,26,24,26,24,26,26,23,20,26,23,22,25,23,26,26,23,25,23,25,25,25,25,26,25,23,25,24,26,25,26,23,26,23,26,24,26,24,25,24,25,23,24,25,22,21,25,25,25,21,23,24,23,21,26,25,25,24,24,25,24,25,24,24,23,25,21,25,26,26,23,25,25,23,21,24,21,25,25,22,24,25,26,23,24,25,19,25,23,25)\n\n\nRiffleShuffle &lt;- function(Cards){\n  ### Riffle shuffles the vector of Cards using\n  ### L/(L+R), R/(L+R) probabilities to each hand. \n  NewDeck = vector()\n  split = floor(rnorm(1, mean=25.78, sd = 2.3046))\n\n  LeftHand = Cards[1:split]\n  RightHand = Cards[(split+1):52]\n  for(x in 1:52){\n    L &lt;- length(LeftHand)\n    R &lt;- length(RightHand)\n    hand = sample(c(\"L\", \"R\"), 1, prob=c(L,R))\n    \n    if(hand == \"L\"){\n      card = LeftHand[1]\n      LeftHand &lt;- if (L != 1) LeftHand[2:L] else vector()\n      NewDeck = append(NewDeck, card)\n    }\n    else{\n      card = RightHand[1]\n      RightHand &lt;- if (R != 1) RightHand[2:R] else vector()\n      NewDeck = append(NewDeck, card)\n    }\n  }\n  \n  return(NewDeck)\n}\n\nSwitch &lt;- function(Cards, vals) {\n  # 1 &lt;= y &lt;= 52\n  # 1 &lt;= x &lt;= 52\n  # Logic: xth index card is moved at yth index\n  x = vals[1]\n  y = vals[2]\n  NewCards = vector()\n  for (i in 1:length(Cards)) {\n    if (i != x) {\n      NewCards = append(NewCards, Cards[i])\n    }\n  }\n  if (y != 1) {\n    if (y != 52) {\n      NewCards = append(NewCards, Cards[x], after = y - 1)\n    } else {\n      NewCards = append(NewCards, Cards[x])\n    }\n  } else {\n    NewCards = append(Cards[x], NewCards)\n  }\n  return(NewCards)\n}\n\nRisingSingleton &lt;- function(array){\n  ### Checks if there is a unique Rising Singleton and returns the singleton.\n  index = numeric(0)\n  for (i in 1:52){\n    index[array[i]] = i\n  }\n  Sum = 0\n  SingletonCard = 0\n  for (i in 1:52){\n    if((index[i] &gt;= index[min((i+1), 52)]) & (index[i] &lt;= index[max((i-1), 1)])){\n      Sum = Sum + 1\n      SingletonCard = i\n    }\n  }\n  return(c((Sum == 1), SingletonCard))\n}\n\nProcess &lt;- function(Cards){\n  ### Performs the whole process and outputs whether there\n  ### is a unique Rising Singleton\n  Cards = RiffleShuffle(Cards)\n  Cards = RiffleShuffle(Cards)\n  Cards = RiffleShuffle(Cards)\n  \n  vals = c(1, rbinom(1, 52, 0.5))\n  PickedCard = Cards[1]\n  Cards = Switch(Cards, vals)\n\n  RSCheck = RisingSingleton(Cards)\n  return((RSCheck[1])&(RSCheck[2] == PickedCard))\n}\n\nSumCalculator &lt;- function(Cards){\n  ### Simulates Process 10000 and counts how many times  \n  ### there is a unique Rising Singleton which is also indeed\n  ### the picked card.\n  Sum = 0\n  for(i in 1:10000){\n    Sum = Sum + Process(Cards)\n  }\n  return(Sum)\n}\n\nCards = 1:52\nSumCalculator(Cards)/10000 * 100\n\n[1] 91.61\n\n\nAlso, @Siddhartha implemented this in Python\n\nimport numpy as np\n\nimport random\ndef riffle_shuffle(deck):\n    cut_index = int(np.random.normal(25.78, 2.3046))\n    cut_index = max(1, min(cut_index, 51))\n    left_hand = deck[:cut_index]\n    right_hand = deck[cut_index:]\n    shuffled_deck = []\n    while left_hand or right_hand:\n        if len(right_hand) &gt; 0 and np.random.rand() &lt;= len(right_hand) / (len(left_hand) + len(right_hand)):\n            shuffled_deck.append(right_hand.pop(0))\n        else:\n            shuffled_deck.append(left_hand.pop(0))\n    return shuffled_deck\n\ndef swap_first_card(deck):\n    index = int(list(np.random.binomial(52, 0.5, 1))[0])\n    index = min(index, 52)\n    deck[0]=deck.pop(0)\n    deck.insert(index,deck[0])\ndef rising_singleton(array):\n    # Create an index array to store the positions of values in the input array\n    index = [0] * 52\n\n    # Populate the index array with the positions of values in the input array\n    for i in range(52):\n        index[array[i] - 1] = i\n\n    Sum = 0\n    SingletonCard = 0\n\n    # Check if there is a unique Rising Singleton\n    for i in range(52):\n        if (index[i] &gt;= index[min(i + 1, 51)]) and (index[i] &lt;= index[max(i - 1, 0)]):\n            Sum += 1\n            SingletonCard = i + 1\n\n    return [Sum == 1, SingletonCard]\n\nunique_singleton_count = 0\n\n# Repeat the process 10,000 times\nfor x in range(10000):\n    deck = list(range(1,53))\n    for y in range(3):\n        deck = riffle_shuffle(deck)\n    swap_first_card(deck)\n    is_unique_singleton,z = rising_singleton(deck)\n    if is_unique_singleton:\n        unique_singleton_count += 1\n\n# Percentage of unique singletons\nprint(\"Percentage: \", unique_singleton_count/100)\n\nPercentage:  92.22\n\n\n\n\n\nVersion 2: Splitting using \\(\\operatorname{Bin}\\left(52, \\frac{1}{2}\\right)\\)\n#Cards is the permutation _Sigma_.\n\nRiffleShuffle &lt;- function(Cards){\n  ...\n  split = rbinom(1, 52, 1/2)\n  ...\n}\nWhere I only change how I perform the split. This results in about \\(\\left(89\\%\\right)\\)."
   },
   {
-    "objectID": "posts/polynomials-are-linear/blog.html",
-    "href": "posts/polynomials-are-linear/blog.html",
-    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
-    "section": "",
-    "text": "Reading the title: you are probably shouting “Lagrange Interpolation!!!” Yeah, sure, Lagrange is cool. But I will show you something cooler which ensures you don’t have to deal with the messy stuff."
-  },
-  {
-    "objectID": "posts/polynomials-are-linear/blog.html#problem-statement",
-    "href": "posts/polynomials-are-linear/blog.html#problem-statement",
-    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
-    "section": "Problem Statement",
-    "text": "Problem Statement\nLet \\(k \\in \\mathbb{N}\\) and \\(t_1, \\dotsc, t_k \\in [0,1]\\) be distinct points. Let \\(\\mathcal{P}_{k-1}\\) be the space of polynomials of degree less than or equal to \\(k-1\\) with real coefficients. Show that there exist real numbers \\(a_1, \\dotsc, a_k\\) such that\n\\[\n\\int_0^1f(x)dx = \\sum_{j=1}^k a_jf(t_j)\n\\]\nfor all \\(f \\in \\mathcal{P}_{k-1}\\)."
-  },
-  {
-    "objectID": "posts/polynomials-are-linear/blog.html#solution",
-    "href": "posts/polynomials-are-linear/blog.html#solution",
-    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
-    "section": "Solution",
-    "text": "Solution\nWhenever you try to prove something “uniquely” determines something; it’s always nice to try to find an isomorphism somewhere. Consider the linear map \\(S:\\mathcal{P}_{k-1} \\to \\mathbb{R}^k\\) such that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k))\n\\]\n\nClaim 1: \\(S\\) is an isomorphism.\nSince \\(\\dim{\\mathcal{P}_{k-1}} = \\dim{\\mathbb{R}^k} = k\\), we would be done if we prove \\(\\mathcal{N}(S) = 0\\). Assume \\(S(f) = (0, 0, \\dotsc, 0)\\) which means \\(f\\) a \\(\\leq k-1\\) degree polynomial is \\(0\\) at \\(k\\) distinct points. This is only possible when \\(f \\equiv 0\\). \\(\\blacksquare\\)\n\n\nFinish\nNotice that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k)) = \\sum_j f(t_j)e_j\n\\] Since \\(S\\) is an isomorphism, \\[\nf = \\sum_j f(t_j)S^{-1}(e_j)\n\\] Let \\(a_j = \\int_0^1 (S^{-1}(e_j))(x) dx\\), then, clearly, \\[\n\\int_0^1 f(x)dx = \\int_0^1 \\sum_j f(t_j)(S^{-1}(e_j))(x) dx\\] \\[\\int_0^1 f(x) dx = \\sum_j f(t_j) \\left(\\int_0^1 (S^{-1}(e_j))(x) dx\\right) = \\sum_j a_j f(t_j) \\blacksquare\n\\]"
-  },
-  {
-    "objectID": "posts/mct-dct/blog.html",
-    "href": "posts/mct-dct/blog.html",
-    "title": "[DRAFT] Some Important Results in Probability Theory",
-    "section": "",
-    "text": "Proof."
-  },
-  {
-    "objectID": "posts/mct-dct/blog.html#theorem-lebesgue-differentiation-theorem",
-    "href": "posts/mct-dct/blog.html#theorem-lebesgue-differentiation-theorem",
-    "title": "[DRAFT] Some Important Results in Probability Theory",
-    "section": "",
-    "text": "Proof."
-  },
-  {
-    "objectID": "posts/mct-dct/blog.html#theorem-monotone-convergence-theorem",
-    "href": "posts/mct-dct/blog.html#theorem-monotone-convergence-theorem",
-    "title": "[DRAFT] Some Important Results in Probability Theory",
-    "section": "Theorem: Monotone Convergence Theorem",
-    "text": "Theorem: Monotone Convergence Theorem"
-  },
-  {
-    "objectID": "posts/mct-dct/blog.html#footnotes",
-    "href": "posts/mct-dct/blog.html#footnotes",
-    "title": "[DRAFT] Some Important Results in Probability Theory",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://en.wikipedia.org/wiki/Absolute_continuity↩︎"
-  },
-  {
-    "objectID": "posts/how-to-get-agi/blog.html",
-    "href": "posts/how-to-get-agi/blog.html",
-    "title": "How to get AGI?",
-    "section": "",
-    "text": "Here is an excerpt from a brilliant conversation 1 between Dwarkesh Patel and François Chollet.\nI believe this is the general consensus of most AI researchers on how AGI will be achieved. I have thought along similar lines before but this internalizes that feeling of mine further."
-  },
-  {
-    "objectID": "posts/how-to-get-agi/blog.html#future-of-ai-progress-deep-learning-program-synthesis",
-    "href": "posts/how-to-get-agi/blog.html#future-of-ai-progress-deep-learning-program-synthesis",
-    "title": "How to get AGI?",
-    "section": "(00:48:28) – Future of AI progress: deep learning + program synthesis",
-    "text": "(00:48:28) – Future of AI progress: deep learning + program synthesis\n\nFrançois Chollet 00:48:28\nIt’s intrinsically limited because the substrate of your model is a big parametric curve. All you can do with this is local generalization. If you want to go beyond this towards broader or even extreme generalization, you have to move to a different type of model. My paradigm of choice is discrete program search, program synthesis.\nIf you want to understand that, you can sort of compare and contrast it with deep learning. In deep learning your model is a differentiable parametric curve. In program synthesis, your model is a discrete graph of operators. You’ve got a set of logical operators, like a domain-specific language. You’re picking instances of it. You’re structuring that into a graph that’s a program. That’s actually very similar to a program you might write in Python or C++ and so on. We are doing machine learning here. We’re trying to automatically learn these models.\nIn deep learning your learning engine is gradient descent. Gradient descent is very compute efficient because you have this very strong informative feedback signal about where the solution is. You can get to the solution very quickly, but it is very data inefficient. In order to make it work, you need a dense sampling of the operating space. You need a dense sampling of the data distribution. Then you’re limited to only generalizing within that data distribution. The reason why you have this limitation is because your model is a curve.\nMeanwhile, if you look at discrete program search, the learning engine is combinatorial search. You’re just trying a bunch of programs until you find one that actually meets your spec. This process is extremely data efficient. You can learn a generalizable program from just one example, two examples. This is why it works so well on ARC, by the way. The big limitation is that it’s extremely compute inefficient because you’re running into combinatorial explosion, of course.\nYou can sort of see here how deep learning and discrete program search have very complementary strengths, and limitations as well. Every limitation of deep learning has a corresponding strength in program synthesis and inversely. The path forward is going to be to merge the two.\nHere’s another way you can think about it. These parametric curves trained with gradient descent are great fits for everything that’s System 1-type thinking: pattern recognition, intuition, memorization, etc. Discrete program search is a great fit for Type 2 thinking: planning, reasoning. It’s quickly figuring out a generalizable model that matches just one or two examples, like for an ARC puzzle for instance.\nHumans are never doing pure System 1 or pure System 2. They’re always mixing and matching both. Right now, we have all the tools for System 1. We have almost nothing for System 2. The way forward is to create a hybrid system.\nThe form it’s going to take is mostly System 2. The outer structure is going to be a discrete program search system. You’re going to fix the fundamental limitation of discrete program search, which is combinatorial explosion, with deep learning. You’re going to leverage deep learning to guide and to provide intuition in program space, to guide the program search.\nThat’s very similar to what you see when you’re playing chess or when you’re trying to prove a theorem, for instance. It’s mostly a reasoning thing, but you start out with some intuition about the shape of the solution. That’s very much something you can get via a deep learning model. Deep learning models are very much like intuition machines. They’re pattern matching machines.\nYou start from this shape of the solution, and then you’re going to do actual explicit discrete program search. But you’re not going to do it via brute force. You’re not going to try things randomly. You’re actually going to ask another deep learning model for suggestions. It’ll be like, “here’s the most likely next step. Here’s where in the graph you should be going.” You can also use yet another deep learning model for feedback like “well, here’s what I have so far. Is it looking good? Should I just backtrack and try something new?” Discrete program search is going to be the key but you want to make it dramatically better, orders of magnitude more efficient, by leveraging deep learning.\nBy the way, another thing that you can use deep learning for is of course things like common sense knowledge and knowledge in general. You’re going to end up with this sort of system where you have this on-the-fly synthesis engine that can adapt to new situations.\nThe way it adapts is that it’s going to fetch from a bank of patterns, modules that could be themselves curves, differentiable modules, and some others that could be algorithmic in nature. It’s going to assemble them via this intuition-guided process. For every new situation you might be faced with, it’s going to give you a generalizable model that was synthesized using very, very little data. Something like this would solve ARC."
-  },
-  {
-    "objectID": "posts/how-to-get-agi/blog.html#thoughts",
-    "href": "posts/how-to-get-agi/blog.html#thoughts",
-    "title": "How to get AGI?",
-    "section": "Thoughts",
-    "text": "Thoughts\nAfter watching the podcast, I realized that AlphaGeometry2 is, almost entirely, just this idea. i believe you can become way better at generating intuition if you have a database of all mathematical theorems, proofs etc in a symbolic / DPS form. But this is too naive. I’ll update as I have more thoughts."
-  },
-  {
-    "objectID": "posts/how-to-get-agi/blog.html#footnotes",
-    "href": "posts/how-to-get-agi/blog.html#footnotes",
-    "title": "How to get AGI?",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://www.youtube.com/watch?v=UakqL6Pj9xo↩︎\nhttps://deepmind.google/discover/blog/alphageometry-an-olympiad-level-ai-system-for-geometry/↩︎"
+    "objectID": "posts/shannon-cardmagic-trick/blog.html#part-c-playing-around",
+    "href": "posts/shannon-cardmagic-trick/blog.html#part-c-playing-around",
+    "title": "Shannon’s Card Magic Trick",
+    "section": "Part C: Playing Around",
+    "text": "Part C: Playing Around\nWe can now tinker with the setup to see what happens when we change things a little bit. Note that we picked the card from the top and put it back somewhere. It makes sense to ask: what happens when we pick it from anywhere? Well, here’s a plot in R which showcases what happens when we vary the location of the picked card.\n\n\n\n\n\nWhich makes sense because the way we are choosing the position to put the card into is a function symmetric around 26."
   },
   {
     "objectID": "posts/zorn-and-aoc/blog.html",
@@ -182,39 +119,116 @@
     "text": "Footnotes\n\nTheorem 3 (Cantor’s Diagonal Argument) \\[X &lt;_{c} P(X) \\ \\forall \\ X\\]\n\nAssume for the sake of contradiction \\(P(X) =_{c} X\\) (where \\(=_{c}\\) means that there exists a bijection between the sets). Thus, there is a surjection \\(f:X \\to P(X)\\). Consider\n\\[\nA = \\{x \\in X: x \\not\\in f(x)\\}\n\\]\nBut since \\(f\\) is a surjection, \\(\\exists x_0 \\ f(x_0) = A\\) then\n\\[\nx_0 \\in A \\iff x_0 \\not\\in A.\n\\]\na contradiction. (This is pretty much the same idea as the famous proof of real numbers being uncountable.)"
   },
   {
-    "objectID": "posts/shannon-cardmagic-trick/blog.html",
-    "href": "posts/shannon-cardmagic-trick/blog.html",
-    "title": "Shannon’s Card Magic Trick",
+    "objectID": "posts/FEI-Conjecture/blog.html",
+    "href": "posts/FEI-Conjecture/blog.html",
+    "title": "Fourier Entropy Influence Conjecture",
     "section": "",
-    "text": "This was my statistics project at ISI Sem 1. My team had: Myself, Siddhartha, Ayan, Drishti, Aman, Mrittika. Thanks to everyone for their efforts."
+    "text": "\\[\n\\newcommand{\\Var}{\\mathrm{Var}}\n\\newcommand{\\E}{\\mathbb{E}}\n\\]\n\nFourier Entropy Influence Conjecture is a conjecture in the analysis of boolean functions which states that for any boolean function \\(f:\\{-1,1\\}^n \\to \\{-1,1\\}\\), there is a constant \\(C\\) independent of the dimension \\(n\\) such that\n\\[\n    H(\\hat{f}^2) \\leq C \\cdot I(f)\n\\]\nI wish to understand the existing literature in FEIC before I start working with Prof. Sourav Chakraborty. Even if I don’t make any progress in the Summer, I believe something will click in the time I will be at ENS Paris. Let’s begin. I started by visiting the EmergentMind page on this conjecture and scouring through the guest post on the Terrance Tao blog by Gil Kalai.\nSome recent results in the FEIC are:\n\n(2020): Towards a Proof of the Fourier–Entropy Conjecture? (Esty Kelman, Guy Kindler, Noam Lifshitz, Dor Minzer, Muli Safra), with talks at lecture1, lecture2\n(2023): A new bound for the Fourier-Entropy-Influence conjecture (Xiao Han)\n\nFirst, we state the theorems proven in the first paper.\nFor \\(\\{0,1\\}\\) boolean functions, define the normalized influence of \\(f\\) as \\(\\tilde{I}[f] = \\frac{I[f]}{\\Var(f)}\\).\n\nThere is \\(C &gt; 0\\), such that for any function \\(f:\\{0, 1\\}^n \\to \\{0, 1\\}^n\\), there is a non-empty \\(S \\subset [n]\\) of size \\(O(\\tilde{I}[f])\\) such that \\(|\\hat{f}(S)| \\geq 2^{-C \\cdot |S| \\log(1 + \\tilde{I}[f])}\\sqrt{\\Var(f)}\\). In particular, \\[H_\\infty(\\hat{f}^2) \\ll \\tilde{I}[f] \\log(1 + \\tilde{I}[f])\\].\n\n\nFor every \\(\\eta &gt; 0\\), there exists \\(C &gt; 0\\), such that for all \\(f: \\{0,1\\}^n \\to \\{0,1\\}\\) we have \\[\\sum_S \\hat{f}(S)^2 1_{|\\hat{f}(S)| \\leq 2^{-C \\cdot \\tilde{I}[f]\\log(1 + \\tilde{I}[f])}} \\leq \\eta \\cdot \\Var(f)\\]\n\nNext, they show a slightly weaker version of FEIC that holds for the low-degree parts of \\(f\\).\n\nThere exists an absolute constant \\(K &gt; 0\\), such that for any \\(D \\in \\mathbb{N}\\) and \\(f:\\{0,1\\}^n \\to \\{0,1\\}\\) we have that \\[H[\\widehat{f^{\\leq D}}] K \\sum_{|S| \\leq D} |S| \\log(|S| + 1)\\hat{f}(S)^2 + K \\cdot I[f]\\]\n\nSince \\(I[f] = \\sum_S |S| \\hat{f}(S)^2\\), this theorem is just short of FEIC by a \\(\\log(|S| + 1)\\) factor.\nNow, we state the results proven in the, recent, second paper.\n\nThere exist \\(c_1, c_2 &gt; 0\\) such that for any boolean function \\(f:\\{-1,1\\}^n \\to \\{-1,1\\}\\), we have \\[H(\\hat{f}^2) &lt; c_1 \\cdot I(f) + c_2 \\sum_{k \\in [n]} I_k(f) \\log\\frac{1}{I_k(f)}\\]\n\n\nTo understand the first paper, I start with the talks. I attach the notes I took while watching the talks."
   },
   {
-    "objectID": "posts/shannon-cardmagic-trick/blog.html#setup",
-    "href": "posts/shannon-cardmagic-trick/blog.html#setup",
-    "title": "Shannon’s Card Magic Trick",
-    "section": "Setup",
-    "text": "Setup\n\nThe magician sends you a deck of cards. You riffle shuffle it three times. You pick the card from the top and put it back in the deck, somewhere. You send the deck back to the magician. Can he find the chosen card?\n\nWhat do you think? Well, I guess I wouldn’t have asked this question if this weren’t possible. Yep - it is possible to do it reliably well.\nI couldn’t believe it myself. However, I think it will make more sense when I present the algorithm which was (apparently) discovered by Shannon. We will talk about this in part A. And implement it in part B. In the subsequent parts, we investigate what happens if we play with the setup a little bit."
+    "objectID": "posts/dna-storage/blog.html",
+    "href": "posts/dna-storage/blog.html",
+    "title": "Ideas on DNA Storage",
+    "section": "",
+    "text": "Recently, I have been thinking about the DNA storage problem quite a bit. It’s been something extremely interesting to me. Asking ChatGPT for DNA storage system use-cases, we find a heck ton of stuff:\nIn this blog post: I would like to present some of my ideas on how DNA sequencing can be improved (I am not a biologist so please feel free to tell me if I am spewing nonsense, haha!) Before that, though, let me quickly present the context in which thinking about this came to be."
   },
   {
-    "objectID": "posts/shannon-cardmagic-trick/blog.html#part-a-shannons-algorithm",
-    "href": "posts/shannon-cardmagic-trick/blog.html#part-a-shannons-algorithm",
-    "title": "Shannon’s Card Magic Trick",
-    "section": "Part A: Shannon’s Algorithm",
-    "text": "Part A: Shannon’s Algorithm\nRemember the original orientation of the deck of cards. Label the cards in this orientation \\[\n    \\{1,2,\\cdots,52\\}\n\\]\nNow, we define rising sequence decomposition. To decompose a deck into its rising sequences we go through the following algorithm\n\n\nAlgorithm:\n\nStart with 1.\nFind the next number, If it is after the previous number, goto step 2. Else, continue.\nThis is a rising sequence. Start with the next unconsidered number, and goto step 2.\n\n\nFor example, if the deck is \\(\\{4,3,5,1,2\\}\\). we go \\(1\\to 2 \\implies (1,2)\\), \\(3 \\implies (3)\\), \\(4 \\to 5 \\implies (4,5)\\), thus \\(\\{4,3,5,1,2\\} \\implies (1,2)(3)(4,5)\\).\nWell, it’s time to reveal the secret algorithm that Shannon came up with:\n\n\n\nAlgorithm:\nPerform the rising sequence decomposition of the final deck. There exists a unique rising sequence singleton in this deck - this is the picked card.\n\nOur team implemented the algorithm in R and the results were extremely satisfactory."
+    "objectID": "posts/dna-storage/blog.html#assumptions",
+    "href": "posts/dna-storage/blog.html#assumptions",
+    "title": "Ideas on DNA Storage",
+    "section": "Assumptions",
+    "text": "Assumptions\n\n\\(\\exists \\ \\delta \\ \\forall S, |S| &lt; \\delta\\)\n\\[\nG(S) \\text{ is unique.}\n\\]\nwhich is saying that for small DNA sequences the generated topology is unique.\nThere exists a fastly-observable \\(f\\) that can be used to invert the map, and hence, obtain \\(T\\).\n\\(f\\) is “more-or-less” one-one."
   },
   {
-    "objectID": "posts/shannon-cardmagic-trick/blog.html#part-b-implementation",
-    "href": "posts/shannon-cardmagic-trick/blog.html#part-b-implementation",
-    "title": "Shannon’s Card Magic Trick",
-    "section": "Part B: Implementation",
-    "text": "Part B: Implementation\n\nVersion 1: Distribution fitting\nWe first cut a standard deck 100 times (LOL IN REAL LIFE) and we recorded the number of cards in the smaller deck (Let this vector be \\(X\\)). I was going to fit the Gaussian distribution over the vector \\(c(X,52-X)\\).\nHowever, I noticed my skill issue when @Ayan pointed out that this dataset would not be IID. To fix this issue, I tossed a coin 100 times and picked either \\(x \\text{ or } 52-x\\) for every \\(x \\in X\\). Fitting the Gaussian distribution over this we ended up with\nfloor(rnorm(1, mean=25.78, sd = 2.3046))\nEverything else was fairly easy to implement, I had quite some fun while making this. This empirically confirms that the algorithm works with pretty high probabilities \\(\\left(\\sim 91\\%\\right)\\).\nWell, I know the code is probably not human-readable (moreso because it was written by me, lol), so, I work with the following functions: RiffleShuffle, Switch, RisingSingleton, Process, and SumCalculator. Here’s what’s special about each of them:\n\nRiffleShuffle(Deck): This first splits the deck according to the fitted distribution. Then, it stores a counter of the number of cards in the Left and Right hands (LeftHand, RightHand). My assumption is: the probability that the “next” card is from the Left hand is \\(\\frac{\\texttt{LeftHand}}{\\texttt{LeftHand + RightHand}}\\) and similarly for the Right hand.\nSwitch(Deck, c(x, y)): The \\(x^{\\text{th}}\\) index card is moved to the \\(y^{\\text{th}}\\) index in the deck.\nRisingSingleton(Deck): Well, this is interesting. I first create the index array which stores the location of the \\(i^{\\text{th}}\\) card in the Deck. Then - note that if there is a RisingSingleton: there is an element \\(x\\) such that \\(\\texttt{index}[x+1] &lt; \\texttt{index}[x]\\) and \\(\\texttt{index}[x-1] &gt; \\texttt{index}[x]\\). The weird condition in the code is to deal with the edgecases, so don’t worry about that. At last, it counts the total number of rising singletons and returns the pair \\((\\texttt{(Sum(RisingSingleton) == 1)}, \\texttt{LastSingleton})\\).\nProcess: This simulates the whole setup, and returns the boolean \\((\\texttt{(Sum(RisingSingleton) == 1) AND (LastSingleton == CorrectCard)})\\) which amounts to checking whether we get what we want.\nSumCalculator: This function carries out Process 10000 times and finds the percentage of times it gets the card right.\n\n\n#Cards is the permutation _Sigma_.\n\nDataset = c(26,26,24,26,26,25,26,26,25,23,25,26,24,26,24,26,26,23,20,26,23,22,25,23,26,26,23,25,23,25,25,25,25,26,25,23,25,24,26,25,26,23,26,23,26,24,26,24,25,24,25,23,24,25,22,21,25,25,25,21,23,24,23,21,26,25,25,24,24,25,24,25,24,24,23,25,21,25,26,26,23,25,25,23,21,24,21,25,25,22,24,25,26,23,24,25,19,25,23,25)\n\n\nRiffleShuffle &lt;- function(Cards){\n  ### Riffle shuffles the vector of Cards using\n  ### L/(L+R), R/(L+R) probabilities to each hand. \n  NewDeck = vector()\n  split = floor(rnorm(1, mean=25.78, sd = 2.3046))\n\n  LeftHand = Cards[1:split]\n  RightHand = Cards[(split+1):52]\n  for(x in 1:52){\n    L &lt;- length(LeftHand)\n    R &lt;- length(RightHand)\n    hand = sample(c(\"L\", \"R\"), 1, prob=c(L,R))\n    \n    if(hand == \"L\"){\n      card = LeftHand[1]\n      LeftHand &lt;- if (L != 1) LeftHand[2:L] else vector()\n      NewDeck = append(NewDeck, card)\n    }\n    else{\n      card = RightHand[1]\n      RightHand &lt;- if (R != 1) RightHand[2:R] else vector()\n      NewDeck = append(NewDeck, card)\n    }\n  }\n  \n  return(NewDeck)\n}\n\nSwitch &lt;- function(Cards, vals) {\n  # 1 &lt;= y &lt;= 52\n  # 1 &lt;= x &lt;= 52\n  # Logic: xth index card is moved at yth index\n  x = vals[1]\n  y = vals[2]\n  NewCards = vector()\n  for (i in 1:length(Cards)) {\n    if (i != x) {\n      NewCards = append(NewCards, Cards[i])\n    }\n  }\n  if (y != 1) {\n    if (y != 52) {\n      NewCards = append(NewCards, Cards[x], after = y - 1)\n    } else {\n      NewCards = append(NewCards, Cards[x])\n    }\n  } else {\n    NewCards = append(Cards[x], NewCards)\n  }\n  return(NewCards)\n}\n\nRisingSingleton &lt;- function(array){\n  ### Checks if there is a unique Rising Singleton and returns the singleton.\n  index = numeric(0)\n  for (i in 1:52){\n    index[array[i]] = i\n  }\n  Sum = 0\n  SingletonCard = 0\n  for (i in 1:52){\n    if((index[i] &gt;= index[min((i+1), 52)]) & (index[i] &lt;= index[max((i-1), 1)])){\n      Sum = Sum + 1\n      SingletonCard = i\n    }\n  }\n  return(c((Sum == 1), SingletonCard))\n}\n\nProcess &lt;- function(Cards){\n  ### Performs the whole process and outputs whether there\n  ### is a unique Rising Singleton\n  Cards = RiffleShuffle(Cards)\n  Cards = RiffleShuffle(Cards)\n  Cards = RiffleShuffle(Cards)\n  \n  vals = c(1, rbinom(1, 52, 0.5))\n  PickedCard = Cards[1]\n  Cards = Switch(Cards, vals)\n\n  RSCheck = RisingSingleton(Cards)\n  return((RSCheck[1])&(RSCheck[2] == PickedCard))\n}\n\nSumCalculator &lt;- function(Cards){\n  ### Simulates Process 10000 and counts how many times  \n  ### there is a unique Rising Singleton which is also indeed\n  ### the picked card.\n  Sum = 0\n  for(i in 1:10000){\n    Sum = Sum + Process(Cards)\n  }\n  return(Sum)\n}\n\nCards = 1:52\nSumCalculator(Cards)/10000 * 100\n\n[1] 91.61\n\n\nAlso, @Siddhartha implemented this in Python\n\nimport numpy as np\n\nimport random\ndef riffle_shuffle(deck):\n    cut_index = int(np.random.normal(25.78, 2.3046))\n    cut_index = max(1, min(cut_index, 51))\n    left_hand = deck[:cut_index]\n    right_hand = deck[cut_index:]\n    shuffled_deck = []\n    while left_hand or right_hand:\n        if len(right_hand) &gt; 0 and np.random.rand() &lt;= len(right_hand) / (len(left_hand) + len(right_hand)):\n            shuffled_deck.append(right_hand.pop(0))\n        else:\n            shuffled_deck.append(left_hand.pop(0))\n    return shuffled_deck\n\ndef swap_first_card(deck):\n    index = int(list(np.random.binomial(52, 0.5, 1))[0])\n    index = min(index, 52)\n    deck[0]=deck.pop(0)\n    deck.insert(index,deck[0])\ndef rising_singleton(array):\n    # Create an index array to store the positions of values in the input array\n    index = [0] * 52\n\n    # Populate the index array with the positions of values in the input array\n    for i in range(52):\n        index[array[i] - 1] = i\n\n    Sum = 0\n    SingletonCard = 0\n\n    # Check if there is a unique Rising Singleton\n    for i in range(52):\n        if (index[i] &gt;= index[min(i + 1, 51)]) and (index[i] &lt;= index[max(i - 1, 0)]):\n            Sum += 1\n            SingletonCard = i + 1\n\n    return [Sum == 1, SingletonCard]\n\nunique_singleton_count = 0\n\n# Repeat the process 10,000 times\nfor x in range(10000):\n    deck = list(range(1,53))\n    for y in range(3):\n        deck = riffle_shuffle(deck)\n    swap_first_card(deck)\n    is_unique_singleton,z = rising_singleton(deck)\n    if is_unique_singleton:\n        unique_singleton_count += 1\n\n# Percentage of unique singletons\nprint(\"Percentage: \", unique_singleton_count/100)\n\nPercentage:  92.22\n\n\n\n\n\nVersion 2: Splitting using \\(\\operatorname{Bin}\\left(52, \\frac{1}{2}\\right)\\)\n#Cards is the permutation _Sigma_.\n\nRiffleShuffle &lt;- function(Cards){\n  ...\n  split = rbinom(1, 52, 1/2)\n  ...\n}\nWhere I only change how I perform the split. This results in about \\(\\left(89\\%\\right)\\)."
+    "objectID": "posts/dna-storage/blog.html#one-step-further",
+    "href": "posts/dna-storage/blog.html#one-step-further",
+    "title": "Ideas on DNA Storage",
+    "section": "One Step Further",
+    "text": "One Step Further\nDNA sequences are used because they exhibit very interesting and useful properties.\nUsing\n\nDNA Polymerase,\nrestriction enzymes,\nand techniques like PCR\n\none can manipulate DNA sequences as needed. This is especially why DNA sequences are preferred. However, there could be other biochemical molecules that demonstrate capabilities of being manipulated similarly, and also turn out to be better candidates for the biochemical storage problem.\nThis could be due to possibilities of finer manipulation, or have better \\(f\\) or could have easier-to-learn inverse mappings \\(\\boxed{f(G(T)) \\to T}\\)."
   },
   {
-    "objectID": "posts/shannon-cardmagic-trick/blog.html#part-c-playing-around",
-    "href": "posts/shannon-cardmagic-trick/blog.html#part-c-playing-around",
-    "title": "Shannon’s Card Magic Trick",
-    "section": "Part C: Playing Around",
-    "text": "Part C: Playing Around\nWe can now tinker with the setup to see what happens when we change things a little bit. Note that we picked the card from the top and put it back somewhere. It makes sense to ask: what happens when we pick it from anywhere? Well, here’s a plot in R which showcases what happens when we vary the location of the picked card.\n\n\n\n\n\nWhich makes sense because the way we are choosing the position to put the card into is a function symmetric around 26."
+    "objectID": "posts/how-to-get-agi/blog.html",
+    "href": "posts/how-to-get-agi/blog.html",
+    "title": "How to get AGI?",
+    "section": "",
+    "text": "Here is an excerpt from a brilliant conversation 1 between Dwarkesh Patel and François Chollet.\nI believe this is the general consensus of most AI researchers on how AGI will be achieved. I have thought along similar lines before but this internalizes that feeling of mine further."
+  },
+  {
+    "objectID": "posts/how-to-get-agi/blog.html#future-of-ai-progress-deep-learning-program-synthesis",
+    "href": "posts/how-to-get-agi/blog.html#future-of-ai-progress-deep-learning-program-synthesis",
+    "title": "How to get AGI?",
+    "section": "(00:48:28) – Future of AI progress: deep learning + program synthesis",
+    "text": "(00:48:28) – Future of AI progress: deep learning + program synthesis\n\nFrançois Chollet 00:48:28\nIt’s intrinsically limited because the substrate of your model is a big parametric curve. All you can do with this is local generalization. If you want to go beyond this towards broader or even extreme generalization, you have to move to a different type of model. My paradigm of choice is discrete program search, program synthesis.\nIf you want to understand that, you can sort of compare and contrast it with deep learning. In deep learning your model is a differentiable parametric curve. In program synthesis, your model is a discrete graph of operators. You’ve got a set of logical operators, like a domain-specific language. You’re picking instances of it. You’re structuring that into a graph that’s a program. That’s actually very similar to a program you might write in Python or C++ and so on. We are doing machine learning here. We’re trying to automatically learn these models.\nIn deep learning your learning engine is gradient descent. Gradient descent is very compute efficient because you have this very strong informative feedback signal about where the solution is. You can get to the solution very quickly, but it is very data inefficient. In order to make it work, you need a dense sampling of the operating space. You need a dense sampling of the data distribution. Then you’re limited to only generalizing within that data distribution. The reason why you have this limitation is because your model is a curve.\nMeanwhile, if you look at discrete program search, the learning engine is combinatorial search. You’re just trying a bunch of programs until you find one that actually meets your spec. This process is extremely data efficient. You can learn a generalizable program from just one example, two examples. This is why it works so well on ARC, by the way. The big limitation is that it’s extremely compute inefficient because you’re running into combinatorial explosion, of course.\nYou can sort of see here how deep learning and discrete program search have very complementary strengths, and limitations as well. Every limitation of deep learning has a corresponding strength in program synthesis and inversely. The path forward is going to be to merge the two.\nHere’s another way you can think about it. These parametric curves trained with gradient descent are great fits for everything that’s System 1-type thinking: pattern recognition, intuition, memorization, etc. Discrete program search is a great fit for Type 2 thinking: planning, reasoning. It’s quickly figuring out a generalizable model that matches just one or two examples, like for an ARC puzzle for instance.\nHumans are never doing pure System 1 or pure System 2. They’re always mixing and matching both. Right now, we have all the tools for System 1. We have almost nothing for System 2. The way forward is to create a hybrid system.\nThe form it’s going to take is mostly System 2. The outer structure is going to be a discrete program search system. You’re going to fix the fundamental limitation of discrete program search, which is combinatorial explosion, with deep learning. You’re going to leverage deep learning to guide and to provide intuition in program space, to guide the program search.\nThat’s very similar to what you see when you’re playing chess or when you’re trying to prove a theorem, for instance. It’s mostly a reasoning thing, but you start out with some intuition about the shape of the solution. That’s very much something you can get via a deep learning model. Deep learning models are very much like intuition machines. They’re pattern matching machines.\nYou start from this shape of the solution, and then you’re going to do actual explicit discrete program search. But you’re not going to do it via brute force. You’re not going to try things randomly. You’re actually going to ask another deep learning model for suggestions. It’ll be like, “here’s the most likely next step. Here’s where in the graph you should be going.” You can also use yet another deep learning model for feedback like “well, here’s what I have so far. Is it looking good? Should I just backtrack and try something new?” Discrete program search is going to be the key but you want to make it dramatically better, orders of magnitude more efficient, by leveraging deep learning.\nBy the way, another thing that you can use deep learning for is of course things like common sense knowledge and knowledge in general. You’re going to end up with this sort of system where you have this on-the-fly synthesis engine that can adapt to new situations.\nThe way it adapts is that it’s going to fetch from a bank of patterns, modules that could be themselves curves, differentiable modules, and some others that could be algorithmic in nature. It’s going to assemble them via this intuition-guided process. For every new situation you might be faced with, it’s going to give you a generalizable model that was synthesized using very, very little data. Something like this would solve ARC."
+  },
+  {
+    "objectID": "posts/how-to-get-agi/blog.html#thoughts",
+    "href": "posts/how-to-get-agi/blog.html#thoughts",
+    "title": "How to get AGI?",
+    "section": "Thoughts",
+    "text": "Thoughts\nAfter watching the podcast, I realized that AlphaGeometry2 is, almost entirely, just this idea. i believe you can become way better at generating intuition if you have a database of all mathematical theorems, proofs etc in a symbolic / DPS form. But this is too naive. I’ll update as I have more thoughts."
+  },
+  {
+    "objectID": "posts/how-to-get-agi/blog.html#footnotes",
+    "href": "posts/how-to-get-agi/blog.html#footnotes",
+    "title": "How to get AGI?",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://www.youtube.com/watch?v=UakqL6Pj9xo↩︎\nhttps://deepmind.google/discover/blog/alphageometry-an-olympiad-level-ai-system-for-geometry/↩︎"
+  },
+  {
+    "objectID": "posts/mct-dct/blog.html",
+    "href": "posts/mct-dct/blog.html",
+    "title": "[DRAFT] Some Important Results in Probability Theory",
+    "section": "",
+    "text": "Proof."
+  },
+  {
+    "objectID": "posts/mct-dct/blog.html#theorem-lebesgue-differentiation-theorem",
+    "href": "posts/mct-dct/blog.html#theorem-lebesgue-differentiation-theorem",
+    "title": "[DRAFT] Some Important Results in Probability Theory",
+    "section": "",
+    "text": "Proof."
+  },
+  {
+    "objectID": "posts/mct-dct/blog.html#theorem-monotone-convergence-theorem",
+    "href": "posts/mct-dct/blog.html#theorem-monotone-convergence-theorem",
+    "title": "[DRAFT] Some Important Results in Probability Theory",
+    "section": "Theorem: Monotone Convergence Theorem",
+    "text": "Theorem: Monotone Convergence Theorem"
+  },
+  {
+    "objectID": "posts/mct-dct/blog.html#footnotes",
+    "href": "posts/mct-dct/blog.html#footnotes",
+    "title": "[DRAFT] Some Important Results in Probability Theory",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://en.wikipedia.org/wiki/Absolute_continuity↩︎"
+  },
+  {
+    "objectID": "posts/polynomials-are-linear/blog.html",
+    "href": "posts/polynomials-are-linear/blog.html",
+    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
+    "section": "",
+    "text": "Reading the title: you are probably shouting “Lagrange Interpolation!!!” Yeah, sure, Lagrange is cool. But I will show you something cooler which ensures you don’t have to deal with the messy stuff."
+  },
+  {
+    "objectID": "posts/polynomials-are-linear/blog.html#problem-statement",
+    "href": "posts/polynomials-are-linear/blog.html#problem-statement",
+    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
+    "section": "Problem Statement",
+    "text": "Problem Statement\nLet \\(k \\in \\mathbb{N}\\) and \\(t_1, \\dotsc, t_k \\in [0,1]\\) be distinct points. Let \\(\\mathcal{P}_{k-1}\\) be the space of polynomials of degree less than or equal to \\(k-1\\) with real coefficients. Show that there exist real numbers \\(a_1, \\dotsc, a_k\\) such that\n\\[\n\\int_0^1f(x)dx = \\sum_{j=1}^k a_jf(t_j)\n\\]\nfor all \\(f \\in \\mathcal{P}_{k-1}\\)."
+  },
+  {
+    "objectID": "posts/polynomials-are-linear/blog.html#solution",
+    "href": "posts/polynomials-are-linear/blog.html#solution",
+    "title": "\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem",
+    "section": "Solution",
+    "text": "Solution\nWhenever you try to prove something “uniquely” determines something; it’s always nice to try to find an isomorphism somewhere. Consider the linear map \\(S:\\mathcal{P}_{k-1} \\to \\mathbb{R}^k\\) such that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k))\n\\]\n\nClaim 1: \\(S\\) is an isomorphism.\nSince \\(\\dim{\\mathcal{P}_{k-1}} = \\dim{\\mathbb{R}^k} = k\\), we would be done if we prove \\(\\mathcal{N}(S) = 0\\). Assume \\(S(f) = (0, 0, \\dotsc, 0)\\) which means \\(f\\) a \\(\\leq k-1\\) degree polynomial is \\(0\\) at \\(k\\) distinct points. This is only possible when \\(f \\equiv 0\\). \\(\\blacksquare\\)\n\n\nFinish\nNotice that\n\\[\nS(f) = (f(t_1), \\dotsc, f(t_k)) = \\sum_j f(t_j)e_j\n\\] Since \\(S\\) is an isomorphism, \\[\nf = \\sum_j f(t_j)S^{-1}(e_j)\n\\] Let \\(a_j = \\int_0^1 (S^{-1}(e_j))(x) dx\\), then, clearly, \\[\n\\int_0^1 f(x)dx = \\int_0^1 \\sum_j f(t_j)(S^{-1}(e_j))(x) dx\\] \\[\\int_0^1 f(x) dx = \\sum_j f(t_j) \\left(\\int_0^1 (S^{-1}(e_j))(x) dx\\right) = \\sum_j a_j f(t_j) \\blacksquare\n\\]"
+  },
+  {
+    "objectID": "posts/incomp-lang/blog.html",
+    "href": "posts/incomp-lang/blog.html",
+    "title": "[DRAFT] Language is an Infinitely Incomplete Approximation of Human Concepts",
+    "section": "",
+    "text": "I had thought of this idea last year, but never got around to writing it. In this blog, I show how humans are infinitely limited by the mode of language in transmission of ideas. I don’t quite remember how I got around to thinking about this, but here goes haha.\nEvery written language is described by a finite set of characters. Every spoken language requires a finite sequence of sounds. Every idea that is realized by humans and communicated through language has to be put into a sequence of letters / sequence of sounds. Call such a thought expressible.\nI define languages to be made of fixed objects, i.e., there are no new characters. A reasonable contention would be: “this is BS? languages change all the time”. Well, yes. However, if they change, then I call the new object a new language. You can think of this as:\n\\[\n\\{\\text{eng\\_v1}, \\text{eng\\_v2}, \\text{eng\\_v3}\\cdots\\}\n\\]\n&lt;fill in: why the set of all languages is countable&gt;\n\nTheorem\nThe set of all languages is countable.\n\n\n\nTheorem\nIf the set of all possible spoken and written languages is countable then the set of expressible ideas is countable.\n\nProof.\nLet \\(S\\) be the set of all languages. For a language, \\(L \\in S\\), let \\(\\mathcal{C}(L)\\) be the characters of \\(L\\). We understand that, \\(|\\mathcal{C}(L)|&lt;\\infty.\\)\nDefine \\(\\mathcal{C}(S) = \\cup_{L \\in S}\\{(L, x) : x\\in \\mathcal{C}(L) \\}\\), which is the set of all characters (signed with the language it belongs to). Since \\(S\\) is countable, \\(\\mathcal{C}(S)\\) is countable.\nNow, every expressible idea is a finite sequence of characters/phonemes like:\n\\[\n\\gamma_1 \\gamma_2 \\gamma_3 \\gamma_4 \\cdots \\gamma_N\n\\]\nwhere \\(\\gamma_i \\in \\mathcal{C}(S)\\).\nLet \\(\\mathrm{I}\\) be the set of all expressible ideas. We know that set of all finite sequences formed using countable characters is countable, and therefore: \\(\\mathrm{I}\\) be countable. \\(\\blacksquare\\)"
   },
   {
     "objectID": "posts/nelson/blog.html",
@@ -252,25 +266,11 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
-    "objectID": "thoughts/(a) NOW.html",
-    "href": "thoughts/(a) NOW.html",
-    "title": "Cold Reflections",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Update the Blog and connect the obsidian files to the blog directly."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Cold Reflections",
-    "section": "",
-    "text": "Ideas on DNA Storage\n\n\n\nbiology\n\nmachine learning\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n[DRAFT] Some Important Results in Probability Theory\n\n\n\nprobability\n\nmath\n\n\n\n\n\n\n\n\n\nMar 17, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n[DRAFT] Language is an Infinitely Incomplete Approximation of Human Concepts\n\n\n\nphilosophy\n\ncognition\n\nmath\n\n\n\n\n\n\n\n\n\nMar 13, 2025\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nHow to get AGI?\n\n\n\nartificial intelligence\n\nartificial general intelligence\n\nphilosophy\n\n\n\n\n\n\n\n\n\nJul 6, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nPonderings on OthelloGPT\n\n\n\nmachine learning\n\nartificial intelligence\n\ninterpretability\n\n\n\n\n\n\n\n\n\nMay 5, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nSo Far Yet So Close: How Independence is Almost Dependence\n\n\n\nprobability theory\n\nstatistics\n\nmath\n\n\n\n\n\n\n\n\n\nMar 4, 2024\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\n\\(k+1\\) points uniquely determine a \\(k\\) degree polynomial: A cool problem\n\n\n\nalgebra\n\nmath\n\n\n\n\n\n\n\n\n\nDec 10, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nAxiom of Choice, the Zorn’s Lemma, and the Foundations of Mathematics: Set Theory Part I\n\n\n\nset theory\n\nmath\n\n\n\n\n\n\n\n\n\nNov 16, 2023\n\n\nHimadri Mandal\n\n\n\n\n\n\n\n\n\n\n\n\nShannon’s Card Magic Trick\n\n\n\nisi\n\nstatistics\n\nmath\n\n\n\n\n\n\n\n\n\nOct 23, 2023\n\n\nHimadri Mandal\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "thoughts/NOW.html",
-    "href": "thoughts/NOW.html",
-    "title": "Cold Reflections",
-    "section": "",
-    "text": "Update the Blog and connect the obsidian files to the blog directly."
+    "text": "I’m Himadri Mandal, 18, you might know me as quirtt from Discord/AoPS, as I use that name on the internet. I am a freshman at ISI Kolkata, India studying Statistics (well, mostly Mathematics, but I enjoy both). I am also a CS nerd, enjoy almost anything geeky, and have a deep interest in wanting to automate all of Mathematics, and wish to work on this a lot.\nYou could check some of my projects out on github, but it could be difficult as they are largely undocumented. I am usually found: learning math/cs, reading ML papers, playing table tennis, chilling with friends, singing badly in my room, etc. Ah well. I have been recently getting more and more interested in AI and AI alignment, too. I wish do some good work in that field as well.\nIf you find me interesting - feel free to shoot me a mail at mandalhimadri06@gmail.com or send me a “Hi!” on my Discord."
   },
   {
     "objectID": "thoughts/Thoughts before I enter ENS.html",
