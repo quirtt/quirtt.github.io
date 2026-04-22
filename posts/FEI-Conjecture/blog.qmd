@@ -54,3 +54,5 @@ Now, we state the results proven in the, recent, second paper.
 ---
 
 To understand the first paper, I start with the talks. I attach the notes I took while watching the talks.
+
+**Note to self:** Recall the specific case of difficulty where FEIC and another conjecture (ref: SouChak) is stuck on. Something about flat polynomials and MinEntropy conjecture. A more specific example could both make the conjecture harder or easier to solve. (As Lipschitz concentration-type results are largely for general Lipschitz functions.) However, it can be used as a test against the results in the papers cited above, to understand the relative strength of the techniques (in particular, in every step) involved, and also against new ideas that I come up with.

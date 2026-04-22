@@ -8,7 +8,7 @@
 
 <meta name="author" content="Himadri Mandal">
 
-<title>Fourier Entropy Influence Conjecture – Cold Reflections</title>
+<title>Problems to Think About – Cold Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -151,11 +151,8 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Fourier Entropy Influence Conjecture</h1>
+      <h1 class="title">Problems to Think About</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">boolean functions</div>
-                <div class="quarto-category">analysis</div>
-                <div class="quarto-category">probability</div>
                 <div class="quarto-category">math</div>
               </div>
                   </div>
@@ -179,8 +176,15 @@ window.Quarto = {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#general-recipes" id="toc-general-recipes" class="nav-link active" data-scroll-target="#general-recipes">General Recipes</a></li>
+  <li><a href="#specific-problems" id="toc-specific-problems" class="nav-link" data-scroll-target="#specific-problems">Specific Problems</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -189,44 +193,35 @@ window.Quarto = {
 
 
 
-<div class="hidden">
-<p><span class="math display">\[
-\newcommand{\Var}{\mathrm{Var}}
-\newcommand{\E}{\mathbb{E}}
-\]</span></p>
-</div>
-<p>Fourier Entropy Influence Conjecture is a conjecture in the analysis of boolean functions which states that for any boolean function <span class="math inline">\(f:\{-1,1\}^n \to \{-1,1\}\)</span>, there is a constant <span class="math inline">\(C\)</span> independent of the dimension <span class="math inline">\(n\)</span> such that</p>
-<p><span class="math display">\[
-    H(\hat{f}^2) \leq C \cdot I(f)
-\]</span></p>
-<p>I wish to understand the existing literature in FEIC before I start working with Prof.&nbsp;Sourav Chakraborty. Even if I don’t make any progress in the Summer, I believe something will click in the time I will be at ENS Paris. Let’s begin. I started by visiting the EmergentMind <a href="https://www.emergentmind.com/topics/fourier-entropy-influence-fei-conjecture">page</a> on this conjecture and scouring through the guest <a href="https://terrytao.wordpress.com/2007/08/16/gil-kalai-the-entropyinfluence-conjecture/">post</a> on the Terrance Tao blog by Gil Kalai.</p>
-<p>Some recent results in the FEIC are:</p>
+<p>This will be an updating collection of interesting problems. Please email me if you are interested in working with me on any of these problems.</p>
+<section id="general-recipes" class="level2">
+<h2 class="anchored" data-anchor-id="general-recipes">General Recipes</h2>
 <ul>
-<li><p>(2020): <a href="https://arxiv.org/abs/1911.10579">Towards a Proof of the Fourier–Entropy Conjecture? (Esty Kelman, Guy Kindler, Noam Lifshitz, Dor Minzer, Muli Safra)</a>, with talks at <a href="https://www.youtube.com/watch?v=gccNUx1S5FA">lecture1</a>, <a href="https://www.youtube.com/watch?v=gccNUx1S5FA">lecture2</a></p></li>
-<li><p>(2023): <a href="https://arxiv.org/abs/2312.08271">A new bound for the Fourier-Entropy-Influence conjecture (Xiao Han)</a></p></li>
+<li><p>Pick any interesting existence result (“qualitative” as Terrance Tao would put it) in mathematics and try to obtain more control over it (make it a “quantitative” result).</p>
+<blockquote class="blockquote">
+<p>An example: <strong>(Qualitative) Mean Value Theorem</strong> states that if a function <span class="math inline">\(f\)</span> is continuous on the closed interval <span class="math inline">\([a,b]\)</span> and differentiable on the open interval <span class="math inline">\((a,b)\)</span>, then there exists at least one point <span class="math inline">\(\xi\)</span> in <span class="math inline">\((a,b)\)</span> such that <span class="math display">\[f'(\xi) = \frac{f(a) - f(b)}{a-b}\]</span> <strong>(Mythological, Quantitative) Mean Value Theorem</strong> states that if a function <span class="math inline">\(f\)</span> is continuous on the closed interval <span class="math inline">\([a,b]\)</span> and differentialbe on the open interval <span class="math inline">\((a,b)\)</span>, then there exists <span class="math inline">\(N_f(a,b)\)</span> points in <span class="math inline">\((a,b)\)</span> that attain the equality above. Also, for any such <span class="math inline">\(c\)</span>, <span class="math inline">\(\max(|c-a|, |c-b|) \leq D_f(a,b)\)</span></p>
+</blockquote></li>
 </ul>
-<p>First, we state the theorems proven in the first paper.</p>
-<p>For <span class="math inline">\(\{0,1\}\)</span> boolean functions, define the normalized influence of <span class="math inline">\(f\)</span> as <span class="math inline">\(\tilde{I}[f] = \frac{I[f]}{\Var(f)}\)</span>.</p>
+</section>
+<section id="specific-problems" class="level2">
+<h2 class="anchored" data-anchor-id="specific-problems">Specific Problems</h2>
+<ul>
+<li><p>Recall the approximate Caratheodory’s Theorem (see <a href="https://arxiv.org/pdf/1406.2296">here</a> for a proof):</p>
 <blockquote class="blockquote">
-<p>There is <span class="math inline">\(C &gt; 0\)</span>, such that for any function <span class="math inline">\(f:\{0, 1\}^n \to \{0, 1\}^n\)</span>, there is a non-empty <span class="math inline">\(S \subset [n]\)</span> of size <span class="math inline">\(O(\tilde{I}[f])\)</span> such that <span class="math inline">\(|\hat{f}(S)| \geq 2^{-C \cdot |S| \log(1 + \tilde{I}[f])}\sqrt{\Var(f)}\)</span>. In particular, <span class="math display">\[H_\infty(\hat{f}^2) \ll \tilde{I}[f] \log(1 + \tilde{I}[f])\]</span>.</p>
-</blockquote>
+<p>Given a set of vectors <span class="math inline">\(U = \{u_1, u_2, \cdots, u_m\} \subset \mathbb{R}^n\)</span> with <span class="math inline">\(\max_{u \in U} \|u\|_\infty \leq 1\)</span>, and <span class="math inline">\(\epsilon &gt; 0\)</span>. For every <span class="math inline">\(\mu \in \operatorname{CS}(U)\)</span> there exists an <span class="math inline">\(\mathcal{O}(\frac{\log(n)}{\epsilon^2})\)</span> uniform vector <span class="math inline">\(\mu' \in \operatorname{CS}(U)\)</span> such that <span class="math inline">\(\|\mu - \mu'\|_\infty \leq \varepsilon\)</span>.</p>
+</blockquote></li>
+<li><p>This can be generalized to a approximate multi-Caratheodory’s Theorem:</p>
 <blockquote class="blockquote">
-<p>For every <span class="math inline">\(\eta &gt; 0\)</span>, there exists <span class="math inline">\(C &gt; 0\)</span>, such that for all <span class="math inline">\(f: \{0,1\}^n \to \{0,1\}\)</span> we have <span class="math display">\[\sum_S \hat{f}(S)^2 1_{|\hat{f}(S)| \leq 2^{-C \cdot \tilde{I}[f]\log(1 + \tilde{I}[f])}} \leq \eta \cdot \Var(f)\]</span></p>
-</blockquote>
-<p>Next, they show a slightly weaker version of FEIC that holds for the low-degree parts of <span class="math inline">\(f\)</span>.</p>
-<blockquote class="blockquote">
-<p>There exists an absolute constant <span class="math inline">\(K &gt; 0\)</span>, such that for any <span class="math inline">\(D \in \mathbb{N}\)</span> and <span class="math inline">\(f:\{0,1\}^n \to \{0,1\}\)</span> we have that <span class="math display">\[H[\widehat{f^{\leq D}}] K \sum_{|S| \leq D} |S| \log(|S| + 1)\hat{f}(S)^2 + K \cdot I[f]\]</span></p>
-</blockquote>
-<p>Since <span class="math inline">\(I[f] = \sum_S |S| \hat{f}(S)^2\)</span>, this theorem is just short of FEIC by a <span class="math inline">\(\log(|S| + 1)\)</span> factor.</p>
-<p>Now, we state the results proven in the, recent, second paper.</p>
-<blockquote class="blockquote">
-<p>There exist <span class="math inline">\(c_1, c_2 &gt; 0\)</span> such that for any boolean function <span class="math inline">\(f:\{-1,1\}^n \to \{-1,1\}\)</span>, we have <span class="math display">\[H(\hat{f}^2) &lt; c_1 \cdot I(f) + c_2 \sum_{k \in [n]} I_k(f) \log\frac{1}{I_k(f)}\]</span></p>
-</blockquote>
-<hr>
-<p>To understand the first paper, I start with the talks. I attach the notes I took while watching the talks.</p>
-<p><strong>Note to self:</strong> Recall the specific case of difficulty where FEIC and another conjecture (ref: SouChak) is stuck on. Something about flat polynomials and MinEntropy conjecture. A more specific example could both make the conjecture harder or easier to solve. (As Lipschitz concentration-type results are largely for general Lipschitz functions.) However, it can be used as a test against the results in the papers cited above, to understand the relative strength of the techniques (in particular, in every step) involved, and also against new ideas that I come up with.</p>
+You instead wish to approximate multiple points <span class="math inline">\(\{\mu_1, \cdots, \mu_p\}\)</span> with multiple (not-necessarily) uniform vectors <span class="math inline">\(\{\mu'_k\}_{k \in [p]}\)</span> such that the size <span class="math inline">\(N\)</span> of the union of the sets of representatives chosen in the representation of <span class="math inline">\(\mu'_k\)</span> is made small. There are a few questions:
+<ul>
+<li>Can <span class="math inline">\(N\)</span> be significantly smaller than <span class="math inline">\(p \cdot \frac{\log(n)}{\varepsilon^2}\)</span>?</li>
+<li>Probably not. Under what conditions can it be significantly smaller than <span class="math inline">\(p \cdot \frac{\log(n)}{\varepsilon^2}\)</span> (ofcourse ignoring constants)? Naive idea was to consider <span class="math inline">\(\operatorname{CS}(U)\times \cdots \times \operatorname{CS}(U)\)</span> i.e.&nbsp;<span class="math inline">\(p\)</span>-time product of <span class="math inline">\(\operatorname{CS}(U)\)</span>, and then apply the theorem again. This leads to the first bound, easily. I expect Franke-Wolfe like techniques would work again with this, possibly improve over the first bound.</li>
+</ul>
+</blockquote></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

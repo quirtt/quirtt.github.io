@@ -1,0 +1,32 @@
+---
+title: "Problems to Think About"
+author: "Himadri Mandal"
+date: ""
+categories: [math]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+        # css: styles.css
+editor: visual
+image: "pfp.jpg"
+---
+This will be an updating collection of interesting problems. Please email me if you are interested in working with me on any of these problems. 
+
+## General Recipes
+- Pick any interesting existence result ("qualitative" as Terrance Tao would put it) in mathematics and try to obtain more control over it (make it a "quantitative" result). 
+    
+    >An example:  **(Qualitative) Mean Value Theorem** states that if a function $f$ is continuous on the closed interval $[a,b]$ and differentiable on the open interval $(a,b)$, then there exists at least one point $\xi$ in $(a,b)$ such that $$f'(\xi) = \frac{f(a) - f(b)}{a-b}$$
+    >**(Mythological, Quantitative) Mean Value Theorem** states that if a function $f$ is continuous on the closed interval $[a,b]$ and differentialbe on the open interval $(a,b)$, then there exists $N_f(a,b)$ points in $(a,b)$ that attain the equality above. Also, for any such $c$, $\max(|c-a|, |c-b|) \leq D_f(a,b)$
+
+## Specific Problems
+- Recall the approximate Caratheodory's Theorem (see [here](https://arxiv.org/pdf/1406.2296) for a proof):
+    
+    >Given a set of vectors $U = \{u_1, u_2, \cdots, u_m\} \subset \mathbb{R}^n$ with $\max_{u \in U} \|u\|_\infty \leq 1$, and $\epsilon > 0$. For every $\mu \in \operatorname{CS}(U)$ there exists an $\mathcal{O}(\frac{\log(n)}{\epsilon^2})$ uniform vector $\mu' \in \operatorname{CS}(U)$ such that $\|\mu - \mu'\|_\infty \leq \varepsilon$.
+
+- This can be generalized to a approximate multi-Caratheodory's Theorem:
+
+    >You instead wish to approximate multiple points $\{\mu_1, \cdots, \mu_p\}$ with multiple (not-necessarily) uniform vectors $\{\mu'_k\}_{k \in [p]}$ such that the size $N$ of the union of the sets of representatives chosen in the representation of $\mu'_k$ is made small. There are a few questions:
+    >- Can $N$ be significantly smaller than $p \cdot \frac{\log(n)}{\varepsilon^2}$?
+    >- Probably not. Under what conditions can it be significantly smaller than $p \cdot \frac{\log(n)}{\varepsilon^2}$ (ofcourse ignoring constants)?
+    >Naive idea was to consider $\operatorname{CS}(U)\times \cdots \times \operatorname{CS}(U)$ i.e. $p$-time product of $\operatorname{CS}(U)$, and then apply the theorem again. This leads to the first bound, easily. I expect Franke-Wolfe like techniques would work again with this, possibly improve over the first bound.
