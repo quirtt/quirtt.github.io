@@ -5,7 +5,7 @@ about:
   template: jolla
   links:
     - text: Curriculum Vitae
-      href: ./CV.pdf
+      href: ./resources/CV.pdf
     - icon: linkedin
       text: LinkedIn
       href: https://linkedin.com/in/quirtt
