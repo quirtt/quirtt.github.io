@@ -185,6 +185,8 @@ window.Quarto = {
    
   <ul>
   <li><a href="#update-28th-april-2026" id="toc-update-28th-april-2026" class="nav-link active" data-scroll-target="#update-28th-april-2026"><strong>Update</strong> [28th April 2026]:</a></li>
+  <li><a href="#update-4th-may-2026" id="toc-update-4th-may-2026" class="nav-link" data-scroll-target="#update-4th-may-2026"><strong>Update</strong> [4th May 2026]:</a></li>
+  <li><a href="#update-5th-may-2026" id="toc-update-5th-may-2026" class="nav-link" data-scroll-target="#update-5th-may-2026">Update [5th May 2026]:</a></li>
   </ul>
 </nav>
     </div>
@@ -231,21 +233,38 @@ window.Quarto = {
 <hr>
 <p>To understand the first paper, I start with the talks. I attach the notes I took while watching the talks.</p>
 <p><strong>Note to self:</strong> Recall the specific case of difficulty where FEIC and another conjecture (ref: SouChak) is stuck on. Something about flat polynomials and MinEntropy conjecture. A more specific example could both make the conjecture harder or easier to solve. (As Lipschitz concentration-type results are largely for general Lipschitz functions.) However, it can be used as a test against the results in the papers cited above, to understand the relative strength of the techniques (in particular, in every step) involved, and also against new ideas that I come up with.</p>
+<p>Here’s an, updating, TODO list of things I wish to do asap:</p>
+<ul class="task-list">
+<li><p><label><input type="checkbox">Read the Bohnenblust-Hille inequality paper with domain in <span class="math inline">\([-1, 1]^n\)</span>, derived in the paper: <a href="https://arxiv.org/abs/1706.03670">On the fourier spectrum of functions on the Boolean Cube</a></label></p></li>
+<li><p><label><input type="checkbox">Correct the derived inequality using the Xiao-Han connection for general real, boolean functions.</label></p></li>
+<li><p><label><input type="checkbox" checked="">Understand the information theoretic proof by Peijei Lin</label></p></li>
+<li><p><label><input type="checkbox">Understand the recursive structure of <span class="math inline">\(C_d\)</span></label></p></li>
+<li><p><label><input type="checkbox">Think about signage of the Boolean cube and how the fourier speectrum behaves downstream of that.</label></p></li>
+<li><p><label><input type="checkbox">Read the <span class="math inline">\(I(f)\log(1 + I(f))\)</span> paper.</label></p></li>
+</ul>
 <section id="update-28th-april-2026" class="level3">
 <h3 class="anchored" data-anchor-id="update-28th-april-2026"><strong>Update</strong> [28th April 2026]:</h3>
 <ul>
 <li>I have gone through the main arguments of Sourav Chakraborty’s 2019 paper, that, among other things, shows a (albeit, weak) connection of the FEI to the Bohnenblust-Hille inequality in Harmonic Analysis.</li>
-<li>I have gone through Peijei’s paper. I believe it shows the limit of what, just, the probabilistic structure of the Fourier spectrum of REAL boolean functions can give us. It is a nice proof. One can ask: what other Markov Chains could one construct here? However, the main difficultiy is, still, in the structure of the spectrum of <span class="math inline">\(\{-1,1\}\)</span>-valued functions. Could I create Markov chains that DEPEND on the booleanity of the function?</li>
+<li>I have gone through Peijei’s paper. I believe it shows the limit of what, just, the probabilistic structure of the Fourier spectrum of REAL boolean functions can give us. It is a nice proof. One can ask: what other Markov Chains could one construct here? However, the main difficultiy is, still, in the structure of the spectrum of <span class="math inline">\(\{-1,1\}\)</span>-valued functions. Could I create Markov chains that DEPEND on the booleanity of the function?Using the Fourier Coefficient identity <span class="math inline">\(\hat{f} \star \hat{f} = \delta_{\emptyset}\)</span> one extracts sign information about the coefficients. For homogenous functions <span class="math inline">\(f\)</span>, one then studies <span class="math inline">\(L_f\)</span> and it turns out using this identity one can prove a beautiful identity about the Gram matrix that connects <span class="math inline">\(L_f\)</span> to the Influences. I need to understand how to better work with tensors and <span class="math inline">\(L_f\)</span> because it seems like an extremely useful tool.</li>
+<li>FEIC essentially states that the growth rate of the norm of the coefficient vector at 2 is bounded above by total influence. Note that norm of the coefficient vector DOESN’T store any information about the sign structure of the coefficients. SO WHERE DOES THE SIGN INFORMATION GO? Does it only matter when I prove the Gram matrix form, and never again?</li>
+<li>When you consider the derivative or |x| wrt x, you get sgn(x). In this scenario, however, you look at |x|^2+eps and take derivative wrt eps, which gives you |x|^2+eps ln(|x|), although this gives you the entropy distribution, it doesn’t say anything about the sign information.</li>
 </ul>
-<p>Here’s a TODO list of things I wish to do asap:</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Read the Bohnenblust-Hille inequality paper with domain in <span class="math inline">\([-1, 1]^n\)</span>, derived in the paper: <a href="https://arxiv.org/abs/1706.03670">On the fourier spectrum of functions on the Boolean Cube</a></label></li>
-<li><label><input type="checkbox">Correct the derived inequality using the Xiao-Han connection for general real, boolean functions.</label></li>
-<li><label><input type="checkbox" checked="">Understand the information theoretic proof by Peijei Lin</label></li>
-<li><label><input type="checkbox">Understand the recursive structure of <span class="math inline">\(C_d\)</span></label></li>
-<li><label><input type="checkbox">Think about signage of the Boolean cube and how the fourier speectrum behaves downstream of that.</label></li>
-<li><label><input type="checkbox">Read the <span class="math inline">\(I(f)\log(1 + I(f))\)</span> paper.</label></li>
+</section>
+<section id="update-4th-may-2026" class="level3">
+<h3 class="anchored" data-anchor-id="update-4th-may-2026"><strong>Update</strong> [4th May 2026]:</h3>
+<section id="reading-the-paper-on-bh-inequality-over-the-boolean-cube." class="level4">
+<h4 class="anchored" data-anchor-id="reading-the-paper-on-bh-inequality-over-the-boolean-cube.">Reading the paper on BH-inequality over the boolean cube.</h4>
+<p>The paper uses/builds upon:</p>
+<ul>
+<li><strong>Blei’s Inequality</strong></li>
 </ul>
+<p><em>to be updated….</em></p>
+</section>
+</section>
+<section id="update-5th-may-2026" class="level3">
+<h3 class="anchored" data-anchor-id="update-5th-may-2026">Update [5th May 2026]:</h3>
+<p>Essentially, you have a multilinear polynomial that satisfies very specific size and sign constraints. Can I somehow relate the Entropy of the square of the coefficients, with the Influence of the function? <strong>To understand the strength of FEI, one could ask if the FEI were true, how many of these constraints would necessarily have to be true?</strong> Another view point is: if {f_hat(S)} are the coefficients then inner producting with itself leads to 1 whereas inner-producting under the shifted operation of <span class="math display">\[S \to A \triangle S\]</span> makes the inner-product 0. This makes the object very combinatorial. <strong>Can I generate all the constraints with just a few of these shifted operation equalities? One can simulate random coefficients and check the FEI-ratio while ensuring some “levels” of these equalities hold.</strong> You can think of these objects modded out under the <span class="math display">\[\langle x_k^2 - 1\rangle\]</span> ideal. If there was no mod, you could think of these vector relations as some vectorspace orthogonality relation of treating coefficient of polynomials as vector spaces. But due to this, putting a vector space structure directly is difficult. <strong>Q: Is this what matroids are about? Q: Fix n = 2 or n = 3 and write down the coefficient constraints. Can you prove FEI with these?</strong> You must be able to, if its true, since these constraints are <strong>equivalent</strong> to booleanity. If not, can you DISPROVE it? Note that these constraints are highly sensitive to perurbations, and stop being true unless a global perturbation of a VERY specific kind is made. Understand, what are the allowed perturbations, that keep you within class of vectors could be key. <strong>Define the set of all coefficient vectors that satisfy the constraints of the</strong> <span class="math inline">\(n\)</span><strong>’th level. Q: What can you say about this object? We know there are exactly 2^n boolean functions. Can you say something about this as n-&gt;infinity? Can you “embed” lower dimensional vectors INSIDE the higher dimensional ones?</strong></p>
 
 
 </section>
