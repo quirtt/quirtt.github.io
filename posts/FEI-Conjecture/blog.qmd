@@ -12,14 +12,14 @@ editor: visual
 image: "pfp.jpg"
 ---
 
-::: {.hidden}
+::: hidden
 $$
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\E}{\mathbb{E}}
 $$
 :::
 
-Fourier Entropy Influence Conjecture is a conjecture in the analysis of boolean functions which states that for any boolean function $f:\{-1,1\}^n \to \{-1,1\}$, there is a constant $C$ independent of the dimension $n$ such that 
+Fourier Entropy Influence Conjecture is a conjecture in the analysis of boolean functions which states that for any boolean function $f:\{-1,1\}^n \to \{-1,1\}$, there is a constant $C$ independent of the dimension $n$ such that
 
 $$
     H(\hat{f}^2) \leq C \cdot I(f)
@@ -29,45 +29,65 @@ I wish to understand the existing literature in FEIC before I start working with
 
 Some recent results in the FEIC are:
 
-- (2020): [Towards a Proof of the Fourier--Entropy Conjecture? (Esty Kelman, Guy Kindler, Noam Lifshitz, Dor Minzer, Muli Safra)](https://arxiv.org/abs/1911.10579), with talks at [lecture1](https://www.youtube.com/watch?v=gccNUx1S5FA), [lecture2](https://www.youtube.com/watch?v=gccNUx1S5FA)
+-   (2020): [Towards a Proof of the Fourier--Entropy Conjecture? (Esty Kelman, Guy Kindler, Noam Lifshitz, Dor Minzer, Muli Safra)](https://arxiv.org/abs/1911.10579), with talks at [lecture1](https://www.youtube.com/watch?v=gccNUx1S5FA), [lecture2](https://www.youtube.com/watch?v=gccNUx1S5FA)
 
-- (2023): [A new bound for the Fourier-Entropy-Influence conjecture (Xiao Han)](https://arxiv.org/abs/2312.08271)
+-   (2023): [A new bound for the Fourier-Entropy-Influence conjecture (Xiao Han)](https://arxiv.org/abs/2312.08271)
 
 First, we state the theorems proven in the first paper.
 
-For $\{0,1\}$ boolean functions, define the normalized influence of $f$ as $\tilde{I}[f] = \frac{I[f]}{\Var(f)}$. 
+For $\{0,1\}$ boolean functions, define the normalized influence of $f$ as $\tilde{I}[f] = \frac{I[f]}{\Var(f)}$.
 
-> There is $C > 0$, such that for any function $f:\{0, 1\}^n \to \{0, 1\}^n$, there is a non-empty $S \subset [n]$ of size $O(\tilde{I}[f])$ such that $|\hat{f}(S)| \geq 2^{-C \cdot |S| \log(1 + \tilde{I}[f])}\sqrt{\Var(f)}$. In particular, $$H_\infty(\hat{f}^2) \ll \tilde{I}[f] \log(1 + \tilde{I}[f])$$. 
+> There is $C > 0$, such that for any function $f:\{0, 1\}^n \to \{0, 1\}^n$, there is a non-empty $S \subset [n]$ of size $O(\tilde{I}[f])$ such that $|\hat{f}(S)| \geq 2^{-C \cdot |S| \log(1 + \tilde{I}[f])}\sqrt{\Var(f)}$. In particular, $$H_\infty(\hat{f}^2) \ll \tilde{I}[f] \log(1 + \tilde{I}[f])$$.
 
 > For every $\eta > 0$, there exists $C > 0$, such that for all $f: \{0,1\}^n \to \{0,1\}$ we have $$\sum_S \hat{f}(S)^2 1_{|\hat{f}(S)| \leq 2^{-C \cdot \tilde{I}[f]\log(1 + \tilde{I}[f])}} \leq \eta \cdot \Var(f)$$
 
-Next, they show a slightly weaker version of FEIC that holds for the low-degree parts of $f$. 
+Next, they show a slightly weaker version of FEIC that holds for the low-degree parts of $f$.
 
 > There exists an absolute constant $K > 0$, such that for any $D \in \mathbb{N}$ and $f:\{0,1\}^n \to \{0,1\}$ we have that $$H[\widehat{f^{\leq D}}] K \sum_{|S| \leq D} |S| \log(|S| + 1)\hat{f}(S)^2 + K \cdot I[f]$$
 
 Since $I[f] = \sum_S |S| \hat{f}(S)^2$, this theorem is just short of FEIC by a $\log(|S| + 1)$ factor.
 
-Now, we state the results proven in the, recent, second paper. 
+Now, we state the results proven in the, recent, second paper.
 
 > There exist $c_1, c_2 > 0$ such that for any boolean function $f:\{-1,1\}^n \to \{-1,1\}$, we have $$H(\hat{f}^2) < c_1 \cdot I(f) + c_2 \sum_{k \in [n]} I_k(f) \log\frac{1}{I_k(f)}$$
 
----
+------------------------------------------------------------------------
 
 To understand the first paper, I start with the talks. I attach the notes I took while watching the talks.
 
 **Note to self:** Recall the specific case of difficulty where FEIC and another conjecture (ref: SouChak) is stuck on. Something about flat polynomials and MinEntropy conjecture. A more specific example could both make the conjecture harder or easier to solve. (As Lipschitz concentration-type results are largely for general Lipschitz functions.) However, it can be used as a test against the results in the papers cited above, to understand the relative strength of the techniques (in particular, in every step) involved, and also against new ideas that I come up with.
 
+Here's an, updating, TODO list of things I wish to do asap:
 
-### **Update** [28th April 2026]:
+-   [ ] Read the Bohnenblust-Hille inequality paper with domain in $[-1, 1]^n$, derived in the paper: [On the fourier spectrum of functions on the Boolean Cube](https://arxiv.org/abs/1706.03670)
 
-- I have gone through the main arguments of Sourav Chakraborty's 2019 paper, that, among other things, shows a (albeit, weak) connection of the FEI to the Bohnenblust-Hille inequality in Harmonic Analysis. 
-- I have gone through Peijei's paper. I believe it shows the limit of what, just, the probabilistic structure of the Fourier spectrum of REAL boolean functions can give us. It is a nice proof. One can ask: what other Markov Chains could one construct here? However, the main difficultiy is, still, in the structure of the spectrum of $\{-1,1\}$-valued functions. Could I create Markov chains that DEPEND on the booleanity of the function?
+-   [ ] Correct the derived inequality using the Xiao-Han connection for general real, boolean functions.
 
-Here's a TODO list of things I wish to do asap:
+-   [x] Understand the information theoretic proof by Peijei Lin
 
-- [ ] Read the Bohnenblust-Hille inequality paper with domain in $[-1, 1]^n$, derived in the paper: [On the fourier spectrum of functions on the Boolean Cube](https://arxiv.org/abs/1706.03670)
-- [ ] Correct the derived inequality using the Xiao-Han connection for general real, boolean functions. 
-- [x] Understand the information theoretic proof by Peijei Lin
-- [ ] Understand the recursive structure of $C_d$
-- [ ] Think about signage of the Boolean cube and how the fourier speectrum behaves downstream of that. 
-- [ ] Read the $I(f)\log(1 + I(f))$ paper.
+-   [ ] Understand the recursive structure of $C_d$
+
+-   [ ] Think about signage of the Boolean cube and how the fourier speectrum behaves downstream of that.
+
+-   [ ] Read the $I(f)\log(1 + I(f))$ paper.
+
+### **Update** \[28th April 2026\]:
+
+-   I have gone through the main arguments of Sourav Chakraborty's 2019 paper, that, among other things, shows a (albeit, weak) connection of the FEI to the Bohnenblust-Hille inequality in Harmonic Analysis.
+-   I have gone through Peijei's paper. I believe it shows the limit of what, just, the probabilistic structure of the Fourier spectrum of REAL boolean functions can give us. It is a nice proof. One can ask: what other Markov Chains could one construct here? However, the main difficultiy is, still, in the structure of the spectrum of $\{-1,1\}$-valued functions. Could I create Markov chains that DEPEND on the booleanity of the function?Using the Fourier Coefficient identity $\hat{f} \star \hat{f} = \delta_{\emptyset}$ one extracts sign information about the coefficients. For homogenous functions $f$, one then studies $L_f$ and it turns out using this identity one can prove a beautiful identity about the Gram matrix that connects $L_f$ to the Influences. I need to understand how to better work with tensors and $L_f$ because it seems like an extremely useful tool.
+-   FEIC essentially states that the growth rate of the norm of the coefficient vector at 2 is bounded above by total influence. Note that norm of the coefficient vector DOESN'T store any information about the sign structure of the coefficients. SO WHERE DOES THE SIGN INFORMATION GO? Does it only matter when I prove the Gram matrix form, and never again?
+-   When you consider the derivative or \|x\| wrt x, you get sgn(x). In this scenario, however, you look at \|x\|\^2+eps and take derivative wrt eps, which gives you \|x\|\^2+eps ln(\|x\|), although this gives you the entropy distribution, it doesn't say anything about the sign information.
+
+### **Update** \[4th May 2026\]:
+
+#### Reading the paper on BH-inequality over the boolean cube.
+
+The paper uses/builds upon:
+
+-   **Blei's Inequality**
+
+*to be updated....*
+
+### Update \[5th May 2026\]:
+
+Essentially, you have a multilinear polynomial that satisfies very specific size and sign constraints. Can I somehow relate the Entropy of the square of the coefficients, with the Influence of the function? **To understand the strength of FEI, one could ask if the FEI were true, how many of these constraints would necessarily have to be true?** Another view point is: if {f_hat(S)} are the coefficients then inner producting with itself leads to 1 whereas inner-producting under the shifted operation of $$S \to A \triangle S$$ makes the inner-product 0. This makes the object very combinatorial. **Can I generate all the constraints with just a few of these shifted operation equalities? One can simulate random coefficients and check the FEI-ratio while ensuring some "levels" of these equalities hold.** You can think of these objects modded out under the $$\langle x_k^2 - 1\rangle$$ ideal. If there was no mod, you could think of these vector relations as some vectorspace orthogonality relation of treating coefficient of polynomials as vector spaces. But due to this, putting a vector space structure directly is difficult. **Q: Is this what matroids are about? Q: Fix n = 2 or n = 3 and write down the coefficient constraints. Can you prove FEI with these?** You must be able to, if its true, since these constraints are **equivalent** to booleanity. If not, can you DISPROVE it? Note that these constraints are highly sensitive to perurbations, and stop being true unless a global perturbation of a VERY specific kind is made. Understand, what are the allowed perturbations, that keep you within class of vectors could be key. **Define the set of all coefficient vectors that satisfy the constraints of the** $n$**'th level. Q: What can you say about this object? We know there are exactly 2\^n boolean functions. Can you say something about this as n-\>infinity? Can you "embed" lower dimensional vectors INSIDE the higher dimensional ones?**
