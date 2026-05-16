@@ -16,6 +16,8 @@ image: "pfp.jpg"
 $$
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\E}{\mathbb{E}}
+\newcommand{\H}{\mathbb{H}}
+\newcommand{\Inf}{\operatorname{Inf}}
 $$
 :::
 
@@ -90,4 +92,113 @@ The paper uses/builds upon:
 
 ### Update \[5th May 2026\]:
 
-Essentially, you have a multilinear polynomial that satisfies very specific size and sign constraints. Can I somehow relate the Entropy of the square of the coefficients, with the Influence of the function? **To understand the strength of FEI, one could ask if the FEI were true, how many of these constraints would necessarily have to be true?** Another view point is: if {f_hat(S)} are the coefficients then inner producting with itself leads to 1 whereas inner-producting under the shifted operation of $$S \to A \triangle S$$ makes the inner-product 0. This makes the object very combinatorial. **Can I generate all the constraints with just a few of these shifted operation equalities? One can simulate random coefficients and check the FEI-ratio while ensuring some "levels" of these equalities hold.** You can think of these objects modded out under the $$\langle x_k^2 - 1\rangle$$ ideal. If there was no mod, you could think of these vector relations as some vectorspace orthogonality relation of treating coefficient of polynomials as vector spaces. But due to this, putting a vector space structure directly is difficult. **Q: Is this what matroids are about? Q: Fix n = 2 or n = 3 and write down the coefficient constraints. Can you prove FEI with these?** You must be able to, if its true, since these constraints are **equivalent** to booleanity. If not, can you DISPROVE it? Note that these constraints are highly sensitive to perurbations, and stop being true unless a global perturbation of a VERY specific kind is made. Understand, what are the allowed perturbations, that keep you within class of vectors could be key. **Define the set of all coefficient vectors that satisfy the constraints of the** $n$**'th level. Q: What can you say about this object? We know there are exactly 2\^n boolean functions. Can you say something about this as n-\>infinity? Can you "embed" lower dimensional vectors INSIDE the higher dimensional ones?**
+Essentially, you have a multilinear polynomial that satisfies very specific size and sign constraints. Can I somehow relate the Entropy of the square of the coefficients, with the Influence of the function? **To understand the strength of FEI, one could ask if the FEI were true, how many of these constraints would necessarily have to be true?** Another view point is: if {f_hat(S)} are the coefficients then inner producting with itself leads to 1 whereas inner-producting under the shifted operation of $$S \to A \triangle S$$ makes the inner-product 0. This makes the object very combinatorial. **Can I generate all the constraints with just a few of these shifted operation equalities? One can simulate random coefficients and check the FEI-ratio while ensuring some "levels" of these equalities hold.** You can think of these objects modded out under the $$\langle x_k^2 - 1\rangle$$ ideal. If there was no mod, you could think of these vector relations as some vectorspace orthogonality relation of treating coefficient of polynomials as vector spaces. But due to this, putting a vector space structure directly is difficult. **Q: Is this what matroids are about? Q: Fix n = 2 or n = 3 and write down the coefficient constraints. Can you prove FEI with these?** You must be able to, if its true, since these constraints are **equivalent** to booleanity. If not, can you DISPROVE it? Note that these constraints are highly sensitive to perturbations, and stop being true unless a global perturbation of a VERY specific kind is made. Understand, what are the allowed perturbations, that keep you within class of vectors could be key. **Define the set of all coefficient vectors that satisfy the constraints of the** $n$**'th level. Q: What can you say about this object? We know there are exactly 2\^n boolean functions. Can you say something about this as n-\>infinity? Can you "embed" lower dimensional vectors INSIDE the higher dimensional ones? Q: Could I weaken the 0-constraints to a** $$\leq \varepsilon$$ constraint? Could that be easier to resolve using some Optimization techniques? What happens when I symmetrize over just a set A, instead of all permutations? Basically, I want my d-linear form to be sensitive to a particular set, and then see what is happening.
+
+## Update \[11th May 2026\]:
+
+Met SouChak and Arijit Ghosh.
+
+There were quite a few questions pondered. SouChak agrees with me that Bohnenblust-Hille tools have the key to this problem. Let's recall what Bohnenblust-Hille, in the context of Boolean polynomials, tells you.
+
+> Let $$f : \{-1, +1\}^n \to \mathbb{R}$$ be a Boolean function. Then, for all integers $d \geq \deg(\hat{f})$, there is a universal constant $C \in \mathbb{R}$ such that
+>
+> $$
+> \|\{\hat{f}(S)\}_S\|_{\frac{2d}{d+1}} \leq C \cdot \|\hat{f}\|_{[-1,1]^n} = C \cdot \|f\|_\infty
+> $$
+>
+> where $\|P\|_T$ is the supremum norm of $P$ over $T$.
+
+Main questions:
+
+-   Does BH imply FEIC? Note: BH on $f$ itself cannot imply FEIC because, BH is true for all real valued functions whereas FEIC is true ONLY for Boolean-valued functions. SouChak's paper, however, applied BH on the approximating polynomial of $f$.
+
+-   One can try applying BH on polynomials in an $L_\infty$ ball of the approximating polynomial. One can try BH on $L\infty$ ball of $P_f$.
+
+-   Does FEIC imply BH?
+
+-   Understand how the Boolean Bohnenblust Hille paper connects to all these tools. Can you create a affine linear form that is symmetric to arbitrary sets $A$ instead of averaging over all injections $\varphi : S \hookrightarrow [n]$.
+
+One recurring theme was understanding how the **Entropy** connects to all of this through the observation that: for a probability vector, $v$, the Entropy $$\mathbb{H}(v) \propto -\frac{d}{d\varepsilon} \|v\|_{2 + \varepsilon}^{2 + \varepsilon}$$
+
+-   How the constant of BH connects to the constant of FEIC? First question: conjecture: are they literally the same?
+
+-   Can you look at the approximating polynomial which is almost-flat? I.e. basically approximating polynomials that have the properties required by the SouChak proof, instead of the best approximating polynomial? If you could show the resulting degree doesn't have a MASSIVE blowup, one might be able to show BH =\> FEIC through this.
+
+<!-- -->
+
+-   How does the BH literature prove the optimality of $\frac{2d}{d+1}$? How to find the optimal norm-order $t$ to compare $\|\{\hat{f}(S)\}_S\|_t$ with $\operatorname{Inf}(f)$? -\> Random polynomials via Salem-Zygmund computation.
+
+------------------------------------------------------------------------
+
+Notice, for boolean functions $f$, $\|f\|_\infty = 1$, so BH tells you that $\|\{\hat{f}(S)\}_S\|_{\frac{2d}{d+1}} \leq C$, for all $d \geq \deg{f}$. This, essentially, leads to $\mathbb{H}(\hat{f}^2) \leq +\infty$, which is a useless bound.
+
+### Update \[15th May 2026\]:
+
+Met SouChak, Arijit Ghosh, Arikith and Manmatha at the Seminar room.
+
+![Fun 2 hours...](/resources/figures/15th_may.jpeg)
+
+Our main focus was on the following question: **Is FEIC equivalent to the following:** $\forall \varepsilon > 0, \exists C > 0, \forall n, f:\{-1, 1\}^n \to \{-1, 1\}$ one has $$
+\|\{\hat{f}(S)\}_S\|_{2 + \varepsilon}^{2 +\varepsilon} \geq \exp(-C\varepsilon\operatorname{Inf}(f))
+$$
+
+> **RHS =\> FEIC:\
+> **
+>
+> Let $\varphi_{f}(2 + \varepsilon) = \sum_{S \subset [n]}\hat{f}(S)^{2 + \varepsilon}$ then $$H(\{\hat{f}(S)^2\}_S) = -\frac{2}{\ln(2)}\left[\frac{d}{d\varepsilon}\varphi_f(2 + \varepsilon)\right]\Bigg|_{\varepsilon = 0}$$
+>
+> $$= \lim_{\varepsilon \downarrow 0}\frac{2}{\ln(2)}\frac{1 - \varphi_f( 2+\varepsilon)}{\varepsilon} \leq \frac{2}{\ln(2)}\lim_{\varepsilon \downarrow 0}\frac{1 - \exp(-C\varepsilon\Inf(f)}{\varepsilon} = C\Inf(f)$$
+
+Some recap on Renyi Entropies before going back to the other side. Let $X$ be a discrete random variable with an alphabet set $\mathcal{A} = \{x_1, \cdots, x_n\}$ with corresponding probabilities $p_i = \operatorname{Pr}(X = x_i)$. Then, the Renyi entropy of order $\alpha \in (0, \infty)$, $\alpha \neq 1$ is defined as
+
+$$
+\H_\alpha(X) = \frac{1}{1-\alpha} \log\left[\sum_{i = 1}^{n} p_i^\alpha\right]
+$$
+
+We also have:
+
+-   $\lim_{\alpha \to 1} \H_\alpha(X) = \H(X)$
+
+-   $\H_\alpha(X) = \frac{\alpha}{1 - \alpha}\log(\|P\|_\alpha)$ where $P$ is the probability vector associated to the alphabet $\mathcal{A}$.
+
+-   $\H_\alpha(X)$ is non-increasing in $\alpha$.
+
+> **FEIC =\> RHS:**
+>
+> Let $v^2 = \{\hat{f}(S)^2\}_S$ be the squared-coefficient vector associated to the function $f$. We have $\H_{1 + \varepsilon}(v^2) \leq \H_1(v^2)$. From FEI, we have $\H_1(v^2) \leq C\Inf(f)$, thus,
+>
+> $$
+> \frac{1+\varepsilon}{-\varepsilon}\log(\|v^2\|_{1 + \varepsilon}) = \H_{1 + \varepsilon}(v^2) \leq C\Inf(f)
+> $$
+>
+> Thus,
+>
+> $$
+> \log(\|v^2\|_{1 + \varepsilon}) \geq \frac{-\varepsilon}{1+\varepsilon}C\Inf(f)
+> $$
+>
+> $$
+> \|v^2\|_{1 +\varepsilon}^{1+\varepsilon} \geq \exp(-C\varepsilon\Inf(f))
+> $$
+>
+> Equivalently,
+>
+> $$
+> \|\{\hat{f}(S)\}_S\|_{2 + \varepsilon}^{2+\varepsilon} \geq \exp\left(-\frac{C\varepsilon}{2}\Inf(f)\right)
+> $$
+
+I realized this later, but, essentially, this is the series of conjectures
+
+$$
+\left\{\mathbb{H}_{1 + \varepsilon} \leq C\Inf(f)\right\}_\varepsilon
+$$
+
+and that is why, naturally, you get FMEI (Fourier Min-Entropy Conjecture) out of $\varepsilon \to \infty$.
+
+Some questions that were interesting were:
+
+-   Can you prove an $\varepsilon$-dependent bound?
+
+-   Using the random-polynomial arguments with real-valued and boolean-valued functions, see what comes out. Hunch should be nothing.
+
+-   Can you do it for $\varepsilon \sim \frac{1}{d}$? Can you prove it for ANY $\varepsilon$? Can you find the "smallest-necessary" $\varepsilon$? Is there such an $\varepsilon$?

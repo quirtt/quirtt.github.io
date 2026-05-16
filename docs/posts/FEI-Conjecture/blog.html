@@ -187,6 +187,10 @@ window.Quarto = {
   <li><a href="#update-28th-april-2026" id="toc-update-28th-april-2026" class="nav-link active" data-scroll-target="#update-28th-april-2026"><strong>Update</strong> [28th April 2026]:</a></li>
   <li><a href="#update-4th-may-2026" id="toc-update-4th-may-2026" class="nav-link" data-scroll-target="#update-4th-may-2026"><strong>Update</strong> [4th May 2026]:</a></li>
   <li><a href="#update-5th-may-2026" id="toc-update-5th-may-2026" class="nav-link" data-scroll-target="#update-5th-may-2026">Update [5th May 2026]:</a></li>
+  <li><a href="#update-11th-may-2026" id="toc-update-11th-may-2026" class="nav-link" data-scroll-target="#update-11th-may-2026">Update [11th May 2026]:</a>
+  <ul class="collapse">
+  <li><a href="#update-15th-may-2026" id="toc-update-15th-may-2026" class="nav-link" data-scroll-target="#update-15th-may-2026">Update [15th May 2026]:</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -201,6 +205,8 @@ window.Quarto = {
 <p><span class="math display">\[
 \newcommand{\Var}{\mathrm{Var}}
 \newcommand{\E}{\mathbb{E}}
+\newcommand{\H}{\mathbb{H}}
+\newcommand{\Inf}{\operatorname{Inf}}
 \]</span></p>
 </div>
 <p>Fourier Entropy Influence Conjecture is a conjecture in the analysis of boolean functions which states that for any boolean function <span class="math inline">\(f:\{-1,1\}^n \to \{-1,1\}\)</span>, there is a constant <span class="math inline">\(C\)</span> independent of the dimension <span class="math inline">\(n\)</span> such that</p>
@@ -264,9 +270,97 @@ window.Quarto = {
 </section>
 <section id="update-5th-may-2026" class="level3">
 <h3 class="anchored" data-anchor-id="update-5th-may-2026">Update [5th May 2026]:</h3>
-<p>Essentially, you have a multilinear polynomial that satisfies very specific size and sign constraints. Can I somehow relate the Entropy of the square of the coefficients, with the Influence of the function? <strong>To understand the strength of FEI, one could ask if the FEI were true, how many of these constraints would necessarily have to be true?</strong> Another view point is: if {f_hat(S)} are the coefficients then inner producting with itself leads to 1 whereas inner-producting under the shifted operation of <span class="math display">\[S \to A \triangle S\]</span> makes the inner-product 0. This makes the object very combinatorial. <strong>Can I generate all the constraints with just a few of these shifted operation equalities? One can simulate random coefficients and check the FEI-ratio while ensuring some “levels” of these equalities hold.</strong> You can think of these objects modded out under the <span class="math display">\[\langle x_k^2 - 1\rangle\]</span> ideal. If there was no mod, you could think of these vector relations as some vectorspace orthogonality relation of treating coefficient of polynomials as vector spaces. But due to this, putting a vector space structure directly is difficult. <strong>Q: Is this what matroids are about? Q: Fix n = 2 or n = 3 and write down the coefficient constraints. Can you prove FEI with these?</strong> You must be able to, if its true, since these constraints are <strong>equivalent</strong> to booleanity. If not, can you DISPROVE it? Note that these constraints are highly sensitive to perurbations, and stop being true unless a global perturbation of a VERY specific kind is made. Understand, what are the allowed perturbations, that keep you within class of vectors could be key. <strong>Define the set of all coefficient vectors that satisfy the constraints of the</strong> <span class="math inline">\(n\)</span><strong>’th level. Q: What can you say about this object? We know there are exactly 2^n boolean functions. Can you say something about this as n-&gt;infinity? Can you “embed” lower dimensional vectors INSIDE the higher dimensional ones?</strong></p>
+<p>Essentially, you have a multilinear polynomial that satisfies very specific size and sign constraints. Can I somehow relate the Entropy of the square of the coefficients, with the Influence of the function? <strong>To understand the strength of FEI, one could ask if the FEI were true, how many of these constraints would necessarily have to be true?</strong> Another view point is: if {f_hat(S)} are the coefficients then inner producting with itself leads to 1 whereas inner-producting under the shifted operation of <span class="math display">\[S \to A \triangle S\]</span> makes the inner-product 0. This makes the object very combinatorial. <strong>Can I generate all the constraints with just a few of these shifted operation equalities? One can simulate random coefficients and check the FEI-ratio while ensuring some “levels” of these equalities hold.</strong> You can think of these objects modded out under the <span class="math display">\[\langle x_k^2 - 1\rangle\]</span> ideal. If there was no mod, you could think of these vector relations as some vectorspace orthogonality relation of treating coefficient of polynomials as vector spaces. But due to this, putting a vector space structure directly is difficult. <strong>Q: Is this what matroids are about? Q: Fix n = 2 or n = 3 and write down the coefficient constraints. Can you prove FEI with these?</strong> You must be able to, if its true, since these constraints are <strong>equivalent</strong> to booleanity. If not, can you DISPROVE it? Note that these constraints are highly sensitive to perturbations, and stop being true unless a global perturbation of a VERY specific kind is made. Understand, what are the allowed perturbations, that keep you within class of vectors could be key. <strong>Define the set of all coefficient vectors that satisfy the constraints of the</strong> <span class="math inline">\(n\)</span><strong>’th level. Q: What can you say about this object? We know there are exactly 2^n boolean functions. Can you say something about this as n-&gt;infinity? Can you “embed” lower dimensional vectors INSIDE the higher dimensional ones? Q: Could I weaken the 0-constraints to a</strong> <span class="math display">\[\leq \varepsilon\]</span> constraint? Could that be easier to resolve using some Optimization techniques? What happens when I symmetrize over just a set A, instead of all permutations? Basically, I want my d-linear form to be sensitive to a particular set, and then see what is happening.</p>
+</section>
+<section id="update-11th-may-2026" class="level2">
+<h2 class="anchored" data-anchor-id="update-11th-may-2026">Update [11th May 2026]:</h2>
+<p>Met SouChak and Arijit Ghosh.</p>
+<p>There were quite a few questions pondered. SouChak agrees with me that Bohnenblust-Hille tools have the key to this problem. Let’s recall what Bohnenblust-Hille, in the context of Boolean polynomials, tells you.</p>
+<blockquote class="blockquote">
+<p>Let <span class="math display">\[f : \{-1, +1\}^n \to \mathbb{R}\]</span> be a Boolean function. Then, for all integers <span class="math inline">\(d \geq \deg(\hat{f})\)</span>, there is a universal constant <span class="math inline">\(C \in \mathbb{R}\)</span> such that</p>
+<p><span class="math display">\[
+\|\{\hat{f}(S)\}_S\|_{\frac{2d}{d+1}} \leq C \cdot \|\hat{f}\|_{[-1,1]^n} = C \cdot \|f\|_\infty
+\]</span></p>
+<p>where <span class="math inline">\(\|P\|_T\)</span> is the supremum norm of <span class="math inline">\(P\)</span> over <span class="math inline">\(T\)</span>.</p>
+</blockquote>
+<p>Main questions:</p>
+<ul>
+<li><p>Does BH imply FEIC? Note: BH on <span class="math inline">\(f\)</span> itself cannot imply FEIC because, BH is true for all real valued functions whereas FEIC is true ONLY for Boolean-valued functions. SouChak’s paper, however, applied BH on the approximating polynomial of <span class="math inline">\(f\)</span>.</p></li>
+<li><p>One can try applying BH on polynomials in an <span class="math inline">\(L_\infty\)</span> ball of the approximating polynomial. One can try BH on <span class="math inline">\(L\infty\)</span> ball of <span class="math inline">\(P_f\)</span>.</p></li>
+<li><p>Does FEIC imply BH?</p></li>
+<li><p>Understand how the Boolean Bohnenblust Hille paper connects to all these tools. Can you create a affine linear form that is symmetric to arbitrary sets <span class="math inline">\(A\)</span> instead of averaging over all injections <span class="math inline">\(\varphi : S \hookrightarrow [n]\)</span>.</p></li>
+</ul>
+<p>One recurring theme was understanding how the <strong>Entropy</strong> connects to all of this through the observation that: for a probability vector, <span class="math inline">\(v\)</span>, the Entropy <span class="math display">\[\mathbb{H}(v) \propto -\frac{d}{d\varepsilon} \|v\|_{2 + \varepsilon}^{2 + \varepsilon}\]</span></p>
+<ul>
+<li><p>How the constant of BH connects to the constant of FEIC? First question: conjecture: are they literally the same?</p></li>
+<li><p>Can you look at the approximating polynomial which is almost-flat? I.e. basically approximating polynomials that have the properties required by the SouChak proof, instead of the best approximating polynomial? If you could show the resulting degree doesn’t have a MASSIVE blowup, one might be able to show BH =&gt; FEIC through this.</p></li>
+</ul>
+<!-- -->
+<ul>
+<li>How does the BH literature prove the optimality of <span class="math inline">\(\frac{2d}{d+1}\)</span>? How to find the optimal norm-order <span class="math inline">\(t\)</span> to compare <span class="math inline">\(\|\{\hat{f}(S)\}_S\|_t\)</span> with <span class="math inline">\(\operatorname{Inf}(f)\)</span>? -&gt; Random polynomials via Salem-Zygmund computation.</li>
+</ul>
+<hr>
+<p>Notice, for boolean functions <span class="math inline">\(f\)</span>, <span class="math inline">\(\|f\|_\infty = 1\)</span>, so BH tells you that <span class="math inline">\(\|\{\hat{f}(S)\}_S\|_{\frac{2d}{d+1}} \leq C\)</span>, for all <span class="math inline">\(d \geq \deg{f}\)</span>. This, essentially, leads to <span class="math inline">\(\mathbb{H}(\hat{f}^2) \leq +\infty\)</span>, which is a useless bound.</p>
+<section id="update-15th-may-2026" class="level3">
+<h3 class="anchored" data-anchor-id="update-15th-may-2026">Update [15th May 2026]:</h3>
+<p>Met SouChak, Arijit Ghosh, Arikith and Manmatha at the Seminar room.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../resources/figures/15th_may.jpeg" class="img-fluid figure-img"></p>
+<figcaption>Fun 2 hours…</figcaption>
+</figure>
+</div>
+<p>Our main focus was on the following question: <strong>Is FEIC equivalent to the following:</strong> <span class="math inline">\(\forall \varepsilon &gt; 0, \exists C &gt; 0, \forall n, f:\{-1, 1\}^n \to \{-1, 1\}\)</span> one has <span class="math display">\[
+\|\{\hat{f}(S)\}_S\|_{2 + \varepsilon}^{2 +\varepsilon} \geq \exp(-C\varepsilon\operatorname{Inf}(f))
+\]</span></p>
+<blockquote class="blockquote">
+<p><strong>RHS =&gt; FEIC:<br>
+</strong></p>
+<p>Let <span class="math inline">\(\varphi_{f}(2 + \varepsilon) = \sum_{S \subset [n]}\hat{f}(S)^{2 + \varepsilon}\)</span> then <span class="math display">\[H(\{\hat{f}(S)^2\}_S) = -\frac{2}{\ln(2)}\left[\frac{d}{d\varepsilon}\varphi_f(2 + \varepsilon)\right]\Bigg|_{\varepsilon = 0}\]</span></p>
+<p><span class="math display">\[= \lim_{\varepsilon \downarrow 0}\frac{2}{\ln(2)}\frac{1 - \varphi_f( 2+\varepsilon)}{\varepsilon} \leq \frac{2}{\ln(2)}\lim_{\varepsilon \downarrow 0}\frac{1 - \exp(-C\varepsilon\Inf(f)}{\varepsilon} = C\Inf(f)\]</span></p>
+</blockquote>
+<p>Some recap on Renyi Entropies before going back to the other side. Let <span class="math inline">\(X\)</span> be a discrete random variable with an alphabet set <span class="math inline">\(\mathcal{A} = \{x_1, \cdots, x_n\}\)</span> with corresponding probabilities <span class="math inline">\(p_i = \operatorname{Pr}(X = x_i)\)</span>. Then, the Renyi entropy of order <span class="math inline">\(\alpha \in (0, \infty)\)</span>, <span class="math inline">\(\alpha \neq 1\)</span> is defined as</p>
+<p><span class="math display">\[
+\H_\alpha(X) = \frac{1}{1-\alpha} \log\left[\sum_{i = 1}^{n} p_i^\alpha\right]
+\]</span></p>
+<p>We also have:</p>
+<ul>
+<li><p><span class="math inline">\(\lim_{\alpha \to 1} \H_\alpha(X) = \H(X)\)</span></p></li>
+<li><p><span class="math inline">\(\H_\alpha(X) = \frac{\alpha}{1 - \alpha}\log(\|P\|_\alpha)\)</span> where <span class="math inline">\(P\)</span> is the probability vector associated to the alphabet <span class="math inline">\(\mathcal{A}\)</span>.</p></li>
+<li><p><span class="math inline">\(\H_\alpha(X)\)</span> is non-increasing in <span class="math inline">\(\alpha\)</span>.</p></li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>FEIC =&gt; RHS:</strong></p>
+<p>Let <span class="math inline">\(v^2 = \{\hat{f}(S)^2\}_S\)</span> be the squared-coefficient vector associated to the function <span class="math inline">\(f\)</span>. We have <span class="math inline">\(\H_{1 + \varepsilon}(v^2) \leq \H_1(v^2)\)</span>. From FEI, we have <span class="math inline">\(\H_1(v^2) \leq C\Inf(f)\)</span>, thus,</p>
+<p><span class="math display">\[
+\frac{1+\varepsilon}{-\varepsilon}\log(\|v^2\|_{1 + \varepsilon}) = \H_{1 + \varepsilon}(v^2) \leq C\Inf(f)
+\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[
+\log(\|v^2\|_{1 + \varepsilon}) \geq \frac{-\varepsilon}{1+\varepsilon}C\Inf(f)
+\]</span></p>
+<p><span class="math display">\[
+\|v^2\|_{1 +\varepsilon}^{1+\varepsilon} \geq \exp(-C\varepsilon\Inf(f))
+\]</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">\[
+\|\{\hat{f}(S)\}_S\|_{2 + \varepsilon}^{2+\varepsilon} \geq \exp\left(-\frac{C\varepsilon}{2}\Inf(f)\right)
+\]</span></p>
+</blockquote>
+<p>I realized this later, but, essentially, this is the series of conjectures</p>
+<p><span class="math display">\[
+\left\{\mathbb{H}_{1 + \varepsilon} \leq C\Inf(f)\right\}_\varepsilon
+\]</span></p>
+<p>and that is why, naturally, you get FMEI (Fourier Min-Entropy Conjecture) out of <span class="math inline">\(\varepsilon \to \infty\)</span>.</p>
+<p>Some questions that were interesting were:</p>
+<ul>
+<li><p>Can you prove an <span class="math inline">\(\varepsilon\)</span>-dependent bound?</p></li>
+<li><p>Using the random-polynomial arguments with real-valued and boolean-valued functions, see what comes out. Hunch should be nothing.</p></li>
+<li><p>Can you do it for <span class="math inline">\(\varepsilon \sim \frac{1}{d}\)</span>? Can you prove it for ANY <span class="math inline">\(\varepsilon\)</span>? Can you find the “smallest-necessary” <span class="math inline">\(\varepsilon\)</span>? Is there such an <span class="math inline">\(\varepsilon\)</span>?</p></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
