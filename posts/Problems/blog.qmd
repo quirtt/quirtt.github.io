@@ -1,7 +1,7 @@
 ---
 title: "Problems to Think About"
 author: "Himadri Mandal"
-date: ""
+date: "04-15-2026"
 categories: [math]
 format: 
     html: 

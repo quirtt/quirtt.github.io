@@ -1,7 +1,7 @@
 ---
 title: "Fourier Entropy Influence Conjecture"
 author: "Himadri Mandal"
-date: ""
+date: "04-22-2026"
 categories: [boolean functions, analysis, probability, math]
 format: 
     html: 

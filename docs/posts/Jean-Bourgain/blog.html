@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Himadri Mandal">
-<meta name="dcterms.date" content="2026-04-15">
+<meta name="dcterms.date" content="2026-05-21">
 
-<title>Problems to Think About – Cold Reflections</title>
+<title>Jean Bourgain and the Fourier Spectrum of Boolean Functions – Cold Reflections</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,35 +72,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -152,9 +123,13 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Problems to Think About</h1>
+      <h1 class="title">Jean Bourgain and the Fourier Spectrum of Boolean Functions</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">math</div>
+                <div class="quarto-category">philosophy</div>
+                <div class="quarto-category">compartmentalizing subroutines</div>
+                <div class="quarto-category">efficieny</div>
+                <div class="quarto-category">grokking</div>
               </div>
                   </div>
   </div>
@@ -172,7 +147,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 15, 2026</p>
+        <p class="date">May 21, 2026</p>
       </div>
     </div>
     
@@ -188,8 +163,9 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#general-recipes" id="toc-general-recipes" class="nav-link active" data-scroll-target="#general-recipes">General Recipes</a></li>
-  <li><a href="#specific-problems" id="toc-specific-problems" class="nav-link" data-scroll-target="#specific-problems">Specific Problems</a></li>
+  <li><a href="#philosophical-flow-of-the-paper" id="toc-philosophical-flow-of-the-paper" class="nav-link active" data-scroll-target="#philosophical-flow-of-the-paper">Philosophical flow of the paper</a></li>
+  <li><a href="#deconstructing-the-subroutines" id="toc-deconstructing-the-subroutines" class="nav-link" data-scroll-target="#deconstructing-the-subroutines">Deconstructing the subroutines</a></li>
+  <li><a href="#the-subroutines" id="toc-the-subroutines" class="nav-link" data-scroll-target="#the-subroutines">The subroutines</a></li>
   </ul>
 </nav>
     </div>
@@ -200,32 +176,17 @@ window.Quarto = {
 
 
 
-<p>This will be an updating collection of interesting problems. Please email me if you are interested in working with me on any of these problems.</p>
-<section id="general-recipes" class="level2">
-<h2 class="anchored" data-anchor-id="general-recipes">General Recipes</h2>
-<ul>
-<li><p>Pick any interesting existence result (“qualitative” as Terrance Tao would put it) in mathematics and try to obtain more control over it (make it a “quantitative” result).</p>
-<blockquote class="blockquote">
-<p>An example: <strong>(Qualitative) Mean Value Theorem</strong> states that if a function <span class="math inline">\(f\)</span> is continuous on the closed interval <span class="math inline">\([a,b]\)</span> and differentiable on the open interval <span class="math inline">\((a,b)\)</span>, then there exists at least one point <span class="math inline">\(\xi\)</span> in <span class="math inline">\((a,b)\)</span> such that <span class="math display">\[f'(\xi) = \frac{f(a) - f(b)}{a-b}\]</span> <strong>(Mythological, Quantitative) Mean Value Theorem</strong> states that if a function <span class="math inline">\(f\)</span> is continuous on the closed interval <span class="math inline">\([a,b]\)</span> and differentialbe on the open interval <span class="math inline">\((a,b)\)</span>, then there exists <span class="math inline">\(N_f(a,b)\)</span> points in <span class="math inline">\((a,b)\)</span> that attain the equality above. Also, for any such <span class="math inline">\(c\)</span>, <span class="math inline">\(\max(|c-a|, |c-b|) \leq D_f(a,b)\)</span></p>
-</blockquote></li>
-</ul>
+<p>Jean Bourgain was a Belgian—Fields Medal winning—mathematician who made significant contributions to various fields of mathematics, including analysis, geometry, and number theory. He was born on February 28, 1954, in Ostend, Belgium, and passed away on December 22, 2018. Bourgain was known for his deep insights and innovative techniques in solving complex mathematical problems.</p>
+<p>I was reading Jean’s paper titled “Fourier Spectrum of Boolean Functions”. I was impressed how a 6-page paper contained such high density of mathematics. One of the best ways he makes his math “faster/more-efficient” is by compartmentalizing/blackbox-ing subroutines.</p>
+<p>In this blog post, I will first go through deconstructing all the subroutines used by Bourgain in the paper, and then summarize all the subroutines, so that I would also learn to use his techniques, in the future, to increase my efficiency.</p>
+<section id="philosophical-flow-of-the-paper" class="level2">
+<h2 class="anchored" data-anchor-id="philosophical-flow-of-the-paper">Philosophical flow of the paper</h2>
 </section>
-<section id="specific-problems" class="level2">
-<h2 class="anchored" data-anchor-id="specific-problems">Specific Problems</h2>
-<ul>
-<li><p>Recall the approximate Caratheodory’s Theorem (see <a href="https://arxiv.org/pdf/1406.2296">here</a> for a proof):</p>
-<blockquote class="blockquote">
-<p>Given a set of vectors <span class="math inline">\(U = \{u_1, u_2, \cdots, u_m\} \subset \mathbb{R}^n\)</span> with <span class="math inline">\(\max_{u \in U} \|u\|_\infty \leq 1\)</span>, and <span class="math inline">\(\epsilon &gt; 0\)</span>. For every <span class="math inline">\(\mu \in \operatorname{CS}(U)\)</span> there exists an <span class="math inline">\(\mathcal{O}(\frac{\log(n)}{\epsilon^2})\)</span> uniform vector <span class="math inline">\(\mu' \in \operatorname{CS}(U)\)</span> such that <span class="math inline">\(\|\mu - \mu'\|_\infty \leq \varepsilon\)</span>.</p>
-</blockquote></li>
-<li><p>This can be generalized to a approximate multi-Caratheodory’s Theorem:</p>
-<blockquote class="blockquote">
-<p>You instead wish to approximate multiple points <span class="math inline">\(\{\mu_1, \cdots, \mu_p\}\)</span> with multiple (not-necessarily) uniform vectors <span class="math inline">\(\{\mu'_k\}_{k \in [p]}\)</span> such that the size <span class="math inline">\(N\)</span> of the union of the sets of representatives chosen in the representation of <span class="math inline">\(\mu'_k\)</span> is made small. There are a few questions:</p>
-<ul>
-<li>Can <span class="math inline">\(N\)</span> be significantly smaller than <span class="math inline">\(p \cdot \frac{\log(n)}{\varepsilon^2}\)</span>?</li>
-<li>Probably not. Under what conditions can it be significantly smaller than <span class="math inline">\(p \cdot \frac{\log(n)}{\varepsilon^2}\)</span> (ofcourse ignoring constants)? Naive idea was to consider <span class="math inline">\(\operatorname{CS}(U)\times \cdots \times \operatorname{CS}(U)\)</span> i.e.&nbsp;<span class="math inline">\(p\)</span>-time product of <span class="math inline">\(\operatorname{CS}(U)\)</span>, and then apply the theorem again. This leads to the first bound, easily. I expect Franke-Wolfe like techniques would work again with this, possibly improve over the first bound.</li>
-</ul>
-</blockquote></li>
-</ul>
+<section id="deconstructing-the-subroutines" class="level2">
+<h2 class="anchored" data-anchor-id="deconstructing-the-subroutines">Deconstructing the subroutines</h2>
+</section>
+<section id="the-subroutines" class="level2">
+<h2 class="anchored" data-anchor-id="the-subroutines">The subroutines</h2>
 
 
 </section>

@@ -1,0 +1,25 @@
+---
+title: "Jean Bourgain and the Fourier Spectrum of Boolean Functions"
+author: "Himadri Mandal"
+date: "05-21-2026"
+categories: [math, philosophy, compartmentalizing subroutines, efficieny, grokking]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+        # css: styles.css
+editor: visual
+image: "pfp.jpg"
+---
+Jean Bourgain was a Belgian---Fields Medal winning---mathematician who made significant contributions to various fields of mathematics, including analysis, geometry, and number theory. He was born on February 28, 1954, in Ostend, Belgium, and passed away on December 22, 2018. Bourgain was known for his deep insights and innovative techniques in solving complex mathematical problems.
+
+I was reading Jean's paper titled "Fourier Spectrum of Boolean Functions". I was impressed how a 6-page paper contained such high density of mathematics. 
+One of the best ways he makes his math "faster/more-efficient" is by compartmentalizing/blackbox-ing subroutines. 
+
+In this blog post, I will first go through deconstructing all the subroutines used by Bourgain in the paper, and then summarize all the subroutines, so that I would also learn to use his techniques, in the future, to increase my efficiency. 
+
+## Philosophical flow of the paper
+
+## Deconstructing the subroutines
+
+## The subroutines
