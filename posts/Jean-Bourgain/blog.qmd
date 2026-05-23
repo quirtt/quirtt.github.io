@@ -13,13 +13,49 @@ image: "pfp.jpg"
 ---
 Jean Bourgain was a Belgian---Fields Medal winning---mathematician who made significant contributions to various fields of mathematics, including analysis, geometry, and number theory. He was born on February 28, 1954, in Ostend, Belgium, and passed away on December 22, 2018. Bourgain was known for his deep insights and innovative techniques in solving complex mathematical problems.
 
-I was reading Jean's paper titled "Fourier Spectrum of Boolean Functions". I was impressed how a 6-page paper contained such high density of mathematics. 
+I was reading Jean's paper titled "Fourier Spectrum of Boolean Functions". I was impressed how a 6-page paper contained such high density of mathematics. The theorem proved in this paper was later, famously, known as the Bourgain's Junta Theorem.
+The goal I am chasing is proving the optimal $k^{-\frac{1}{2}}$ instead of $k^{-\frac{1}{2} - o(1)}$. 
+
 One of the best ways he makes his math "faster/more-efficient" is by compartmentalizing/blackbox-ing subroutines. 
 
-In this blog post, I will first go through deconstructing all the subroutines used by Bourgain in the paper, and then summarize all the subroutines, so that I would also learn to use his techniques, in the future, to increase my efficiency. 
+In this blog post, I will go through the paper and try to collect all the constants dropped by Bourgain. I also wish to understand the philosophical flow of the paper. I will also summarize the subroutines used, so that I can also use them in future. 
+
+## Bourgain's Extremely Successful Toolkit
+
+
 
 ## Philosophical flow of the paper
+> Let $f:\{-1,1\}^n \to \{0,1\}$ be a Boolean function. Let $k > 0$ be an integer, and $\gamma > 0$ a fixed constant. Assume
+> $$
+> \sum\{|\hat{f}(S)|^2 \Bigg| |\hat{f}(S)| < \gamma 4^{-k^2}\} > \gamma^2
+> $$
+> Then, 
+> $$
+> \sum_{|S| > k} |\hat{f}(S)|^2 \gtrsim k^{-\frac{1}{2} - o(1)}
+> $$
+
+TN: If total Fourier-mass of sets that all have very little indivdual Fourier-mass is high, then, the Fourier-mass on the tail of the Fourier spectrum is large. 
+
+Since $\gamma$ is a constant, we can start by assuming the $k$-tail Fourier mass is less than $\gamma^2/100$. 
+
+We introduce lots of parameters and then study important objects wrt those parameters. The important objects are chosen to break the problem down into recursive subproblems. 
+
+> **Breakdown: #1**: Coordinate-level breakdown. Fixing a few coordinates, returns a Boolean function again, thus, coordinate-level breakdown is a natural idea. Objects like Influence treat coordinates as fundamental to the function, which further motivates this breakdown.
+
+>> **Criticism:** Gaussian.
+
+
 
 ## Deconstructing the subroutines
+$$
+f_{x_2} - \mathbb{E}_{I(\omega)}[f_{x_2}] = \sum_{T \subset I_1, T \not\subset I(\omega)} F_{T}(x_2) w_T(\cdot)
+$$
+
+Let $f$ be a degree $d$ Boolean function and $p \in (1,2)$.
+$$
+\|f\|_2 \leq (\frac{1}{\sqrt{p-1}})^{d} \|f\|_p
+$$
 
 ## The subroutines
+
+

@@ -72,6 +72,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -163,7 +192,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#philosophical-flow-of-the-paper" id="toc-philosophical-flow-of-the-paper" class="nav-link active" data-scroll-target="#philosophical-flow-of-the-paper">Philosophical flow of the paper</a></li>
+  <li><a href="#bourgains-extremely-successful-toolkit" id="toc-bourgains-extremely-successful-toolkit" class="nav-link active" data-scroll-target="#bourgains-extremely-successful-toolkit">Bourgain’s Extremely Successful Toolkit</a></li>
+  <li><a href="#philosophical-flow-of-the-paper" id="toc-philosophical-flow-of-the-paper" class="nav-link" data-scroll-target="#philosophical-flow-of-the-paper">Philosophical flow of the paper</a></li>
   <li><a href="#deconstructing-the-subroutines" id="toc-deconstructing-the-subroutines" class="nav-link" data-scroll-target="#deconstructing-the-subroutines">Deconstructing the subroutines</a></li>
   <li><a href="#the-subroutines" id="toc-the-subroutines" class="nav-link" data-scroll-target="#the-subroutines">The subroutines</a></li>
   </ul>
@@ -177,13 +207,41 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Jean Bourgain was a Belgian—Fields Medal winning—mathematician who made significant contributions to various fields of mathematics, including analysis, geometry, and number theory. He was born on February 28, 1954, in Ostend, Belgium, and passed away on December 22, 2018. Bourgain was known for his deep insights and innovative techniques in solving complex mathematical problems.</p>
-<p>I was reading Jean’s paper titled “Fourier Spectrum of Boolean Functions”. I was impressed how a 6-page paper contained such high density of mathematics. One of the best ways he makes his math “faster/more-efficient” is by compartmentalizing/blackbox-ing subroutines.</p>
-<p>In this blog post, I will first go through deconstructing all the subroutines used by Bourgain in the paper, and then summarize all the subroutines, so that I would also learn to use his techniques, in the future, to increase my efficiency.</p>
+<p>I was reading Jean’s paper titled “Fourier Spectrum of Boolean Functions”. I was impressed how a 6-page paper contained such high density of mathematics. The theorem proved in this paper was later, famously, known as the Bourgain’s Junta Theorem. The goal I am chasing is proving the optimal <span class="math inline">\(k^{-\frac{1}{2}}\)</span> instead of <span class="math inline">\(k^{-\frac{1}{2} - o(1)}\)</span>.</p>
+<p>One of the best ways he makes his math “faster/more-efficient” is by compartmentalizing/blackbox-ing subroutines.</p>
+<p>In this blog post, I will go through the paper and try to collect all the constants dropped by Bourgain. I also wish to understand the philosophical flow of the paper. I will also summarize the subroutines used, so that I can also use them in future.</p>
+<section id="bourgains-extremely-successful-toolkit" class="level2">
+<h2 class="anchored" data-anchor-id="bourgains-extremely-successful-toolkit">Bourgain’s Extremely Successful Toolkit</h2>
+</section>
 <section id="philosophical-flow-of-the-paper" class="level2">
 <h2 class="anchored" data-anchor-id="philosophical-flow-of-the-paper">Philosophical flow of the paper</h2>
+<blockquote class="blockquote">
+<p>Let <span class="math inline">\(f:\{-1,1\}^n \to \{0,1\}\)</span> be a Boolean function. Let <span class="math inline">\(k &gt; 0\)</span> be an integer, and <span class="math inline">\(\gamma &gt; 0\)</span> a fixed constant. Assume <span class="math display">\[
+\sum\{|\hat{f}(S)|^2 \Bigg| |\hat{f}(S)| &lt; \gamma 4^{-k^2}\} &gt; \gamma^2
+\]</span> Then, <span class="math display">\[
+\sum_{|S| &gt; k} |\hat{f}(S)|^2 \gtrsim k^{-\frac{1}{2} - o(1)}
+\]</span></p>
+</blockquote>
+<p>TN: If total Fourier-mass of sets that all have very little indivdual Fourier-mass is high, then, the Fourier-mass on the tail of the Fourier spectrum is large.</p>
+<p>Since <span class="math inline">\(\gamma\)</span> is a constant, we can start by assuming the <span class="math inline">\(k\)</span>-tail Fourier mass is less than <span class="math inline">\(\gamma^2/100\)</span>.</p>
+<p>We introduce lots of parameters and then study important objects wrt those parameters. The important objects are chosen to break the problem down into recursive subproblems.</p>
+<blockquote class="blockquote">
+<p><strong>Breakdown: #1</strong>: Coordinate-level breakdown. Fixing a few coordinates, returns a Boolean function again, thus, coordinate-level breakdown is a natural idea. Objects like Influence treat coordinates as fundamental to the function, which further motivates this breakdown.</p>
+</blockquote>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p><strong>Criticism:</strong> Gaussian.</p>
+</blockquote>
+</blockquote>
 </section>
 <section id="deconstructing-the-subroutines" class="level2">
 <h2 class="anchored" data-anchor-id="deconstructing-the-subroutines">Deconstructing the subroutines</h2>
+<p><span class="math display">\[
+f_{x_2} - \mathbb{E}_{I(\omega)}[f_{x_2}] = \sum_{T \subset I_1, T \not\subset I(\omega)} F_{T}(x_2) w_T(\cdot)
+\]</span></p>
+<p>Let <span class="math inline">\(f\)</span> be a degree <span class="math inline">\(d\)</span> Boolean function and <span class="math inline">\(p \in (1,2)\)</span>. <span class="math display">\[
+\|f\|_2 \leq (\frac{1}{\sqrt{p-1}})^{d} \|f\|_p
+\]</span></p>
 </section>
 <section id="the-subroutines" class="level2">
 <h2 class="anchored" data-anchor-id="the-subroutines">The subroutines</h2>

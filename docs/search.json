@@ -312,21 +312,21 @@
     "href": "posts/Jean-Bourgain/blog.html",
     "title": "Jean Bourgain and the Fourier Spectrum of Boolean Functions",
     "section": "",
-    "text": "Jean Bourgain was a Belgian—Fields Medal winning—mathematician who made significant contributions to various fields of mathematics, including analysis, geometry, and number theory. He was born on February 28, 1954, in Ostend, Belgium, and passed away on December 22, 2018. Bourgain was known for his deep insights and innovative techniques in solving complex mathematical problems.\nI was reading Jean’s paper titled “Fourier Spectrum of Boolean Functions”. I was impressed how a 6-page paper contained such high density of mathematics. One of the best ways he makes his math “faster/more-efficient” is by compartmentalizing/blackbox-ing subroutines.\nIn this blog post, I will first go through deconstructing all the subroutines used by Bourgain in the paper, and then summarize all the subroutines, so that I would also learn to use his techniques, in the future, to increase my efficiency."
+    "text": "Jean Bourgain was a Belgian—Fields Medal winning—mathematician who made significant contributions to various fields of mathematics, including analysis, geometry, and number theory. He was born on February 28, 1954, in Ostend, Belgium, and passed away on December 22, 2018. Bourgain was known for his deep insights and innovative techniques in solving complex mathematical problems.\nI was reading Jean’s paper titled “Fourier Spectrum of Boolean Functions”. I was impressed how a 6-page paper contained such high density of mathematics. The theorem proved in this paper was later, famously, known as the Bourgain’s Junta Theorem. The goal I am chasing is proving the optimal \\(k^{-\\frac{1}{2}}\\) instead of \\(k^{-\\frac{1}{2} - o(1)}\\).\nOne of the best ways he makes his math “faster/more-efficient” is by compartmentalizing/blackbox-ing subroutines.\nIn this blog post, I will go through the paper and try to collect all the constants dropped by Bourgain. I also wish to understand the philosophical flow of the paper. I will also summarize the subroutines used, so that I can also use them in future."
   },
   {
     "objectID": "posts/Jean-Bourgain/blog.html#philosophical-flow-of-the-paper",
     "href": "posts/Jean-Bourgain/blog.html#philosophical-flow-of-the-paper",
     "title": "Jean Bourgain and the Fourier Spectrum of Boolean Functions",
     "section": "Philosophical flow of the paper",
-    "text": "Philosophical flow of the paper"
+    "text": "Philosophical flow of the paper\n\nLet \\(f:\\{-1,1\\}^n \\to \\{0,1\\}\\) be a Boolean function. Let \\(k &gt; 0\\) be an integer, and \\(\\gamma &gt; 0\\) a fixed constant. Assume \\[\n\\sum\\{|\\hat{f}(S)|^2 \\Bigg| |\\hat{f}(S)| &lt; \\gamma 4^{-k^2}\\} &gt; \\gamma^2\n\\] Then, \\[\n\\sum_{|S| &gt; k} |\\hat{f}(S)|^2 \\gtrsim k^{-\\frac{1}{2} - o(1)}\n\\]\n\nTN: If total Fourier-mass of sets that all have very little indivdual Fourier-mass is high, then, the Fourier-mass on the tail of the Fourier spectrum is large.\nSince \\(\\gamma\\) is a constant, we can start by assuming the \\(k\\)-tail Fourier mass is less than \\(\\gamma^2/100\\).\nWe introduce lots of parameters and then study important objects wrt those parameters. The important objects are chosen to break the problem down into recursive subproblems.\n\nBreakdown: #1: Coordinate-level breakdown. Fixing a few coordinates, returns a Boolean function again, thus, coordinate-level breakdown is a natural idea. Objects like Influence treat coordinates as fundamental to the function, which further motivates this breakdown.\n\n\n\nCriticism: Gaussian."
   },
   {
     "objectID": "posts/Jean-Bourgain/blog.html#deconstructing-the-subroutines",
     "href": "posts/Jean-Bourgain/blog.html#deconstructing-the-subroutines",
     "title": "Jean Bourgain and the Fourier Spectrum of Boolean Functions",
     "section": "Deconstructing the subroutines",
-    "text": "Deconstructing the subroutines"
+    "text": "Deconstructing the subroutines\n\\[\nf_{x_2} - \\mathbb{E}_{I(\\omega)}[f_{x_2}] = \\sum_{T \\subset I_1, T \\not\\subset I(\\omega)} F_{T}(x_2) w_T(\\cdot)\n\\]\nLet \\(f\\) be a degree \\(d\\) Boolean function and \\(p \\in (1,2)\\). \\[\n\\|f\\|_2 \\leq (\\frac{1}{\\sqrt{p-1}})^{d} \\|f\\|_p\n\\]"
   },
   {
     "objectID": "posts/Jean-Bourgain/blog.html#the-subroutines",
@@ -334,5 +334,12 @@
     "title": "Jean Bourgain and the Fourier Spectrum of Boolean Functions",
     "section": "The subroutines",
     "text": "The subroutines"
+  },
+  {
+    "objectID": "posts/Jean-Bourgain/blog.html#bourgains-extremely-successful-toolkit",
+    "href": "posts/Jean-Bourgain/blog.html#bourgains-extremely-successful-toolkit",
+    "title": "Jean Bourgain and the Fourier Spectrum of Boolean Functions",
+    "section": "Bourgain’s Extremely Successful Toolkit",
+    "text": "Bourgain’s Extremely Successful Toolkit"
   }
 ]
