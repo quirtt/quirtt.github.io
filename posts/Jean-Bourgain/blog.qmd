@@ -60,6 +60,7 @@ Thus, studying the objects once again leads to the inequality $(4)$ pretty quick
 
 > **Dyadic Partitioning**: Track all the properties used about and around the chosen partition. Using the Ansatz of properties, could you obtain a better partition?
 
+> 2 levels of randomization. Set level randomization and then further randomization within the indices in the sets. 
 
 ## Deconstructing the subroutines
 $$

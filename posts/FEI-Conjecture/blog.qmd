@@ -132,7 +132,7 @@ One recurring theme was understanding how the **Entropy** connects to all of thi
 
 Notice, for boolean functions $f$, $\|f\|_\infty = 1$, so BH tells you that $\|\{\hat{f}(S)\}_S\|_{\frac{2d}{d+1}} \leq C$, for all $d \geq \deg{f}$. This, essentially, leads to $\mathbb{H}(\hat{f}^2) \leq +\infty$, which is a useless bound.
 
-### Update \[15th May 2026\]:
+## Update \[15th May 2026\]:
 
 Met SouChak, Arijit Ghosh, Arikith and Manmatha at the Seminar room.
 
@@ -199,6 +199,14 @@ Some questions that were interesting were:
 
 -   Can you prove an $\varepsilon$-dependent bound?
 
--   Using the random-polynomial arguments with real-valued and boolean-valued functions, see what comes out. Hunch should be nothing.
+-   Using the random-polynomial arguments with real-valued and boolean-valued functions, see what comes Hunch should be nothing.
 
 -   Can you do it for $\varepsilon \sim \frac{1}{d}$? Can you prove it for ANY $\varepsilon$? Can you find the "smallest-necessary" $\varepsilon$? Is there such an $\varepsilon$?
+
+## Update \[24th May 2026\]:
+
+Discussed quite a few things with Arikith. I noticed that Donnel was not able to improve upon $k^{-1/2 - o(1)}$ result without using the Invariance principle, upon which he was able to obtain the optimal $\Var(f)/k^{1/2}$. We notice that the 2020 Esty Kelman et. al. is also stuck on a logarithmic barrier. Also, the whole analysis is never able to "witness" the structure arising from Rotational symmetry/Invariance when the max influence is small. It becomes important to see how one can utilize all of this.
+
+-    **Q: Can you "rotate" the space so that the "influence" of a particular variable is reduced.**
+
+-   **Q: By self-tensorizing / or some other construction could you reduce the max-influence? Because then, Invariance kicks in. What is nice about self-tensorization is the resulting Entropy and Influence all have very predictable behavior. For example, mythologically, the function x_1 can be made 1/sqrt(n) \[x_1 + ... + x_n\] by rotation.**
