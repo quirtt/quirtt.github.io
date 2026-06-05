@@ -194,10 +194,9 @@ window.Quarto = {
   <li><a href="#update-28th-april-2026" id="toc-update-28th-april-2026" class="nav-link active" data-scroll-target="#update-28th-april-2026"><strong>Update</strong> [28th April 2026]:</a></li>
   <li><a href="#update-4th-may-2026" id="toc-update-4th-may-2026" class="nav-link" data-scroll-target="#update-4th-may-2026"><strong>Update</strong> [4th May 2026]:</a></li>
   <li><a href="#update-5th-may-2026" id="toc-update-5th-may-2026" class="nav-link" data-scroll-target="#update-5th-may-2026">Update [5th May 2026]:</a></li>
-  <li><a href="#update-11th-may-2026" id="toc-update-11th-may-2026" class="nav-link" data-scroll-target="#update-11th-may-2026">Update [11th May 2026]:</a>
-  <ul class="collapse">
+  <li><a href="#update-11th-may-2026" id="toc-update-11th-may-2026" class="nav-link" data-scroll-target="#update-11th-may-2026">Update [11th May 2026]:</a></li>
   <li><a href="#update-15th-may-2026" id="toc-update-15th-may-2026" class="nav-link" data-scroll-target="#update-15th-may-2026">Update [15th May 2026]:</a></li>
-  </ul></li>
+  <li><a href="#update-24th-may-2026" id="toc-update-24th-may-2026" class="nav-link" data-scroll-target="#update-24th-may-2026">Update [24th May 2026]:</a></li>
   </ul>
 </nav>
     </div>
@@ -308,8 +307,9 @@ window.Quarto = {
 </ul>
 <hr>
 <p>Notice, for boolean functions <span class="math inline">\(f\)</span>, <span class="math inline">\(\|f\|_\infty = 1\)</span>, so BH tells you that <span class="math inline">\(\|\{\hat{f}(S)\}_S\|_{\frac{2d}{d+1}} \leq C\)</span>, for all <span class="math inline">\(d \geq \deg{f}\)</span>. This, essentially, leads to <span class="math inline">\(\mathbb{H}(\hat{f}^2) \leq +\infty\)</span>, which is a useless bound.</p>
-<section id="update-15th-may-2026" class="level3">
-<h3 class="anchored" data-anchor-id="update-15th-may-2026">Update [15th May 2026]:</h3>
+</section>
+<section id="update-15th-may-2026" class="level2">
+<h2 class="anchored" data-anchor-id="update-15th-may-2026">Update [15th May 2026]:</h2>
 <p>Met SouChak, Arijit Ghosh, Arikith and Manmatha at the Seminar room.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -362,12 +362,20 @@ window.Quarto = {
 <p>Some questions that were interesting were:</p>
 <ul>
 <li><p>Can you prove an <span class="math inline">\(\varepsilon\)</span>-dependent bound?</p></li>
-<li><p>Using the random-polynomial arguments with real-valued and boolean-valued functions, see what comes out. Hunch should be nothing.</p></li>
+<li><p>Using the random-polynomial arguments with real-valued and boolean-valued functions, see what comes Hunch should be nothing.</p></li>
 <li><p>Can you do it for <span class="math inline">\(\varepsilon \sim \frac{1}{d}\)</span>? Can you prove it for ANY <span class="math inline">\(\varepsilon\)</span>? Can you find the “smallest-necessary” <span class="math inline">\(\varepsilon\)</span>? Is there such an <span class="math inline">\(\varepsilon\)</span>?</p></li>
+</ul>
+</section>
+<section id="update-24th-may-2026" class="level2">
+<h2 class="anchored" data-anchor-id="update-24th-may-2026">Update [24th May 2026]:</h2>
+<p>Discussed quite a few things with Arikith. I noticed that Donnel was not able to improve upon <span class="math inline">\(k^{-1/2 - o(1)}\)</span> result without using the Invariance principle, upon which he was able to obtain the optimal <span class="math inline">\(\Var(f)/k^{1/2}\)</span>. We notice that the 2020 Esty Kelman et. al.&nbsp;is also stuck on a logarithmic barrier. Also, the whole analysis is never able to “witness” the structure arising from Rotational symmetry/Invariance when the max influence is small. It becomes important to see how one can utilize all of this.</p>
+<ul>
+<li><p><strong>Q: Can you “rotate” the space so that the “influence” of a particular variable is reduced.</strong> After the influence reduces, you can apply Invariance, replace everything with Gaussian, and then perform a inverse-rotation to get what you want.</p></li>
+<li><p><strong>Q: By self-tensorizing / or some other construction could you reduce the max-influence? Because then, Invariance kicks in. What is nice about self-tensorization is the resulting Entropy and Influence all have very predictable behavior. For example, mythologically, the function x_1 can be made 1/sqrt(n) [x_1 + … + x_n] by rotation.</strong></p></li>
+<li><p>Using Shalev’s ideas i.e.&nbsp;proving it for Influence 2^-s(n) where s(n) = o(n) is enough, I am thinking of connecting this to Invariance and</p></li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
