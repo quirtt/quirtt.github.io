@@ -207,6 +207,8 @@ Some questions that were interesting were:
 
 Discussed quite a few things with Arikith. I noticed that Donnel was not able to improve upon $k^{-1/2 - o(1)}$ result without using the Invariance principle, upon which he was able to obtain the optimal $\Var(f)/k^{1/2}$. We notice that the 2020 Esty Kelman et. al. is also stuck on a logarithmic barrier. Also, the whole analysis is never able to "witness" the structure arising from Rotational symmetry/Invariance when the max influence is small. It becomes important to see how one can utilize all of this.
 
--    **Q: Can you "rotate" the space so that the "influence" of a particular variable is reduced.**
+-   **Q: Can you "rotate" the space so that the "influence" of a particular variable is reduced.** After the influence reduces, you can apply Invariance, replace everything with Gaussian, and then perform a inverse-rotation to get what you want.
 
 -   **Q: By self-tensorizing / or some other construction could you reduce the max-influence? Because then, Invariance kicks in. What is nice about self-tensorization is the resulting Entropy and Influence all have very predictable behavior. For example, mythologically, the function x_1 can be made 1/sqrt(n) \[x_1 + ... + x_n\] by rotation.**
+
+-   Using Shalev's ideas i.e. proving it for Influence 2\^-s(n) where s(n) = o(n) is enough, I am thinking of connecting this to Invariance and
