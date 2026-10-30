@@ -9,7 +9,6 @@ format:
         html-math-method: mathjax
         # css: styles.css
 editor: visual
-image: "pfp.jpg"
 ---
 
 This will be an updating collection of interesting problems. Please email me if you are interested in working with me on any of these problems.
@@ -19,6 +18,8 @@ This will be an updating collection of interesting problems. Please email me if 
 -   Pick any interesting existence result ("qualitative" as Terrance Tao would put it) in mathematics and try to obtain more control over it (make it a "quantitative" result).
 
     > An example: **(Qualitative) Mean Value Theorem** states that if a function $f$ is continuous on the closed interval $[a,b]$ and differentiable on the open interval $(a,b)$, then there exists at least one point $\xi$ in $(a,b)$ such that $$f'(\xi) = \frac{f(a) - f(b)}{a-b}$$ **(Mythological, Quantitative) Mean Value Theorem** states that if a function $f$ is continuous on the closed interval $[a,b]$ and differentialbe on the open interval $(a,b)$, then there exists $N_f(a,b)$ points in $(a,b)$ that attain the equality above. Also, for any such $c$, $\max(|c-a|, |c-b|) \leq D_f(a,b)$
+
+-   After understanding advanced mathematics: algebraic geometry, number theory and category theory RESTUDY the undergraduate fundamentals again. That will almost certainly make you discover that one right question that will be the driving force of your research.
 
 ## Specific Problems
 

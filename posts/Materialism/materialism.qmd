@@ -1,0 +1,28 @@
+---
+title: "Materialism"
+author: "Himadri Mandal"
+date: "2026-7-14"
+categories: [philosophy, materialism, society]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+        # css: styles.css
+editor: visual
+---
+
+# Materialism
+
+Borrowing from Wikipedia, Materiialism is the philosophical doctrine that matter has the primary position in nature. More colloquially, when one talks about \`\`Materialism", one often uses that in the context of an individual's tendency of attachment to Materialistic reality. This is the connotation I would use in this blogpost.
+
+What do I mean by Materialistic reality? This
+
+# How Materialism makes all of us more unhappy
+
+# The invisible standards sold to us by Materialism
+
+# Who benefits from Materialism? Interaction of Materialism with Capitalism
+
+# How to break free
+
+#

@@ -9,7 +9,6 @@ format:
         html-math-method: mathjax
         # css: styles.css
 editor: visual
-image: "pfp.jpg"
 ---
 
 Reading the title: you are probably shouting "Lagrange Interpolation!!!" Yeah, sure, Lagrange is cool. But I will show you something cooler which ensures you don't have to deal with the messy stuff.

@@ -9,7 +9,6 @@ format:
         html-math-method: mathjax
         # css: styles.css
 editor: visual
-image: "display.png"
 ---
 
 ## Theorem \[Lebesgue Differentiation Theorem\]

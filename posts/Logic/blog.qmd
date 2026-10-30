@@ -1,0 +1,103 @@
+---
+title: "Musings in my Logic Course"
+author: "Himadri Mandal"
+date: "08-10-2026"
+categories: [logic, set theory, math]
+format: 
+    html: 
+        toc: true
+        html-math-method: mathjax
+        # css: styles.css
+editor: visual
+---
+
+::: hidden
+$$
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\H}{\mathbb{H}}
+\newcommand{\Inf}{\operatorname{Inf}}
+$$
+:::
+
+A blog on my musings on some difficulties I had in my Logic course at ENS.
+
+### Problem
+
+> Prove that every finite ordinal is for the form $[n]$ for some $n \in \mathbb{N}$.
+
+[**Def**]{.underline}: $\alpha$ is a finite ordinal if
+
+-   $\alpha$ is $\emptyset$ or a successor ordinal
+
+-   Every element of $\alpha$ is either $\emptyset$ or a successor ordinal.
+
+> Proof. Say $\alpha \neq \emptyset$. Since $\alpha$ is a successor ordinal, $$\exists \alpha_1 \in \operatorname{Ord}$$ with $\alpha = \operatorname{succ}(\alpha_1)$. If $\alpha_1 = \emptyset$ we are done. Otherwise, again, $\alpha_1$ is a successor ordinal. And we get, further, $\alpha_2 \in \alpha_1$.
+>
+> Assume we don't reach $\emptyset$ in finite time. Therefore, one can create a infinite descending chain
+>
+> $$
+> \alpha \leftarrow \alpha_1 \leftarrow \alpha_2 \leftarrow \cdots 
+> $$
+>
+> where $x \leftarrow y$ means $y \in x$. Transitivity implies every such element is in $\alpha$. Let $A = \{\alpha_k \ | \ k \in \mathbb{N}\} \subset \alpha$. By the well-ordering of $\alpha$, we have $\alpha^* = \min_{\beta \in A} \beta = \min A$ which necessarily has to be $\emptyset$ and hence we are done.
+
+Firstly, I had an uneasiness with choosing an infinite descending chain of ordinals. I wondered whether an application of Axiom of Choice is needed here. Well, this isn't an issue as one can represent $\alpha_k = \cup \alpha_{k-1}$. However, if I were to descend an infinite tree downwards and there were multiple nodes available to follow at each depth level. I would have needed an application of AoC (or the weaker version: Axiom of Dependent Choice).
+
+However, there is still a second problem. It is not clear whether $A$ is a well-defined set. In **ZF**, we can use the Axiom Schema of Replacement to show this. Recall
+
+> **Axiom Schema of Replacement**
+>
+> For any formula $\phi(x,y,p)$ in the language of set theory (where $p$ is a parameter) such that for every $x$ there is *exactly one* $y$ satisfying $\phi(x,y,p)$, the following holds: For any set $A$, there exists a set $B$ such that for every $x \in A$, there is a $y \in B$ such that $\phi(x,y,p)$.
+
+Define
+
+-   $\phi(0,y,\alpha)$ to be the formula $y = \alpha$
+
+-   $\phi(n+1, y, \alpha)$ to be the formula $\exists z[\phi(n,z,\alpha) \land y = P(z)]$
+
+By induction on $n \in \omega$, one can show there is exactly one $y$ satisfying $\phi(n,y,\alpha)$. Thus, $\phi$ defines a unique function on $\omega$. Using Axiom Schme of Replacement we have
+
+$$
+A = \{y | \exists n \in \omega, \phi(n,y, \alpha)\}
+$$
+
+is a well-defined set. The result follows.
+
+### Theorem
+
+> $\forall (A, \leq)$ W.O., $\exists ! \alpha \in \operatorname{ON}$, $\exists ! f$ isomorphism such that $f: A \overset{\sim}{\to} \alpha$
+
+The proof of this theorem begins with the statement
+
+> Consider the set $A_0 = \{x \in A | \exists \alpha \in \operatorname{ON}, \exists f:A_{< x} \overset{\sim}{\to} \alpha\}$
+
+I had a strong uneasiness with whether this is actually a well-defined set or not, in ZFC. This revealed to me my misunderstandings about FOL and Set Theory.
+
+I felt it was illegal to index $\alpha$ over $\operatorname{ON}$ since $\operatorname{ON}$ is a proper-class. But that is not how FOL works. When we write $\exists \alpha \in \operatorname{ON}$, what we actually mean is $\exists \alpha \land \operatorname{Ord}(\alpha)$. Then I realized I had the misconception that the quantifier $\exists x$ always needed to be bound to some set $\exists x \in A$. That is not true. In FOL, $\exists x$ is just a formula with only syntactical but no semantical meaning.
+
+Infact, I had the bigger misunderstanding that when we work with ZFC, we are already working with a model $M$ that satisfies ZFC (and hence you have a universe that you always index your quantifiers over). That isn't true.
+
+We know from
+
+> **Godel Completeness Theorem**
+>
+> A theory $T$ has a model $M$ that satisfies it if and only if $T$ is consistent. Equivalently, $T$ is satisfiable if and only if $T$ is consistent.
+
+\[Note: read [Completeness and Compactness Theorem](https://terrytao.wordpress.com/2009/04/10/the-completeness-and-compactness-theorems-of-first-order-logic/#more-2032)\]
+
+If a theory $T$ has a model $M$ that satisfies it; then, trivially, $T$ is consistent. The non-triviality is the other side: if $T$ is consistent (there do not exist statements $\phi$ and $\neg \phi$ that are true simultaneously), then there exists a model that satisfies it.
+
+> **([first) Godel Incompleteness Theorem](https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems)**
+>
+> "Any consistent formal system F within which a certain amount of elementary arithmetic can be carried out is incomplete; i.e. there are statements of the language of F which can neither be proved nor disproved in F." (Raatikainen 2020)
+>
+> **Second Godel Incompleteness Theorem**
+>
+> No such system can demonstrate its own consistency.
+
+Hence, we CANNOT work with a model of ZFC when we talk about quantifier-formulas like $\exists x$, because ZFC cannot prove its own consistency. To talk about models of ZFC is to assign truth-value to all the syntactical formulae; and that is possible when you go outside of ZFC to an even stronger theory.
+
+When we work with ZFC all we can do is
+
+###

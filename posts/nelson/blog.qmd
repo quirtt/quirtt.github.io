@@ -9,7 +9,6 @@ format:
         html-math-method: mathjax
         # css: styles.css
 editor: visual
-image: "pfp.jpeg"
 ---
 
 Imagine two continuous random variables seemingly unrelated and free from any influence from each other. It's a common assumption in probability theory that independence implies a lack of any relationship between variables.

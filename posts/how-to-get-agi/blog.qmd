@@ -8,7 +8,6 @@ format:
     html: 
         toc: true
         html-math-method: mathjax
-image: "brain.jpeg"
 ---
 
 Here is an excerpt from a brilliant conversation [^1] between Dwarkesh Patel and François Chollet.

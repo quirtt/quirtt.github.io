@@ -8,7 +8,6 @@ format:
     html: 
         toc: true
         html-math-method: mathjax
-image: "othello.jpeg"
 ---
 
 This is a report of sorts of my playing around with OthelloGPT, a GPT model trained on Othello games to predict all the possible legal moves.
